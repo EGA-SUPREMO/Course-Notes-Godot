@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://53q7cmdct0vu"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
+[ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="1_ws64h"]
+[ext_resource type="Texture2D" uid="uid://dskfguleh02xt" path="res://assets/sprites/Risuner-2.png" id="2_5deqe"]
+[ext_resource type="Texture2D" uid="uid://4x12uxc7usnu" path="res://assets/sprites/Risuner-3.png" id="3_l7gy6"]
+[ext_resource type="PackedScene" uid="uid://ci0chopbr3lhf" path="res://scene/player_hud.tscn" id="5_ur0ho"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v13ht"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ws64h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5deqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l7gy6")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7qfd"]
+
+[node name="player" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_dsi0t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v13ht")
+animation = &"moving"
+autoplay = "moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r7qfd")
+
+[node name="hud_angle" parent="." instance=ExtResource("5_ur0ho")]
+position = Vector2(38, -33)

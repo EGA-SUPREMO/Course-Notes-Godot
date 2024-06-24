@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0562akwst7p3"]
+
+[ext_resource type="Texture2D" uid="uid://ol2xj05g4tes" path="res://assets/sprites/missiles/misil_2.png" id="1_aclib"]
+[ext_resource type="Script" path="res://scripts/missile.gd" id="1_vx1c2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2vnx"]
+radius = 2.0
+height = 14.0
+
+[node name="Missile" type="RigidBody2D"]
+script = ExtResource("1_vx1c2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u2vnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_aclib")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
