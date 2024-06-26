@@ -1,6 +1,5 @@
 extends RigidBody2D
 
-@export var SPEED := 500
 var new_rotation: float
 @onready var timer = $Timer
 var should_draw := false
