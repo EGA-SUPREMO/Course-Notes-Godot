@@ -29,10 +29,4 @@ shape = SubResource("WorldBoundaryShape2D_573hu")
 position = Vector2(4, -155)
 texture = ExtResource("2_ejua2")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Angle:
-Rotation:"
-
 [connection signal="shoot" from="player" to="." method="_on_player_shoot"]

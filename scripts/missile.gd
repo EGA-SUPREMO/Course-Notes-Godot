@@ -13,7 +13,5 @@ func _physics_process(delta):
 	if should_draw:#there is a nasty bug, that upon instantiating the scene, velocity and susequentemente rotation is 0 and misile from 1 frame to another changes make a wide turn, donot remove
 		rotation = new_rotation + PI / 2
 
-
-
 func _on_timer_timeout():
 	should_draw = true

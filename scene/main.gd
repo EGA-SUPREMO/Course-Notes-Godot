@@ -1,7 +1,6 @@
 extends Node2D
 
 var scene_missile = preload("res://scene/missile.tscn")
-@onready var label = $Label
 
 func _ready():
 	pass # Replace with function body.

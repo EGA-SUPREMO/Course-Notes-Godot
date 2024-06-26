@@ -6,8 +6,9 @@ signal shoot
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
-
-@onready var hud_angle = $hud_angle
+@onready var player = $"."
+@onready var hud = $HUD
+@onready var reticule = $HUD/reticule
 
 @export var angle := 0.0
 
@@ -22,8 +23,7 @@ func _process(delta):
 	if Input.is_action_pressed("lower_angle"):
 		angle -= 2 * delta
 		
-	#var new_x = Vector2(0, hud_angle.global_position.x).rotated(dir).x
-	#hud_angle.global_position.x = new_x
+	hud.rotate(hud.get_angle_to(get_global_mouse_position()))
 	
 	
 func _physics_process(delta):
