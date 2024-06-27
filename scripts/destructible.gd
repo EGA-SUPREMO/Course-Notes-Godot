@@ -2,7 +2,6 @@ extends Node2D
 @onready var shape_sprite = $ShapeSprite
 @onready var collision_holder = $CollisionHolder
 
-
 func _ready():
 	build_collision_from_image()
 
@@ -23,8 +22,9 @@ func build_collision_from_image():
 		for point in polygon:
 			newpoints.push_back(point)
 		collider.polygon = newpoints
-		print(collider.polygon)
-		a = CollisionPolygon2D.new()
+		collider.position.x -= bitMap.get_size().x/2
+		collider.position.y -= bitMap.get_size().y/2
+		collision_holder.add_child(collider)
 		
-		collision_holder.add_child(collider.polygon)
+		
 		

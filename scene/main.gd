@@ -15,6 +15,6 @@ func _on_player_shoot():
 	missile.position = $player/HUD.global_position
 	#print($player.global_position)
 	var direction = Vector2(cos($player.angle), sin($player.angle))
-	missile.apply_impulse(direction * $player.missile_power, Vector2.ZERO)
+	missile.apply_impulse(direction * $player.missile_power * 15, Vector2.ZERO)
 		
 	add_child(missile)

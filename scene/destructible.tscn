@@ -10,5 +10,7 @@ script = ExtResource("1_41gow")
 texture = ExtResource("1_17axd")
 
 [node name="CollisionHolder" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
 
 [node name="SubViewport" type="SubViewport" parent="."]

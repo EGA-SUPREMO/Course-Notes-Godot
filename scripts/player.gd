@@ -33,9 +33,9 @@ func _process(delta):
 	if Input.is_action_pressed("lower_angle"):
 		angle -= 2 * delta
 	if Input.is_action_pressed("increase_power"):
-		missile_power += 200 * delta
+		missile_power += 100 * delta
 	if Input.is_action_pressed("decrease_power"):
-		missile_power -= 200 * delta
+		missile_power -= 100 * delta
 		
 	set_percentage_visible_power(missile_power)
 		
