@@ -5,7 +5,7 @@ var new_rotation: float
 var should_draw := false
 
 func _ready():
-	timer.start(0.05)
+	timer.start(0.015)
 
 func _physics_process(delta):
 	new_rotation = atan2(linear_velocity.y, linear_velocity.x)

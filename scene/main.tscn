@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cb58k2m6006yu" path="res://assets/backgrounds/background3.png" id="2_ejua2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_573hu"]
-distance = -37.0
+distance = -19.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vsj3d")
@@ -17,6 +17,8 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_573hu")
