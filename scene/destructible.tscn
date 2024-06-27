@@ -1,5 +1,14 @@
-[gd_scene format=3 uid="uid://3hbiak6m6bik"]
+[gd_scene load_steps=3 format=3 uid="uid://3hbiak6m6bik"]
+
+[ext_resource type="Texture2D" uid="uid://bd2ikop4xof3a" path="res://assets/sprites/map/mesa bad.png" id="1_17axd"]
+[ext_resource type="Script" path="res://scripts/destructible.gd" id="1_41gow"]
 
 [node name="Destructible" type="Node2D"]
+script = ExtResource("1_41gow")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShapeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_17axd")
+
+[node name="CollisionHolder" type="StaticBody2D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]

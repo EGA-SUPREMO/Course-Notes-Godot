@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://k2u3kjnuay6s"]
+[gd_scene load_steps=6 format=3 uid="uid://k2u3kjnuay6s"]
 
 [ext_resource type="PackedScene" uid="uid://53q7cmdct0vu" path="res://scene/player.tscn" id="1_sqf7g"]
 [ext_resource type="Script" path="res://scene/main.gd" id="1_vsj3d"]
+[ext_resource type="PackedScene" uid="uid://3hbiak6m6bik" path="res://scene/destructible.tscn" id="2_ctdug"]
 [ext_resource type="Texture2D" uid="uid://cb58k2m6006yu" path="res://assets/backgrounds/background3.png" id="2_ejua2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_573hu"]
@@ -9,6 +10,8 @@ distance = -19.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vsj3d")
+
+[node name="Destructible" parent="." instance=ExtResource("2_ctdug")]
 
 [node name="player" parent="." instance=ExtResource("1_sqf7g")]
 
