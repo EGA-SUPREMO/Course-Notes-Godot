@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://diel7vtghr4bn"]
+
+[ext_resource type="Script" path="res://scene/terrain.gd" id="1_lackl"]
+[ext_resource type="Texture2D" uid="uid://bd2ikop4xof3a" path="res://assets/sprites/map/mesa bad.png" id="2_8qeqe"]
+
+[node name="Terrain" type="Node2D"]
+script = ExtResource("1_lackl")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="ShapeSprite" type="Sprite2D" parent="."]
+z_index = -30
+z_as_relative = false
+texture = ExtResource("2_8qeqe")
+
+[node name="Destructible" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Destructible"]

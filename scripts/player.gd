@@ -29,7 +29,7 @@ func _process(delta):
 	if Input.is_action_just_released("shot"):
 		shoot.emit()
 	if Input.is_action_pressed("increase_angle"):
-		angle += 2 * delta
+		angle += 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
 	if Input.is_action_pressed("lower_angle"):
 		angle -= 2 * delta
 	if Input.is_action_pressed("increase_power"):
