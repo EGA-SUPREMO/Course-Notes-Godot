@@ -68,16 +68,19 @@ func build_collision_from_image():
 	
 	var polygons = bitMap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
 
-	for polygon in polygons:
-		var collider = CollisionPolygon2D.new()
-		
-		var newpoints := Array()
-		for point in polygon:
-			newpoints.push_back(point)
-		collider.polygon = newpoints
-		collider.position.x -= bitMap.get_size().x/2
-		collider.position.y -= bitMap.get_size().y/2
-		collision_holder.add_child(collider)
+	#for polygon in polygons:
+	var polygon = polygons[0]
+	print("collis")
+	print(polygon)
+	var collider = CollisionPolygon2D.new()
+	
+	var newpoints := Array()
+	for point in polygon:
+		newpoints.push_back(point)
+	collider.polygon = newpoints
+	collider.position.x -= bitMap.get_size().x/2
+	collider.position.y -= bitMap.get_size().y/2
+	collision_holder.add_child(collider)
 		
 		
 func destroy(position: Vector2, radius: int):

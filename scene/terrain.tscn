@@ -13,6 +13,6 @@ z_index = -30
 z_as_relative = false
 texture = ExtResource("2_8qeqe")
 
-[node name="Destructible" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Destructible"]
+[node name="CollisionHolder" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7

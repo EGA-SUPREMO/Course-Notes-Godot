@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://k2u3kjnuay6s"]
+[gd_scene load_steps=6 format=3 uid="uid://k2u3kjnuay6s"]
 
 [ext_resource type="PackedScene" uid="uid://53q7cmdct0vu" path="res://scene/player.tscn" id="1_sqf7g"]
 [ext_resource type="Script" path="res://scene/main.gd" id="1_vsj3d"]
-[ext_resource type="PackedScene" uid="uid://3hbiak6m6bik" path="res://scene/destructible.tscn" id="2_ctdug"]
+[ext_resource type="PackedScene" uid="uid://diel7vtghr4bn" path="res://scene/terrain.tscn" id="2_1t2nn"]
 [ext_resource type="Texture2D" uid="uid://cb58k2m6006yu" path="res://assets/backgrounds/background3.png" id="2_ejua2"]
-[ext_resource type="PackedScene" uid="uid://diel7vtghr4bn" path="res://scene/terrain.tscn" id="2_jfdwr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_573hu"]
 distance = -19.0
@@ -12,14 +11,10 @@ distance = -19.0
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vsj3d")
 
-[node name="Terrain" parent="." instance=ExtResource("2_jfdwr")]
+[node name="Terrain" parent="." instance=ExtResource("2_1t2nn")]
 
-[node name="Destructible" parent="." instance=ExtResource("2_ctdug")]
-visible = false
-position = Vector2(5, -103)
-
-[node name="Camera2D" type="Camera2D" parent="Destructible"]
-position = Vector2(96, 103)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(101, 0)
 limit_smoothed = true
 position_smoothing_enabled = true
 
@@ -42,7 +37,6 @@ position = Vector2(4, -155)
 texture = ExtResource("2_ejua2")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 one_shot = true
 
 [connection signal="shoot" from="player" to="." method="_on_player_shoot"]

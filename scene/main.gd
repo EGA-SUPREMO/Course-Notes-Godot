@@ -1,7 +1,7 @@
 extends Node2D
 
 signal destroy
-@onready var destructible = $Destructible
+#@onready var destructible = $Destructible
 var last_misil#borrar, codigo feo
 var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
@@ -27,10 +27,8 @@ func _on_player_shoot():
 	add_child(missile)
 
 func on_destroy():#position: Vector2, radious):
-	#destructible.destroy(position, radious)
 	print("boom")
-	#destructible.destroy(last_misil.global_position, 30000)
-	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, 50))
+	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, 100), last_misil.global_position)
 	print("boom3")
 
 
