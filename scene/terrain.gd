@@ -31,9 +31,37 @@ func clip(poly: PackedVector2Array, global_position_missile: Vector2):
 	var offset_poly = Polygon2D.new()
 	offset_poly = Transform2D(0, Vector2(map_size.x/2, map_size.y/2)) * poly
 	
-	var res = Geometry2D.clip_polygons(collision_holder.get_child(0).polygon, offset_poly)
-	
-	collision_holder.get_child(0).set_deferred("polygon", res[0])
+	for collision_polygon in collision_holder.get_children():
+		var res = Geometry2D.clip_polygons(collision_polygon.polygon, offset_poly)
+		
+		if res.size() == 0:
+			collision_polygon.queue_free()
+			
+		for i in range(res.size()):
+			var clipped_collision = res[i]
+			clipped_collision = Transform2D(0, Vector2(-map_size.x/2, -map_size.y/2)) * res[i]
+			# These are awkward single or two-point floaters.
+			if clipped_collision.size() < 3:
+				continue
+				
+			if i == 0:
+				#collision_polygon.call_deferred("set", "polygon", res)
+				collision_polygon.set_deferred("polygon", res[0])
+			else:
+				var collider := CollisionPolygon2D.new()
+				collider.polygon = clipped_collision
+				collision_holder.call_deferred("add_child", collider)
+		#
+		#
+		#if res.size() > 1:
+			#var island := Polygon2D.new()
+			#var island_collision := CollisionPolygon2D.new()
+			#island.polygon = res[1]
+			#island_collision.set_deferred('polygon',res[1])
+			#add_child(island_collision)
+			#add_child(island)
+#
+		#collision_polygon.set_deferred("polygon", res[0])
 
 func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 	var nb_points = 8

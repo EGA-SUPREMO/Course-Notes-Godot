@@ -9,6 +9,7 @@ script = ExtResource("1_lackl")
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
 [node name="ShapeSprite" type="Sprite2D" parent="."]
+visible = false
 z_index = -30
 z_as_relative = false
 texture = ExtResource("2_8qeqe")
