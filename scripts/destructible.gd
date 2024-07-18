@@ -68,7 +68,7 @@ func build_collision_from_image():
 	
 	var polygons = bitMap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
 
-	#for polygon in polygons:
+	for polygon in polygons:
 	var polygon = polygons[0]
 	print("collis")
 	print(polygon)
