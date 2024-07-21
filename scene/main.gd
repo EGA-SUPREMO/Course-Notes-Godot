@@ -28,7 +28,7 @@ func _on_player_shoot():
 
 func on_destroy():#position: Vector2, radious):
 	print("boom")
-	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, 100), last_misil.global_position)
+	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, $player.damage), last_misil.global_position)
 	print("boom3")
 
 
