@@ -16,7 +16,3 @@ texture = ExtResource("2_8qeqe")
 [node name="IslandHolder" type="Node2D" parent="."]
 
 [node name="IslandHolde" type="Node" parent="."]
-
-[node name="MainCollisionHolder" type="StaticBody2D" parent="IslandHolde"]
-collision_layer = 7
-collision_mask = 7

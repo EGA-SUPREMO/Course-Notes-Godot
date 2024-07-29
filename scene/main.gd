@@ -6,13 +6,20 @@ var last_misil#borrar, codigo feo
 var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
 @onready var terrain = $Terrain
-
+@onready var camera_2d = $Camera2D
 func _ready():
+
 	pass # Replace with function body.
 
 
 func _process(delta):
-	pass
+	if Input.is_action_pressed("reduce_zoom"):
+		camera_2d.zoom.x += 0.5 * delta
+		camera_2d.zoom.y += 0.5 * delta
+	if Input.is_action_pressed("increase_zoom"):
+		camera_2d.zoom.x -= 0.5 * delta
+		camera_2d.zoom.y -= 0.5 * delta
+		
 func _on_player_shoot():
 	var missile = scene_missile.instantiate()
 	missile.add_to_group("missile")

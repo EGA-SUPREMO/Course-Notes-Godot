@@ -28,6 +28,7 @@ animations = [{
 
 [node name="player" type="CharacterBody2D"]
 z_index = 5
+floor_max_angle = 1.309
 script = ExtResource("1_dsi0t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
