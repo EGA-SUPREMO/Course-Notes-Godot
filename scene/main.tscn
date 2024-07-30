@@ -12,6 +12,7 @@ distance = -19.0
 script = ExtResource("1_vsj3d")
 
 [node name="Terrain" parent="." instance=ExtResource("2_1t2nn")]
+position = Vector2(0, -163)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(101, 0)

@@ -1,7 +1,8 @@
 extends Node2D
-@onready var polygon_2d = $Polygon2D
+#@onready var polygon_2d = $Polygon2D
 @onready var shape_sprite = $ShapeSprite
-@onready var island_holder = $IslandHolde
+@onready var island_holder = $IslandHolder
+@onready var terrain = $"."
 
 var map_size: Vector2i
 
@@ -31,8 +32,8 @@ func create_collisions():
 		
 		collider.polygon = newpoints
 		map_size = bitMap.get_size()
-		body.global_position.x -= bitMap.get_size().x/2
-		body.global_position.y -= bitMap.get_size().y/2
+		#body.global_position.x -= bitMap.get_size().x/2
+		#body.global_position.y -= bitMap.get_size().y/2
 		#drawed_polygon.polygon = collider.polygon
 		#drawed_polygon.position = collider.position
 		var sprite_collider := Sprite2D.new()
@@ -48,24 +49,33 @@ func create_collisions():
 		island_holder.add_child(body)
 		#add_child(drawed_polygon)
 		
-func clip(poly: PackedVector2Array, global_position_missile: Vector2):
-	var offset_poly = Transform2D(0, Vector2(map_size.x/2, map_size.y/2)) * poly
-	
+func clip(poly: PackedVector2Array):
 	for collision_polygon in island_holder.get_children():
 		var position_body = collision_polygon.global_position
 		collision_polygon = collision_polygon.get_child(0)
-
-		print(collision_polygon.global_position)
-		print(collision_polygon.position)
-		print(collision_polygon.polygon)
+		
+		#print("missil " + str(poly))
+		print(collision_polygon.global_position.x)
+		print(map_size.x/2)
 		
 		var offset_poly_island = Transform2D(0, Vector2(collision_polygon.global_position.x,
 			collision_polygon.global_position.x)) * collision_polygon.polygon
+		#var offset_poly = Transform2D(0, #-collision_polygon.rotation,
+		#	Vector2(collision_polygon.global_position.x,
+		#	collision_polygon.global_position.y)) * poly
+		var offset_poly = Transform2D(0, #-collision_polygon.rotation,
+			Vector2(map_size.x/2 + terrain.global_position.x,
+			map_size.y/2 + terrain.global_position.y)) * poly
+		offset_poly = poly
+		var poligono := Polygon2D.new()
+		poligono.polygon = offset_poly
+		add_child(poligono)
 	
 		
 		#var offset_position_body = Transform2D(
 		#	0, Vector2(position_body.x, position_body.y)) * collision_polygon.polygon
 		var res = Geometry2D.clip_polygons(collision_polygon.polygon, offset_poly)
+		#var res = Geometry2D.clip_polygons(collision_polygon.polygon, poly)
 		#var res = Geometry2D.clip_polygons(offset_poly_island, offset_poly)
 		
 		if res.size() == 0:
@@ -94,8 +104,8 @@ func clip(poly: PackedVector2Array, global_position_missile: Vector2):
 				body.collision_mask = 3
 				collider.polygon = clipped_collision
 				body.position = collider.position
-				#collider.position.x -= map_size.x/2
-				#collider.position.y -= map_size.y/2
+				#body.global_position.x -= map_size.x/2
+				#body.global_position.y -= map_size.y/2
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
 				body.center_of_mass = Vector2(0, 0)
 				#print(body.center_of_mass)
@@ -109,8 +119,8 @@ func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
 	var points_arc = PackedVector2Array()
 	points_arc.push_back(position)
-	
 	for i in range(nb_points + 1):
 		var angle_point = deg_to_rad(i * 360 / nb_points)
 		points_arc.push_back(position + Vector2(cos(angle_point), sin(angle_point)) * radius)
+
 	return points_arc

@@ -20,6 +20,11 @@ func _process(delta):
 		camera_2d.zoom.x -= 0.5 * delta
 		camera_2d.zoom.y -= 0.5 * delta
 		
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		terrain.clip(terrain.create_circle_radious_polygon(
+			get_global_mouse_position(), $player.damage))	
+	
+		
 func _on_player_shoot():
 	var missile = scene_missile.instantiate()
 	missile.add_to_group("missile")
@@ -35,7 +40,7 @@ func _on_player_shoot():
 
 func on_destroy():#position: Vector2, radious):
 	print("boom")
-	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, $player.damage), last_misil.global_position)
+	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, $player.damage))
 	print("boom3")
 
 

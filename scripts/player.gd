@@ -34,7 +34,7 @@ func _process(delta):
 		angle += 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
 	if Input.is_action_pressed("lower_angle"):
 		angle -= 2 * delta
-		
+	
 	if Input.is_action_pressed("increase_power"):
 		damage += 200 * delta
 		missile_power += 100 * delta
