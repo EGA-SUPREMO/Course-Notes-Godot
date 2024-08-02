@@ -20,7 +20,7 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="player" parent="." instance=ExtResource("1_sqf7g")]
-position = Vector2(101, 0)
+position = Vector2(102, -85)
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]
 position = Vector2(0, 367)

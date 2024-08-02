@@ -22,7 +22,7 @@ func _process(delta):
 		
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
-			get_global_mouse_position(), $player.damage))	
+			get_global_mouse_position(), $player.damage), terrain.global_position)	
 	
 		
 func _on_player_shoot():
@@ -40,7 +40,9 @@ func _on_player_shoot():
 
 func on_destroy():#position: Vector2, radious):
 	print("boom")
-	terrain.clip(terrain.create_circle_radious_polygon(last_misil.global_position, $player.damage))
+	terrain.clip(terrain.create_circle_radious_polygon(
+		last_misil.global_position, $player.damage),
+		terrain.global_position)
 	print("boom3")
 
 
