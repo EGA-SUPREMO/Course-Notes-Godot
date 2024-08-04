@@ -49,27 +49,27 @@ func create_collisions():
 		#add_child(drawed_polygon)
 		
 func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
-	for collision_polygon in island_holder.get_children():
-		var position_body = collision_polygon.global_position
-		collision_polygon = collision_polygon.get_child(0)
+	for collision_body in island_holder.get_children():
+		var collision_polygon = collision_body.get_child(0)
 		
 		#print("missil " + str(poly))
 		#print(collision_polygon.global_position.x)
 		#print(map_size.x/2)
 		var offset_position = Vector2(collision_polygon.global_position.x - global_terrain_position.x,
 			collision_polygon.global_position.y - global_terrain_position.y)
-		
-		var offset_poly_island = Transform2D(0,
-			Vector2(offset_position.x,
-				offset_position.y)) * collision_polygon.polygon
-				
-		var offset_poly = Transform2D(0,#-collision_polygon.rotation,
-			Vector2(-global_terrain_position.x,
-			-global_terrain_position.y)) * poly
+		print(collision_body.global_position.y)
+		print(collision_body.position.y)
+		#var offset_poly_island = Transform2D(0,
+			#Vector2(offset_position.x,
+				#offset_position.y)) * collision_polygon.polygon
+		#
+		var offset_poly = Transform2D(-collision_body.rotation,
+			Vector2(-global_terrain_position.x + (collision_body.position.x - island_holder.position.x),
+			-global_terrain_position.y + (collision_body.position.y - island_holder.position.y))) * poly
 		#var offset_poly = Transform2D(0, #-collision_polygon.rotation,
 			#Vector2(-global_terrain_position.x,
 			#-global_terrain_position.y)) * poly
-		offset_poly = poly
+		#offset_poly = poly
 		var poligono := Polygon2D.new()
 		poligono.polygon = offset_poly
 		add_child(poligono)
@@ -86,11 +86,12 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 			
 		for i in range(res.size()):
 			
-			var new_res_position := Array()
-			for new_polygon in res:# da el res grande antes de anadirle los nuevos
-				var p = Transform2D(0, offset_position) * new_polygon
-				new_res_position.push_back(p)
-			var clipped_collision = new_res_position[i]
+			#var new_res_position := Array()
+			#for new_polygon in res:# da el res grande antes de anadirle los nuevos
+			#	var p = Transform2D(0, offset_position) * new_polygon
+			#	new_res_position.push_back(p)
+			#var clipped_collision = new_res_position[i]
+			var clipped_collision = res[i]
 			#clipped_collision = Transform2D(0, Vector2(-map_size.x/2, -map_size.y/2)) * res[i]
 			# These are awkward single or two-point floaters.
 			if clipped_collision.size() < 3:
@@ -102,7 +103,7 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				
 				print("new_res {")
 				#print(res1 == res)
-				print(new_res_position == res)
+				#print(new_res_position == res)
 				print("}")
 				
 				
