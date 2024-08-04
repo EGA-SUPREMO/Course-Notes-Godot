@@ -64,8 +64,8 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				#offset_position.y)) * collision_polygon.polygon
 		#
 		var offset_poly = Transform2D(-collision_body.rotation,
-			Vector2(-global_terrain_position.x - collision_body.position.x,
-			-global_terrain_position.y - collision_body.position.y)) * poly
+			Vector2(-collision_body.global_position.x,
+			-collision_body.global_position.y)) * poly
 		#var offset_poly = Transform2D(0, #-collision_polygon.rotation,
 			#Vector2(-global_terrain_position.x,
 			#-global_terrain_position.y)) * poly
