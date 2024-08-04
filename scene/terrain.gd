@@ -55,17 +55,15 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 		#print("missil " + str(poly))
 		#print(collision_polygon.global_position.x)
 		#print(map_size.x/2)
-		var offset_position = Vector2(collision_polygon.global_position.x - global_terrain_position.x,
-			collision_polygon.global_position.y - global_terrain_position.y)
-		print(island_holder.position.y)
-		print(island_holder.position.x)
 		#var offset_poly_island = Transform2D(0,
 			#Vector2(offset_position.x,
 				#offset_position.y)) * collision_polygon.polygon
-		#
-		var offset_poly = Transform2D(-collision_body.rotation,
-			Vector2(-collision_body.global_position.x,
-			-collision_body.global_position.y)) * poly
+		var offset_position = Vector2(-collision_body.global_position.x,
+			-collision_body.global_position.y)
+		#print(-collision_body.rotation)
+		offset_position = offset_position.rotated(-collision_body.rotation)
+		var offset_poly := Transform2D(-collision_body.rotation,
+			offset_position) * poly
 		#var offset_poly = Transform2D(0, #-collision_polygon.rotation,
 			#Vector2(-global_terrain_position.x,
 			#-global_terrain_position.y)) * poly
@@ -111,7 +109,8 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
-				body.lock_rotation = true
+				#body.lock_rotation = true
+				#body.rotation = deg_to_rad(90)
 				#var sprite_collider := Sprite2D.new()
 				#var sprite_rigidbody := Sprite2D.new()
 				#sprite_collider.texture = preload("res://assets/sprites/player_hud/shield_0.png")
