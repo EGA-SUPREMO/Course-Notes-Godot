@@ -57,15 +57,15 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 		#print(map_size.x/2)
 		var offset_position = Vector2(collision_polygon.global_position.x - global_terrain_position.x,
 			collision_polygon.global_position.y - global_terrain_position.y)
-		print(collision_body.global_position.y)
-		print(collision_body.position.y)
+		print(island_holder.position.y)
+		print(island_holder.position.x)
 		#var offset_poly_island = Transform2D(0,
 			#Vector2(offset_position.x,
 				#offset_position.y)) * collision_polygon.polygon
 		#
 		var offset_poly = Transform2D(-collision_body.rotation,
-			Vector2(-global_terrain_position.x + (collision_body.position.x - island_holder.position.x),
-			-global_terrain_position.y + (collision_body.position.y - island_holder.position.y))) * poly
+			Vector2(-global_terrain_position.x - collision_body.position.x,
+			-global_terrain_position.y - collision_body.position.y)) * poly
 		#var offset_poly = Transform2D(0, #-collision_polygon.rotation,
 			#Vector2(-global_terrain_position.x,
 			#-global_terrain_position.y)) * poly
@@ -111,6 +111,7 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
+				body.lock_rotation = true
 				#var sprite_collider := Sprite2D.new()
 				#var sprite_rigidbody := Sprite2D.new()
 				#sprite_collider.texture = preload("res://assets/sprites/player_hud/shield_0.png")
@@ -134,7 +135,7 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 			#add_child(island)
 
 func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
-	var nb_points = 4
+	var nb_points = 8
 	var points_arc = PackedVector2Array()
 	points_arc.push_back(position)
 	for i in range(nb_points + 1):
