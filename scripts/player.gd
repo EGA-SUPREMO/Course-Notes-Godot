@@ -11,7 +11,7 @@ const SPEED = 100.0
 @onready var hud = $HUD
 @onready var children_count = $HUD.get_child_count()
 
-var damage = 100
+var damage = 10
 
 @export var angle := 0.0
 
@@ -36,11 +36,11 @@ func _process(delta):
 		angle -= 2 * delta
 	
 	if Input.is_action_pressed("increase_power"):
-		damage += 200 * delta
+		damage += 50 * delta
 		missile_power += 100 * delta
 	if Input.is_action_pressed("decrease_power"):
 		missile_power -= 100 * delta
-		damage -= 200 * delta
+		damage -= 50 * delta
 		
 	set_percentage_visible_power(missile_power)
 		
