@@ -78,16 +78,12 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				var body := RigidBody2D.new()
 				body.collision_layer = 3
 				body.collision_mask = 3
+				
 				collider.polygon = clipped_collision
 				body.global_position = collision_body.position
 
 				body.rotation = collision_body.rotation
-				#body.rotation = deg_to_rad(-90)
-				var offset_body_position = -collision_body.global_position.rotated(-collision_body.rotation)
-				#body.lock_rotation = true
-				#body.position = -offset_body_position
-				
-				
+								
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
 				body.center_of_mass = Vector2(50, 50)
 				island_holder.call_deferred("add_child", body)
