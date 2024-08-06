@@ -5,7 +5,12 @@ var new_rotation: float
 var damage: int
 var should_draw := false
 signal explosion
+@onready var missile = $"."
+@onready var collision_shape_2d = $CollisionShape2D
+
+
 func _ready():
+	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 
 func _physics_process(delta):

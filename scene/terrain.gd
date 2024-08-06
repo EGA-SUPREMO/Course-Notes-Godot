@@ -43,7 +43,7 @@ func create_collisions():
 		sprite_collider.scale.y = 2.5
 		#collider.add_child(sprite_collider)
 		#body.add_child(sprite_rigidbody)
-		
+
 		body.add_child(collider)
 		island_holder.add_child(body)
 		#add_child(drawed_polygon)
@@ -73,6 +73,10 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				
 			if i == 0:
 				collision_polygon.set_deferred("polygon", res[0])
+				if collision_body is RigidBody2D:
+					collision_body.center_of_mass = get_polygon_center(res[0])
+					collision_body.mass = calculate_area(res[0])
+				
 			else:
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
@@ -85,9 +89,18 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				body.rotation = collision_body.rotation
 								
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-				body.center_of_mass = Vector2(50, 50)
+				#body.center_of_mass = calculate_centroid(collider.polygon)
+				body.center_of_mass = get_polygon_center(collider.polygon)
+				body.mass = calculate_area(collider.polygon)
+				
+				var sprite_collider := Sprite2D.new()
+				sprite_collider.texture = preload("res://assets/sprites/player_hud/shield_0.png")
+				sprite_collider.scale = Vector2(0.2, 0.2)
+				sprite_collider.position = body.center_of_mass
+				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
+				body.call_deferred("add_child", sprite_collider)
 			#var island := Polygon2D.new()
 			#island.polygon = res[1]
 			#add_child(island)
@@ -101,3 +114,38 @@ func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 		points_arc.push_back(position + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	return points_arc
+
+func calculate_area(mesh_vertices) -> float:
+	var result = 0.0
+	var num_vertices = mesh_vertices.size()
+
+	for q in range(num_vertices):
+		var p = (q - 1 + num_vertices) % num_vertices
+		result += mesh_vertices[q].cross(mesh_vertices[p])
+	
+	return abs(result) * 0.5
+
+func calculate_centroid(mesh_vertices) -> Vector2:
+	var centroid = Vector2()
+	var area = calculate_area(mesh_vertices)
+	var num_vertices = mesh_vertices.size()
+	var factor = 0.0
+
+	for q in range(num_vertices):
+		var p = (q - 1 + num_vertices) % num_vertices
+		factor = mesh_vertices[q].x * mesh_vertices[p].y - mesh_vertices[p].x * mesh_vertices[q].y
+		centroid += (mesh_vertices[q] + mesh_vertices[p]) * factor
+
+	# Final division by 6 times the polygon's area
+	centroid /= (6.0 * area)
+	return centroid
+
+func get_polygon_center(polygon: PackedVector2Array):
+	var center_weight = polygon.size()
+	var center = Vector2(0, 0)
+	
+	for point in polygon:
+		center.x += point.x / center_weight
+		center.y += point.y / center_weight
+	
+	return center

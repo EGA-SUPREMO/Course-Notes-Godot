@@ -7,9 +7,14 @@ var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
-func _ready():
+@onready var rigid_body_2d = $RigidBody2D
+@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
 
-	pass # Replace with function body.
+func _ready():
+	rigid_body_2d.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
+	rigid_body_2d.center_of_mass = terrain.get_polygon_center(collision_polygon_2d.polygon)
+	print(terrain.get_polygon_center(collision_polygon_2d.polygon))
+	print(terrain.calculate_centroid(collision_polygon_2d.polygon))
 
 
 func _process(delta):
