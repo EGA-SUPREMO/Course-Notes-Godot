@@ -67,10 +67,6 @@ increase_zoom={
 ]
 }
 
-[physics]
-
-common/physics_ticks_per_second=120
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -7,14 +7,9 @@ var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
-@onready var rigid_body_2d = $RigidBody2D
-@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
 
 func _ready():
-	rigid_body_2d.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-	rigid_body_2d.center_of_mass = terrain.get_polygon_center(collision_polygon_2d.polygon)
-	print(terrain.get_polygon_center(collision_polygon_2d.polygon))
-	print(terrain.calculate_centroid(collision_polygon_2d.polygon))
+	pass
 
 
 func _process(delta):
@@ -27,7 +22,7 @@ func _process(delta):
 		
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
-			get_global_mouse_position(), $player.damage), terrain.global_position)	
+			get_global_mouse_position(), $player.damage))	
 	
 		
 func _on_player_shoot():
@@ -46,8 +41,7 @@ func _on_player_shoot():
 func on_destroy():#position: Vector2, radious):
 	print("boom")
 	terrain.clip(terrain.create_circle_radious_polygon(
-		last_misil.global_position, $player.damage),
-		terrain.global_position)
+		last_misil.global_position, $player.damage))
 	print("boom3")
 
 

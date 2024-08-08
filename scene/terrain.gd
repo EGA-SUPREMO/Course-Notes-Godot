@@ -48,7 +48,7 @@ func create_collisions():
 		island_holder.add_child(body)
 		#add_child(drawed_polygon)
 		
-func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
+func clip(poly: PackedVector2Array):
 	for collision_body in island_holder.get_children():
 		var collision_polygon = collision_body.get_child(0)
 		
@@ -74,7 +74,7 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 			if i == 0:
 				collision_polygon.set_deferred("polygon", res[0])
 				if collision_body is RigidBody2D:
-					collision_body.center_of_mass = get_polygon_center(res[0])
+					collision_body.center_of_mass = -calculate_centroid(res[0])
 					collision_body.mass = calculate_area(res[0])
 				
 			else:
@@ -89,18 +89,11 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 				body.rotation = collision_body.rotation
 								
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-				#body.center_of_mass = calculate_centroid(collider.polygon)
-				body.center_of_mass = get_polygon_center(collider.polygon)
+				body.center_of_mass = -calculate_centroid(collider.polygon)
 				body.mass = calculate_area(collider.polygon)
-				
-				var sprite_collider := Sprite2D.new()
-				sprite_collider.texture = preload("res://assets/sprites/player_hud/shield_0.png")
-				sprite_collider.scale = Vector2(0.2, 0.2)
-				sprite_collider.position = body.center_of_mass
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
-				body.call_deferred("add_child", sprite_collider)
 			#var island := Polygon2D.new()
 			#island.polygon = res[1]
 			#add_child(island)
@@ -108,6 +101,7 @@ func clip(poly: PackedVector2Array, global_terrain_position: Vector2):
 func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
 	var points_arc = PackedVector2Array()
+	
 	points_arc.push_back(position)
 	for i in range(nb_points + 1):
 		var angle_point = deg_to_rad(i * 360 / nb_points)
