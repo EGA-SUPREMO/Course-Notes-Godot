@@ -74,7 +74,7 @@ func clip(poly: PackedVector2Array):
 			if i == 0:
 				collision_polygon.set_deferred("polygon", res[0])
 				if collision_body is RigidBody2D:
-					collision_body.center_of_mass = -calculate_centroid(res[0])
+					collision_body.center_of_mass = calculate_centroid(res[0])
 					collision_body.mass = calculate_area(res[0])
 				
 			else:
@@ -89,7 +89,7 @@ func clip(poly: PackedVector2Array):
 				body.rotation = collision_body.rotation
 								
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-				body.center_of_mass = -calculate_centroid(collider.polygon)
+				body.center_of_mass = calculate_centroid(collider.polygon)
 				body.mass = calculate_area(collider.polygon)
 				
 				island_holder.call_deferred("add_child", body)
@@ -109,9 +109,9 @@ func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 
 	return points_arc
 
-func calculate_area(mesh_vertices) -> float:
-	var result = 0.0
-	var num_vertices = mesh_vertices.size()
+func calculate_area(mesh_vertices: PackedVector2Array) -> float:
+	var result := 0.0
+	var num_vertices := mesh_vertices.size()
 
 	for q in range(num_vertices):
 		var p = (q - 1 + num_vertices) % num_vertices
@@ -119,7 +119,7 @@ func calculate_area(mesh_vertices) -> float:
 	
 	return abs(result) * 0.5
 
-func calculate_centroid(mesh_vertices) -> Vector2:
+func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 	var centroid = Vector2()
 	var area = calculate_area(mesh_vertices)
 	var num_vertices = mesh_vertices.size()
@@ -130,16 +130,5 @@ func calculate_centroid(mesh_vertices) -> Vector2:
 		factor = mesh_vertices[q].x * mesh_vertices[p].y - mesh_vertices[p].x * mesh_vertices[q].y
 		centroid += (mesh_vertices[q] + mesh_vertices[p]) * factor
 
-	# Final division by 6 times the polygon's area
 	centroid /= (6.0 * area)
-	return centroid
-
-func get_polygon_center(polygon: PackedVector2Array):
-	var center_weight = polygon.size()
-	var center = Vector2(0, 0)
-	
-	for point in polygon:
-		center.x += point.x / center_weight
-		center.y += point.y / center_weight
-	
-	return center
+	return -centroid
