@@ -6,7 +6,7 @@ var last_misil#borrar, codigo feo
 var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
 @onready var terrain = $Terrain
-@onready var camera_2d = $Camera2D
+@onready var camera_2d = $player/Camera2D
 
 func _ready():
 	pass

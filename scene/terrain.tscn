@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://diel7vtghr4bn"]
 
 [ext_resource type="Script" path="res://scene/terrain.gd" id="1_lackl"]
-[ext_resource type="Texture2D" uid="uid://bd2ikop4xof3a" path="res://assets/sprites/map/mesa bad.png" id="2_8qeqe"]
+[ext_resource type="Texture2D" uid="uid://dgxwr4v0ufmul" path="res://assets/sprites/map/mesa bad1.png" id="2_k5jo2"]
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource("1_lackl")
@@ -9,7 +9,7 @@ script = ExtResource("1_lackl")
 [node name="ShapeSprite" type="Sprite2D" parent="."]
 z_index = -30
 z_as_relative = false
-texture = ExtResource("2_8qeqe")
+texture = ExtResource("2_k5jo2")
 centered = false
 
 [node name="IslandHolder" type="Node2D" parent="."]
