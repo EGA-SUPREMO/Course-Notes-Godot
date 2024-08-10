@@ -15,13 +15,7 @@ script = ExtResource("1_vsj3d")
 position = Vector2(0, -163)
 
 [node name="player" parent="." instance=ExtResource("1_sqf7g")]
-position = Vector2(102, -85)
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(-1, 85)
-offset = Vector2(0, -250)
-limit_smoothed = true
-position_smoothing_enabled = true
+position = Vector2(100, -74)
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]
 position = Vector2(0, 367)
@@ -38,6 +32,11 @@ shape = SubResource("WorldBoundaryShape2D_573hu")
 [node name="Background3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(4, -155)
 texture = ExtResource("2_ejua2")
+
+[node name="Camera2D" type="Camera2D" parent="ParallaxBackground"]
+position = Vector2(99, 11)
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

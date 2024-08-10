@@ -74,6 +74,7 @@ func clip(poly: PackedVector2Array):
 				body.gravity_scale = 1
 				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
 				body.center_of_mass = calculate_centroid(collider.polygon)
+				
 				body.mass = calculate_area(collider.polygon)
 				
 				island_holder.call_deferred("add_child", body)
