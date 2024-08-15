@@ -58,12 +58,12 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				if collision_body is RigidBody2D:
 					var centroid = calculate_centroid(clipped_collision)
-					collision_polygon.set_deferred("polygon",
-						offset_polygon_by_center_of_mass(res[0], centroid))
+					#collision_polygon.set_deferred("polygon",
+					#	offset_polygon_by_center_of_mass(res[0], centroid))
 				
 					collision_body.set_deferred("mass", calculate_area(res[0]))
-					collision_body.global_position = collision_body.global_position + centroid
-					collision_body.get_child(1).position = collision_body.center_of_mass
+					#collision_body.global_position = collision_body.global_position + centroid
+					#collision_body.get_child(1).position = collision_body.center_of_mass
 					
 			else:
 				var collider := CollisionPolygon2D.new()
@@ -116,20 +116,24 @@ func calculate_area(mesh_vertices: PackedVector2Array) -> float:
 		result += mesh_vertices[q].cross(mesh_vertices[p])
 	
 	return abs(result) * 0.5
-
+	
 func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 	var centroid = Vector2()
-	var area = calculate_area(mesh_vertices)
+	var area = 0.0
 	var num_vertices = mesh_vertices.size()
-	var factor = 0.0
 
 	for q in range(num_vertices):
 		var p = (q - 1 + num_vertices) % num_vertices
-		factor = mesh_vertices[q].x * mesh_vertices[p].y - mesh_vertices[p].x * mesh_vertices[q].y
-		centroid += (mesh_vertices[q] + mesh_vertices[p]) * factor
+		var cross_product = mesh_vertices[q].cross(mesh_vertices[p])
+		area += cross_product
+		centroid += (mesh_vertices[q] + mesh_vertices[p]) * cross_product
 
+	area = abs(area) * 0.5  # Correct area computation
 	centroid /= (6.0 * area)
-	return -centroid
+	#return centroid
+	print(centroid)
+	print(mesh_vertices)
+	return centroid
 
 func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
 	var offset_polygon = Transform2D(0, -center_of_mass) * polygon
