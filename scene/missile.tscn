@@ -5,7 +5,6 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2vnx"]
 radius = 2.0
-height = 14.0
 
 [node name="Missile" type="RigidBody2D"]
 z_index = 4
@@ -16,10 +15,11 @@ continuous_cd = 1
 script = ExtResource("1_vx1c2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_u2vnx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.3, 0.6)
 texture = ExtResource("1_aclib")
 
 [node name="Timer" type="Timer" parent="."]

@@ -24,7 +24,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r7qfd"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
+radius = 4.0
+height = 36.0
 
 [node name="player" type="CharacterBody2D"]
 z_index = 5
@@ -37,7 +39,9 @@ animation = &"moving"
 autoplay = "moving"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_r7qfd")
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_damwu")
 
 [node name="HUD" type="Node2D" parent="."]
 z_index = -22
