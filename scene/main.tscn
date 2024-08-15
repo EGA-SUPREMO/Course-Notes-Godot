@@ -41,5 +41,16 @@ position = Vector2(99, 11)
 limit_smoothed = true
 position_smoothing_enabled = true
 
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(206, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(10, -10, -10, 0, 0, 10, 10, 0)
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(206, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D2"]
+
 [connection signal="shoot" from="player" to="." method="_on_player_shoot"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

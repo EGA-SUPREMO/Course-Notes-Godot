@@ -32,7 +32,7 @@ func create_collisions():
 		body.add_child(collider)
 		island_holder.add_child(body)
 		
-func clip(poly: PackedVector2Array):
+func clip(missile_polygon: PackedVector2Array):
 	for collision_body in island_holder.get_children():
 		var collision_polygon = collision_body.get_child(0)
 		
@@ -40,15 +40,14 @@ func clip(poly: PackedVector2Array):
 			-collision_body.global_position.y)
 		offset_position = offset_position.rotated(-collision_body.rotation)
 		
-		var offset_poly := Transform2D(-collision_body.rotation,
-			offset_position) * poly
-		var res = Geometry2D.clip_polygons(collision_polygon.polygon, offset_poly)
+		var offset_missile_polygon := Transform2D(-collision_body.rotation,
+			offset_position) * missile_polygon
+		var res = Geometry2D.clip_polygons(collision_polygon.polygon, offset_missile_polygon)
 		
 		if res.size() == 0:
 			collision_polygon.get_parent().queue_free()
 			
 		for i in range(res.size()):
-			
 			var clipped_collision = res[i]
 			# These are awkward single or two-point floaters.
 			if clipped_collision.size() < 3:
@@ -56,30 +55,47 @@ func clip(poly: PackedVector2Array):
 				
 			if i == 0:
 				collision_polygon.set_deferred("polygon", res[0])
+				
 				if collision_body is RigidBody2D:
-					var new_center_of_mass = calculate_centroid(res[0])
-					var new_mass = calculate_area(res[0])
-					collision_body.set_deferred("center_of_mass", new_center_of_mass)
-					collision_body.set_deferred("mass", new_mass)
+					var centroid = calculate_centroid(clipped_collision)
+					collision_polygon.set_deferred("polygon",
+						offset_polygon_by_center_of_mass(res[0], centroid))
+				
+					collision_body.set_deferred("mass", calculate_area(res[0]))
+					collision_body.global_position = collision_body.global_position + centroid
+					collision_body.get_child(1).position = collision_body.center_of_mass
+					
 			else:
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
 				body.collision_layer = 3
 				body.collision_mask = 3
 				
-				collider.polygon = clipped_collision
-				body.global_position = collision_body.position
-
+				var centroid = calculate_centroid(clipped_collision)
+				
 				body.rotation = collision_body.rotation
-				body.gravity_scale = 1
-				body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-				body.center_of_mass = calculate_centroid(collider.polygon)
+				#collider.polygon = clipped_collision
+				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
+				body.global_position = collision_body.position
+				body.global_position = body.global_position + centroid
+				
+				body.lock_rotation = true
+				body.freeze = true
+				#body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
+				#body.center_of_mass = calculate_centroid(collider.polygon)
+				print(body.center_of_mass)
 				
 				body.mass = calculate_area(collider.polygon)
 				
+				var sprite = Sprite2D.new()
+				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
+				sprite.scale.x = 0.2
+				sprite.scale.y = 0.2
+				sprite.position = body.center_of_mass
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
-
+				body.call_deferred("add_child", sprite)
+				
 func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
 	var points_arc = PackedVector2Array()
@@ -114,3 +130,14 @@ func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 
 	centroid /= (6.0 * area)
 	return -centroid
+
+func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
+	var offset_polygon = Transform2D(0, -center_of_mass) * polygon
+	#var offset_polygon = PackedVector2Array()
+	#for point in polygon:
+	#	offset_polygon.append(point - center_of_mass)
+	
+	#print(offset_polygon)
+	#print(polygon)
+	print(center_of_mass)
+	return offset_polygon
