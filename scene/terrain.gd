@@ -57,13 +57,14 @@ func clip(missile_polygon: PackedVector2Array):
 				collision_polygon.set_deferred("polygon", res[0])
 				
 				if collision_body is RigidBody2D:
+					collision_body.set_deferred("mass", calculate_areaa(res[0]))
 					var centroid = calculate_centroid(clipped_collision)
-					#collision_polygon.set_deferred("polygon",
-					#	offset_polygon_by_center_of_mass(res[0], centroid))
+					if abs(centroid) > Vector2(0.05, 0.05):
+						collision_polygon.set_deferred("polygon",
+							offset_polygon_by_center_of_mass(res[0], centroid))
 				
-					collision_body.set_deferred("mass", calculate_area(res[0]))
-					#collision_body.global_position = collision_body.global_position + centroid
-					#collision_body.get_child(1).position = collision_body.center_of_mass
+						collision_body.global_position = collision_body.global_position + centroid
+						collision_body.get_child(1).position = collision_body.center_of_mass
 					
 			else:
 				var collider := CollisionPolygon2D.new()
@@ -79,13 +80,13 @@ func clip(missile_polygon: PackedVector2Array):
 				body.global_position = collision_body.position
 				body.global_position = body.global_position + centroid
 				
-				body.lock_rotation = true
+				#body.lock_rotation = true
 				body.freeze = true
 				#body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
 				#body.center_of_mass = calculate_centroid(collider.polygon)
 				print(body.center_of_mass)
 				
-				body.mass = calculate_area(collider.polygon)
+				body.mass = calculate_areaa(collider.polygon)
 				
 				var sprite = Sprite2D.new()
 				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
@@ -107,7 +108,7 @@ func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 
 	return points_arc
 
-func calculate_area(mesh_vertices: PackedVector2Array) -> float:
+func calculate_areaa(mesh_vertices: PackedVector2Array) -> float:
 	var result := 0.0
 	var num_vertices := mesh_vertices.size()
 
@@ -117,7 +118,7 @@ func calculate_area(mesh_vertices: PackedVector2Array) -> float:
 	
 	return abs(result) * 0.5
 	
-func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
+func calculate_centroida(mesh_vertices: PackedVector2Array) -> Vector2:
 	var centroid = Vector2()
 	var area = 0.0
 	var num_vertices = mesh_vertices.size()
@@ -134,6 +135,31 @@ func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 	print(centroid)
 	print(mesh_vertices)
 	return centroid
+
+func calculate_area(mesh_vertices: PackedVector2Array) -> float:
+	var result := 0.0
+	var num_vertices := mesh_vertices.size()
+	
+	for q in range(num_vertices):
+		var p = (q - 1 + num_vertices) % num_vertices
+		result += mesh_vertices[q].cross(mesh_vertices[p])
+	
+	return result * 0.5  # Remove abs to retain the sign
+
+func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
+	var centroid = Vector2()
+	var area = calculate_area(mesh_vertices)
+	var num_vertices = mesh_vertices.size()
+	var factor = 0.0
+
+	for q in range(num_vertices):
+		var p = (q - 1 + num_vertices) % num_vertices
+		factor = mesh_vertices[q].cross(mesh_vertices[p])
+		centroid += (mesh_vertices[q] + mesh_vertices[p]) * factor
+
+	centroid /= (6.0 * area)  # Use area with its original sign
+	return centroid
+
 
 func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
 	var offset_polygon = Transform2D(0, -center_of_mass) * polygon

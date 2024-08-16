@@ -19,14 +19,14 @@ func _ready():
 		[Vector2(30, 20), Vector2(30, 10), Vector2(20, 0), Vector2(10, 10)])
 	collision_polygon_2d2.polygon = PackedVector2Array(
 		[Vector2(-1030, -1020), Vector2(-1030, -1010), Vector2(-1020, -1000), Vector2(-1010, -1010)])
-	rigid_body_2d.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-	rigid_body_2d2.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-	rigid_body_2d.center_of_mass = terrain.calculate_centroid(collision_polygon_2d.polygon)
-	rigid_body_2d2.center_of_mass = terrain.calculate_centroid(collision_polygon_2d2.polygon)
+	#rigid_body_2d.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
+	#rigid_body_2d2.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
+	#rigid_body_2d.center_of_mass = terrain.calculate_centroid(collision_polygon_2d.polygon)
+	#rigid_body_2d2.center_of_mass = terrain.calculate_centroid(collision_polygon_2d2.polygon)
 	
-	#var rigid_body_2d2center_of_mass = terrain.calculate_centroid(collision_polygon_2d2.polygon)
-	#collision_polygon_2d2.polygon = terrain.offset_polygon_by_center_of_mass(collision_polygon_2d2.polygon, rigid_body_2d2center_of_mass)
-	#rigid_body_2d2.global_position += rigid_body_2d2center_of_mass
+	var rigid_body_2d2center_of_mass = terrain.calculate_centroid(collision_polygon_2d2.polygon)
+	collision_polygon_2d2.polygon = terrain.offset_polygon_by_center_of_mass(collision_polygon_2d2.polygon, rigid_body_2d2center_of_mass)
+	rigid_body_2d2.global_position += rigid_body_2d2center_of_mass
 	print(rigid_body_2d.center_of_mass)
 	print(rigid_body_2d2.center_of_mass)
 	

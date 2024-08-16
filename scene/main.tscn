@@ -33,13 +33,13 @@ shape = SubResource("WorldBoundaryShape2D_573hu")
 position = Vector2(4, -155)
 texture = ExtResource("2_ejua2")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(99, 11)
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(206, 0)
