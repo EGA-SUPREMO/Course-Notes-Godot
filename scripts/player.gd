@@ -11,7 +11,7 @@ const SPEED = 100.0
 @onready var hud = $HUD
 @onready var children_count = $HUD.get_child_count()
 
-var damage = 10
+var damage = 15
 
 @export var angle := 0.0
 

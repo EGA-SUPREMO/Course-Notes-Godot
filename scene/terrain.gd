@@ -57,13 +57,16 @@ func clip(missile_polygon: PackedVector2Array):
 				collision_polygon.set_deferred("polygon", res[0])
 				
 				if collision_body is RigidBody2D:
+					
 					collision_body.set_deferred("mass", calculate_areaa(res[0]))
 					var centroid = calculate_centroid(clipped_collision)
 					if abs(centroid) > Vector2(0.05, 0.05):
 						collision_polygon.set_deferred("polygon",
 							offset_polygon_by_center_of_mass(res[0], centroid))
 				
-						collision_body.global_position = collision_body.global_position + centroid
+						collision_body.position = collision_body.position + centroid
+						
+						
 						collision_body.get_child(1).position = collision_body.center_of_mass
 					
 			else:
@@ -73,29 +76,52 @@ func clip(missile_polygon: PackedVector2Array):
 				body.collision_mask = 3
 				
 				var centroid = calculate_centroid(clipped_collision)
+				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
 				
 				body.rotation = collision_body.rotation
 				#collider.polygon = clipped_collision
-				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
-				body.global_position = collision_body.position
-				body.global_position = body.global_position + centroid
-				
+				body.position = collision_body.position
+				body.position = body.position + centroid
+				# deberia usar el get del padre o del hijo?
+				#body.position = centroid
+				#body.global_position = body.global_position + centroid
+				if collision_body is RigidBody2D:
+					body.position += get_min_x_y(collider.polygon)
+					#print(get_min_x_y(collision_polygon.polygon))
 				#body.lock_rotation = true
+				print("centroid: " + str(centroid))
+				print("minxy: " + str(get_min_x_y(collider.polygon)))
+				print("position: " + str(body.position))
+				print("initial position: " + str(collision_body.position))
+				print("padre centroid: " + str(calculate_centroid(collision_polygon.polygon)))
+				
 				body.freeze = true
 				#body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
 				#body.center_of_mass = calculate_centroid(collider.polygon)
-				print(body.center_of_mass)
+				#print(body.center_of_mass)
 				
 				body.mass = calculate_areaa(collider.polygon)
 				
 				var sprite = Sprite2D.new()
+				var sprite2 = Sprite2D.new()
+				var sprite3 = Sprite2D.new()
 				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
+				sprite2.texture = preload("res://assets/sprites/player_hud/shield_0.png")
+				sprite3.texture = preload("res://assets/sprites/player_hud/shield_0.png")
 				sprite.scale.x = 0.2
+				sprite2.scale.x = 0.1
+				sprite2.scale.y = 0.3
+				sprite3.scale.x = 0.1315
+				sprite3.scale.y = 2.15
 				sprite.scale.y = 0.2
 				sprite.position = body.center_of_mass
+				sprite2.global_position = body.global_position
+				sprite3.global_position = centroid#body.global_position + get_min_x_y(collider.polygon)
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", sprite)
+				call_deferred("add_child", sprite2)
+				call_deferred("add_child", sprite3)
 				
 func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
@@ -132,8 +158,8 @@ func calculate_centroida(mesh_vertices: PackedVector2Array) -> Vector2:
 	area = abs(area) * 0.5  # Correct area computation
 	centroid /= (6.0 * area)
 	#return centroid
-	print(centroid)
-	print(mesh_vertices)
+	#print(centroid)
+	#print(mesh_vertices)
 	return centroid
 
 func calculate_area(mesh_vertices: PackedVector2Array) -> float:
@@ -169,5 +195,16 @@ func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mas
 	
 	#print(offset_polygon)
 	#print(polygon)
-	print(center_of_mass)
+	#print(center_of_mass)
 	return offset_polygon
+
+func get_min_x_y(points: PackedVector2Array) -> Vector2:
+	var min_x = points[0].x
+	var min_y = points[0].y
+
+	for point in points:
+		if point.x < min_x:
+			min_x = point.x
+		if point.y < min_y:
+			min_y = point.y
+	return Vector2(min_x, min_y)
