@@ -57,16 +57,14 @@ func clip(missile_polygon: PackedVector2Array):
 				collision_polygon.set_deferred("polygon", res[0])
 				
 				if collision_body is RigidBody2D:
-					
-					collision_body.set_deferred("mass", calculate_areaa(res[0]))
+					collision_body.set_deferred("mass", abs(calculate_area(res[0])))
+					# when comenting the code below, the game works properly, but this code is need to update the center of mass, collision_body.get_child(1) is the sprite
 					var centroid = calculate_centroid(clipped_collision)
-					if abs(centroid) > Vector2(0.05, 0.05):
-						collision_polygon.set_deferred("polygon",
-							offset_polygon_by_center_of_mass(res[0], centroid))
-				
-						collision_body.position = collision_body.position + centroid
-						
-						collision_body.get_child(1).position = collision_body.center_of_mass
+					collision_polygon.set_deferred("polygon",
+						offset_polygon_by_center_of_mass(res[0], centroid))
+			
+					collision_body.position = collision_body.position + centroid
+					collision_body.get_child(1).position = collision_body.center_of_mass
 					
 			else:
 				var collider := CollisionPolygon2D.new()
@@ -78,14 +76,12 @@ func clip(missile_polygon: PackedVector2Array):
 				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
 				
 				body.rotation = collision_body.rotation
-				#collider.polygon = clipped_collision
-				body.position = collision_body.position
-				body.position = body.position + centroid
-				# deberia usar el get del padre o del hijo?
+				body.position = collision_body.position + centroid
+				# what I tried
 				#body.position = centroid
 				#body.global_position = body.global_position + centroid
-				if collision_body is RigidBody2D:
-					body.position += get_min_x_y(collider.polygon)
+				#if collision_body is RigidBody2D:
+				#	body.position += get_min_x_y(collider.polygon)
 				print("centroid: " + str(centroid))
 				print("minxy: " + str(get_min_x_y(collider.polygon)))
 				print("position: " + str(body.position))
@@ -94,8 +90,9 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.freeze = true
 				
-				body.mass = calculate_areaa(collider.polygon)
+				body.mass = abs(calculate_area(collider.polygon))
 				
+				# Those sprites are for debugging, can be removed
 				var sprite = Sprite2D.new()
 				var sprite2 = Sprite2D.new()
 				var sprite3 = Sprite2D.new()
@@ -112,6 +109,7 @@ func clip(missile_polygon: PackedVector2Array):
 				sprite.position = body.center_of_mass
 				sprite2.global_position = body.global_position
 				sprite3.global_position = centroid#body.global_position + get_min_x_y(collider.polygon)
+				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", sprite)
@@ -128,31 +126,6 @@ func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
 		points_arc.push_back(position + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	return points_arc
-
-func calculate_areaa(mesh_vertices: PackedVector2Array) -> float:
-	var result := 0.0
-	var num_vertices := mesh_vertices.size()
-
-	for q in range(num_vertices):
-		var p = (q - 1 + num_vertices) % num_vertices
-		result += mesh_vertices[q].cross(mesh_vertices[p])
-	
-	return abs(result) * 0.5
-	
-func calculate_centroida(mesh_vertices: PackedVector2Array) -> Vector2:
-	var centroid = Vector2()
-	var area = 0.0
-	var num_vertices = mesh_vertices.size()
-
-	for q in range(num_vertices):
-		var p = (q - 1 + num_vertices) % num_vertices
-		var cross_product = mesh_vertices[q].cross(mesh_vertices[p])
-		area += cross_product
-		centroid += (mesh_vertices[q] + mesh_vertices[p]) * cross_product
-
-	area = abs(area) * 0.5 
-	centroid /= (6.0 * area)
-	return centroid
 
 func calculate_area(mesh_vertices: PackedVector2Array) -> float:
 	var result := 0.0
