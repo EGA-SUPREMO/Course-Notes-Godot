@@ -77,7 +77,6 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.rotation = collision_body.rotation
 				body.position = collision_body.position + centroid
-				body.freeze = false
 				
 				body.mass = abs(calculate_area(collider.polygon))
 				
