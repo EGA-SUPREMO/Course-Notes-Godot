@@ -66,7 +66,6 @@ func clip(missile_polygon: PackedVector2Array):
 				
 						collision_body.position = collision_body.position + centroid
 						
-						
 						collision_body.get_child(1).position = collision_body.center_of_mass
 					
 			else:
@@ -87,8 +86,6 @@ func clip(missile_polygon: PackedVector2Array):
 				#body.global_position = body.global_position + centroid
 				if collision_body is RigidBody2D:
 					body.position += get_min_x_y(collider.polygon)
-					#print(get_min_x_y(collision_polygon.polygon))
-				#body.lock_rotation = true
 				print("centroid: " + str(centroid))
 				print("minxy: " + str(get_min_x_y(collider.polygon)))
 				print("position: " + str(body.position))
@@ -96,9 +93,6 @@ func clip(missile_polygon: PackedVector2Array):
 				print("padre centroid: " + str(calculate_centroid(collision_polygon.polygon)))
 				
 				body.freeze = true
-				#body.center_of_mass_mode = RigidBody2D.CENTER_OF_MASS_MODE_CUSTOM
-				#body.center_of_mass = calculate_centroid(collider.polygon)
-				#print(body.center_of_mass)
 				
 				body.mass = calculate_areaa(collider.polygon)
 				
@@ -111,8 +105,9 @@ func clip(missile_polygon: PackedVector2Array):
 				sprite.scale.x = 0.2
 				sprite2.scale.x = 0.1
 				sprite2.scale.y = 0.3
-				sprite3.scale.x = 0.1315
-				sprite3.scale.y = 2.15
+				sprite3.scale.x = 0.15
+				sprite3.scale.y = 0.1
+				sprite3.modulate = Color(0.3, 1, 0.7)
 				sprite.scale.y = 0.2
 				sprite.position = body.center_of_mass
 				sprite2.global_position = body.global_position
@@ -155,11 +150,8 @@ func calculate_centroida(mesh_vertices: PackedVector2Array) -> Vector2:
 		area += cross_product
 		centroid += (mesh_vertices[q] + mesh_vertices[p]) * cross_product
 
-	area = abs(area) * 0.5  # Correct area computation
+	area = abs(area) * 0.5 
 	centroid /= (6.0 * area)
-	#return centroid
-	#print(centroid)
-	#print(mesh_vertices)
 	return centroid
 
 func calculate_area(mesh_vertices: PackedVector2Array) -> float:
@@ -170,7 +162,7 @@ func calculate_area(mesh_vertices: PackedVector2Array) -> float:
 		var p = (q - 1 + num_vertices) % num_vertices
 		result += mesh_vertices[q].cross(mesh_vertices[p])
 	
-	return result * 0.5  # Remove abs to retain the sign
+	return result * 0.5
 
 func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 	var centroid = Vector2()
@@ -183,19 +175,11 @@ func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 		factor = mesh_vertices[q].cross(mesh_vertices[p])
 		centroid += (mesh_vertices[q] + mesh_vertices[p]) * factor
 
-	centroid /= (6.0 * area)  # Use area with its original sign
+	centroid /= (6.0 * area)
 	return centroid
-
 
 func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
 	var offset_polygon = Transform2D(0, -center_of_mass) * polygon
-	#var offset_polygon = PackedVector2Array()
-	#for point in polygon:
-	#	offset_polygon.append(point - center_of_mass)
-	
-	#print(offset_polygon)
-	#print(polygon)
-	#print(center_of_mass)
 	return offset_polygon
 
 func get_min_x_y(points: PackedVector2Array) -> Vector2:
