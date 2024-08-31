@@ -60,12 +60,12 @@ func clip(missile_polygon: PackedVector2Array):
 					collision_body.set_deferred("mass", abs(calculate_area(res[0])))
 					# when comenting the code below, the game works properly, but this code is need to update the center of mass, collision_body.get_child(1) is the sprite
 					var centroid = calculate_centroid(clipped_collision)
-					collision_polygon.set_deferred("polygon",
-						offset_polygon_by_center_of_mass(res[0], centroid))
-			
-					collision_body.position = collision_body.position + centroid
-					collision_body.get_child(1).position = collision_body.center_of_mass
-					
+					if abs(centroid) > Vector2(0.5, 0.5):
+						collision_polygon.set_deferred("polygon",
+							offset_polygon_by_center_of_mass(res[0], centroid))
+						collision_body.set_deferred("position", collision_body.position + centroid)
+						#collision_body.position = collision_body.position + centroid
+						
 			else:
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
@@ -81,29 +81,8 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.mass = abs(calculate_area(collider.polygon))
 				
-				# Those sprites are for debugging, can be removed
-				var sprite = Sprite2D.new()
-				var sprite2 = Sprite2D.new()
-				var sprite3 = Sprite2D.new()
-				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
-				sprite2.texture = preload("res://assets/sprites/player_hud/shield_0.png")
-				sprite3.texture = preload("res://assets/sprites/player_hud/shield_0.png")
-				sprite.scale.x = 0.2
-				sprite2.scale.x = 0.1
-				sprite2.scale.y = 0.3
-				sprite3.scale.x = 0.15
-				sprite3.scale.y = 0.1
-				sprite3.modulate = Color(0.3, 1, 0.7)
-				sprite.scale.y = 0.2
-				sprite.position = body.center_of_mass
-				sprite2.global_position = body.global_position
-				sprite3.global_position = centroid#body.global_position + get_min_x_y(collider.polygon)
-				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
-				body.call_deferred("add_child", sprite)
-				call_deferred("add_child", sprite2)
-				call_deferred("add_child", sprite3)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
