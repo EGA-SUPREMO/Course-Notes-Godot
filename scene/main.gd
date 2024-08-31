@@ -1,6 +1,5 @@
 extends Node2D
 
-signal destroy
 #@onready var destructible = $Destructible
 var last_misil#borrar, codigo feo
 var scene_missile = preload("res://scene/missile.tscn")

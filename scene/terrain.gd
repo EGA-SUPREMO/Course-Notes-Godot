@@ -47,7 +47,7 @@ func clip(missile_polygon: PackedVector2Array):
 		if res.size() == 0:
 			collision_polygon.get_parent().queue_free()
 			
-		for i in range(res.size()):
+		for i in range(res.size() - 1, -1, -1):#has to go from size to 0, for some reason
 			var clipped_collision = res[i]
 			# These are awkward single or two-point floaters.
 			if clipped_collision.size() < 3:
@@ -77,18 +77,7 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.rotation = collision_body.rotation
 				body.position = collision_body.position + centroid
-				# what I tried
-				#body.position = centroid
-				#body.global_position = body.global_position + centroid
-				#if collision_body is RigidBody2D:
-				#	body.position += get_min_x_y(collider.polygon)
-				print("centroid: " + str(centroid))
-				print("minxy: " + str(get_min_x_y(collider.polygon)))
-				print("position: " + str(body.position))
-				print("initial position: " + str(collision_body.position))
-				print("padre centroid: " + str(calculate_centroid(collision_polygon.polygon)))
-				
-				body.freeze = true
+				body.freeze = false
 				
 				body.mass = abs(calculate_area(collider.polygon))
 				
@@ -116,14 +105,14 @@ func clip(missile_polygon: PackedVector2Array):
 				call_deferred("add_child", sprite2)
 				call_deferred("add_child", sprite3)
 				
-func create_circle_radious_polygon(position, radius: int) -> PackedVector2Array:
+func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
 	var points_arc = PackedVector2Array()
 	
-	points_arc.push_back(position)
+	points_arc.push_back(circle_position)
 	for i in range(nb_points + 1):
 		var angle_point = deg_to_rad(i * 360 / nb_points)
-		points_arc.push_back(position + Vector2(cos(angle_point), sin(angle_point)) * radius)
+		points_arc.push_back(circle_position + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	return points_arc
 
