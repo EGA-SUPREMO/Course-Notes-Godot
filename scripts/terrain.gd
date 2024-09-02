@@ -29,8 +29,6 @@ func create_collisions():
 		collider.polygon = newpoints
 		map_size = bitMap.get_size()
 		
-		body.rotation = deg_to_rad(90)
-		
 		body.add_child(collider)
 		island_holder.add_child(body)
 		
@@ -65,12 +63,8 @@ func clip(missile_polygon: PackedVector2Array):
 					if abs(centroid) > Vector2(0.5, 0.5):
 						collision_polygon.set_deferred("polygon",
 							offset_polygon_by_center_of_mass(res[0], centroid))
-						var offset_body_global_position = collision_body.global_position + centroid
 						
-				
-						
-						collision_body.set_deferred("global_position", collision_body.global_position + centroid)
-						#collision_body.position = collision_body.position + centroid
+						collision_body.set_deferred("global_position", collision_body.global_position + centroid.rotated(collision_body.rotation))
 						
 			else:
 				var collider := CollisionPolygon2D.new()
@@ -79,13 +73,15 @@ func clip(missile_polygon: PackedVector2Array):
 				body.collision_mask = 3
 				
 				var centroid = calculate_centroid(clipped_collision)
-				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid, collision_body.rotation)
+				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
 				
 				
-				#body.rotation = collision_body.rotation
-				body.global_position = collision_body.position + centroid
-				var offset_body_global_position = body.global_position
-				#body.position = offset_body_global_position.rotated(body.rotation)
+				body.rotation = collision_body.rotation
+				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
+				#var offset_body_global_position = body.global_position
+				#body.global_position = offset_body_global_position.rotated(body.rotation)
+				
+				
 				body.freeze = false
 				body.mass = abs(calculate_area(collider.polygon))
 				
@@ -137,8 +133,8 @@ func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 	centroid /= (6.0 * area)
 	return centroid
 
-func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2, angle = 0) -> PackedVector2Array:
-	var offset_polygon = Transform2D(angle, -center_of_mass) * polygon
+func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
+	var offset_polygon = Transform2D(0, -center_of_mass) * polygon
 	return offset_polygon
 
 func get_min_x_y(points: PackedVector2Array) -> Vector2:
