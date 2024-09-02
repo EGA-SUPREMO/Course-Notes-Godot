@@ -29,7 +29,7 @@ func create_collisions():
 		collider.polygon = newpoints
 		map_size = bitMap.get_size()
 		
-		body.rotation = deg_to_rad(0)
+		body.rotation = deg_to_rad(90)
 		
 		body.add_child(collider)
 		island_holder.add_child(body)
@@ -89,8 +89,18 @@ func clip(missile_polygon: PackedVector2Array):
 				body.freeze = false
 				body.mass = abs(calculate_area(collider.polygon))
 				
+				
+				var sprite = Sprite2D.new()
+				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
+				sprite.scale.x = 0.2
+				sprite.scale.y = 0.2
+				sprite.position = body.center_of_mass
+				
+				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
+				
+				body.call_deferred("add_child", sprite)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
