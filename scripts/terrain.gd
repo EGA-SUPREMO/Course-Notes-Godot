@@ -58,7 +58,6 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				if collision_body is RigidBody2D:
 					collision_body.set_deferred("mass", abs(calculate_area(res[0])))
-					# when comenting the code below, the game works properly, but this code is need to update the center of mass, collision_body.get_child(1) is the sprite
 					var centroid = calculate_centroid(clipped_collision)
 					if abs(centroid) > Vector2(0.5, 0.5):
 						collision_polygon.set_deferred("polygon",
@@ -75,28 +74,12 @@ func clip(missile_polygon: PackedVector2Array):
 				var centroid = calculate_centroid(clipped_collision)
 				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
 				
-				
 				body.rotation = collision_body.rotation
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
-				#var offset_body_global_position = body.global_position
-				#body.global_position = offset_body_global_position.rotated(body.rotation)
-				
-				
-				body.freeze = false
 				body.mass = abs(calculate_area(collider.polygon))
-				
-				
-				var sprite = Sprite2D.new()
-				sprite.texture = preload("res://assets/sprites/player_hud/shield_0.png")
-				sprite.scale.x = 0.2
-				sprite.scale.y = 0.2
-				sprite.position = body.center_of_mass
-				
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
-				
-				body.call_deferred("add_child", sprite)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
