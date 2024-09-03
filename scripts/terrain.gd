@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var shape_sprite = $ShapeSprite
 @onready var island_holder = $IslandHolder
+@onready var circle: Node2D = $Circle
 
 var map_size: Vector2i
 
@@ -68,6 +69,9 @@ func clip(missile_polygon: PackedVector2Array):
 			else:
 				var collider := CollisionPolygon2D.new()
 				var body := RigidBody2D.new()
+				var sprite := Sprite2D.new()
+				sprite.texture = shape_sprite.texture
+				sprite.centered = false
 				body.collision_layer = 3
 				body.collision_mask = 3
 				
@@ -76,10 +80,14 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.rotation = collision_body.rotation
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
+				#sprite.position.x -= map_size.x/2
+				#sprite.position.y -= map_size.y/2
+				#sprite.position = get_min_x_y(collider.polygon)
 				body.mass = abs(calculate_area(collider.polygon))
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
+				#body.call_deferred("add_child", sprite)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 8
