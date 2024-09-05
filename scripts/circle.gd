@@ -2,13 +2,10 @@ extends Node2D
 
 var _radius := 40
 
-func _ready() -> void:
-	reposition(global_position, 40)
-
-func reposition(position: Vector2, radius: int) -> void:
+func reposition(positio: Vector2, radius: int) -> void:
 	visible = true
 	
-	global_position = position
+	global_position = positio
 	_radius = radius
 	
 	# to force a redraw

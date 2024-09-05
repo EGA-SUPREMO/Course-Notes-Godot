@@ -9,6 +9,15 @@ var map_size: Vector2i
 func _ready() -> void:
 	create_collisions()
 	
+	#var _image_republish_texture = ImageTexture.create_from_image(shape_sprite.texture.get_image())
+	
+	#var _image_republish_texture = Texture2D.new()
+	#_image_republish_texture.draw(null, Vector2.ZERO, Color.BLACK)
+	
+	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
+	#shape_sprite.material.set_shader_parameter("ratio", float(map_size.x)/map_size.y)
+	
+	
 func create_collisions():	
 	var bitMap = BitMap.new()
 	bitMap.create_from_image_alpha(shape_sprite.texture.get_image())
