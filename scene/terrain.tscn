@@ -9,8 +9,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pfij"]
 shader = ExtResource("2_xbubg")
-shader_parameter/ratio = null
-shader_parameter/radius = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qihk6"]
 shader = ExtResource("2_viorw")
@@ -30,7 +28,7 @@ shader_parameter/radius = null
 [node name="Terrain" type="Node2D"]
 script = ExtResource("1_l2wfj")
 
-[node name="ShapeSprite2" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 z_index = -30
 z_as_relative = false
 material = SubResource("ShaderMaterial_4pfij")
