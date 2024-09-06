@@ -1,10 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://diel7vtghr4bn"]
+[gd_scene load_steps=11 format=3 uid="uid://diel7vtghr4bn"]
 
 [ext_resource type="Script" path="res://scripts/terrain.gd" id="1_l2wfj"]
 [ext_resource type="Texture2D" uid="uid://bd2ikop4xof3a" path="res://assets/sprites/map/mesa bad.png" id="2_fi23k"]
 [ext_resource type="Shader" path="res://scene/parent_terrain.gdshader" id="2_viorw"]
+[ext_resource type="Shader" path="res://scene/terrain_background.gdshader" id="2_xbubg"]
 [ext_resource type="Script" path="res://scripts/circle.gd" id="4_m27gq"]
 [ext_resource type="Shader" path="res://scene/test.gdshader" id="4_u42j8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4pfij"]
+shader = ExtResource("2_xbubg")
+shader_parameter/ratio = null
+shader_parameter/radius = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qihk6"]
 shader = ExtResource("2_viorw")
@@ -23,6 +29,13 @@ shader_parameter/radius = null
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource("1_l2wfj")
+
+[node name="ShapeSprite2" type="Sprite2D" parent="."]
+z_index = -30
+z_as_relative = false
+material = SubResource("ShaderMaterial_4pfij")
+texture = ExtResource("2_fi23k")
+centered = false
 
 [node name="ShapeSprite" type="Sprite2D" parent="."]
 z_index = -30
