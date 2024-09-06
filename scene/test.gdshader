@@ -1,22 +1,24 @@
 shader_type canvas_item;
-render_mode blend_sub;
+
+render_mode blend_mix;
+
+uniform sampler2D destruction_mask: hint_default_transparent;
+uniform float ratio;
+uniform float radius;
 
 float getAlpha(float col, float alpha) {
 	return col + (1.0 - col) * alpha;
 }
 
+
 void fragment() {
-	/*vec4 original_colour = texture(TEXTURE, UV).rgba;
+	vec4 original_colour = texture(TEXTURE, UV).rgba;
 	vec4 destruction_map_colour = texture(destruction_mask, UV).rgba;
 
-	COLOR = vec4(original_colour.r, original_colour.g, original_colour.b, original_colour.a * destruction_map_colour.a);*/
-	vec3 tex = texture(TEXTURE, UV).rgb;
-	float alpha = 1.0 - COLOR.a;
-	
-	COLOR.rgb = vec3(
-		getAlpha(tex.r, alpha),
-		getAlpha(tex.g, alpha),
-		getAlpha(tex.b, alpha)
-	);
-	COLOR.rgba = vec4(texture(TEXTURE, UV).rgb, 0.0);
+	//COLOR = vec4(original_colour.r, original_colour.g, original_colour.b, destruction_map_colour.a - original_colour.a);
+	if (original_colour.a == 1.0) {
+    	COLOR = vec4(original_colour.rgb, 0.0); // Set alpha to 0 when both alphas are 1
+	}
+	//COLOR = vec4(destruction_map_colour.rbga);
+
 }

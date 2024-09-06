@@ -14,7 +14,7 @@ void fragment() {
 	vec4 destruction_map_colour = texture(destruction_mask, UV).rgba;
 	
 	//COLOR = vec4(original_colour.r, original_colour.g, original_colour.b, destruction_map_colour.a - original_colour.a);
-	if (destruction_map_colour.g == 1.0) {
+	if (destruction_map_colour.a == 1.0) {
     	COLOR = vec4(original_colour.rgb, 0.0); // Set alpha to 0 when both alphas are 1
 	}
 	//COLOR = vec4(destruction_map_colour.rbga);

@@ -13,9 +13,13 @@ shader_parameter/radius = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_avrh3"]
 shader = ExtResource("4_u42j8")
+shader_parameter/ratio = null
+shader_parameter/radius = null
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5w0jb"]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdecg"]
+shader = ExtResource("2_viorw")
+shader_parameter/ratio = null
+shader_parameter/radius = null
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource("1_l2wfj")
@@ -38,7 +42,7 @@ offset_bottom = 193.0
 z_index = 1
 
 [node name="Circle" type="Node2D" parent="."]
-material = SubResource("CanvasItemMaterial_5w0jb")
+material = SubResource("ShaderMaterial_mdecg")
 script = ExtResource("4_m27gq")
 
 [node name="SubViewport" type="SubViewport" parent="."]
