@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var shape_sprite = $ShapeSprite
 @onready var island_holder = $IslandHolder
-@onready var circle: Node2D = $Circle
+@onready var circle: Node2D = $SubViewport/Circle
+@onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 
 var map_size: Vector2i
 
@@ -10,9 +10,6 @@ func _ready() -> void:
 	create_collisions()
 	
 	#var _image_republish_texture = ImageTexture.create_from_image(shape_sprite.texture.get_image())
-	
-	#var _image_republish_texture = Texture2D.new()
-	#_image_republish_texture.draw(null, Vector2.ZERO, Color.BLACK)
 	
 	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
 	#shape_sprite.material.set_shader_parameter("ratio", float(map_size.x)/map_size.y)
@@ -29,6 +26,7 @@ func create_collisions():
 		
 		var newpoints := Array()
 		var body := StaticBody2D.new()
+		var polygon_temp := Polygon2D.new()
 		
 		body.collision_layer = 3
 		body.collision_mask = 3
@@ -37,9 +35,12 @@ func create_collisions():
 			newpoints.push_back(point)
 		
 		collider.polygon = newpoints
+		polygon_temp.polygon = collider.polygon
+		polygon_temp.color = Color.WEB_MAROON
 		map_size = bitMap.get_size()
 		
 		body.add_child(collider)
+		body.add_child(polygon_temp)
 		island_holder.add_child(body)
 		
 func clip(missile_polygon: PackedVector2Array):
@@ -65,6 +66,7 @@ func clip(missile_polygon: PackedVector2Array):
 				
 			if i == 0:
 				collision_polygon.set_deferred("polygon", res[0])
+				collision_body.get_child(1).set_deferred("polygon", res[0])
 				
 				if collision_body is RigidBody2D:
 					collision_body.set_deferred("mass", abs(calculate_area(res[0])))
@@ -72,11 +74,14 @@ func clip(missile_polygon: PackedVector2Array):
 					if abs(centroid) > Vector2(0.5, 0.5):
 						collision_polygon.set_deferred("polygon",
 							offset_polygon_by_center_of_mass(res[0], centroid))
+						collision_body.get_child(1).set_deferred("polygon",
+							offset_polygon_by_center_of_mass(res[0], centroid))
 						
 						collision_body.set_deferred("global_position", collision_body.global_position + centroid.rotated(collision_body.rotation))
 						
 			else:
 				var collider := CollisionPolygon2D.new()
+				var polygon_temp := Polygon2D.new()
 				var body := RigidBody2D.new()
 				var sprite := Sprite2D.new()
 				sprite.texture = shape_sprite.texture
@@ -86,6 +91,8 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				var centroid = calculate_centroid(clipped_collision)
 				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
+				polygon_temp.polygon = collider.polygon
+				polygon_temp.color = Color.WEB_MAROON
 				
 				body.rotation = collision_body.rotation
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
@@ -96,6 +103,7 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
+				body.call_deferred("add_child", polygon_temp)
 				#body.call_deferred("add_child", sprite)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
