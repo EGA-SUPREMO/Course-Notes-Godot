@@ -12,7 +12,7 @@ float getAlpha(float col, float alpha) {
 void fragment() {
 	vec4 original_colour = texture(TEXTURE, UV).rgba;
 	vec4 destruction_map_colour = texture(destruction_mask, UV).rgba;
-	
+
 	//COLOR = vec4(original_colour.r, original_colour.g, original_colour.b, destruction_map_colour.a - original_colour.a);
 	if (destruction_map_colour.a == 1.0) {
     	COLOR = vec4(original_colour.rgb, 0.0); // Set alpha to 0 when both alphas are 1

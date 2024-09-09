@@ -107,7 +107,7 @@ func clip(missile_polygon: PackedVector2Array):
 				#body.call_deferred("add_child", sprite)
 				
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
-	var nb_points = 8
+	var nb_points = 16
 	var points_arc = PackedVector2Array()
 	
 	points_arc.push_back(circle_position)

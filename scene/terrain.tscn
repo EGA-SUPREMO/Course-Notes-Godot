@@ -24,6 +24,8 @@ script = ExtResource("1_l2wfj")
 z_index = -30
 z_as_relative = false
 material = SubResource("ShaderMaterial_4pfij")
+position = Vector2(0, 10)
+scale = Vector2(1, 0.981481)
 texture = ExtResource("2_fi23k")
 centered = false
 
