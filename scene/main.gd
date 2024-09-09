@@ -6,6 +6,8 @@ var scene_missile = preload("res://scene/missile.tscn")
 @onready var timer = $Timer
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
+@onready var void_limit: StaticBody2D = $VoidLimit
+
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
 #@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
@@ -31,6 +33,7 @@ func _ready():
 	#print(rigid_body_2d2.center_of_mass)
 	pass
 func _process(delta):
+	adjust_camera()
 	#if i > 200:
 	#	var body = RigidBody2D.new()
 	#	var collision = CollisionPolygon2D.new()
@@ -80,3 +83,15 @@ func on_destroy():#position: Vector2, radious):
 
 func _on_timer_timeout():
 	on_destroy()
+
+func adjust_camera() -> void:
+	camera_2d.position.x = terrain.map_size.x/2
+	camera_2d.position.y = get_y_from_x(get_viewport().get_visible_rect().size.x / terrain.map_size.x)
+	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
+	camera_2d.zoom.y = camera_2d.zoom.x
+
+func get_y_from_x(x_value):#slope
+	var m = 0.003332
+	var b = 1.666
+	var x = (x_value - b) / m
+	return x
