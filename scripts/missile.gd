@@ -7,9 +7,11 @@ var should_draw := false
 signal explosion
 @onready var missile = $"."
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
+	missile.contact_monitor = true
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 
@@ -26,3 +28,8 @@ func _on_timer_2_timeout():
 	#explosion.emit(position, 30)
 	
 	queue_free()
+
+
+func _on_body_entered(body: Node) -> void:
+	print("oex")
+	animation_player.play("explotion")

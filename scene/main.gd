@@ -77,7 +77,8 @@ func on_destroy():#position: Vector2, radious):
 	terrain.clip(terrain.create_circle_radious_polygon(
 		last_misil.global_position, $player.damage))
 	print($player.damage)
-	terrain.circle.reposition(last_misil.global_position, $player.damage)
+	#terrain.circle.reposition(last_misil.global_position, $player.damage)
+	last_misil.animation_player.play("explotion")
 	print("boom3")
 
 
@@ -86,12 +87,12 @@ func _on_timer_timeout():
 
 func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
-	camera_2d.position.y = get_y_from_x(get_viewport().get_visible_rect().size.x / terrain.map_size.x)
+	camera_2d.position.y = get_y_from_x(get_viewport().get_visible_rect().size.x / terrain.map_size.x)# - get_viewport().get_visible_rect().size.y
+	#camera_2d.position.y -=  - get_viewport().get_visible_rect().size.y/4
 	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
 	camera_2d.zoom.y = camera_2d.zoom.x
 
 func get_y_from_x(x_value):#slope
 	var m = 0.003332
 	var b = 1.666
-	var x = (x_value - b) / m
-	return x
+	return (x_value - b) / m
