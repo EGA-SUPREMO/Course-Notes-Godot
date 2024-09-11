@@ -28,7 +28,7 @@ func _ready():
 	#print(rigid_body_2d2.global_position)
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
-	pass
+	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
 func _process(delta):
 	adjust_camera()
 	#if i > 200:
@@ -42,15 +42,6 @@ func _process(delta):
 	#	i+=1
 	#	body.collision_layer = 3
 	#	body.collision_mask = 3
-	
-	if Input.is_action_pressed("reduce_zoom"):
-		camera_2d.zoom.x += 0.5 * delta
-		camera_2d.zoom.y += 0.5 * delta
-		#i=0
-	if Input.is_action_pressed("increase_zoom"):
-		camera_2d.zoom.x -= 0.5 * delta
-		camera_2d.zoom.y -= 0.5 * delta
-		
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
 			get_global_mouse_position(), $player.damage))	
@@ -68,12 +59,5 @@ func _on_player_shoot():
 
 func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
-	camera_2d.position.y = get_y_from_x(get_viewport().get_visible_rect().size.x / terrain.map_size.x)# - get_viewport().get_visible_rect().size.y
-	#camera_2d.position.y -=  - get_viewport().get_visible_rect().size.y/4
 	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
 	camera_2d.zoom.y = camera_2d.zoom.x
-
-func get_y_from_x(x_value):#slope
-	var m = 0.003332
-	var b = 1.666
-	return (x_value - b) / m
