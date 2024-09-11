@@ -17,7 +17,7 @@ shader = ExtResource("2_viorw")
 shader_parameter/ratio = null
 shader_parameter/radius = null
 
-[node name="Terrain" type="Node2D"]
+[node name="Terrain" type="Node2D" groups=["destructibles"]]
 script = ExtResource("1_l2wfj")
 
 [node name="Background" type="Sprite2D" parent="."]

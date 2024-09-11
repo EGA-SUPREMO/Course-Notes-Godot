@@ -7,6 +7,7 @@ extends Node2D
 var map_size: Vector2i
 
 func _ready() -> void:
+	add_to_group("destructibles")
 	create_collisions()
 	
 	#var _image_republish_texture = ImageTexture.create_from_image(shape_sprite.texture.get_image())
@@ -83,9 +84,6 @@ func clip(missile_polygon: PackedVector2Array):
 				var collider := CollisionPolygon2D.new()
 				var polygon_temp := Polygon2D.new()
 				var body := RigidBody2D.new()
-				var sprite := Sprite2D.new()
-				sprite.texture = shape_sprite.texture
-				sprite.centered = false
 				body.collision_layer = 3
 				body.collision_mask = 3
 				
@@ -155,3 +153,6 @@ func get_min_x_y(points: PackedVector2Array) -> Vector2:
 		if point.y < min_y:
 			min_y = point.y
 	return Vector2(min_x, min_y)
+
+func destroy(position_missile: Vector2, radius: int):
+	clip(create_circle_radious_polygon(position_missile, radius))

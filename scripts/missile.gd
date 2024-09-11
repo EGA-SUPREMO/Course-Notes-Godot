@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var new_rotation: float
 @onready var timer = $Timer
-var damage: int
+@export var damage: int
 var should_draw := false
 signal explosion
 @onready var missile = $"."
@@ -11,7 +11,7 @@ signal explosion
 
 
 func _ready():
-	missile.contact_monitor = true
+	damage = 30
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 
@@ -24,12 +24,7 @@ func _physics_process(delta):
 func _on_timer_timeout():
 	should_draw = true
 
-func _on_timer_2_timeout():
-	#explosion.emit(position, 30)
-	
-	queue_free()
-
-
 func _on_body_entered(body: Node) -> void:
-	print("oex")
+	print(body)
+	get_tree().call_group("destructibles", "destroy", global_position, damage)
 	animation_player.play("explotion")
