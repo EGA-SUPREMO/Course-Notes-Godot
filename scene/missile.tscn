@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0562akwst7p3"]
+[gd_scene load_steps=19 format=3 uid="uid://c0562akwst7p3"]
 
 [ext_resource type="Texture2D" uid="uid://ol2xj05g4tes" path="res://assets/sprites/missiles/misil_2.png" id="1_aclib"]
 [ext_resource type="Script" path="res://scripts/missile.gd" id="1_vx1c2"]
 [ext_resource type="Texture2D" uid="uid://d0080wsh48tfm" path="res://assets/sprites/explosion/spritesheet.png" id="3_xlgyg"]
+[ext_resource type="AudioStream" uid="uid://6j5n2b6vc325" path="res://assets/sounds/explosion.wav" id="4_errr7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2vnx"]
 radius = 2.0
@@ -52,6 +53,18 @@ tracks/3/path = NodePath(".:freeze")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SFX_Explotion:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -119,7 +132,7 @@ tracks/4/path = NodePath("Sprite2D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.0333333),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -131,6 +144,18 @@ tracks/5/path = NodePath(".:freeze")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SFX_Explotion:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -262,8 +287,13 @@ libraries = {
 autoplay = "reset"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_oj14e")
+
+[node name="SFX_Explotion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_errr7")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
