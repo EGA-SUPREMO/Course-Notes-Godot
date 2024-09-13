@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=11 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="1_ws64h"]
 [ext_resource type="Texture2D" uid="uid://dskfguleh02xt" path="res://assets/sprites/Risuner-2.png" id="2_5deqe"]
 [ext_resource type="Texture2D" uid="uid://4x12uxc7usnu" path="res://assets/sprites/Risuner-3.png" id="3_l7gy6"]
 [ext_resource type="Texture2D" uid="uid://ls3efihws416" path="res://assets/sprites/player_hud/shield_0.png" id="5_up7eb"]
+[ext_resource type="Script" path="res://scripts/states/state_machine.gd" id="6_murpk"]
+[ext_resource type="Script" path="res://scripts/states/idle.gd" id="7_75v2v"]
+[ext_resource type="Script" path="res://scripts/states/attacking.gd" id="8_cm8dj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v13ht"]
 resource_local_to_scene = true
@@ -126,3 +129,16 @@ texture = ExtResource("5_up7eb")
 position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_murpk")
+initial_state = NodePath("Attacking")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_75v2v")
+
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_cm8dj")
+player = NodePath("../..")
+
+[connection signal="shoot" from="StateMachine/Attacking" to="." method="_on_player_shoot"]

@@ -4,15 +4,13 @@ extends CharacterBody2D
 
 @export var missile_power := 50
 
-signal shoot
-
-const SPEED = 100.0
 @onready var player = $"."
 @onready var hud = $HUD
 @onready var children_count = $HUD.get_child_count()
 
 var damage = 15
 
+var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -28,8 +26,6 @@ func _ready():
 		child.position.x *= scale_factor*scale_factor
 		
 func _process(delta):
-	if Input.is_action_just_released("shot"):
-		shoot.emit()
 	if Input.is_action_pressed("increase_angle"):
 		angle += 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
 	if Input.is_action_pressed("lower_angle"):
@@ -58,17 +54,15 @@ func set_percentage_visible_power(power: int):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-	var direction = Input.get_axis("left_move", "right_move")
-
-	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
-		animated_sprite.flip_h = true
 	
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	move_and_slide()
+	
+func _on_player_shoot():
+	var missile = scene_missile.instantiate()
+	missile.add_to_group("missile")
+	missile.rotation = angle + PI / 2
+	missile.position = $HUD.position
+	var direction = Vector2(cos(angle), sin(angle))
+	missile.apply_impulse(direction * missile_power * 15, Vector2.ZERO)
+	#missile.connect("explosion", terrain.destroy(position, 230))
+	add_child(missile)

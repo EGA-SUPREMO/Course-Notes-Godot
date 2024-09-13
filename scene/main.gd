@@ -1,9 +1,9 @@
 extends Node2D
 
-var scene_missile = preload("res://scene/missile.tscn")
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
+@onready var player: CharacterBody2D = $player
 
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
@@ -29,6 +29,7 @@ func _ready():
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
+	
 func _process(delta):
 	adjust_camera()
 	#if i > 200:
@@ -47,15 +48,7 @@ func _process(delta):
 			get_global_mouse_position(), $player.damage))	
 	
 		
-func _on_player_shoot():
-	var missile = scene_missile.instantiate()
-	missile.add_to_group("missile")
-	missile.rotation = $player.angle + PI / 2
-	missile.position = $player/HUD.global_position
-	var direction = Vector2(cos($player.angle), sin($player.angle))
-	missile.apply_impulse(direction * $player.missile_power * 15, Vector2.ZERO)
-	#missile.connect("explosion", terrain.destroy(position, 230))
-	add_child(missile)
+
 
 func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
