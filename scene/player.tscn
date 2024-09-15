@@ -114,8 +114,9 @@ texture = ExtResource("5_up7eb")
 script = ExtResource("6_murpk")
 initial_state = NodePath("Attacking")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_75v2v")
+player = NodePath("../..")
 
 [node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("8_cm8dj")

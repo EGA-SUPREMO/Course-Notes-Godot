@@ -32,7 +32,7 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
 	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
-func _process(delta):
+func _process(_delta):
 	adjust_camera()
 	#if i > 200:
 	#	var body = RigidBody2D.new()

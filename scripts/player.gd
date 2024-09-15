@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var state_machine: Node = $StateMachine
 
 @export var missile_power := 50
 
@@ -62,5 +63,6 @@ func _on_player_shoot():
 	missile.position = $HUD.position
 	var direction = Vector2(cos(angle), sin(angle))
 	missile.apply_impulse(direction * missile_power * 15, Vector2.ZERO)
+	missile.who_shoot = self
 	#missile.connect("explosion", terrain.destroy(position, 230))
 	add_child(missile)

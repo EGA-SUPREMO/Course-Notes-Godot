@@ -4,6 +4,8 @@ var new_rotation: float
 @onready var timer = $Timer
 @export var damage: int
 var should_draw := false
+var who_shoot: CharacterBody2D
+
 signal explosion
 @onready var missile = $"."
 @onready var collision_shape_2d = $CollisionShape2D
@@ -17,7 +19,7 @@ func _ready():
 	timer.start(0.015)
 	sfx_explotion.pitch_scale = randf() + 0.75
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	new_rotation = atan2(linear_velocity.y, linear_velocity.x)
 	if should_draw:#there used to be a nasty bug, that upon instantiating the scene, velocity and susequentemente rotation is 0 and misile from 1 frame to another changes make a wide turn, donot remove
 	#but seems like it disappeared :v
@@ -26,6 +28,10 @@ func _physics_process(delta):
 func _on_timer_timeout():
 	should_draw = true
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
+	if collision_shape_2d.disabled:
+		return
 	get_tree().call_group("destructibles", "destroy", global_position, damage)
 	animation_player.play("explotion")
+	who_shoot.state_machine.current_state.next_turn()
+	
