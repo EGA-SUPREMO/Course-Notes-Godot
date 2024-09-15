@@ -4,6 +4,7 @@ extends Node2D
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
 @onready var player: CharacterBody2D = $player
+@onready var player_2: CharacterBody2D = $player2
 
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
@@ -29,6 +30,7 @@ func _ready():
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
+	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
 func _process(delta):
 	adjust_camera()

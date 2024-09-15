@@ -13,9 +13,7 @@ var damage = 15
 var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 func _ready():
 	for i in range(children_count):
 		var child = $HUD.get_child(i)

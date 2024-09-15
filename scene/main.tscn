@@ -20,13 +20,9 @@ position = Vector2(0, -300)
 
 [node name="player" parent="." instance=ExtResource("1_sqf7g")]
 position = Vector2(100, -241)
-missile_power = 50
-angle = 0.0
 
 [node name="player2" parent="." instance=ExtResource("1_sqf7g")]
 position = Vector2(100, -217)
-missile_power = 50
-angle = 0.0
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]
 position = Vector2(0, 222)

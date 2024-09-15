@@ -27,6 +27,5 @@ func _on_timer_timeout():
 	should_draw = true
 
 func _on_body_entered(body: Node) -> void:
-	print(body)
 	get_tree().call_group("destructibles", "destroy", global_position, damage)
 	animation_player.play("explotion")

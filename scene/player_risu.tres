@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cymyjko403owb"]
+
+[ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="1_mhrkb"]
+[ext_resource type="Texture2D" uid="uid://dskfguleh02xt" path="res://assets/sprites/Risuner-2.png" id="2_15s6n"]
+[ext_resource type="Texture2D" uid="uid://4x12uxc7usnu" path="res://assets/sprites/Risuner-3.png" id="3_c42bh"]
+
+[resource]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mhrkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_15s6n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c42bh")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
