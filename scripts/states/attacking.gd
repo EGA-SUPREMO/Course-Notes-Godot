@@ -6,12 +6,12 @@ signal shoot
 const SPEED = 100.0
 
 func update(_delta):
-	if Input.is_action_just_released("shot"):
+	if Input.is_action_just_released(player.keyboard_profile + "shot"):
 		shoot.emit()
 		transition.emit(self, "idle")
 
 func update_physics(_delta):
-	var direction = Input.get_axis("left_move", "right_move")
+	var direction = Input.get_axis(player.keyboard_profile + "left_move", player.keyboard_profile + "right_move")
 
 	if direction > 0:
 		player.animated_sprite.flip_h = false

@@ -3,9 +3,11 @@ extends Node2D
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
-@onready var player: CharacterBody2D = $player
-@onready var player_2: CharacterBody2D = $player2
+@onready var player_1: CharacterBody2D = $Players/player
+@onready var player_2: CharacterBody2D = $Players/player2
+@onready var players: Node = $Players
 
+var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
 #@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
@@ -32,6 +34,9 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
 	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
+	for player in players.get_children():
+		player.shoot.connect(_on_player_shoot.bind(player))
+		
 func _process(_delta):
 	adjust_camera()
 	#if i > 200:
@@ -47,12 +52,25 @@ func _process(_delta):
 	#	body.collision_mask = 3
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
-			get_global_mouse_position(), $player.damage))	
+			get_global_mouse_position(), player_1.damage))	
 	
-		
-
-
+	
 func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
 	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
 	camera_2d.zoom.y = camera_2d.zoom.x
+
+
+func next_turn():
+	players_on_wait = true
+	for player in players.get_children():
+		if player.state_machine.current_state.name.to_lower()=="attacking":
+			players_on_wait = false
+	if players_on_wait:
+		for player in players.get_children():
+			player.state_machine.current_state.next_turn()
+
+
+func _on_player_shoot(player) -> void:
+	player.missile.explotion.connect(next_turn)
+	add_child(player.missile)

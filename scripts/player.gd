@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var state_machine: Node = $StateMachine
 
 @export var missile_power := 50
+@export var keyboard_profile: String
+var missile
+signal shoot
 
 @onready var player = $"."
 @onready var hud = $HUD
@@ -15,6 +18,7 @@ var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 func _ready():
 	for i in range(children_count):
 		var child = $HUD.get_child(i)
@@ -25,15 +29,15 @@ func _ready():
 		child.position.x *= scale_factor*scale_factor
 		
 func _process(delta):
-	if Input.is_action_pressed("increase_angle"):
+	if Input.is_action_pressed(keyboard_profile + "increase_angle"):
 		angle += 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
-	if Input.is_action_pressed("lower_angle"):
+	if Input.is_action_pressed(keyboard_profile + "lower_angle"):
 		angle -= 2 * delta
 	
-	if Input.is_action_pressed("increase_power"):
+	if Input.is_action_pressed(keyboard_profile + "increase_power"):
 		damage += 50 * delta
 		missile_power += 100 * delta
-	if Input.is_action_pressed("decrease_power"):
+	if Input.is_action_pressed(keyboard_profile + "decrease_power"):
 		missile_power -= 100 * delta
 		damage -= 50 * delta
 		
@@ -57,12 +61,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_player_shoot():
-	var missile = scene_missile.instantiate()
+	missile = scene_missile.instantiate()
 	missile.add_to_group("missile")
 	missile.rotation = angle + PI / 2
-	missile.position = $HUD.position
+	missile.position = $HUD.global_position
 	var direction = Vector2(cos(angle), sin(angle))
 	missile.apply_impulse(direction * missile_power * 15, Vector2.ZERO)
 	missile.who_shoot = self
-	#missile.connect("explosion", terrain.destroy(position, 230))
-	add_child(missile)
+	shoot.emit()

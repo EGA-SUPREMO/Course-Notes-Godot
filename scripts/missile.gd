@@ -6,7 +6,7 @@ var new_rotation: float
 var should_draw := false
 var who_shoot: CharacterBody2D
 
-signal explosion
+signal explotion
 @onready var missile = $"."
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -33,5 +33,7 @@ func _on_body_entered(_body: Node) -> void:
 		return
 	get_tree().call_group("destructibles", "destroy", global_position, damage)
 	animation_player.play("explotion")
-	who_shoot.state_machine.current_state.next_turn()
+	collision_shape_2d.set_deferred("disabled", true)
+	explotion.emit()
+	#who_shoot.state_machine.current_state.next_turn()
 	
