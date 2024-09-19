@@ -29,18 +29,20 @@ func _ready():
 		child.position.x *= scale_factor*scale_factor
 		
 func _process(delta):
-	if Input.is_action_pressed(keyboard_profile + "increase_angle"):
-		angle += 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
-	if Input.is_action_pressed(keyboard_profile + "lower_angle"):
-		angle -= 2 * delta
+	var direction_angle_changed = Input.get_axis(keyboard_profile + "increase_angle", keyboard_profile + "lower_angle")
+	if direction_angle_changed > 0:
+		angle -= 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
+	elif direction_angle_changed < 0:
+		angle += 2 * delta
 	
-	if Input.is_action_pressed(keyboard_profile + "increase_power"):
+	var direction_power_changed = Input.get_axis(keyboard_profile + "increase_power", keyboard_profile + "decrease_power")
+	if direction_power_changed < 0:
 		damage += 50 * delta
-		missile_power += 100 * delta
-	if Input.is_action_pressed(keyboard_profile + "decrease_power"):
-		missile_power -= 100 * delta
+		missile_power += 100 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
+	elif direction_power_changed > 0:
 		damage -= 50 * delta
-		
+		missile_power -= 100 * delta
+	
 	set_percentage_visible_power(missile_power)
 		
 	hud.rotation = angle

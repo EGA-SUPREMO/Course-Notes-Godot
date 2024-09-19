@@ -4,6 +4,8 @@ class_name Attacking
 
 signal shoot
 const SPEED = 100.0
+const ACCELERATION = 10.0
+	
 
 func update(_delta):
 	if Input.is_action_just_released(player.keyboard_profile + "shot"):
@@ -12,13 +14,10 @@ func update(_delta):
 
 func update_physics(_delta):
 	var direction = Input.get_axis(player.keyboard_profile + "left_move", player.keyboard_profile + "right_move")
-
+	
 	if direction > 0:
 		player.animated_sprite.flip_h = false
 	elif direction < 0:
 		player.animated_sprite.flip_h = true
+	player.velocity.x = lerp(player.velocity.x, direction * SPEED, _delta * ACCELERATION)
 	
-	if direction:
-		player.velocity.x = direction * SPEED
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
