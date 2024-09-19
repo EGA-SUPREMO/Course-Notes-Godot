@@ -73,3 +73,19 @@ func _on_player_shoot():
 	missile.apply_impulse(direction * missile_power * 15, Vector2.ZERO)
 	missile.who_shoot = self
 	shoot.emit()
+	
+
+func calculate_quadratic_damage(target_position: Vector2, explosion_radius: float) -> float:
+	var distance = target_position.distance_to(position)
+	var damage = explosion_radius
+	# Ensure the distance doesn't exceed the explosion radius
+	if distance > explosion_radius:
+		return 0  # No damage outside the explosion radius
+	
+	return damage * (1 - pow(distance / explosion_radius, 2))
+	
+func destroy(position_missile: Vector2, radius: int):
+	HP -= calculate_quadratic_damage(position_missile, radius)
+	print(HP)
+	if HP < 0:
+		queue_free()

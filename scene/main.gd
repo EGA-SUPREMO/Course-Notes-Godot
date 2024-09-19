@@ -52,9 +52,9 @@ func _process(_delta):
 	#	i+=1
 	#	body.collision_layer = 3
 	#	body.collision_mask = 3
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		terrain.clip(terrain.create_circle_radious_polygon(
-			get_global_mouse_position(), player_1.damage))	
+#	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+#		terrain.clip(terrain.create_circle_radious_polygon(
+#			get_global_mouse_position(), player_1.damage))	
 	
 	
 func adjust_camera() -> void:
