@@ -29,7 +29,7 @@ func _on_timer_timeout():
 	should_draw = true
 
 func _on_body_entered(_body: Node) -> void:
-	if collision_shape_2d.disabled:
+	if collision_shape_2d.disabled:#WTF GODOT!
 		return
 	get_tree().call_group("destructibles", "destroy", global_position, damage)
 	animation_player.play("explotion")

@@ -13,6 +13,8 @@ signal shoot
 @onready var children_count = $HUD.get_child_count()
 
 var damage = 15
+var HP:= 100.0
+var money := 0
 
 var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0

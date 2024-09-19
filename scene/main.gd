@@ -6,6 +6,7 @@ extends Node2D
 @onready var player_1: CharacterBody2D = $Players/player
 @onready var player_2: CharacterBody2D = $Players/player2
 @onready var players: Node = $Players
+@onready var missiles: Node = $Missiles
 
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
@@ -39,6 +40,7 @@ func _ready():
 		
 func _process(_delta):
 	adjust_camera()
+	next_turn()#sholdnt run every update, but only after explotions
 	#if i > 200:
 	#	var body = RigidBody2D.new()
 	#	var collision = CollisionPolygon2D.new()
@@ -63,6 +65,9 @@ func adjust_camera() -> void:
 
 func next_turn():
 	players_on_wait = true
+	for missile in missiles.get_children():
+		if !missile.collision_shape_2d.disabled:
+			return
 	for player in players.get_children():
 		if player.state_machine.current_state.name.to_lower()=="attacking":
 			players_on_wait = false
@@ -70,7 +75,6 @@ func next_turn():
 		for player in players.get_children():
 			player.state_machine.current_state.next_turn()
 
-
 func _on_player_shoot(player) -> void:
-	player.missile.explotion.connect(next_turn)
-	add_child(player.missile)
+	#player.missile.explotion.connect(next_turn)
+	missiles.add_child(player.missile)

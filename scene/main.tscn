@@ -18,6 +18,8 @@ script = ExtResource("1_vsj3d")
 [node name="Terrain" parent="." instance=ExtResource("2_1t2nn")]
 position = Vector2(0, -300)
 
+[node name="Missiles" type="Node" parent="."]
+
 [node name="Players" type="Node" parent="." groups=["destructibles"]]
 
 [node name="player" parent="Players" instance=ExtResource("1_sqf7g")]
