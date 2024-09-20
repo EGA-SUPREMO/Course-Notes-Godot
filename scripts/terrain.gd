@@ -154,5 +154,5 @@ func get_min_x_y(points: PackedVector2Array) -> Vector2:
 			min_y = point.y
 	return Vector2(min_x, min_y)
 
-func destroy(position_missile: Vector2, radius: int):
-	clip(create_circle_radious_polygon(position_missile, radius))
+func destroy(missile) -> void:
+	clip(create_circle_radious_polygon(missile.global_position, missile.damage))

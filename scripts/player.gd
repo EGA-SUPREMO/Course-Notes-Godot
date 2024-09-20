@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var state_machine: Node = $StateMachine
+@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 
 @export var missile_power := 50
 @export var keyboard_profile: String
@@ -12,9 +13,10 @@ signal shoot
 @onready var hud = $HUD
 @onready var children_count = $HUD.get_child_count()
 
-var damage = 15
+#var damage = 15
 var HP:= 100.0
 var money := 5000
+const MONEY_MULTIPLIER = 50
 
 var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0
@@ -39,10 +41,10 @@ func _process(delta):
 	
 	var direction_power_changed = Input.get_axis(keyboard_profile + "increase_power", keyboard_profile + "decrease_power")
 	if direction_power_changed < 0:
-		damage += 50 * delta
+		#damage += 50 * delta
 		missile_power += 100 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
 	elif direction_power_changed > 0:
-		damage -= 50 * delta
+		#damage -= 50 * delta
 		missile_power -= 100 * delta
 	
 	set_percentage_visible_power(missile_power)
@@ -84,8 +86,16 @@ func calculate_quadratic_damage(target_position: Vector2, damage: float) -> floa
 	
 	return damage * (1 - pow(distance / explosion_radius, 2))
 	
-func destroy(position_missile: Vector2, radius: int):
-	HP -= calculate_quadratic_damage(position_missile, radius)
+func destroy(missile):
+	var damage = calculate_quadratic_damage(missile.global_position, missile.damage)
+	if damage>0:
+		HP -= damage
+		#esto no afecta a quien disparo, solo si el que recibio disparo
+		money += damage * ( -1 if missile.who_shoot == self else 1 ) * MONEY_MULTIPLIER
+		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")
+		hurt_sfx.pitch_scale = randf() + 0.5
+		hurt_sfx.play()
 	print("HP " + str(HP))
+	print("Money " + str(money) + str(self))
 	if HP < 0:
 		queue_free()
