@@ -127,4 +127,8 @@ player = NodePath("../..")
 stream = ExtResource("7_071vd")
 bus = &"SFX"
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="shoot" from="StateMachine/Attacking" to="." method="_on_player_shoot"]

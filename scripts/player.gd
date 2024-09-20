@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var state_machine: Node = $StateMachine
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
+@onready var label: Label = $Label
 
 @export var missile_power := 50
 @export var keyboard_profile: String
@@ -33,6 +34,7 @@ func _ready():
 		child.position.x *= scale_factor*scale_factor
 		
 func _process(delta):
+	label.text = str(money)
 	var direction_angle_changed = Input.get_axis(keyboard_profile + "increase_angle", keyboard_profile + "lower_angle")
 	if direction_angle_changed > 0:
 		angle -= 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
@@ -90,12 +92,10 @@ func destroy(missile):
 	var damage = calculate_quadratic_damage(missile.global_position, missile.damage)
 	if damage>0:
 		HP -= damage
-		#esto no afecta a quien disparo, solo si el que recibio disparo
-		money += damage * ( -1 if missile.who_shoot == self else 1 ) * MONEY_MULTIPLIER
-		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")
+		var sign = ( -1 if missile.who_shoot == self else 1 )
+		missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
+		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
 		hurt_sfx.pitch_scale = randf() + 0.5
 		hurt_sfx.play()
-	print("HP " + str(HP))
-	print("Money " + str(money) + str(self))
 	if HP < 0:
 		queue_free()
