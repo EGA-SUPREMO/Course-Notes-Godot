@@ -3,8 +3,6 @@ class_name Attacking
 
 @export var player: CharacterBody2D
 
-const SPEED = 100.0
-const ACCELERATION = 10.0
 	
 
 func update(_delta):
@@ -19,5 +17,5 @@ func update_physics(_delta):
 		player.animated_sprite.flip_h = false
 	elif direction < 0:
 		player.animated_sprite.flip_h = true
-	player.velocity.x = lerp(player.velocity.x, direction * SPEED, _delta * ACCELERATION)
+	player.velocity.x = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.ACCELERATION_MOVEMENT)
 	
