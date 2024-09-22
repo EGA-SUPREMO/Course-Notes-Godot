@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=12 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="SpriteFrames" uid="uid://bcomtk7bj44ai" path="res://scene/player_zeta.tres" id="2_f8upj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/states/idle.gd" id="7_75v2v"]
 [ext_resource type="Script" path="res://scripts/states/attacking.gd" id="8_cm8dj"]
 [ext_resource type="Script" path="res://scripts/states/ai_idle.gd" id="8_pvw5g"]
+[ext_resource type="Script" path="res://scripts/user_input_component.gd" id="10_bdi5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
 radius = 4.0
@@ -140,3 +141,6 @@ bus = &"SFX"
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="UserInputComponent" type="Node" parent="."]
+script = ExtResource("10_bdi5k")

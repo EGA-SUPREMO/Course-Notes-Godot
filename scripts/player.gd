@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var state_machine: Node = $StateMachine
@@ -18,6 +19,8 @@ signal shoot
 var HP:= 100.0
 var money := 5000
 const MONEY_MULTIPLIER = 50
+@export var human: bool
+@onready var user_input_component: UserInputComponent = $UserInputComponent
 
 @export var angle := 0.0
 
@@ -25,27 +28,22 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	for i in range(children_count):
-		var child = $HUD.get_child(i)
+		var child = hud.get_child(i)
 		var scale_factor = (i + 1) / float(children_count)
 		child.scale = Vector2(0.4, 0.4)
 		child.scale *= scale_factor
 		child.position.x = 64
 		child.position.x *= scale_factor*scale_factor
 		
+	if human:
+		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
+		
+		
 func _process(delta):
 	label.text = "$: " + str(money) + "\nHp: " + str(HP)
 	
-	var direction_angle_changed = Input.get_axis(keyboard_profile + "increase_angle", keyboard_profile + "lower_angle")
-	if direction_angle_changed > 0:
-		angle -= 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
-	elif direction_angle_changed < 0:
-		angle += 2 * delta
-	
-	var direction_power_changed = Input.get_axis(keyboard_profile + "increase_power", keyboard_profile + "decrease_power")
-	if direction_power_changed < 0:
-		missile_power += 100 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
-	elif direction_power_changed > 0:
-		missile_power -= 100 * delta
+	if human:
+		user_input_component.update_user_input(self, delta)
 	
 	set_percentage_visible_power(missile_power)
 		

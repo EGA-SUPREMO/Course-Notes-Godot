@@ -109,6 +109,7 @@ func clip(missile_polygon: PackedVector2Array):
 				
 func on_collision_polygon(_target_body, _body):
 	if _target_body is CharacterBody2D:
+		# TODO Shouldnt we check if player has velocity zero, if so, it'd mean that is being squished
 		var angular_force = _body.angular_velocity * _body.mass
 		var linear_force = _body.linear_velocity.length() * _body.mass
 		var total_force = angular_force + linear_force# TODO este metodo le falta chicha

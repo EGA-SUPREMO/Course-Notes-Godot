@@ -37,8 +37,6 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
 	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
-	players.get_child(0).state_machine.current_state.transition.emit(players.get_child(0).state_machine.current_state, "attacking")
-	#players.get_child(0).state_machine.initial_state
 	for player in players.get_children():
 		player.shoot.connect(_on_player_shoot.bind(player))
 		
@@ -74,7 +72,7 @@ func next_turn():
 			return
 	for player in players.get_children():
 		if player.state_machine.current_state.name.to_lower()=="attacking" or player.state_machine.current_state.name.to_lower()=="ai_attacking":
-			players_on_wait = false
+			return
 	if players_on_wait:
 		for player in players.get_children():
 			player.state_machine.current_state.next_turn()

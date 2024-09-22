@@ -1,8 +1,6 @@
 extends Attacking
 class_name AI_Attacking
 
-
-
 func update(_delta):
 	player.angle -= 2 * _delta
 	player.shoot.emit()
