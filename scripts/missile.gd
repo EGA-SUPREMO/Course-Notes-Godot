@@ -32,6 +32,7 @@ func _on_timer_timeout():
 func _on_body_entered(_body: Node) -> void:
 	if collision_shape_2d.disabled:#WTF GODOT!
 		return
+	
 	get_tree().call_group("destructibles", "destroy", self)
 	animation_player.play("explotion")
 	collision_shape_2d.set_deferred("disabled", true)

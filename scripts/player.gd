@@ -33,7 +33,7 @@ func _ready():
 		child.position.x *= scale_factor*scale_factor
 		
 func _process(delta):
-	label.text = str(money)
+	label.text = "$: " + str(money) + "\nHp: " + str(HP)
 	
 	var direction_angle_changed = Input.get_axis(keyboard_profile + "increase_angle", keyboard_profile + "lower_angle")
 	if direction_angle_changed > 0:
@@ -65,9 +65,6 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	move_and_slide()
-	
-func _on_player_shoot():
-	player.shoot.emit()
 	
 
 func calculate_quadratic_damage(target_position: Vector2, damage: float) -> float:

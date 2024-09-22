@@ -94,6 +94,9 @@ func clip(missile_polygon: PackedVector2Array):
 				
 				body.rotation = collision_body.rotation
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
+				body.contact_monitor = true
+				body.max_contacts_reported = 2
+				body.connect("body_entered", on_collision_polygon.bind(body))
 				#sprite.position.x -= map_size.x/2
 				#sprite.position.y -= map_size.y/2
 				#sprite.position = get_min_x_y(collider.polygon)
@@ -104,6 +107,13 @@ func clip(missile_polygon: PackedVector2Array):
 				body.call_deferred("add_child", polygon_temp)
 				#body.call_deferred("add_child", sprite)
 				
+func on_collision_polygon(_target_body, _body):
+	if _target_body is CharacterBody2D:
+		var angular_force = _body.angular_velocity * _body.mass
+		var linear_force = _body.linear_velocity.length() * _body.mass
+		var total_force = angular_force + linear_force# TODO este metodo le falta chicha
+		#print(total_force)
+
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 16
 	var points_arc = PackedVector2Array()

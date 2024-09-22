@@ -3,7 +3,6 @@ class_name Attacking
 
 @export var player: CharacterBody2D
 
-signal shoot
 const SPEED = 100.0
 const ACCELERATION = 10.0
 	
