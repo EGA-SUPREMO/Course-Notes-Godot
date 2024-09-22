@@ -19,7 +19,6 @@ var HP:= 100.0
 var money := 5000
 const MONEY_MULTIPLIER = 50
 
-var scene_missile = preload("res://scene/missile.tscn")
 @export var angle := 0.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -68,14 +67,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_player_shoot():
-	missile = scene_missile.instantiate()
-	missile.add_to_group("missile")
-	missile.rotation = angle + PI / 2
-	missile.position = $HUD.global_position
-	var direction = Vector2(cos(angle), sin(angle))
-	missile.apply_impulse(direction * missile_power * 15, Vector2.ZERO)
-	missile.who_shoot = self
-	shoot.emit()
+	player.shoot.emit()
 	
 
 func calculate_quadratic_damage(target_position: Vector2, damage: float) -> float:

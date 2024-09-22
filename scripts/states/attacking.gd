@@ -10,7 +10,7 @@ const ACCELERATION = 10.0
 
 func update(_delta):
 	if Input.is_action_just_released(player.keyboard_profile + "shot"):
-		shoot.emit()
+		player.shoot.emit()
 		transition.emit(self, "idle")
 
 func update_physics(_delta):

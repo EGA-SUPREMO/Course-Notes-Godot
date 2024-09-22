@@ -8,6 +8,8 @@ extends Node2D
 @onready var players: Node = $Players
 @onready var missiles: Node = $Missiles
 
+var scene_missile = preload("res://scene/missile.tscn")
+
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
@@ -35,6 +37,8 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
 	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
+	players.get_child(0).state_machine.current_state.transition.emit(players.get_child(0).state_machine.current_state, "attacking")
+	#players.get_child(0).state_machine.initial_state
 	for player in players.get_children():
 		player.shoot.connect(_on_player_shoot.bind(player))
 		
@@ -76,5 +80,11 @@ func next_turn():
 			player.state_machine.current_state.next_turn()
 
 func _on_player_shoot(player) -> void:
-	#player.missile.explotion.connect(next_turn)
+	player.missile = scene_missile.instantiate()
+	player.missile.add_to_group("missile")
+	player.missile.rotation = player.angle + PI / 2
+	player.missile.position = player.hud.global_position
+	var direction = Vector2(cos(player.angle), sin(player.angle))
+	player.missile.apply_impulse(direction * player.missile_power * 15, Vector2.ZERO)
+	player.missile.who_shoot = player
 	missiles.add_child(player.missile)
