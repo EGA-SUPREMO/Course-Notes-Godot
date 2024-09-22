@@ -1,5 +1,6 @@
 extends State
 class_name Attacking
+
 @export var player: CharacterBody2D
 
 signal shoot

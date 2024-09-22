@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=10 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="SpriteFrames" uid="uid://bcomtk7bj44ai" path="res://scene/player_zeta.tres" id="2_f8upj"]
 [ext_resource type="Texture2D" uid="uid://ls3efihws416" path="res://assets/sprites/player_hud/shield_0.png" id="5_up7eb"]
 [ext_resource type="Script" path="res://scripts/states/state_machine.gd" id="6_murpk"]
+[ext_resource type="Script" path="res://scene/ai_attacking.gd" id="7_10yhs"]
 [ext_resource type="AudioStream" uid="uid://dh4iecimemn8p" path="res://assets/sounds/hurt.wav" id="7_071vd"]
 [ext_resource type="Script" path="res://scripts/states/idle.gd" id="7_75v2v"]
 [ext_resource type="Script" path="res://scripts/states/attacking.gd" id="8_cm8dj"]
@@ -113,7 +114,7 @@ texture = ExtResource("5_up7eb")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_murpk")
-initial_state = NodePath("Attacking")
+initial_state = NodePath("AI_Attacking")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_75v2v")
@@ -121,6 +122,10 @@ player = NodePath("../..")
 
 [node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("8_cm8dj")
+player = NodePath("../..")
+
+[node name="AI_Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("7_10yhs")
 player = NodePath("../..")
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]

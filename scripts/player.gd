@@ -35,6 +35,7 @@ func _ready():
 		
 func _process(delta):
 	label.text = str(money)
+	
 	var direction_angle_changed = Input.get_axis(keyboard_profile + "increase_angle", keyboard_profile + "lower_angle")
 	if direction_angle_changed > 0:
 		angle -= 2 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
@@ -43,10 +44,8 @@ func _process(delta):
 	
 	var direction_power_changed = Input.get_axis(keyboard_profile + "increase_power", keyboard_profile + "decrease_power")
 	if direction_power_changed < 0:
-		#damage += 50 * delta
 		missile_power += 100 * delta#aparentemente no se debe usar cuando algo ocurre con el tiempo, no cuando ocurre inmediatamente, borrar el delta time y ver si cambia 2 frams vs 60 frams
 	elif direction_power_changed > 0:
-		#damage -= 50 * delta
 		missile_power -= 100 * delta
 	
 	set_percentage_visible_power(missile_power)
@@ -94,8 +93,10 @@ func destroy(missile):
 		HP -= damage
 		var sign = ( -1 if missile.who_shoot == self else 1 )
 		missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
+		
 		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
 		hurt_sfx.pitch_scale = randf() + 0.5
 		hurt_sfx.play()
+
 	if HP < 0:
 		queue_free()

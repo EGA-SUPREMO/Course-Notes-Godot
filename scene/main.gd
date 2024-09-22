@@ -69,7 +69,7 @@ func next_turn():
 		if !missile.collision_shape_2d.disabled:
 			return
 	for player in players.get_children():
-		if player.state_machine.current_state.name.to_lower()=="attacking":
+		if player.state_machine.current_state.name.to_lower()=="attacking" or player.state_machine.current_state.name.to_lower()=="ai_attacking":
 			players_on_wait = false
 	if players_on_wait:
 		for player in players.get_children():

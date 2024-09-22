@@ -36,5 +36,4 @@ func _on_body_entered(_body: Node) -> void:
 	animation_player.play("explotion")
 	collision_shape_2d.set_deferred("disabled", true)
 	explotion.emit()
-	#who_shoot.state_machine.current_state.next_turn()
 	
