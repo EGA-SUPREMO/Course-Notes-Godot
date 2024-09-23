@@ -20,7 +20,8 @@ var HP:= 100.0
 var money := 5000
 const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0
-const ACCELERATION_MOVEMENT = 5.0
+const ACCELERATION_MOVEMENT = 3.0
+const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 3.0
 
 @export var human: bool
 @onready var user_input_component: UserInputComponent = $UserInputComponent
@@ -45,7 +46,7 @@ func _ready():
 func _process(delta):
 	label.text = "$: " + str(money) + "\nHp: " + str(HP)
 	
-	if human:
+	if human:# change something like state machine when IA is fully implemented
 		user_input_component.update_user_input(self, delta)
 	
 	set_percentage_visible_power(missile_power)

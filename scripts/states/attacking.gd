@@ -17,5 +17,11 @@ func update_physics(_delta):
 		player.animated_sprite.flip_h = false
 	elif direction < 0:
 		player.animated_sprite.flip_h = true
-	player.velocity.x = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.ACCELERATION_MOVEMENT)
 	
+	var max_movement = direction * player.SPEED_MOVEMENT
+	var acceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.ACCELERATION_MOVEMENT)
+	if abs(max_movement) > abs(acceleration):
+		player.velocity.x = acceleration
+	else:
+		var desacceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.DESACCELERATION_MOVEMENT)
+		player.velocity.x = desacceleration
