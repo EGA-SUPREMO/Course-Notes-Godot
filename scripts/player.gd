@@ -20,8 +20,8 @@ var HP:= 100.0
 var money := 5000
 const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0
-const ACCELERATION_MOVEMENT = 3.0
-const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 3.0
+const ACCELERATION_MOVEMENT = 5.0
+const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 
 @export var human: bool
 @onready var user_input_component: UserInputComponent = $UserInputComponent
