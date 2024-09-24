@@ -5,6 +5,7 @@ extends Node2D
 @onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 
 var map_size: Vector2i
+const FORCE_MULTIPLIER_TO_POLYGONS = 50000
 
 func _ready() -> void:
 	add_to_group("destructibles")
@@ -165,5 +166,22 @@ func get_min_x_y(points: PackedVector2Array) -> Vector2:
 			min_y = point.y
 	return Vector2(min_x, min_y)
 
+func apply_explotion_impulse(missile_position: Vector2, force: float) -> void:
+	for collision_body in island_holder.get_children():
+		if collision_body is RigidBody2D:
+			var direction: Vector2 = collision_body.global_position - missile_position
+			var distance: float = direction.length()
+			
+			if distance > 0:
+				direction = direction.normalized()
+				
+				var impulse_strength: float = force / (distance * distance)
+				
+				var body_mass: float = collision_body.mass
+				impulse_strength *= body_mass
+				
+				collision_body.apply_impulse(direction * impulse_strength, Vector2())
+
 func destroy(missile) -> void:
 	clip(create_circle_radious_polygon(missile.global_position, missile.damage))
+	apply_explotion_impulse(missile.global_position, missile.damage*FORCE_MULTIPLIER_TO_POLYGONS)
