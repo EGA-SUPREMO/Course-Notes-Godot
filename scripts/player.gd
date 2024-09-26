@@ -75,7 +75,7 @@ func _physics_process(delta):
 	
 
 func calculate_quadratic_damage(target_position: Vector2, damage: float) -> float:
-	var distance = target_position.distance_to(position)
+	var distance = Globals.get_closest_distance_to_shape(collision_shape, target_position)
 	var explosion_radius = damage * 2
 	
 	if distance > explosion_radius:

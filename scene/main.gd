@@ -39,7 +39,8 @@ func _ready():
 	
 	for player in players.get_children():
 		player.shoot.connect(_on_player_shoot.bind(player))
-	#player_2.queue_free()	
+	#player_2.queue_free()
+
 func _process(_delta):
 	adjust_camera()
 	next_turn()#sholdnt run every update, but only after explotions
