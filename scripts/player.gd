@@ -94,8 +94,11 @@ func destroy(exploded_missile):
 		hurt_sfx.pitch_scale = randf() + 0.5
 		hurt_sfx.play()
 		
+		var direction: Vector2 = player.global_position - exploded_missile.global_position
+		direction = direction.normalized()
 		var impulse = Global.calculate_strength_knockback(player.global_position,
 				exploded_missile.position, damage*FORCE_MULTIPLIER_TO_PLAYERS, mass) * 2
-		player.velocity += impulse.clampf(-200, 200)
+		player.velocity += impulse.clampf(-200, 200) * direction
+		
 	if HP < 0:
 		queue_free()
