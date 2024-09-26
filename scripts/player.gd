@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var state_machine: Node = $StateMachine
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
@@ -22,6 +23,7 @@ const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0
 const ACCELERATION_MOVEMENT = 5.0
 const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
+const FORCE_MULTIPLIER_TO_PLAYERS = 1
 
 @export var human: bool
 @onready var user_input_component: UserInputComponent = $UserInputComponent
@@ -29,8 +31,11 @@ const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 @export var angle := 0.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var mass
 
 func _ready():
+	mass = (collision_shape.shape.radius * 2) * collision_shape.shape.height
+	
 	for i in range(children_count):
 		var child = hud.get_child(i)
 		var scale_factor = (i + 1) / float(children_count)
@@ -78,16 +83,19 @@ func calculate_quadratic_damage(target_position: Vector2, damage: float) -> floa
 	
 	return damage * (1 - pow(distance / explosion_radius, 2))
 	
-func destroy(missile):
-	var damage = calculate_quadratic_damage(missile.global_position, missile.damage)
+func destroy(exploded_missile):
+	var damage = calculate_quadratic_damage(exploded_missile.global_position, exploded_missile.damage)
 	if damage>0:
 		HP -= damage
-		var sign = ( -1 if missile.who_shoot == self else 1 )
-		missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
+		var sign = ( -1 if exploded_missile.who_shoot == self else 1 )
+		exploded_missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
 		
 		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
 		hurt_sfx.pitch_scale = randf() + 0.5
 		hurt_sfx.play()
-
+		
+		var impulse = Global.calculate_strength_knockback(player.global_position,
+				exploded_missile.position, damage*FORCE_MULTIPLIER_TO_PLAYERS, mass) * 2
+		player.velocity += impulse.clampf(-200, 200)
 	if HP < 0:
 		queue_free()

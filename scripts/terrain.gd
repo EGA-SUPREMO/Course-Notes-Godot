@@ -5,7 +5,7 @@ extends Node2D
 @onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 
 var map_size: Vector2i
-const FORCE_MULTIPLIER_TO_POLYGONS = 50000
+const FORCE_MULTIPLIER_TO_POLYGONS = 500
 
 func _ready() -> void:
 	add_to_group("destructibles")
@@ -60,7 +60,8 @@ func clip(missile_polygon: PackedVector2Array):
 		if res.size() == 0:
 			collision_polygon.get_parent().queue_free()
 			
-		for i in range(res.size() - 1, -1, -1):#has to go from size to 0, for some reason
+		#for i in range(res.size() - 1, -1, -1):#has to go from size to 0, for some reason
+		for i in range(res.size()):
 			var clipped_collision = res[i]
 			# These are awkward single or two-point floaters.
 			if clipped_collision.size() < 3:
@@ -80,7 +81,7 @@ func clip(missile_polygon: PackedVector2Array):
 							offset_polygon_by_center_of_mass(res[0], centroid))
 						
 						collision_body.set_deferred("global_position", collision_body.global_position + centroid.rotated(collision_body.rotation))
-						
+
 			else:
 				var collider := CollisionPolygon2D.new()
 				var polygon_temp := Polygon2D.new()
@@ -98,15 +99,11 @@ func clip(missile_polygon: PackedVector2Array):
 				body.contact_monitor = true
 				body.max_contacts_reported = 2
 				body.connect("body_entered", on_collision_polygon.bind(body))
-				#sprite.position.x -= map_size.x/2
-				#sprite.position.y -= map_size.y/2
-				#sprite.position = get_min_x_y(collider.polygon)
 				body.mass = abs(calculate_area(collider.polygon))
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
-				#body.call_deferred("add_child", sprite)
 				
 func on_collision_polygon(_target_body, _body):
 	if _target_body is CharacterBody2D:
@@ -169,19 +166,10 @@ func get_min_x_y(points: PackedVector2Array) -> Vector2:
 func apply_explotion_impulse(missile_position: Vector2, force: float) -> void:
 	for collision_body in island_holder.get_children():
 		if collision_body is RigidBody2D:
-			var direction: Vector2 = collision_body.global_position - missile_position
-			var distance: float = direction.length()
-			
-			if distance > 0:
-				direction = direction.normalized()
-				
-				var impulse_strength: float = force / (distance * distance)
-				
-				var body_mass: float = collision_body.mass
-				impulse_strength *= body_mass
-				
-				collision_body.apply_impulse(direction * impulse_strength, Vector2())
+			var strength_knockback = Global.calculate_strength_knockback(collision_body.global_position,
+				missile_position, force, collision_body.mass)
+			collision_body.apply_impulse(strength_knockback, Vector2())
 
 func destroy(missile) -> void:
-	clip(create_circle_radious_polygon(missile.global_position, missile.damage))
+	call_deferred("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
 	apply_explotion_impulse(missile.global_position, missile.damage*FORCE_MULTIPLIER_TO_POLYGONS)
