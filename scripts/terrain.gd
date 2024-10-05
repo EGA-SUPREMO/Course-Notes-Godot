@@ -5,7 +5,7 @@ extends Node2D
 @onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 
 var map_size: Vector2i
-const FORCE_MULTIPLIER_TO_POLYGONS = 500
+const FORCE_MULTIPLIER_TO_POLYGONS = 1000
 
 func _ready() -> void:
 	add_to_group("destructibles")
@@ -98,20 +98,12 @@ func clip(missile_polygon: PackedVector2Array):
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
 				body.contact_monitor = true
 				body.max_contacts_reported = 2
-				body.connect("body_entered", on_collision_polygon.bind(body))
 				body.mass = abs(calculate_area(collider.polygon))
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
 				
-func on_collision_polygon(_target_body, _body):
-	if _target_body is CharacterBody2D:
-		# TODO Shouldnt we check if player has velocity zero, if so, it'd mean that is being squished
-		var angular_force = _body.angular_velocity * _body.mass
-		var linear_force = _body.linear_velocity.length() * _body.mass
-		var total_force = angular_force + linear_force# TODO este metodo le falta chicha
-		#print(total_force)
 
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 16

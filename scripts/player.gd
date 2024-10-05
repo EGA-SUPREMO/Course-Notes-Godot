@@ -12,12 +12,22 @@ class_name Player
 var missile
 signal shoot
 
+var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
 @onready var children_count = $HUD.get_child_count()
+@onready var monitors: Node2D = $Monitors
 
-#var damage = 15
-var HP:= 100.0
+
+var HP:= 100.0:
+	set(value):
+		if HP > value:
+			hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
+			hurt_sfx.pitch_scale = randf() + 0.5
+			hurt_sfx.play()
+		HP = value
+		if HP <= 0:
+			queue_free()
 var money := 5000
 const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0
@@ -34,6 +44,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	for collision_side in monitors.get_children():
+		collision_side.connect("body_entered", _on_area_2d_body_entered)
+		collision_side.collision_mask = 6
 	mass = (collision_shape.shape.radius * 2) * collision_shape.shape.height
 	
 	for i in range(children_count):
@@ -49,8 +62,8 @@ func _ready():
 		
 		
 func _process(delta):
-	label.text = "$: " + str(money) + "\nHp: " + str(HP)
-	
+	label.text = "$: " + str(money) + "\nHp: " + str(HP) + text_temp
+	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
 		user_input_component.update_user_input(self, delta)
 	
@@ -90,15 +103,46 @@ func destroy(exploded_missile):
 		var sign = ( -1 if exploded_missile.who_shoot == self else 1 )
 		exploded_missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
 		
-		hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
-		hurt_sfx.pitch_scale = randf() + 0.5
-		hurt_sfx.play()
-		
 		var direction: Vector2 = player.global_position - exploded_missile.global_position
 		direction = direction.normalized()
 		var impulse = Global.calculate_strength_knockback(player.global_position,
 				exploded_missile.position, damage*FORCE_MULTIPLIER_TO_PLAYERS, mass) * 2
 		player.velocity += impulse.clampf(-200, 200) * direction
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D or body is Missile:
+		return
+	var left_overlapping = false
+	var right_overlapping = false
+	var top_overlapping = false
+	var bottom_overlapping = false
+	
+	for collision_side in monitors.get_children():
+		if collision_side.has_overlapping_bodies():
+			match collision_side.name:
+				"MonitorLeft":
+					left_overlapping = true
+				"MonitorRight":
+					right_overlapping = true
+				"MonitorTop":
+					top_overlapping = true
+				"MonitorBottom":
+					bottom_overlapping = true
 		
-	if HP < 0:
-		queue_free()
+	if (left_overlapping and right_overlapping) or (top_overlapping and bottom_overlapping):
+		#text_temp += "\n " + str(left_overlapping)
+		#text_temp += "\n " + str(right_overlapping)
+		#text_temp += "\n " + str(top_overlapping)
+		#text_temp += "\n " + str(bottom_overlapping)
+		#print(str(player) + text_temp)
+		apply_squish_damage(body)
+
+func apply_squish_damage(_body):
+	if _body is StaticBody2D:
+		return
+	var angular_force = _body.angular_velocity * _body.mass
+	var linear_force = _body.linear_velocity.length() * _body.mass
+	var total_force = angular_force + linear_force# TODO este metodo le falta chicha
+	
+	HP -= total_force/20000

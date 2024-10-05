@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=16 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="SpriteFrames" uid="uid://bcomtk7bj44ai" path="res://scene/player_zeta.tres" id="2_f8upj"]
@@ -15,21 +15,59 @@
 radius = 4.0
 height = 36.0
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_h64yj"]
+a = Vector2(-18, 3)
+b = Vector2(18, 3)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_whavn"]
+a = Vector2(-18, 11)
+b = Vector2(18, 11)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_422t8"]
+a = Vector2(-18, 3)
+b = Vector2(-18, 11)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_c5dy1"]
+a = Vector2(18, 3)
+b = Vector2(18, 11)
+
 [node name="player" type="CharacterBody2D" groups=["destructibles"]]
 z_index = 5
 floor_block_on_wall = false
 floor_max_angle = 1.309
 script = ExtResource("1_dsi0t")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_damwu")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_f8upj")
 animation = &"moving"
 autoplay = "moving"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_damwu")
+[node name="Monitors" type="Node2D" parent="."]
+
+[node name="MonitorTop" type="Area2D" parent="Monitors"]
+
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorTop"]
+shape = SubResource("SegmentShape2D_h64yj")
+
+[node name="MonitorBottom" type="Area2D" parent="Monitors"]
+
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorBottom"]
+shape = SubResource("SegmentShape2D_whavn")
+
+[node name="MonitorLeft" type="Area2D" parent="Monitors"]
+
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorLeft"]
+shape = SubResource("SegmentShape2D_422t8")
+
+[node name="MonitorRight" type="Area2D" parent="Monitors"]
+
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorRight"]
+shape = SubResource("SegmentShape2D_c5dy1")
 
 [node name="HUD" type="Node2D" parent="."]
 z_index = -22
