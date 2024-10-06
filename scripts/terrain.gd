@@ -11,12 +11,19 @@ func _ready() -> void:
 	add_to_group("destructibles")
 	create_collisions()
 	
-	#var _image_republish_texture = ImageTexture.create_from_image(shape_sprite.texture.get_image())
-	
 	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
-	#shape_sprite.material.set_shader_parameter("ratio", float(map_size.x)/map_size.y)
-	
-	
+
+func go_around_map_borrar_duplicado_en_main() -> void:
+	for polygon in island_holder.get_children():
+		if polygon.position.x < 0:
+			var new_position_x = map_size.x - polygon.position.x
+			polygon.set_deferred("position",
+				Vector2(new_position_x, polygon.position.y))
+		elif polygon.position.x > map_size.x:
+			var new_position_x = polygon.position.x - map_size.x
+			polygon.set_deferred("position", 
+				Vector2(new_position_x, polygon.position.y))
+
 func create_collisions():	
 	var bitMap = BitMap.new()
 	bitMap.create_from_image_alpha(shape_sprite.texture.get_image())
@@ -103,7 +110,6 @@ func clip(missile_polygon: PackedVector2Array):
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
-				
 
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 16

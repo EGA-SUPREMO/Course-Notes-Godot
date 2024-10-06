@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0p0oybjkur2" path="res://assets/sprites/player_hud/shield_01.png" id="2_rbqmm"]
 [ext_resource type="Script" path="res://scene/missile_hotshower.gd" id="2_tflg1"]
 
-[node name="Missile" instance=ExtResource("1_u5t41")]
+[node name="HotshowerMissile" instance=ExtResource("1_u5t41")]
 script = ExtResource("2_tflg1")
 
 [node name="Sprite2D" parent="." index="1"]

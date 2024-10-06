@@ -60,6 +60,16 @@ func _process(_delta):
 		terrain.clip(terrain.create_circle_radious_polygon(
 			get_global_mouse_position(), 50))
 	
+func go_around_map():	
+	for polygon in missiles.get_children():
+		if polygon.global_position.x < 0:
+			var new_global_position_x = terrain.map_size.x - polygon.global_position.x
+			polygon.set_deferred("global_position",
+				Vector2(new_global_position_x, polygon.global_position.y))
+		elif polygon.global_position.x > terrain.map_size.x:
+			var new_global_position_x = polygon.global_position.x - terrain.map_size.x
+			polygon.set_deferred("global_position", 
+				Vector2(new_global_position_x, polygon.global_position.y))
 	
 func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
