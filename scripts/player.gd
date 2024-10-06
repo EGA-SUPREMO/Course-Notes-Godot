@@ -11,6 +11,7 @@ class_name Player
 @export var keyboard_profile: String
 var missile
 signal shoot
+signal death
 
 var text_temp : String
 @onready var player = $"."
@@ -27,7 +28,8 @@ var HP:= 100.0:
 			hurt_sfx.play()
 		HP = value
 		if HP <= 0:
-			queue_free()
+			death.emit()
+			
 var money := 5000
 const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0

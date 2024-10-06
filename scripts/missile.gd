@@ -13,9 +13,11 @@ signal explotion
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sfx_explotion: AudioStreamPlayer2D = $SFX_Explotion
 
+var collision_height = 30
 
 func _ready():
 	damage = 30
+	collision_shape_2d.shape.height = collision_height
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 	sfx_explotion.pitch_scale = randf() + 0.75
@@ -32,8 +34,10 @@ func _on_body_entered(_body: Node) -> void:
 	if collision_shape_2d.disabled:#WTF GODOT!
 		return
 	
+	explode()
+
+func explode() -> void:
 	get_tree().call_group("destructibles", "destroy", self)
 	animation_player.play("explotion")
 	collision_shape_2d.set_deferred("disabled", true)
 	explotion.emit()
-	

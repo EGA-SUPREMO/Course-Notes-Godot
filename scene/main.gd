@@ -9,7 +9,7 @@ extends Node2D
 @onready var missiles: Node = $Missiles
 
 var scene_missile = preload("res://scene/missile.tscn")
-
+const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
@@ -39,6 +39,7 @@ func _ready():
 	
 	for player in players.get_children():
 		player.shoot.connect(_on_player_shoot.bind(player))
+		player.death.connect(_on_player_death.bind(player))
 	#player_2.queue_free()
 
 func _process(_delta):
@@ -79,7 +80,7 @@ func next_turn():
 			player.state_machine.current_state.next_turn()
 
 func _on_player_shoot(player) -> void:
-	player.missile = scene_missile.instantiate()
+	player.missile = SCENE_MISSILE_HOTSHOWER.instantiate()
 	player.missile.add_to_group("missile")
 	player.missile.rotation = player.angle + PI / 2
 	player.missile.position = player.hud.global_position
@@ -87,3 +88,6 @@ func _on_player_shoot(player) -> void:
 	player.missile.apply_impulse(direction * player.missile_power * 15, Vector2.ZERO)
 	player.missile.who_shoot = player
 	missiles.add_child(player.missile)
+
+func _on_player_death(player: Player):
+	players.call_deferred("remove_child", player)
