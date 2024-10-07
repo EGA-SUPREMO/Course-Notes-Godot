@@ -1,16 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://clgn0dcidtx1a"]
+[gd_scene load_steps=5 format=3 uid="uid://clgn0dcidtx1a"]
 
 [ext_resource type="PackedScene" uid="uid://c0562akwst7p3" path="res://scene/missile.tscn" id="1_u5t41"]
 [ext_resource type="Texture2D" uid="uid://c0p0oybjkur2" path="res://assets/sprites/player_hud/shield_01.png" id="2_rbqmm"]
 [ext_resource type="Script" path="res://scene/missile_hotshower.gd" id="2_tflg1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxba6"]
+size = Vector2(30, 2)
+
 [node name="HotshowerMissile" instance=ExtResource("1_u5t41")]
 script = ExtResource("2_tflg1")
 
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_yxba6")
+
 [node name="Sprite2D" parent="." index="1"]
-position = Vector2(-2.98023e-08, 1)
-scale = Vector2(0.0625, 0.53125)
+position = Vector2(-3.55271e-15, 0)
+scale = Vector2(0.531, 0.063)
 texture = ExtResource("2_rbqmm")
 
-[node name="AnimatedSprite2D" parent="." index="4"]
+[node name="TEMP" type="Sprite2D" parent="." index="2"]
+position = Vector2(0, 5.96046e-08)
+scale = Vector2(0.03125, 0.28125)
+texture = ExtResource("2_rbqmm")
+
+[node name="AnimatedSprite2D" parent="." index="5"]
 visible = false
