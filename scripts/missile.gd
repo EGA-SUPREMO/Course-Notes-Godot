@@ -8,10 +8,12 @@ var should_draw := false
 var who_shoot: CharacterBody2D
 
 signal explotion
+
 @onready var missile = $"."
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sfx_explotion: AudioStreamPlayer2D = $SFX_Explotion
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var collision_height = 30
 

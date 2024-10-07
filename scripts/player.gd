@@ -29,6 +29,8 @@ var HP:= 100.0:
 		HP = value
 		if HP <= 0:
 			death.emit()
+	get():
+		return roundi(HP)
 			
 var money := 5000
 const MONEY_MULTIPLIER = 50

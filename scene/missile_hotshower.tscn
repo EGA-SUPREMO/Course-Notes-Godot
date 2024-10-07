@@ -18,10 +18,8 @@ position = Vector2(-3.55271e-15, 0)
 scale = Vector2(0.531, 0.063)
 texture = ExtResource("2_rbqmm")
 
-[node name="TEMP" type="Sprite2D" parent="." index="2"]
-position = Vector2(0, 5.96046e-08)
-scale = Vector2(0.03125, 0.28125)
-texture = ExtResource("2_rbqmm")
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = ""
 
-[node name="AnimatedSprite2D" parent="." index="5"]
+[node name="AnimatedSprite2D" parent="." index="4"]
 visible = false
