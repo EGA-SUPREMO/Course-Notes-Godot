@@ -48,16 +48,12 @@ func spawn_mini_bombs():
 		child_missile.position.y = position.y# - collision_shape_2d.shape.size.y/2 
 		child_missile.position.x = position.x + number_missiles * 1
 		
-		#child_missile.sprite_2d.scale.y = child_missile.sprite_2d.scale.x
 		var relative_step_multiplier = linear_velocity * 0.025
 		var base_step_multiplier = Vector2(35, 0)
 		var step_multiplier = base_step_multiplier + relative_step_multiplier
 		
 		child_missile.linear_velocity = linear_velocity + (Vector2(i,i) * step_multiplier)
 		child_missile.who_shoot = who_shoot
-		
-		child_missile.collision_layer = 4  # Layer 4 (Mini child_missiles)
-		child_missile.collision_mask = 1 | 2  # Collides with players/enemies (Layer 1) and terrain (Layer 2)
 		
 		get_tree().get_current_scene().missiles.add_child(child_missile)
 	
