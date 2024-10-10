@@ -4,8 +4,9 @@ class_name Global
 const SCENE_MISSILE = preload("res://scene/missile.tscn")
 const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
 const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
+const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
 
-const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER, SCENE_NUCLEAR_MISSILE]
+const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER, SCENE_MISSILE_FIVEBOMB, SCENE_NUCLEAR_MISSILE]
 
 
 static func calculate_strength_knockback(target_position: Vector2, source_position: Vector2, force: float, mass: float) -> Vector2:
@@ -54,3 +55,9 @@ func get_closest_distance_to_shape(collision_shape: CollisionShape2D, target_pos
 			closest_point = closest_on_edge
 
 	return min_distance
+
+func random_float_in_ranges(min_negative, max_negative, min_positive, max_positive) -> float:
+	var range_choice = randi() % 2
+	if range_choice:
+		return randf_range(min_negative, max_negative)
+	return randf_range(min_positive, max_positive)

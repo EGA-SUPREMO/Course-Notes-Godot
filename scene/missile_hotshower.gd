@@ -12,7 +12,7 @@ func _ready() -> void:
 	sfx_explotion.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
 	sfx_explotion.pitch_scale = randf() + 0.75
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if linear_velocity.y > 0 and not has_fallen:
 		disappear()
 
@@ -55,5 +55,5 @@ func spawn_mini_bombs():
 		child_missile.linear_velocity = linear_velocity + (Vector2(i,i) * step_multiplier)
 		child_missile.who_shoot = who_shoot
 		
-		get_tree().get_current_scene().missiles.add_child(child_missile)
+		get_tree().get_current_scene().missiles.call_deferred("add_child", child_missile)
 	

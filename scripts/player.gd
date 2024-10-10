@@ -50,7 +50,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
-	inventory = [9999, 10, 5]
+	inventory = [9999, 10, 100, 5]
 	
 	for collision_side in monitors.get_children():
 		collision_side.connect("body_entered", _on_area_2d_body_entered)
