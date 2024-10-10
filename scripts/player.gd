@@ -13,8 +13,8 @@ signal shoot
 signal death
 
 
-var current_missile:= 0
-var inventory
+var current_missile:= 1
+var inventory : Array
 var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
@@ -50,6 +50,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	
+	inventory = [9999, 10]
+	
 	for collision_side in monitors.get_children():
 		collision_side.connect("body_entered", _on_area_2d_body_entered)
 		collision_side.collision_mask = 6
@@ -152,3 +155,24 @@ func apply_squish_damage(_body):
 	var total_force = angular_force + linear_force# TODO este metodo le falta chicha
 	
 	HP -= total_force/20000
+
+func spend_current_missile_in_inventory() -> void:
+	inventory[current_missile] -= 1
+	if inventory[current_missile] < 1:
+		change_current_missile_to_previous_missile_in_inventory()
+		
+func change_current_missile_to_next_missile_in_inventory() -> void:
+	current_missile += 1
+	if current_missile >= Globals.PLAYABLE_MISSILES.size():
+		current_missile = 0
+	if inventory[current_missile] < 1:
+		change_current_missile_to_next_missile_in_inventory()# stack overflow xdxd
+
+
+func change_current_missile_to_previous_missile_in_inventory() -> void:
+	if current_missile>0:
+		current_missile -= 1;
+	else:
+		current_missile = Globals.PLAYABLE_MISSILES.size()-1;
+	if inventory[current_missile]<1:
+		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd

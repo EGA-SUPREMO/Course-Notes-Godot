@@ -7,6 +7,7 @@ radius = 5.0
 height = 10.0
 
 [node name="MiniMissile" instance=ExtResource("1_vmsck")]
+damage = 10
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CapsuleShape2D_0he8a")

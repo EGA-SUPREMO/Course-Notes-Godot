@@ -1,6 +1,12 @@
 extends Node
 class_name Global
 
+const SCENE_MISSILE = preload("res://scene/missile.tscn")
+const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
+
+const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER]
+
+
 static func calculate_strength_knockback(target_position: Vector2, source_position: Vector2, force: float, mass: float) -> Vector2:
 	var direction: Vector2 = target_position - source_position
 	var distance: float = direction.length()

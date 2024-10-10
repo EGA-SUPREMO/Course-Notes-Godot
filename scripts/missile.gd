@@ -3,7 +3,7 @@ class_name Missile
 
 var new_rotation: float
 @onready var timer = $Timer
-@export var damage: int
+@export var damage:= 30
 var should_draw := false
 var who_shoot: CharacterBody2D
 
@@ -18,7 +18,6 @@ signal explotion
 var collision_height = 30
 
 func _ready():
-	damage = 30
 	collision_shape_2d.shape.height = collision_height
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
