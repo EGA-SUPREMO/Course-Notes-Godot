@@ -3,7 +3,7 @@ class_name Hotshower
 
 var number_missiles := 7
 var has_fallen:= false
-const MISSILE = preload("res://scene/missile.tscn")
+const MINI_MISSILE = preload("res://scene/mini_missile.tscn")
 
 func _ready() -> void:
 	damage = 30
@@ -27,7 +27,6 @@ func disappear() -> void:
 func explode() -> void:
 	call_deferred("drop_bomb")
 	sfx_explotion.stream = preload("res://assets/sounds/explosion.wav")
-	print(sfx_explotion.pitch_scale)
 	
 	super.explode()
 	
@@ -39,9 +38,12 @@ func drop_bomb():
 		return
 	has_fallen = true
 	
+	spawn_mini_bombs()
+	
+func spawn_mini_bombs():
 	for i in range(-number_missiles/2, number_missiles/2 + 1):
-		var child_missile = MISSILE.instantiate()
-		child_missile.collision_height = 4
+		var child_missile = MINI_MISSILE.instantiate()
+		child_missile.collision_height = 10
 		
 		child_missile.rotation = rotation
 		child_missile.position.y = position.y# - collision_shape_2d.shape.size.y/2 
