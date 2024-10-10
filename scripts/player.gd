@@ -9,10 +9,12 @@ class_name Player
 
 @export var missile_power := 50
 @export var keyboard_profile: String
-var missile
 signal shoot
 signal death
 
+
+var current_missile:= 0
+var inventory
 var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
