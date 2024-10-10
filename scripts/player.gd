@@ -13,7 +13,7 @@ signal shoot
 signal death
 
 
-var current_missile:= 1
+var current_missile:= 2
 var inventory : Array
 var text_temp : String
 @onready var player = $"."
@@ -50,8 +50,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
-	
-	inventory = [9999, 10]
+	inventory = [9999, 10, 5]
 	
 	for collision_side in monitors.get_children():
 		collision_side.connect("body_entered", _on_area_2d_body_entered)
@@ -71,7 +70,7 @@ func _ready():
 		
 		
 func _process(delta):
-	label.text = "$: " + str(money) + "\nHp: " + str(HP) + text_temp
+	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
 		user_input_component.update_user_input(self, delta)
@@ -159,7 +158,7 @@ func apply_squish_damage(_body):
 func spend_current_missile_in_inventory() -> void:
 	inventory[current_missile] -= 1
 	if inventory[current_missile] < 1:
-		change_current_missile_to_previous_missile_in_inventory()
+		change_current_missile_to_next_missile_in_inventory()
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
 	current_missile += 1

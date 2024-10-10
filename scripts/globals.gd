@@ -3,8 +3,9 @@ class_name Global
 
 const SCENE_MISSILE = preload("res://scene/missile.tscn")
 const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
+const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
 
-const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER]
+const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER, SCENE_NUCLEAR_MISSILE]
 
 
 static func calculate_strength_knockback(target_position: Vector2, source_position: Vector2, force: float, mass: float) -> Vector2:

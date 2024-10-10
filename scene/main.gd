@@ -98,7 +98,6 @@ func _on_player_shoot(player) -> void:
 	missiles.add_child(missile)
 
 	player.spend_current_missile_in_inventory()
-	print(player.inventory)
 
 func _on_player_death(player: Player):
 	players.call_deferred("remove_child", player)
