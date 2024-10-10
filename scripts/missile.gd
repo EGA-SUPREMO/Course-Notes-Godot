@@ -15,10 +15,7 @@ signal explotion
 @onready var sfx_explotion: AudioStreamPlayer2D = $SFX_Explotion
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-var collision_height = 30
-
 func _ready():
-	collision_shape_2d.shape.height = collision_height
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 	sfx_explotion.pitch_scale = randf() + 0.75

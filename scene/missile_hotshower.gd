@@ -43,7 +43,6 @@ func drop_bomb():
 func spawn_mini_bombs():
 	for i in range(-number_missiles/2, number_missiles/2 + 1):
 		var child_missile = MINI_MISSILE.instantiate()
-		child_missile.collision_height = 10
 		
 		child_missile.rotation = rotation
 		child_missile.position.y = position.y# - collision_shape_2d.shape.size.y/2 
