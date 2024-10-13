@@ -15,6 +15,7 @@ signal death
 
 var current_missile:= 2
 var inventory : Array
+var stamina:= 500
 var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
@@ -70,7 +71,8 @@ func _ready():
 		
 		
 func _process(delta):
-	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp
+	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina)
+
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
 		user_input_component.update_user_input(self, delta)

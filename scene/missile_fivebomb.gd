@@ -4,9 +4,6 @@ class_name Fivebomb
 var number_missiles := 6
 const MINI_MISSILE = preload("res://scene/mini_missile.tscn")
 
-func _process(delta: float) -> void:
-	pass
-	
 func explode():
 	super.explode()
 	
@@ -17,7 +14,6 @@ func explode():
 		child_missile.damage = 20
 		child_missile.rotation = randf() * PI * 2
 		child_missile.position = position + rand_vector_position
-		
 		
 		var velocity_multiplier = Vector2(1, 1)
 		
