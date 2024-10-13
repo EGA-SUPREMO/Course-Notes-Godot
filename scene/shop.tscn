@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://brxo0auobyvwh"]
+
+[ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
+[ext_resource type="Texture2D" uid="uid://dmb63txpxaw6i" path="res://assets/sprites/icons/hotshower.png" id="2_qq740"]
+[ext_resource type="Texture2D" uid="uid://cb4orucc82gky" path="res://assets/sprites/icons/nuclear.png" id="3_bhtho"]
+[ext_resource type="Texture2D" uid="uid://bhus0xqa5fqns" path="res://assets/sprites/icons/more_hp.png" id="4_7audq"]
+[ext_resource type="Texture2D" uid="uid://3rmbpwy5ca8j" path="res://assets/sprites/icons/more_speed.png" id="5_fyeax"]
+[ext_resource type="Texture2D" uid="uid://be3nefdvpib53" path="res://assets/sprites/icons/stamina.png" id="6_533r8"]
+[ext_resource type="Texture2D" uid="uid://ce6fxcplbpco5" path="res://assets/sprites/icons/teleport.png" id="7_4y46l"]
+[ext_resource type="Texture2D" uid="uid://dnpcmf6qr6eu5" path="res://assets/sprites/icons/repair.png" id="8_pnuyr"]
+[ext_resource type="Texture2D" uid="uid://cmtq6epl1c8cg" path="res://assets/sprites/icons/next.png" id="9_dbnhc"]
+[ext_resource type="Texture2D" uid="uid://gbbqow6l6ucw" path="res://assets/sprites/icons/overlay.png" id="10_is46x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a7nf8"]
+line_spacing = 2.0
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_8jhy4"]
+font_size = 13
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+step = 10.0
+value = 20.0
+rounded = true
+show_percentage = false
+
+[node name="Missiles" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Fivebomb" type="TextureButton" parent="VBoxContainer/Missiles"]
+layout_mode = 2
+texture_normal = ExtResource("1_qggbj")
+
+[node name="Hotshower" type="TextureButton" parent="VBoxContainer/Missiles"]
+layout_mode = 2
+texture_normal = ExtResource("2_qq740")
+
+[node name="Nuclear" type="TextureButton" parent="VBoxContainer/Missiles"]
+layout_mode = 2
+texture_normal = ExtResource("3_bhtho")
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Missiles"]
+layout_mode = 2
+
+[node name="Consumables" type="HBoxContainer" parent="VBoxContainer/Missiles"]
+layout_mode = 2
+
+[node name="HP" type="TextureButton" parent="VBoxContainer/Missiles/Consumables"]
+layout_mode = 2
+texture_normal = ExtResource("7_4y46l")
+
+[node name="MovementSpeed" type="TextureButton" parent="VBoxContainer/Missiles/Consumables"]
+layout_mode = 2
+texture_normal = ExtResource("8_pnuyr")
+
+[node name="Traits" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HP" type="TextureButton" parent="VBoxContainer/Traits"]
+layout_mode = 2
+texture_normal = ExtResource("4_7audq")
+
+[node name="MovementSpeed" type="TextureButton" parent="VBoxContainer/Traits"]
+layout_mode = 2
+texture_normal = ExtResource("5_fyeax")
+
+[node name="Stamina" type="TextureButton" parent="VBoxContainer/Traits"]
+layout_mode = 2
+texture_normal = ExtResource("6_533r8")
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("9_dbnhc")
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 231.0
+offset_right = 310.0
+offset_bottom = 274.0
+texture = ExtResource("10_is46x")
+
+[node name="Money" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 19.0
+offset_right = 59.0
+offset_bottom = 42.0
+text = "$: 100000"
+label_settings = SubResource("LabelSettings_a7nf8")
+
+[node name="CurrentAmount" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 19.0
+offset_right = 59.0
+offset_bottom = 42.0
+text = "57"
+label_settings = SubResource("LabelSettings_8jhy4")
+vertical_alignment = 2
