@@ -32,7 +32,7 @@ func _ready():
 	#print(rigid_body_2d2.global_position)
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
-	camera_2d.limit_bottom = void_limit.position.y + 19#i dont know man, it has that offset
+	camera_2d.limit_bottom = void_limit.position.y
 	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
 	for player in players.get_children():
