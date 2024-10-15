@@ -14,11 +14,14 @@ signal explotion
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sfx_explotion: AudioStreamPlayer2D = $SFX_Explotion
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready():
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
 	sfx_explotion.pitch_scale = randf() + 0.75
+	animated_sprite_2d.scale.x = float(damage)/30
+	animated_sprite_2d.scale.y = float(damage)/30
 
 func _physics_process(_delta):
 	new_rotation = atan2(linear_velocity.y, linear_velocity.x)
