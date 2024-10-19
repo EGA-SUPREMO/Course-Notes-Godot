@@ -2,7 +2,7 @@ extends Attacking
 class_name AI_Attacking
 
 func update(_delta):
-	player.angle -= 2 * _delta
+	player.angle -= 30
 	player.change_current_missile_to_next_missile_in_inventory()
 	player.shoot.emit()
 	transition.emit(self, "ai_idle")

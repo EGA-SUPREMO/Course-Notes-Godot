@@ -7,7 +7,9 @@ class_name Player
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var label: Label = $Label
 
-@export var missile_power := 50
+@export var missile_power := 50:
+	set(value):
+		missile_power = clamp(value, 0, 100)
 @export var keyboard_profile: String
 signal shoot
 signal death
@@ -19,7 +21,6 @@ var stamina:= 500
 var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
-@onready var children_count = $HUD.get_child_count()
 @onready var monitors: Node2D = $Monitors
 
 
@@ -44,6 +45,9 @@ const FORCE_MULTIPLIER_TO_PLAYERS = 1
 
 @export var human: bool
 @onready var user_input_component: UserInputComponent = $UserInputComponent
+@onready var angle_number: Label = $HUD/AngleNumberLabel
+var amount_power_sprites: int
+@onready var power_label: Label = $HUD/PowerLabel
 
 @export var angle := 0.0
 
@@ -58,9 +62,13 @@ func _ready():
 		collision_side.collision_mask = 6
 	mass = (collision_shape.shape.radius * 2) * collision_shape.shape.height
 	
-	for i in range(children_count):
+	for i in range(hud.get_child_count()):
+		if hud.get_child(i) is Sprite2D:
+			amount_power_sprites += 1
+	
+	for i in range(amount_power_sprites):
 		var child = hud.get_child(i)
-		var scale_factor = (i + 1) / float(children_count)
+		var scale_factor = (i + 1) / float(amount_power_sprites)
 		child.scale = Vector2(0.4, 0.4)
 		child.scale *= scale_factor
 		child.position.x = 64
@@ -69,26 +77,26 @@ func _ready():
 	if human:
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
 		
-		
 func _process(delta):
 	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina)
-
+	angle_number.text = str(angle)
+	power_label.text = str(missile_power)
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
 		user_input_component.update_user_input(self, delta)
 	
 	set_percentage_visible_power(missile_power)
 		
-	hud.rotation = angle
+	hud.rotation = deg_to_rad(angle)
 	
 func set_percentage_visible_power(power: int):
 	var percentage = clamp(power, 0, 100)
-	var num_true_items = int($HUD.get_child_count() * percentage / 100.0)
+	var num_true_items_visible = int(amount_power_sprites * percentage / 100.0)
 	
-	for i in range(num_true_items):
+	for i in range(num_true_items_visible):
 		$HUD.get_children()[i].visible = true
-	for i in range($HUD.get_child_count() - num_true_items):
-		$HUD.get_children()[i + num_true_items].visible = false
+	for i in range(num_true_items_visible, amount_power_sprites):
+		$HUD.get_children()[i].visible = false
 	
 func _physics_process(delta):
 	if not is_on_floor():

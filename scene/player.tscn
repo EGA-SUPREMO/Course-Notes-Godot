@@ -71,7 +71,7 @@ shape = SubResource("SegmentShape2D_c5dy1")
 
 [node name="HUD" type="Node2D" parent="."]
 z_index = -22
-position = Vector2(0, -5)
+position = Vector2(0, -10)
 
 [node name="power" type="Sprite2D" parent="HUD"]
 position = Vector2(8, 0)
@@ -123,35 +123,15 @@ position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power11" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
+[node name="AngleNumberLabel" type="Label" parent="HUD"]
+offset_left = 60.0
+offset_right = 100.0
+offset_bottom = 23.0
 
-[node name="power12" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
-
-[node name="power13" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
-
-[node name="power14" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
-
-[node name="power15" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
-
-[node name="power16" type="Sprite2D" parent="HUD"]
-position = Vector2(56, 0)
-scale = Vector2(0.333, 0.333)
-texture = ExtResource("5_up7eb")
+[node name="PowerLabel" type="Label" parent="HUD"]
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 3.0
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_murpk")
