@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://brxo0auobyvwh"]
+[gd_scene load_steps=14 format=3 uid="uid://brxo0auobyvwh"]
 
+[ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
 [ext_resource type="Texture2D" uid="uid://dmb63txpxaw6i" path="res://assets/sprites/icons/hotshower.png" id="2_qq740"]
 [ext_resource type="Texture2D" uid="uid://cb4orucc82gky" path="res://assets/sprites/icons/nuclear.png" id="3_bhtho"]
@@ -25,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_njatk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -87,15 +89,21 @@ layout_mode = 2
 icon = ExtResource("9_dbnhc")
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 267.0
+offset_left = 263.0
 offset_top = 231.0
-offset_right = 310.0
+offset_right = 400.0
 offset_bottom = 274.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="Money" type="Label" parent="TextureRect"]
+[node name="MoneyPlayer" type="Label" parent="MarginContainer/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 19.0
@@ -104,7 +112,11 @@ offset_bottom = 42.0
 text = "$: 100000"
 label_settings = SubResource("LabelSettings_a7nf8")
 
-[node name="CurrentAmount" type="Label" parent="TextureRect"]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_is46x")
+
+[node name="CurrentAmount" type="Label" parent="MarginContainer/HBoxContainer/TextureRect2"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 19.0
@@ -113,3 +125,7 @@ offset_bottom = 42.0
 text = "57"
 label_settings = SubResource("LabelSettings_8jhy4")
 vertical_alignment = 2
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_is46x")

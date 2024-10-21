@@ -57,6 +57,11 @@ func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
 			get_global_mouse_position(), 50))
+		#for missile in missiles.get_children():
+			
+		#	var direction = Vector2(cos(deg_to_rad(missile.rotation)), sin(deg_to_rad(missile.rotation)))
+		#	missile.apply_impulse(direction * 5000 * 15, Vector2.ZERO)
+	
 	
 func go_around_map():	
 	for polygon in missiles.get_children():

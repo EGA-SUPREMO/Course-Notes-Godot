@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddg6dw7vc0f1o"]
+
+[ext_resource type="Script" path="res://scripts/main_menu_container.gd" id="1_oolfy"]
+
+[node name="MainMenuContainer" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_oolfy")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 2
+text = "Play"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 2
+text = "Credits"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
