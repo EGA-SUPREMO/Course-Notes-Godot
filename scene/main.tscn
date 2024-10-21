@@ -28,12 +28,9 @@ position = Vector2(0, -300)
 [node name="Players" type="Node" parent="." groups=["destructibles"]]
 
 [node name="player" parent="Players" instance=ExtResource("1_sqf7g")]
-position = Vector2(250, -241)
 keyboard_profile = "player_1_"
-human = true
 
 [node name="player2" parent="Players" instance=ExtResource("1_sqf7g")]
-position = Vector2(186, -217)
 keyboard_profile = "player_2_"
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]

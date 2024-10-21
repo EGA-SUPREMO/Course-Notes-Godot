@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://cdt2h8qaty7hw"]
+[gd_scene load_steps=2 format=3 uid="uid://cdt2h8qaty7hw"]
+
+[ext_resource type="Script" path="res://scripts/play_menu.gd" id="1_2ojsx"]
 
 [node name="PlayMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_2ojsx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -14,3 +17,5 @@ offset_bottom = 40.0
 [node name="QuickMatch" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quick Match"
+
+[connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
