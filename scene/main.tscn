@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://k2u3kjnuay6s"]
+[gd_scene load_steps=9 format=3 uid="uid://k2u3kjnuay6s"]
 
-[ext_resource type="PackedScene" uid="uid://53q7cmdct0vu" path="res://scene/player.tscn" id="1_sqf7g"]
 [ext_resource type="Script" path="res://scene/main.gd" id="1_vsj3d"]
 [ext_resource type="PackedScene" uid="uid://diel7vtghr4bn" path="res://scene/terrain.tscn" id="2_1t2nn"]
 [ext_resource type="Texture2D" uid="uid://b6foq4ungkp2s" path="res://assets/backgrounds/background2.png" id="4_37v58"]
@@ -26,12 +25,6 @@ position = Vector2(0, -300)
 [node name="Missiles" type="Node" parent="."]
 
 [node name="Players" type="Node" parent="." groups=["destructibles"]]
-
-[node name="player" parent="Players" instance=ExtResource("1_sqf7g")]
-keyboard_profile = "player_1_"
-
-[node name="player2" parent="Players" instance=ExtResource("1_sqf7g")]
-keyboard_profile = "player_2_"
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]
 position = Vector2(0, 240)

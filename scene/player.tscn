@@ -33,7 +33,6 @@ b = Vector2(18, 11)
 
 [node name="player" type="CharacterBody2D" groups=["destructibles"]]
 z_index = 5
-floor_block_on_wall = false
 floor_max_angle = 1.309
 script = ExtResource("1_dsi0t")
 angle = -45.0

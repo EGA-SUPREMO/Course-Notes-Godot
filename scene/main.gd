@@ -3,8 +3,6 @@ extends Node2D
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
-@onready var player_1: CharacterBody2D = $Players/player
-@onready var player_2: CharacterBody2D = $Players/player2
 @onready var players: Node = $Players
 @onready var missiles: Node = $Missiles
 
@@ -33,9 +31,9 @@ func _ready():
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
 	camera_2d.limit_bottom = void_limit.position.y
-	player_2.animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
 	
 	for player in players.get_children():
+		print("aye")
 		player.shoot.connect(_on_player_shoot.bind(player))
 		player.death.connect(_on_player_death.bind(player))
 	#player_2.queue_free()
@@ -106,3 +104,7 @@ func _on_player_shoot(player) -> void:
 
 func _on_player_death(player: Player):
 	players.call_deferred("remove_child", player)
+
+func add_player(player):
+	print(players)
+	#players.call_deferred("add_child", player)
