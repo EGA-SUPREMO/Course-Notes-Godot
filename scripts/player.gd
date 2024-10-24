@@ -15,7 +15,7 @@ signal shoot
 signal death
 
 
-var current_missile:= 2
+var current_missile:= 1
 var inventory : Array
 var stamina:= 500
 var text_temp : String

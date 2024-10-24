@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		if navigable_items[current_item_selected] == next_match_button:
+			print(MatchManager.players.get_children())
 			var game = load("res://scene/main.tscn")
 			# do stuff to preprare netx match? otherwise use oneline
 			get_tree().change_scene_to_packed(game)

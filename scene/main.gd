@@ -3,7 +3,7 @@ extends Node2D
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
-@onready var players: Node = $Players
+@onready var players: Node = MatchManager.players
 @onready var missiles: Node = $Missiles
 
 var players_on_wait: bool
@@ -33,9 +33,10 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y
 	
 	for player in players.get_children():
-		print("aye")
+		print("in main ready")
 		player.shoot.connect(_on_player_shoot.bind(player))
 		player.death.connect(_on_player_death.bind(player))
+	add_child(players)
 	#player_2.queue_free()
 
 func _process(_delta):
@@ -87,8 +88,14 @@ func next_turn():
 		if player.state_machine.current_state.name.to_lower()=="attacking" or player.state_machine.current_state.name.to_lower()=="ai_attacking":
 			return
 	if players_on_wait:
+		if not players.get_child_count() and not missiles.get_child_count():
+			next_round()
 		for player in players.get_children():
 			player.state_machine.current_state.next_turn()
+
+func next_round():
+	Globals.counting()
+	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
 	var missile = Globals.PLAYABLE_MISSILES[player.current_missile].instantiate()
@@ -104,6 +111,7 @@ func _on_player_shoot(player) -> void:
 
 func _on_player_death(player: Player):
 	players.call_deferred("remove_child", player)
+	
 
 func add_player(player):
 	print(players)

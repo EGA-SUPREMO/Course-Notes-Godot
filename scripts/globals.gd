@@ -8,6 +8,11 @@ const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
 
 const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER, SCENE_MISSILE_FIVEBOMB, SCENE_NUCLEAR_MISSILE]
 
+var i = 0
+
+func counting():
+	i += 1
+	print(i)
 
 static func calculate_strength_knockback(target_position: Vector2, source_position: Vector2, force: float, mass: float) -> Vector2:
 	var direction: Vector2 = target_position - source_position
