@@ -89,46 +89,44 @@ layout_mode = 2
 icon = ExtResource("9_dbnhc")
 icon_alignment = 1
 
-[node name="Selector" type="Control" parent="."]
+[node name="Selectors" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Selector"]
+[node name="Selector" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Selector"]
 layout_mode = 2
 offset_left = -8.0
 offset_top = -36.0
 offset_right = 129.0
 offset_bottom = 7.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Selector/AspectRatioContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Selector/AspectRatioContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect2" type="TextureRect" parent="Selector/AspectRatioContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect3" type="TextureRect" parent="Selector/AspectRatioContainer/HBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="MarginContainer" type="MarginContainer" parent="Selector"]
-layout_mode = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="Selector"]
+layout_mode = 2
 offset_left = -8.0
 offset_top = 121.0
 offset_right = 129.0
 offset_bottom = 164.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Selector/MarginContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Selector/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="MoneyPlayer" type="Label" parent="Selector/MarginContainer/HBoxContainer/TextureRect"]
+[node name="MoneyPlayer" type="Label" parent="Selector/HBoxContainer/TextureRect"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 19.0
@@ -137,11 +135,11 @@ offset_bottom = 42.0
 text = "$: 100000"
 label_settings = SubResource("LabelSettings_a7nf8")
 
-[node name="TextureRect2" type="TextureRect" parent="Selector/MarginContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="CurrentAmount" type="Label" parent="Selector/MarginContainer/HBoxContainer/TextureRect2"]
+[node name="CurrentAmount" type="Label" parent="Selector/HBoxContainer/TextureRect2"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 19.0
@@ -151,52 +149,46 @@ text = "57"
 label_settings = SubResource("LabelSettings_8jhy4")
 vertical_alignment = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Selector/MarginContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="MarginContainer2" type="MarginContainer" parent="Selector"]
-layout_mode = 0
+[node name="HBoxContainer3" type="HBoxContainer" parent="Selector"]
+layout_mode = 2
 offset_left = 16.0
 offset_top = 7.0
 offset_right = 153.0
 offset_bottom = 50.0
 rotation = 1.5708
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Selector/MarginContainer2"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Selector/MarginContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect2" type="TextureRect" parent="Selector/MarginContainer2/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect3" type="TextureRect" parent="Selector/MarginContainer2/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="MarginContainer3" type="MarginContainer" parent="Selector"]
-layout_mode = 0
+[node name="HBoxContainer4" type="HBoxContainer" parent="Selector"]
+layout_mode = 2
 offset_left = 174.0
 offset_top = 7.0
 offset_right = 311.0
 offset_bottom = 50.0
 rotation = 1.5708
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Selector/MarginContainer3"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Selector/MarginContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer4"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect2" type="TextureRect" parent="Selector/MarginContainer3/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer4"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="TextureRect3" type="TextureRect" parent="Selector/MarginContainer3/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer4"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
