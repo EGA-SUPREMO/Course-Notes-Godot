@@ -104,9 +104,10 @@ func next_turn():
 func next_round():
 	Globals.counting()
 	for player in players.get_children():
-		players.call_deferred("remove_child", player)
+		#print(player)
+		players.remove_child(player)
 		MatchManager.players.call_deferred("add_child", player)
-	MatchManager.prepare_new_match()
+	MatchManager.call_deferred("prepare_new_match")
 	
 	
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
@@ -124,9 +125,5 @@ func _on_player_shoot(player) -> void:
 	player.spend_current_missile_in_inventory()
 
 func _on_player_death(player: Player):
-	players.call_deferred("remove_child", player)
+	players.remove_child(player)
 	MatchManager.players.call_deferred("add_child", player)
-
-func add_player(player):
-	print(players)
-	#players.call_deferred("add_child", player)

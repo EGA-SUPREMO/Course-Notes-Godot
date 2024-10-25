@@ -56,6 +56,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	name = keyboard_profile
 	inventory = [9999, 10, 100, 5]
 	
 	for collision_side in monitors.get_children():

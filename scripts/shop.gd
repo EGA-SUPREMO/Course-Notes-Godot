@@ -24,7 +24,7 @@ func _ready() -> void:
 	navigable_items.append(next_match_button)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):
 		current_item_selected -= 1
 		
