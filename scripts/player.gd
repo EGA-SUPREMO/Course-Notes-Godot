@@ -23,8 +23,9 @@ var text_temp : String
 @onready var hud = $HUD
 @onready var monitors: Node2D = $Monitors
 
-
-var HP:= 100.0:
+var max_hp := 100.0
+var max_stamina := 500
+var HP:= max_hp:
 	set(value):
 		if HP > value:
 			hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh

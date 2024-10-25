@@ -14,3 +14,7 @@ func update(_delta: float) -> void:
 
 func update_physics(_delta: float) -> void:
 	pass
+
+
+func next_turn() -> void:
+	pass

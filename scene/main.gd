@@ -3,8 +3,9 @@ extends Node2D
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
-@onready var players: Node = MatchManager.players
+#@onready var players: Node = MatchManager.players
 @onready var missiles: Node = $Missiles
+@onready var players: Node = $Players
 
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
@@ -32,11 +33,15 @@ func _ready():
 	#print(rigid_body_2d2.center_of_mass)
 	camera_2d.limit_bottom = void_limit.position.y
 	
+	for player in MatchManager.players.get_children():
+		
+		MatchManager.players.remove_child(player)
+		players.add_child(player)
 	for player in players.get_children():
 		print("in main ready")
 		player.shoot.connect(_on_player_shoot.bind(player))
 		player.death.connect(_on_player_death.bind(player))
-	add_child(players)
+	#add_child(players)
 	#player_2.queue_free()
 
 func _process(_delta):
@@ -81,20 +86,29 @@ func adjust_camera() -> void:
 
 func next_turn():
 	players_on_wait = true
+	
+	if players.get_child_count() <= 1 and not missiles.get_child_count():
+		next_round()
+	
 	for missile in missiles.get_children():
 		if !missile.collision_shape_2d.disabled:
 			return
 	for player in players.get_children():
 		if player.state_machine.current_state.name.to_lower()=="attacking" or player.state_machine.current_state.name.to_lower()=="ai_attacking":
 			return
+	
 	if players_on_wait:
-		if not players.get_child_count() and not missiles.get_child_count():
-			next_round()
 		for player in players.get_children():
 			player.state_machine.current_state.next_turn()
 
 func next_round():
 	Globals.counting()
+	for player in players.get_children():
+		players.call_deferred("remove_child", player)
+		MatchManager.players.call_deferred("add_child", player)
+	MatchManager.prepare_new_match()
+	
+	
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
@@ -111,7 +125,7 @@ func _on_player_shoot(player) -> void:
 
 func _on_player_death(player: Player):
 	players.call_deferred("remove_child", player)
-	
+	MatchManager.players.call_deferred("add_child", player)
 
 func add_player(player):
 	print(players)

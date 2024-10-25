@@ -3,6 +3,7 @@ extends Control
 @onready var missiles: HBoxContainer = $VBoxContainer/Missiles
 @onready var traits: HBoxContainer = $VBoxContainer/Traits
 @onready var next_match_button: Button = $VBoxContainer/NextMatch
+@onready var progress_bar: ProgressBar = $VBoxContainer/ProgressBar
 
 @onready var consumables: HBoxContainer = $VBoxContainer/Missiles/Consumables
 @onready var selector: Control = $Selector
@@ -12,6 +13,7 @@ var current_item_selected = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	progress_bar.value = Globals.current_match_count * 10
 	for missile in missiles.get_children():
 		if missile is not VSeparator and missile is not HBoxContainer:
 			navigable_items.append(missile)
