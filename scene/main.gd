@@ -107,9 +107,7 @@ func next_round():
 		#print(player)
 		players.remove_child(player)
 		MatchManager.players.call_deferred("add_child", player)
-	MatchManager.call_deferred("prepare_new_match")
-	
-	
+			
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
@@ -118,7 +116,7 @@ func _on_player_shoot(player) -> void:
 	missile.rotation = deg_to_rad(player.angle) + PI / 2
 	missile.position = player.hud.global_position
 	var direction = Vector2(cos(deg_to_rad(player.angle)), sin(deg_to_rad(player.angle)))
-	missile.apply_impulse(direction * player.missile_power * 15, Vector2.ZERO)
+	missile.apply_impulse(direction * player.missile_power * 9, Vector2.ZERO)
 	missile.who_shoot = player
 	missiles.add_child(missile)
 

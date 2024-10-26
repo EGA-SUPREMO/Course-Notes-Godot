@@ -192,3 +192,5 @@ texture = ExtResource("10_is46x")
 [node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
+
+[node name="UserInputComponent" type="Node" parent="."]

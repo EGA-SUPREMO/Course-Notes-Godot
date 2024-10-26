@@ -5,6 +5,10 @@ extends Control
 @onready var next_match_button: Button = $VBoxContainer/NextMatch
 @onready var progress_bar: ProgressBar = $VBoxContainer/ProgressBar
 
+@onready var hp: TextureButton = $VBoxContainer/Traits/HP
+@onready var movement_speed: TextureButton = $VBoxContainer/Traits/MovementSpeed
+@onready var stamina: TextureButton = $VBoxContainer/Traits/Stamina
+
 @onready var consumables: HBoxContainer = $VBoxContainer/Missiles/Consumables
 @onready var selector: Control = $Selector
 @onready var selectors: Control = $Selectors
@@ -40,14 +44,12 @@ func create_selectors():
 				item.visible = false
 		
 	var number_labels_step = floori(12/MatchManager.number_players)
-	print(number_labels_step)
+	
 	for i in range(0, MatchManager.number_players):
 		for j in range(i * number_labels_step, number_labels_step * (i + 1)):
-			print("player " + str(i) + ", selector: " + str(j))
-			#selector_player.get_children()[0].get_children()[j - i * number_labels_step].visible = true
 			list_labels_selector[i][j].visible = true
 			list_labels_selector[i][j].name = "player " + str(i) + ", " + str(j)
-			print(list_labels_selector[i][j])
+			
 		selector_player[i].visible = true
 		selectors.add_child(selector_player[i])
 
@@ -66,10 +68,26 @@ func _process(_delta: float) -> void:
 				current_item_selected[i] = 0
 		
 		selectors.get_children()[i].position = navigable_items[current_item_selected[i]].global_position
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		if navigable_items[current_item_selected[0]] == next_match_button:
-			print(MatchManager.players.get_children())
-			var game = load("res://scene/main.tscn")
-			# do stuff to preprare netx match? otherwise use oneline
-			get_tree().change_scene_to_packed(game)
+		
+		if Input.is_action_just_pressed("ui_accept"):
+			match navigable_items[current_item_selected[i]]:
+				next_match_button:
+					var game = load("res://scene/main.tscn")
+					MatchManager.call_deferred("prepare_new_match")
+					# do stuff to preprare netx match? otherwise use oneline
+					get_tree().change_scene_to_packed(game)
+				hp:
+					if buy(MatchManager.players.get_children()[i].money, 10000):
+						MatchManager.players.get_children()[i].max_hp *= 1.1
+						print(MatchManager.players.get_children()[i].max_hp)
+				stamina:
+					if buy(MatchManager.players.get_children()[i].money, 3000):
+						MatchManager.players.get_children()[i].max_stamina += 100
+						print(MatchManager.players.get_children()[i].max_stamina)
+				
+func buy(player: Player, price: int) -> bool:
+	if player.money >= price:
+		player.money -= price
+		return true
+	return false
+					
