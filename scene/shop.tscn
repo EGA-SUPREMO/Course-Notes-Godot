@@ -115,6 +115,26 @@ texture = ExtResource("10_is46x")
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="Selector"]
+layout_mode = 2
+offset_left = 174.0
+offset_top = 7.0
+offset_right = 311.0
+offset_bottom = 50.0
+rotation = 1.5708
+
+[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("10_is46x")
+
+[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("10_is46x")
+
+[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("10_is46x")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Selector"]
 layout_mode = 2
 offset_left = -8.0
@@ -170,25 +190,5 @@ layout_mode = 2
 texture = ExtResource("10_is46x")
 
 [node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer3"]
-layout_mode = 2
-texture = ExtResource("10_is46x")
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Selector"]
-layout_mode = 2
-offset_left = 174.0
-offset_top = 7.0
-offset_right = 311.0
-offset_bottom = 50.0
-rotation = 1.5708
-
-[node name="TextureRect" type="TextureRect" parent="Selector/HBoxContainer4"]
-layout_mode = 2
-texture = ExtResource("10_is46x")
-
-[node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer4"]
-layout_mode = 2
-texture = ExtResource("10_is46x")
-
-[node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer4"]
 layout_mode = 2
 texture = ExtResource("10_is46x")

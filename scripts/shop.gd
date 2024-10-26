@@ -12,7 +12,7 @@ extends Control
 var list_labels_selector: Array
 
 var navigable_items: Array
-var current_item_selected = 0
+var current_item_selected: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,12 +31,13 @@ func _ready() -> void:
 func create_selectors():
 	var selector_player: Array
 	for player in range(MatchManager.number_players):
+		current_item_selected.append(0)
 		list_labels_selector.append(Array())
-		for container in selector.get_children():
+		selector_player.append(selector.duplicate(0))
+		for container in selector_player[-1].get_children():
 			for item in container.get_children():
 				list_labels_selector[player].append(item)
 				item.visible = false
-		selector_player.append(selector.duplicate(0))
 		
 	var number_labels_step = floori(12/MatchManager.number_players)
 	print(number_labels_step)
@@ -45,26 +46,29 @@ func create_selectors():
 			print("player " + str(i) + ", selector: " + str(j))
 			#selector_player.get_children()[0].get_children()[j - i * number_labels_step].visible = true
 			list_labels_selector[i][j].visible = true
+			list_labels_selector[i][j].name = "player " + str(i) + ", " + str(j)
 			print(list_labels_selector[i][j])
 		selector_player[i].visible = true
 		selectors.add_child(selector_player[i])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_left"):
-		current_item_selected -= 1
+	for i in range(MatchManager.number_players):
+		if not MatchManager.players.get_children()[i].human:
+			continue
+		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "left_move"):
+			current_item_selected[i] -= 1
+			if current_item_selected[i] <= -1:
+				current_item_selected[i] = navigable_items.size() - 1
+		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "right_move"):
+			current_item_selected[i] += 1
+			if current_item_selected[i] >= navigable_items.size():
+				current_item_selected[i] = 0
 		
-		if current_item_selected <= -1:
-			current_item_selected = navigable_items.size() - 1
-	if Input.is_action_just_pressed("ui_right"):
-		current_item_selected += 1
-		if current_item_selected >= navigable_items.size():
-			current_item_selected = 0
-	
-	selectors.get_children()[0].position = navigable_items[current_item_selected].global_position
+		selectors.get_children()[i].position = navigable_items[current_item_selected[i]].global_position
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		if navigable_items[current_item_selected] == next_match_button:
+		if navigable_items[current_item_selected[0]] == next_match_button:
 			print(MatchManager.players.get_children())
 			var game = load("res://scene/main.tscn")
 			# do stuff to preprare netx match? otherwise use oneline
