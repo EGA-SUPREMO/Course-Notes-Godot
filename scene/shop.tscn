@@ -68,11 +68,11 @@ layout_mode = 2
 [node name="Consumables" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Missiles"]
 layout_mode = 2
 
-[node name="HP" type="TextureButton" parent="PanelContainer/VBoxContainer/Missiles/Consumables"]
+[node name="Enderpearl" type="TextureButton" parent="PanelContainer/VBoxContainer/Missiles/Consumables"]
 layout_mode = 2
 texture_normal = ExtResource("7_4y46l")
 
-[node name="MovementSpeed" type="TextureButton" parent="PanelContainer/VBoxContainer/Missiles/Consumables"]
+[node name="Regenaration" type="TextureButton" parent="PanelContainer/VBoxContainer/Missiles/Consumables"]
 layout_mode = 2
 texture_normal = ExtResource("8_pnuyr")
 

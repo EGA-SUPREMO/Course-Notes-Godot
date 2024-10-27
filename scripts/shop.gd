@@ -5,6 +5,13 @@ extends Control
 @onready var next_match_button: Button = $PanelContainer/VBoxContainer/NextMatch
 @onready var progress_bar: ProgressBar = $PanelContainer/VBoxContainer/ProgressBar
 
+@onready var fivebomb: TextureButton = $PanelContainer/VBoxContainer/Missiles/Fivebomb
+@onready var hotshower: TextureButton = $PanelContainer/VBoxContainer/Missiles/Hotshower
+@onready var nuclear: TextureButton = $PanelContainer/VBoxContainer/Missiles/Nuclear
+
+@onready var enderpearl: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Enderpearl
+@onready var regenaration: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Regenaration
+
 @onready var hp: TextureButton = $PanelContainer/VBoxContainer/Traits/HP
 @onready var movement_speed: TextureButton = $PanelContainer/VBoxContainer/Traits/MovementSpeed
 @onready var stamina: TextureButton = $PanelContainer/VBoxContainer/Traits/Stamina
@@ -62,6 +69,7 @@ func create_selectors():
 func _process(_delta: float) -> void:
 	for i in range(MatchManager.number_players):
 		if not MatchManager.players.get_children()[i].human:
+			player_selected_next_match[i] = true# cambiar a algo mas natural, ej que mueva el selector a donde es
 			continue
 		if player_selected_next_match[i]:
 			continue
@@ -80,10 +88,17 @@ func _process(_delta: float) -> void:
 			match navigable_items[current_item_selected[i]]:
 				next_match_button:
 					begin_next_match(i)
+				fivebomb:
+					if buy(MatchManager.players.get_children()[i], 1000):
+						MatchManager.players.get_children()[i].inventory
+						#print(Globals.PLAYABLE_MISSILES.find(Globals.SCENE_MISSILE_HOTSHOWER))
 				hp:
 					if buy(MatchManager.players.get_children()[i], 10000):
 						MatchManager.players.get_children()[i].max_hp *= 1.1
 						print(MatchManager.players.get_children()[i].max_hp)
+				movement_speed:
+					if buy(MatchManager.players.get_children()[i], 7000):
+						MatchManager.players.get_children()[i].SPEED_MOVEMENT += 10
 				stamina:
 					if buy(MatchManager.players.get_children()[i], 3000):
 						MatchManager.players.get_children()[i].max_stamina += 100
