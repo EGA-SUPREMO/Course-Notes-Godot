@@ -37,7 +37,9 @@ var HP:= max_hp:
 	get():
 		return roundi(HP)
 			
-var money := 5000
+var money := 5000:
+	set(value):
+		money = clamp(value, 0, INF)
 const MONEY_MULTIPLIER = 50
 const SPEED_MOVEMENT = 100.0
 const ACCELERATION_MOVEMENT = 5.0

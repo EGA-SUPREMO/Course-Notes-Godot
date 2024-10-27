@@ -38,7 +38,6 @@ func _ready():
 		MatchManager.players.remove_child(player)
 		players.add_child(player)
 	for player in players.get_children():
-		print("in main ready")
 		player.shoot.connect(_on_player_shoot.bind(player))
 		player.death.connect(_on_player_death.bind(player))
 	#add_child(players)

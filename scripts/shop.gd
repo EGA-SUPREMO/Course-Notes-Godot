@@ -71,17 +71,16 @@ func _process(_delta: float) -> void:
 		
 		if Input.is_action_just_pressed("ui_accept"):
 			match navigable_items[current_item_selected[i]]:
-				next_match_button:
-					var game = load("res://scene/main.tscn")
+				next_match_button when true:
 					MatchManager.call_deferred("prepare_new_match")
 					# do stuff to preprare netx match? otherwise use oneline
-					get_tree().change_scene_to_packed(game)
+					get_tree().change_scene_to_file("res://scene/main.tscn")
 				hp:
-					if buy(MatchManager.players.get_children()[i].money, 10000):
+					if buy(MatchManager.players.get_children()[i], 10000):
 						MatchManager.players.get_children()[i].max_hp *= 1.1
 						print(MatchManager.players.get_children()[i].max_hp)
 				stamina:
-					if buy(MatchManager.players.get_children()[i].money, 3000):
+					if buy(MatchManager.players.get_children()[i], 3000):
 						MatchManager.players.get_children()[i].max_stamina += 100
 						print(MatchManager.players.get_children()[i].max_stamina)
 				
