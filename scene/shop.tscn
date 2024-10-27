@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brxo0auobyvwh"]
+[gd_scene load_steps=15 format=3 uid="uid://brxo0auobyvwh"]
 
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://3rmbpwy5ca8j" path="res://assets/sprites/icons/more_speed.png" id="5_fyeax"]
 [ext_resource type="Texture2D" uid="uid://be3nefdvpib53" path="res://assets/sprites/icons/stamina.png" id="6_533r8"]
 [ext_resource type="Texture2D" uid="uid://ce6fxcplbpco5" path="res://assets/sprites/icons/teleport.png" id="7_4y46l"]
+[ext_resource type="Texture2D" uid="uid://bfd6wsayi02mn" path="res://assets/sprites/icons/half_hexagon.png" id="7_ikopq"]
 [ext_resource type="Texture2D" uid="uid://dnpcmf6qr6eu5" path="res://assets/sprites/icons/repair.png" id="8_pnuyr"]
 [ext_resource type="Texture2D" uid="uid://cmtq6epl1c8cg" path="res://assets/sprites/icons/next.png" id="9_dbnhc"]
 [ext_resource type="Texture2D" uid="uid://gbbqow6l6ucw" path="res://assets/sprites/icons/overlay.png" id="10_is46x"]
@@ -80,6 +81,10 @@ layout_mode = 2
 
 [node name="Traits" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Ignore" type="TextureRect" parent="PanelContainer/VBoxContainer/Traits"]
+layout_mode = 2
+texture = ExtResource("7_ikopq")
 
 [node name="HP" type="TextureButton" parent="PanelContainer/VBoxContainer/Traits"]
 layout_mode = 2

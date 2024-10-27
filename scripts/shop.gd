@@ -28,7 +28,8 @@ func _ready() -> void:
 	for consumable in consumables.get_children():
 		navigable_items.append(consumable)
 	for current in traits.get_children():
-		navigable_items.append(current)
+		if current.name != "Ignore":
+			navigable_items.append(current)
 	navigable_items.append(next_match_button)
 	
 	create_selectors()
@@ -75,7 +76,7 @@ func _process(_delta: float) -> void:
 		
 		selectors.get_children()[i].position = navigable_items[current_item_selected[i]].global_position
 		
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "shot"):
 			match navigable_items[current_item_selected[i]]:
 				next_match_button:
 					begin_next_match(i)
