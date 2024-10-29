@@ -6,8 +6,9 @@
 radius = 9.0
 height = 38.0
 
-[node name="Missile" instance=ExtResource("1_c7ri7")]
+[node name="Nuclear" instance=ExtResource("1_c7ri7")]
 damage = 200
+price = 30000
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -3)

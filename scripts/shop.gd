@@ -88,10 +88,6 @@ func _process(_delta: float) -> void:
 			match navigable_items[current_item_selected[i]]:
 				next_match_button:
 					begin_next_match(i)
-				fivebomb:
-					if buy(MatchManager.players.get_children()[i], 1000):
-						MatchManager.players.get_children()[i].inventory
-						#print(Globals.PLAYABLE_MISSILES.find(Globals.SCENE_MISSILE_HOTSHOWER))
 				hp:
 					if buy(MatchManager.players.get_children()[i], 10000):
 						MatchManager.players.get_children()[i].max_hp *= 1.1
@@ -103,7 +99,11 @@ func _process(_delta: float) -> void:
 					if buy(MatchManager.players.get_children()[i], 3000):
 						MatchManager.players.get_children()[i].max_stamina += 100
 						print(MatchManager.players.get_children()[i].max_stamina)
-				
+				_:
+					for j in range(Globals.playable_missiles_nodes.size()):
+						if Globals.playable_missiles_nodes[j].name == navigable_items[current_item_selected[i]].name:
+							buy_missile(MatchManager.players.get_children()[i], j)
+
 func begin_next_match(i):
 	player_selected_next_match[i] = true
 	for j in range(MatchManager.number_players):
@@ -119,3 +119,8 @@ func buy(player: Player, price: int) -> bool:
 		return true
 	return false
 					
+func buy_missile(player: Player, missile_id: int) -> void:
+	if player.money >= Globals.playable_missiles_nodes[missile_id].price:
+		player.money -= Globals.playable_missiles_nodes[missile_id].price
+		player.inventory[missile_id] += 1
+		print(player.inventory)

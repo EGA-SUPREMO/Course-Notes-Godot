@@ -6,6 +6,7 @@ var new_rotation: float
 @export var damage:= 30
 var should_draw := false
 var who_shoot: CharacterBody2D
+@export var price: int
 
 signal explotion
 

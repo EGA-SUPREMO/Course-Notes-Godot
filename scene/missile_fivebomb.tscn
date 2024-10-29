@@ -5,3 +5,4 @@
 
 [node name="Fivebomb" instance=ExtResource("1_7n4hw")]
 script = ExtResource("2_r34xi")
+price = 8000

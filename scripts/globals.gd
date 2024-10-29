@@ -6,14 +6,15 @@ const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
 const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
 const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
 
-#const PLAYABLE_MISSILES = {"missile": SCENE_MISSILE,
-	#"hotshower": SCENE_MISSILE_HOTSHOWER, "fivebomb": SCENE_MISSILE_FIVEBOMB,
-	#"nuclear": SCENE_NUCLEAR_MISSILE}
 const PLAYABLE_MISSILES = [SCENE_MISSILE, SCENE_MISSILE_HOTSHOWER,
 SCENE_MISSILE_FIVEBOMB, SCENE_NUCLEAR_MISSILE]
-#var PLAYABLE_MISSILES_NAME = PLAYABLE_MISSILES.keys()
+var playable_missiles_nodes: Array
 
 var current_match_count = 0
+
+func _ready() -> void:
+	for missile in PLAYABLE_MISSILES:
+		playable_missiles_nodes.append(missile.instantiate())
 
 func counting():
 	current_match_count += 1

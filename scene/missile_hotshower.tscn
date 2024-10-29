@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxba6"]
 size = Vector2(30, 2)
 
-[node name="HotshowerMissile" instance=ExtResource("1_u5t41")]
+[node name="Hotshower" instance=ExtResource("1_u5t41")]
 script = ExtResource("2_tflg1")
+price = 13000
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_yxba6")
