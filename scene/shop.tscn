@@ -69,6 +69,18 @@ value = 20.0
 rounded = true
 show_percentage = false
 
+[node name="StoreLabel" type="Label" parent="PanelContainer/VBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+text = "🏪Store"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Missiles" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
