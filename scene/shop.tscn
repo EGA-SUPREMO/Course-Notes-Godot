@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://brxo0auobyvwh"]
+[gd_scene load_steps=16 format=3 uid="uid://brxo0auobyvwh"]
 
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
@@ -29,13 +29,6 @@ expand_margin_left = 40.0
 expand_margin_top = 40.0
 expand_margin_right = 40.0
 expand_margin_bottom = 40.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_a7nf8"]
-line_spacing = 2.0
-font_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_8jhy4"]
-font_size = 13
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -213,28 +206,9 @@ rotation = 3.14159
 layout_mode = 2
 texture = ExtResource("10_is46x")
 
-[node name="MoneyPlayer" type="Label" parent="Selector/HBoxContainer3/TextureRect"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 19.0
-offset_right = 59.0
-offset_bottom = 42.0
-text = "$: 100000"
-label_settings = SubResource("LabelSettings_a7nf8")
-
 [node name="TextureRect2" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2
 texture = ExtResource("10_is46x")
-
-[node name="CurrentAmount" type="Label" parent="Selector/HBoxContainer3/TextureRect2"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 19.0
-offset_right = 59.0
-offset_bottom = 42.0
-text = "57"
-label_settings = SubResource("LabelSettings_8jhy4")
-vertical_alignment = 2
 
 [node name="TextureRect3" type="TextureRect" parent="Selector/HBoxContainer3"]
 layout_mode = 2

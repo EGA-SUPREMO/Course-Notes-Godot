@@ -37,7 +37,7 @@ var HP:= max_hp:
 	get():
 		return roundi(HP)
 			
-var money := 500000:
+var money := 10000:
 	set(value):
 		money = clamp(value, 0, INF)
 const MONEY_MULTIPLIER = 50
