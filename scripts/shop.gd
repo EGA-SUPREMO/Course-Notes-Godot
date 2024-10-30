@@ -20,6 +20,7 @@ extends Control
 @onready var selector: Control = $Selector
 @onready var selectors: Control = $Selectors
 
+@onready var fail_buy_sfx: AudioStreamPlayer = $FailBuySFX
 @onready var buy_sfx: AudioStreamPlayer = $BuySFX
 @onready var movethis_to_global: AudioStreamPlayer = $MovethisToGlobal
 
@@ -157,6 +158,7 @@ func buy(player_id: int, price: int) -> bool:
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
 		return true
+	fail_buy_sfx.play()
 	return false
 					
 func buy_missile(player_id: int, missile_id: int) -> void:
@@ -167,3 +169,5 @@ func buy_missile(player_id: int, missile_id: int) -> void:
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
 		print(player.inventory)
+		return
+	fail_buy_sfx.play()
