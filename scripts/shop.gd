@@ -55,6 +55,9 @@ func _ready() -> void:
 	
 	create_selectors()
 	
+	for i in range(MatchManager.number_players):
+		update_inventory(i)
+	
 func create_selectors():
 	var selector_player: Array
 	for player in range(MatchManager.number_players):
@@ -85,6 +88,7 @@ func create_selectors():
 				1:
 					var label = current_amount_label.duplicate(0)
 					label.z_index = 1001
+					label.position.x += 15
 					label.text = "0"
 					label.add_theme_color_override("font_color", Color.BLACK)
 					list_labels_selector[i][j].add_child(label)
@@ -114,6 +118,7 @@ func _process(_delta: float) -> void:
 			
 			#movethis_to_global.pitch_scale = 0.75 + float(current_item_selected[i])/navigable_items.size()/4
 			movethis_to_global.play()
+			update_inventory(i)
 			
 		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "right_move"):
 			current_item_selected[i] += 1
@@ -121,7 +126,8 @@ func _process(_delta: float) -> void:
 				current_item_selected[i] = 0
 			#movethis_to_global.pitch_scale = 0.75 + float(current_item_selected[i])/navigable_items.size()/4
 			movethis_to_global.play()
-		
+			update_inventory(i)
+			
 		selectors.get_children()[i].global_position = navigable_items[current_item_selected[i]].global_position
 		
 		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "shot"):
@@ -131,12 +137,15 @@ func _process(_delta: float) -> void:
 				hp:
 					if buy(i, 10000):
 						MatchManager.players.get_children()[i].max_hp *= 1.1
+						update_inventory(i)
 				movement_speed:
 					if buy(i, 7000):
 						MatchManager.players.get_children()[i].SPEED_MOVEMENT += 10
+						update_inventory(i)
 				stamina:
 					if buy(i, 3000):
 						MatchManager.players.get_children()[i].max_stamina += 100
+						update_inventory(i)
 				_:
 					for j in range(Globals.playable_missiles_nodes.size()):
 						if Globals.playable_missiles_nodes[j].name == navigable_items[current_item_selected[i]].name:
@@ -157,6 +166,7 @@ func buy(player_id: int, price: int) -> bool:
 		player.money -= price
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
+		
 		return true
 	fail_buy_sfx.play()
 	return false
@@ -168,6 +178,22 @@ func buy_missile(player_id: int, missile_id: int) -> void:
 		player.inventory[missile_id] += 1
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
-		print(player.inventory)
+		update_inventory(player_id)
 		return
 	fail_buy_sfx.play()
+
+func update_inventory(player_id: int) -> void:
+	var current_player = MatchManager.players.get_children()[player_id]
+	var item = current_item_selected[player_id]
+	
+	match current_item_selected[player_id]:
+		0, 1, 2:
+			labels[player_id][1].text = str(current_player.inventory[item])
+		5:
+			labels[player_id][1].text = str(current_player.max_hp)
+		6:
+			labels[player_id][1].text = str(current_player.SPEED_MOVEMENT)
+		7:
+			labels[player_id][1].text = str(current_player.max_stamina)
+		_:
+			labels[player_id][1].text = ""

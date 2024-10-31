@@ -59,7 +59,7 @@ var mass
 
 func _ready():
 	name = keyboard_profile
-	inventory = [9999, 10, 100, 5]
+	inventory = [INF, 10, 5]
 	
 	for collision_side in monitors.get_children():
 		collision_side.connect("body_entered", _on_area_2d_body_entered)
