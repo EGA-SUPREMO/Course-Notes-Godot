@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=15 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
-[ext_resource type="SpriteFrames" uid="uid://bcomtk7bj44ai" path="res://scene/player_zeta.tres" id="2_f8upj"]
 [ext_resource type="Texture2D" uid="uid://ls3efihws416" path="res://assets/sprites/player_hud/shield_0.png" id="5_up7eb"]
 [ext_resource type="Script" path="res://scripts/states/state_machine.gd" id="6_murpk"]
 [ext_resource type="Script" path="res://scene/ai_attacking.gd" id="7_10yhs"]
@@ -43,9 +42,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_damwu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_f8upj")
-animation = &"moving"
-autoplay = "moving"
+animation = &""
 
 [node name="Monitors" type="Node2D" parent="."]
 

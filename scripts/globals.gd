@@ -10,6 +10,19 @@ const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
 	SCENE_NUCLEAR_MISSILE]
 var playable_missiles_nodes: Array
 
+var sprites_for_players = [preload("res://scene/player_zeta.tres"),
+	preload("res://scene/player_pemaloe.tres"),
+	preload("res://scene/player_merakyat.tres"),
+	preload("res://scene/player_risu.tres"),
+	preload("res://scene/player_moonafic.tres")
+	]
+
+var colors_by_player = [Color.BLACK.clamp(0, Color(1, 1, 1, 0.75)),
+	Color.RED.clamp(0, Color(1, 1, 1, 0.75)),
+	Color.BLUE.clamp(0, Color(1, 1, 1, 0.75)),
+	Color.PINK.clamp(0, Color(1, 1, 1, 0.75)),
+	Color.PURPLE.clamp(0, Color(1, 1, 1, 0.75))]
+
 var current_match_count = 0
 
 func _ready() -> void:

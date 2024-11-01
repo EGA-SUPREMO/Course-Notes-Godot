@@ -10,7 +10,7 @@ extends Control
 @onready var nuclear: TextureButton = $PanelContainer/VBoxContainer/Missiles/Nuclear
 
 @onready var enderpearl: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Enderpearl
-@onready var regenaration: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Regenaration
+@onready var regenaration: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Regeneration
 
 @onready var hp: TextureButton = $PanelContainer/VBoxContainer/Traits/HP
 @onready var movement_speed: TextureButton = $PanelContainer/VBoxContainer/Traits/MovementSpeed
@@ -70,7 +70,7 @@ func create_selectors():
 			for item in container.get_children():
 				list_labels_selector[player].append(item)
 				item.z_index = -1000
-		
+				item.get_children()[0].color = Globals.colors_by_player[player]
 	var number_labels_step = floori(12.0/MatchManager.number_players)
 	
 	for i in range(0, MatchManager.number_players):

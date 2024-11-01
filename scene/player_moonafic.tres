@@ -1,0 +1,22 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://copk26up6hreh"]
+
+[ext_resource type="Texture2D" uid="uid://ca1tjsesvspwb" path="res://assets/sprites/players/Moonafic-1.png" id="1_0pbgk"]
+[ext_resource type="Texture2D" uid="uid://b7gtwojwfj0jo" path="res://assets/sprites/players/Moonafic-2.png" id="2_ahruy"]
+[ext_resource type="Texture2D" uid="uid://dc2f68f6qeb8r" path="res://assets/sprites/players/Moonafic-3.png" id="3_dj6ws"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0pbgk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ahruy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dj6ws")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 10.0
+}]

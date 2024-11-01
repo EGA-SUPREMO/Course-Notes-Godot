@@ -10,6 +10,7 @@ func _ready() -> void:
 	for i in range(number_players):
 		var player = preload("res://scene/player.tscn").instantiate()
 		player.human = true
+		player.resource_sprite_frame = i
 		player.keyboard_profile = "player_" + str(i + 1) + "_"
 		player.position.x = randi_range(0, 600)
 		player.position.y = randi_range(-100, -200)
@@ -18,8 +19,6 @@ func _ready() -> void:
 	players.get_child(2).human = false
 	
 func prepare_new_match():
-	#players.get_child(2).animated_sprite.sprite_frames = preload("res://scene/player_risu.tres")
-
 	for player in players.get_children():
 		player.position.x = randi_range(0, 600)
 		player.position.y = randi_range(-100, -200)

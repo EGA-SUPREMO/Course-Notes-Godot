@@ -46,6 +46,7 @@ const ACCELERATION_MOVEMENT = 5.0
 const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 const FORCE_MULTIPLIER_TO_PLAYERS = 1
 
+@export var resource_sprite_frame: int
 @export var human: bool
 @onready var user_input_component: UserInputComponent = $UserInputComponent
 @onready var angle_number: Label = $HUD/AngleNumberLabel
@@ -60,6 +61,7 @@ var mass
 func _ready():
 	name = keyboard_profile
 	inventory = [INF, 10, 5]
+	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
 		collision_side.connect("body_entered", _on_area_2d_body_entered)
@@ -77,7 +79,7 @@ func _ready():
 		child.scale *= scale_factor
 		child.position.x = 64
 		child.position.x *= scale_factor*scale_factor
-		
+		child.modulate = Globals.colors_by_player[resource_sprite_frame]
 	if human:
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
 		
