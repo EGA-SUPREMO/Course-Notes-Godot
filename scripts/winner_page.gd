@@ -23,6 +23,7 @@ func _ready() -> void:
 		
 		var label = first_place_label.duplicate(0)
 		label.text = str(i) + ". place: " + player.name + "\nWins: " + str(player.win_count) + "\nDamage done: " + str(player.damage_done)
+		label.visible = true
 		player.position = Vector2(70 + i*70, 0)
 		
 		label.position -= Vector2(0, 400 - i*80)

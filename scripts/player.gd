@@ -57,11 +57,13 @@ var amount_power_sprites: int
 @export var angle := 0.0
 var win_count:= 0
 var loss_count:= 0
+var id: int
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	keyboard_profile = "player_" + str(id + 1) + "_"
 	name = keyboard_profile
 	inventory = [INF, 10, 5]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]

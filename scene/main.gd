@@ -115,6 +115,8 @@ func next_round():
 		MatchManager.call_deferred("prepare_new_match")
 		get_tree().change_scene_to_file("res://scene/winner_page.tscn")
 		return
+	
+	MatchManager.call_deferred("sort_players_node_by_id")
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
