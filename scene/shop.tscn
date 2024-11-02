@@ -60,7 +60,6 @@ clip_contents = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 step = 10.0
-value = 20.0
 rounded = true
 show_percentage = false
 

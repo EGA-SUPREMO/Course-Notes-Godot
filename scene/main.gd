@@ -105,16 +105,21 @@ func next_round():
 	var i = 0
 	for player in players.get_children():
 		i += 1
+		player.win_count += 1
 		player.money += 3000
 		players.remove_child(player)
 		MatchManager.players.call_deferred("add_child", player)
 	
 	if i > 1: print("problemon, dos players obtuvieron bonus de ganador")
+	if Globals.current_match_count > Globals.max_number_match:
+		MatchManager.call_deferred("prepare_new_match")
+		get_tree().change_scene_to_file("res://scene/winner_page.tscn")
+		return
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
-	
-	#var missile = Globals.PLAYABLE_MISSILES[Globals.PLAYABLE_MISSILES.keys()[player.current_missile]].instantiate()
+	if players.get_child_count() == 1:
+		return
 	var missile = Globals.PLAYABLE_MISSILES[player.current_missile].instantiate()
 	missile.add_to_group("missile")
 	missile.rotation = deg_to_rad(player.angle) + PI / 2

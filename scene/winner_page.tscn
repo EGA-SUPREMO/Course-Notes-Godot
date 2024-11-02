@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv00pn68b1uxr"]
+
+[ext_resource type="Script" path="res://scripts/winner_page.gd" id="1_onxla"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8mqej"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_onxla")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AspectRatioContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Congrats!"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="FirstPlaceLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1100, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/HBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1100, 500)
+render_target_update_mode = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport"]
+position = Vector2(0, 400)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_8mqej")

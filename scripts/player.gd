@@ -18,6 +18,7 @@ signal death
 var current_missile:= 1
 var inventory : Array
 var stamina:= 500
+var damage_done: int
 var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
@@ -54,6 +55,8 @@ var amount_power_sprites: int
 @onready var power_label: Label = $HUD/PowerLabel
 
 @export var angle := 0.0
+var win_count:= 0
+var loss_count:= 0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
@@ -126,6 +129,7 @@ func destroy(exploded_missile):
 		HP -= damage
 		var sign = ( -1 if exploded_missile.who_shoot == self else 1 )
 		exploded_missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
+		exploded_missile.who_shoot.damage_done += damage * sign
 		
 		var direction: Vector2 = player.global_position - exploded_missile.global_position
 		direction = direction.normalized()

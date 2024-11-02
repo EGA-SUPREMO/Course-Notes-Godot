@@ -41,7 +41,8 @@ func _ready() -> void:
 	money_player = Label.new()
 	current_amount_label = Label.new()
 	
-	progress_bar.value = Globals.current_match_count * 10
+	progress_bar.max_value = Globals.max_number_match
+	progress_bar.value = Globals.current_match_count
 	
 	for missile in missiles.get_children():
 		if missile is not VSeparator and missile is not HBoxContainer:
