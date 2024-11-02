@@ -23,13 +23,12 @@ func _ready() -> void:
 		
 		var label = first_place_label.duplicate(0)
 		label.text = str(i) + ". place: " + player.name + "\nWins: " + str(player.win_count) + "\nDamage done: " + str(player.damage_done)
+		player.position = Vector2(70 + i*70, 0)
 		
 		label.position -= Vector2(0, 400 - i*80)
 		sub_viewport.add_child(player)
-		h_box_container.add_child(first_place_label)
+		#h_box_container.add_child(first_place_label)
 		player.add_child(label)
-		
-		print(player.win_count)
 	
 
 func sort_players_by_win_count(a: Player, b: Player) -> bool:

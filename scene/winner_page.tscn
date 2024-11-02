@@ -32,6 +32,7 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="FirstPlaceLabel" type="RichTextLabel" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]

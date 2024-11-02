@@ -111,7 +111,7 @@ func next_round():
 		MatchManager.players.call_deferred("add_child", player)
 	
 	if i > 1: print("problemon, dos players obtuvieron bonus de ganador")
-	if Globals.current_match_count > Globals.max_number_match:
+	if Globals.current_match_count >= Globals.max_number_match:
 		MatchManager.call_deferred("prepare_new_match")
 		get_tree().change_scene_to_file("res://scene/winner_page.tscn")
 		return
