@@ -89,7 +89,7 @@ func _ready():
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
 		
 func _process(delta):
-	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina)
+	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
 	angle_number.text = str(angle)
 	power_label.text = str(missile_power)
 	text_temp = ""
