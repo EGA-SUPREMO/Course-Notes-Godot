@@ -13,6 +13,10 @@ var players_on_wait: bool
 #@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
 #@onready var collision_polygon_2d2 = $RigidBody2D2/CollisionPolygon2D
 #var i = 0
+
+static var fail_to_regenarate_sfx: AudioStreamPlayer
+static var successful_regenaratation_sfx: AudioStreamPlayer
+
 func _ready():
 	#rigid_body_2d.global_position = Vector2(-20, -100)
 	#rigid_body_2d2.global_position = Vector2(0, 0)
@@ -31,6 +35,18 @@ func _ready():
 	#print(rigid_body_2d2.global_position)
 	#print(rigid_body_2d.center_of_mass)
 	#print(rigid_body_2d2.center_of_mass)
+	fail_to_regenarate_sfx = AudioStreamPlayer.new()
+	fail_to_regenarate_sfx.bus = "SFX"
+	fail_to_regenarate_sfx.volume_db = -1059.0
+	fail_to_regenarate_sfx.stream = preload("res://assets/sounds/buy_fail2.wav")
+	add_child(fail_to_regenarate_sfx)
+	
+	successful_regenaratation_sfx = AudioStreamPlayer.new()
+	successful_regenaratation_sfx.bus = "SFX"
+	fail_to_regenarate_sfx.volume_db = -9.0
+	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
+	add_child(successful_regenaratation_sfx)
+	
 	camera_2d.limit_bottom = void_limit.position.y
 	
 	for player in MatchManager.players.get_children():

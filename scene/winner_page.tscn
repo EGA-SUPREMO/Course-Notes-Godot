@@ -66,3 +66,5 @@ position = Vector2(0, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport/StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_8mqej")
+
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]

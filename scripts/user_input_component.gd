@@ -1,7 +1,7 @@
 extends Node
 class_name UserInputComponent
 
-func update_user_input(player: Player, delta: float) -> void:
+func update_user_input(player: Player, _delta: float) -> void:
 	if Input.is_action_just_released(player.keyboard_profile + "lower_angle"):
 		player.angle -= 3
 	if Input.is_action_just_released(player.keyboard_profile + "increase_angle"):

@@ -8,6 +8,8 @@ class_name Attacking
 func update(_delta):
 	if Input.is_action_just_pressed(player.keyboard_profile + "shot"):
 		player.shoot.emit()
+		if Globals.playable_missiles_nodes[player.current_missile].consumable:
+			return
 		transition.emit(self, "idle")
 
 func update_physics(_delta):

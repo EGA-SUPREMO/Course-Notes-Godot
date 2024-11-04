@@ -40,3 +40,8 @@ func sort_players_by_win_count(a: Player, b: Player) -> bool:
 	if a.damage_done > b.damage_done:
 		return true
 	return false
+
+
+func _on_return_pressed() -> void:
+	get_tree().change_scene_to_file("res://scene/main_menu_container.tscn")
+	# do stuff to reset everything TODO

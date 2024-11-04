@@ -32,6 +32,9 @@ var HP:= max_hp:
 			hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
 			hurt_sfx.pitch_scale = randf() + 0.5
 			hurt_sfx.play()
+		if value > max_hp:
+			print("nono" + str(value))
+			return
 		HP = value
 		if HP <= 0:
 			death.emit()
@@ -65,7 +68,7 @@ var mass
 func _ready():
 	keyboard_profile = "player_" + str(id + 1) + "_"
 	name = keyboard_profile
-	inventory = [INF, 10, 5]
+	inventory = [INF, 10, 5, 1, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
@@ -177,7 +180,10 @@ func apply_squish_damage(_body):
 	
 	HP -= total_force/20000
 
-func spend_current_missile_in_inventory() -> void:
+func spend_current_missile_in_inventory(forced := false) -> void:
+	if Globals.playable_missiles_nodes[current_missile].name == "Regenerate" and forced==false:
+		return
+	
 	inventory[current_missile] -= 1
 	if inventory[current_missile] < 1:
 		change_current_missile_to_next_missile_in_inventory()

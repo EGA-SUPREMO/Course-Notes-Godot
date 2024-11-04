@@ -5,9 +5,11 @@ const SCENE_MISSILE = preload("res://scene/missile.tscn")
 const SCENE_MISSILE_HOTSHOWER = preload("res://scene/missile_hotshower.tscn")
 const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
 const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
+const ENDERPEARL = preload("res://scene/enderpearl.tscn")
+const REGENERATE = preload("res://scene/regenerate.tscn")
 
 const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
-	SCENE_NUCLEAR_MISSILE]
+	SCENE_NUCLEAR_MISSILE, ENDERPEARL, REGENERATE]
 var playable_missiles_nodes: Array
 
 var sprites_for_players = [preload("res://scene/player_zeta.tres"),
@@ -29,6 +31,7 @@ var max_number_match = 3
 func _ready() -> void:
 	for missile in PLAYABLE_MISSILES:
 		playable_missiles_nodes.append(missile.instantiate())
+		
 
 func counting():
 	current_match_count += 1

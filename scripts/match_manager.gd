@@ -21,7 +21,7 @@ func _ready() -> void:
 func prepare_new_match():
 	for player in players.get_children():
 		player.position.x = randi_range(0, 600)
-		player.position.y = randi_range(-100, -200)
+		player.position.y = randi_range(-200, -300)
 		player.HP = player.max_hp
 		player.stamina = player.max_stamina
 		player.state_machine.current_state.next_turn()

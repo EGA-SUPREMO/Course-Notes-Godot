@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgmhnsl114br6"]
+
+[ext_resource type="PackedScene" uid="uid://c0562akwst7p3" path="res://scene/missile.tscn" id="1_8yakg"]
+[ext_resource type="Script" path="res://scripts/enderpearl.gd" id="2_7jq7d"]
+[ext_resource type="Texture2D" uid="uid://ce6fxcplbpco5" path="res://assets/sprites/icons/teleport.png" id="2_gktsm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65urk"]
+radius = 8.0
+height = 16.0
+
+[node name="Enderpearl" instance=ExtResource("1_8yakg")]
+script = ExtResource("2_7jq7d")
+price = 15000
+consumable = true
+knockback_multiplier = 15
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_65urk")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_gktsm")
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+visible = false

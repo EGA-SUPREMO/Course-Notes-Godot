@@ -7,6 +7,8 @@ var new_rotation: float
 var should_draw := false
 var who_shoot: CharacterBody2D
 @export var price: int
+@export var consumable := false#doesnt spend a turn to use
+@export var knockback_multiplier:= 1
 
 signal explotion
 

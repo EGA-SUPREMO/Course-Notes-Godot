@@ -10,7 +10,7 @@ extends Control
 @onready var nuclear: TextureButton = $PanelContainer/VBoxContainer/Missiles/Nuclear
 
 @onready var enderpearl: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Enderpearl
-@onready var regenaration: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Regeneration
+@onready var regenaration: TextureButton = $PanelContainer/VBoxContainer/Missiles/Consumables/Regenerate
 
 @onready var hp: TextureButton = $PanelContainer/VBoxContainer/Traits/HP
 @onready var movement_speed: TextureButton = $PanelContainer/VBoxContainer/Traits/MovementSpeed
@@ -188,7 +188,7 @@ func update_inventory(player_id: int) -> void:
 	var item = current_item_selected[player_id]
 	
 	match current_item_selected[player_id]:
-		0, 1, 2:
+		0, 1, 2, 3, 4:
 			labels[player_id][1].text = str(current_player.inventory[item])
 		5:
 			labels[player_id][1].text = str(current_player.max_hp)
