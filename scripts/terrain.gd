@@ -5,6 +5,7 @@ extends Node2D
 @onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 
 var map_size: Vector2i
+const MIN_MASS_POLYGON := 200
 const FORCE_MULTIPLIER_TO_POLYGONS = 1000
 
 func _ready() -> void:
@@ -79,7 +80,10 @@ func clip(missile_polygon: PackedVector2Array):
 				collision_body.get_child(1).set_deferred("polygon", res[0])
 				
 				if collision_body is RigidBody2D:
-					collision_body.set_deferred("mass", abs(calculate_area(res[0])))
+					var mass = abs(calculate_area(res[0]))
+					if mass < MIN_MASS_POLYGON:
+						collision_body.queue_free()
+					collision_body.set_deferred("mass", mass)
 					var centroid = calculate_centroid(clipped_collision)
 					if abs(centroid) > Vector2(0.5, 0.5):
 						collision_polygon.set_deferred("polygon",
@@ -101,11 +105,15 @@ func clip(missile_polygon: PackedVector2Array):
 				polygon_temp.polygon = collider.polygon
 				polygon_temp.color = Color.WEB_MAROON
 				
+				var mass = abs(calculate_area(collider.polygon))
+				if mass < MIN_MASS_POLYGON:#too small
+					return
+				
 				body.rotation = collision_body.rotation
 				body.global_position = collision_body.position + centroid.rotated(collision_body.rotation)
 				body.contact_monitor = true
 				body.max_contacts_reported = 2
-				body.mass = abs(calculate_area(collider.polygon))
+				body.mass = mass
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
