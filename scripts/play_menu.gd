@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_quick_match_pressed() -> void:
 	get_tree().change_scene_to_file("res://scene/main.tscn")
+
+
+func _on_create_match_pressed() -> void:
+	get_tree().change_scene_to_file("res://scene/menus/create_match_menu.tscn")

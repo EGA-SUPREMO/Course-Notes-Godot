@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6hevy366qvwh"]
+
+[ext_resource type="Script" path="res://scene/menus/create_match_menu.gd" id="1_imi00"]
+[ext_resource type="Texture2D" uid="uid://bm342svic8wpj" path="res://assets/sprites/icons/add_player.png" id="1_tsqui"]
+[ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="2_j0qud"]
+[ext_resource type="Texture2D" uid="uid://cmtq6epl1c8cg" path="res://assets/sprites/icons/next.png" id="4_irl51"]
+
+[node name="CreateMatchMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_imi00")
+
+[node name="PlayerTexture_1" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+offset_top = 291.0
+offset_right = 155.0
+offset_bottom = 313.0
+texture = ExtResource("2_j0qud")
+
+[node name="CheckButton" type="CheckButton" parent="PlayerTexture_1"]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 20
+text = "AI:"
+
+[node name="RemovePlayer" type="Button" parent="PlayerTexture_1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -31.0
+offset_right = 35.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Remove"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Create a new match"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AddPlayerButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_tsqui")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/AddPlayerButton"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Add player"
+
+[node name="PlayerContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="StartMatch" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_irl51")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]

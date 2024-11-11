@@ -6,7 +6,7 @@ var number_players:= 3
 func _ready() -> void:
 	players = Node.new()
 	players.add_to_group("destructibles")
-	create_players()
+	#create_players()
 	
 func clean_players():
 	for player in players.get_children():
@@ -21,10 +21,8 @@ func create_players() -> void:
 		player.resource_sprite_frame = i
 		player.id = i
 		player.position.x = randi_range(0, 600)
-		player.position.y = randi_range(-100, -200)
+		player.position.y = randi_range(-200, -300)
 		players.add_child(player)
-	
-	players.get_child(2).human = false
 	
 func prepare_new_match():
 	for player in players.get_children():

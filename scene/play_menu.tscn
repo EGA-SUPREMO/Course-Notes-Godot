@@ -18,4 +18,10 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "Quick Match"
 
+[node name="CreateMatch" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Create a new match"
+
 [connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_quick_match_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
