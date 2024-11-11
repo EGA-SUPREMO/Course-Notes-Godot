@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cwcm35nd7gjvl" path="res://assets/sounds/blipSelect.wav" id="14_7ym1k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4p16"]
-bg_color = Color(1, 0.435294, 0, 1)
+bg_color = Color(0.8, 0.8, 0.8, 1)
 border_width_left = 40
 border_width_top = 40
 border_width_right = 40
@@ -119,6 +119,7 @@ layout_mode = 2
 theme_override_constants/separation = 40
 
 [node name="Ignore" type="TextureRect" parent="PanelContainer/VBoxContainer/Traits"]
+visible = false
 layout_mode = 2
 texture = ExtResource("7_ikopq")
 
@@ -142,7 +143,10 @@ price = 3000
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="NextMatch" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NextMatch" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("9_dbnhc")
 icon_alignment = 1

@@ -2,8 +2,9 @@ extends Control
 
 @onready var missiles: HBoxContainer = $PanelContainer/VBoxContainer/Missiles
 @onready var traits: HBoxContainer = $PanelContainer/VBoxContainer/Traits
-@onready var next_match_button: Button = $PanelContainer/VBoxContainer/NextMatch
+@onready var next_match_button: Button = $PanelContainer/VBoxContainer/HBoxContainer/NextMatch
 @onready var progress_bar: ProgressBar = $PanelContainer/VBoxContainer/ProgressBar
+
 
 @onready var fivebomb: TextureButton = $PanelContainer/VBoxContainer/Missiles/Fivebomb
 @onready var hotshower: TextureButton = $PanelContainer/VBoxContainer/Missiles/Hotshower
@@ -102,6 +103,8 @@ func create_selectors():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	for item in navigable_items:
+		item.scale = Vector2(1,1)
 	for i in range(MatchManager.number_players):
 		if not MatchManager.players.get_children()[i].human:
 			player_selected_next_match[i] = true# cambiar a algo mas natural, ej que mueva el selector a donde es
@@ -130,6 +133,9 @@ func _process(_delta: float) -> void:
 			update_inventory(i)
 			
 		selectors.get_children()[i].global_position = navigable_items[current_item_selected[i]].global_position
+		
+		navigable_items[current_item_selected[i]].scale.x = 1.35
+		navigable_items[current_item_selected[i]].scale.y = 1.35
 		
 		if Input.is_action_just_pressed(MatchManager.players.get_children()[i].keyboard_profile + "shot"):
 			match navigable_items[current_item_selected[i]]:
