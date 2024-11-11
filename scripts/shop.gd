@@ -109,6 +109,9 @@ func _process(_delta: float) -> void:
 		if not MatchManager.players.get_children()[i].human:
 			player_selected_next_match[i] = true# cambiar a algo mas natural, ej que mueva el selector a donde es
 			current_item_selected[i] = 8
+			navigable_items[current_item_selected[i]].scale.x = 1.35
+			navigable_items[current_item_selected[i]].scale.y = 1.35
+		
 			#movethis_to_global.play()
 			selectors.get_children()[i].global_position = navigable_items[current_item_selected[i]].global_position
 			continue

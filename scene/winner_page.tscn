@@ -68,3 +68,4 @@ position = Vector2(0, 400)
 shape = SubResource("WorldBoundaryShape2D_8mqej")
 
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="VBoxContainer/Again" to="." method="_on_again_pressed"]

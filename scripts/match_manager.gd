@@ -6,7 +6,15 @@ var number_players:= 3
 func _ready() -> void:
 	players = Node.new()
 	players.add_to_group("destructibles")
+	create_players()
 	
+func clean_players():
+	for player in players.get_children():
+		players.remove_child(player)
+
+	create_players()
+	
+func create_players() -> void:
 	for i in range(number_players):
 		var player = preload("res://scene/player.tscn").instantiate()
 		player.human = true

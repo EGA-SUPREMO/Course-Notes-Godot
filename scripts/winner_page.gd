@@ -7,7 +7,6 @@ extends Control
 var players_sorted: Array
 
 func _ready() -> void:
-	
 	first_place_label.custom_minimum_size = Vector2(200, 70)
 	
 	for player in MatchManager.players.get_children():
@@ -33,15 +32,22 @@ func _ready() -> void:
 	
 
 func sort_players_by_win_count(a: Player, b: Player) -> bool:
-	if a.win_count > b.win_count:
-		return true
-	if a.win_count < b.win_count:
-		return false
 	if a.damage_done > b.damage_done:
 		return true
+	if a.damage_done < b.damage_done:
+		return false
+	if a.win_count < b.win_count:
+		return false
 	return false
 
 
 func _on_return_pressed() -> void:
+	MatchManager.clean_players()
+	Globals.current_match_count = 0
 	get_tree().change_scene_to_file("res://scene/main_menu_container.tscn")
-	# do stuff to reset everything TODO
+	
+
+func _on_again_pressed() -> void:
+	MatchManager.clean_players()
+	Globals.current_match_count = 0
+	get_tree().change_scene_to_file("res://scene/main.tscn")

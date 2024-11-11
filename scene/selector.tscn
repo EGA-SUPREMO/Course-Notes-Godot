@@ -1,0 +1,187 @@
+[gd_scene load_steps=2 format=3 uid="uid://di5uwrrvmcv2p"]
+
+[ext_resource type="Texture2D" uid="uid://gbbqow6l6ucw" path="res://assets/sprites/icons/overlay.png" id="1_oh0pv"]
+
+[node name="Selector" type="Control"]
+z_index = -1000
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_top = -21.0
+offset_right = 1112.0
+offset_bottom = 669.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 129.0
+offset_bottom = 7.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/TextureRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 174.0
+offset_top = 7.0
+offset_right = 311.0
+offset_bottom = 50.0
+rotation = 1.5708
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer2/TextureRect4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer2/TextureRect5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer2/TextureRect6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 135.0
+offset_top = 180.0
+offset_right = 272.0
+offset_bottom = 223.0
+rotation = 3.14159
+
+[node name="TextureRect7" type="TextureRect" parent="HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer3/TextureRect7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect8" type="TextureRect" parent="HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer3/TextureRect8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect9" type="TextureRect" parent="HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer3/TextureRect9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 7.0
+offset_right = 153.0
+offset_bottom = 50.0
+rotation = 1.5708
+
+[node name="TextureRect10" type="TextureRect" parent="HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer4/TextureRect10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect11" type="TextureRect" parent="HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer4/TextureRect11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect12" type="TextureRect" parent="HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("1_oh0pv")
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer4/TextureRect12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
