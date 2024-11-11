@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://brxo0auobyvwh"]
+[gd_scene load_steps=19 format=3 uid="uid://brxo0auobyvwh"]
 
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://d2jib15psq40h" path="res://assets/sounds/buy_fail.wav" id="13_irxat"]
 [ext_resource type="AudioStream" uid="uid://urg6javrrh1d" path="res://assets/sounds/buy_sfx.wav" id="13_s83id"]
 [ext_resource type="AudioStream" uid="uid://cwcm35nd7gjvl" path="res://assets/sounds/blipSelect.wav" id="14_7ym1k"]
+[ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="17_kledt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4p16"]
 bg_color = Color(0.8, 0.8, 0.8, 1)
@@ -176,4 +177,8 @@ bus = &"SFX"
 [node name="MovethisToGlobal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_7ym1k")
 volume_db = -5.0
+bus = &"SFX"
+
+[node name="MovethisToGlobal2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_kledt")
 bus = &"SFX"

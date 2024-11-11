@@ -24,6 +24,7 @@ extends Control
 @onready var fail_buy_sfx: AudioStreamPlayer = $FailBuySFX
 @onready var buy_sfx: AudioStreamPlayer = $BuySFX
 @onready var movethis_to_global: AudioStreamPlayer = $MovethisToGlobal
+@onready var movethis_to_global_2: AudioStreamPlayer = $MovethisToGlobal2
 
 var money_player: Label
 var current_amount_label: Label
@@ -111,7 +112,8 @@ func _process(_delta: float) -> void:
 			current_item_selected[i] = 8
 			navigable_items[current_item_selected[i]].scale.x = 1.35
 			navigable_items[current_item_selected[i]].scale.y = 1.35
-		
+			
+			#begin_next_match(i)
 			#movethis_to_global.play()
 			selectors.get_children()[i].global_position = navigable_items[current_item_selected[i]].global_position
 			continue
@@ -162,7 +164,9 @@ func _process(_delta: float) -> void:
 							buy_missile(i, j)
 
 func begin_next_match(i):
-	player_selected_next_match[i] = true
+	if not player_selected_next_match[i]:
+		player_selected_next_match[i] = true
+		movethis_to_global_2.play()
 	for j in range(MatchManager.number_players):
 		if not player_selected_next_match[j]:
 			return
