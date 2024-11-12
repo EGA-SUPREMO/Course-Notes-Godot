@@ -7,7 +7,8 @@ func enter() -> void:
 	pass
 
 func exit() -> void:
-	pass
+	player.change_color_to_power(Globals.colors_by_player[player.resource_sprite_frame])
+
 	
 func update(_delta: float) -> void:
 	player.velocity.x = lerp(player.velocity.x, 0.0, _delta * player.DESACCELERATION_MOVEMENT) 

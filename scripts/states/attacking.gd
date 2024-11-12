@@ -3,7 +3,12 @@ class_name Attacking
 
 @export var player: CharacterBody2D
 
-	
+func enter():
+	player.call_deferred("change_color_to_power", Globals.colors_by_player[player.resource_sprite_frame])
+
+
+func exit():
+	player.change_color_to_power(Color.GRAY)
 
 func update(_delta):
 	if Input.is_action_just_pressed(player.keyboard_profile + "shot"):

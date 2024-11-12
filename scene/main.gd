@@ -37,13 +37,13 @@ func _ready():
 	#print(rigid_body_2d2.center_of_mass)
 	fail_to_regenarate_sfx = AudioStreamPlayer.new()
 	fail_to_regenarate_sfx.bus = "SFX"
-	fail_to_regenarate_sfx.volume_db = -1059.0
+	fail_to_regenarate_sfx.volume_db = 10.0
 	fail_to_regenarate_sfx.stream = preload("res://assets/sounds/buy_fail2.wav")
 	add_child(fail_to_regenarate_sfx)
 	
 	successful_regenaratation_sfx = AudioStreamPlayer.new()
 	successful_regenaratation_sfx.bus = "SFX"
-	fail_to_regenarate_sfx.volume_db = -9.0
+	fail_to_regenarate_sfx.volume_db = 9.0
 	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
 	add_child(successful_regenaratation_sfx)
 	

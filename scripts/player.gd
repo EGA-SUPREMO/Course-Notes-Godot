@@ -102,7 +102,11 @@ func _process(delta):
 	set_percentage_visible_power(missile_power)
 		
 	hud.rotation = deg_to_rad(angle)
-	
+
+func change_color_to_power(color: Color):
+	for child in hud.get_children():
+		child.modulate = color
+
 func set_percentage_visible_power(power: int):
 	var percentage = clamp(power, 0, 100)
 	var num_true_items_visible = int(amount_power_sprites * percentage / 100.0)
