@@ -24,4 +24,3 @@ text = "Create a new match"
 
 [connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
-[connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_quick_match_pressed"]

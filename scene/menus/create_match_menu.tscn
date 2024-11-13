@@ -75,3 +75,4 @@ layout_mode = 2
 texture_normal = ExtResource("4_irl51")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartMatch" to="." method="_on_start_match_pressed"]
