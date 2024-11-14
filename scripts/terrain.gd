@@ -178,4 +178,6 @@ func apply_explotion_impulse(missile_position: Vector2, force: float) -> void:
 
 func destroy(missile) -> void:
 	call_deferred("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
+	#call_deferred_thread_group("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
+	#call_thread_safe("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
 	apply_explotion_impulse(missile.global_position, missile.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile.knockback_multiplier)

@@ -15,6 +15,7 @@ var next_id = 0 # Next ID to use if no reusable IDs are available
 
 
 func _ready() -> void:
+	MatchManager.number_players = 0
 	for i in range(2):
 		create_players_textures()
 		player_container.get_child(i).get_child(1).disabled = true
