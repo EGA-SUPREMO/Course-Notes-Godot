@@ -142,7 +142,7 @@ func _on_player_shoot(player) -> void:
 	missile.add_to_group("missile")
 	missile.rotation = deg_to_rad(player.angle) + PI / 2
 	missile.position = player.hud.global_position
-	var direction = Vector2(cos(deg_to_rad(player.angle)), sin(deg_to_rad(player.angle)))
+	var direction = Vector2(cos(deg_to_rad(player.angle + 180)), sin(deg_to_rad(player.angle + 180)))
 	missile.apply_impulse(direction * player.missile_power * 9, Vector2.ZERO)
 	missile.who_shoot = player
 	missiles.add_child(missile)

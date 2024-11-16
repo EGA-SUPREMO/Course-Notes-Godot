@@ -25,7 +25,7 @@ func create_players(ids = [], human_bools = []) -> void:
 	image_ids = ids
 	is_human_bools = human_bools
 	
-	if human_bools.size() != number_players or ids.size() != number_players:
+	if human_bools.size() != 0 and human_bools.size() != number_players or ids.size() != number_players:
 		print("error, human_bools list size is different than number of players")
 	for i in range(number_players):
 		var player = preload("res://scene/player.tscn").instantiate()

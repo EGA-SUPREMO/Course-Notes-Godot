@@ -57,7 +57,15 @@ const FORCE_MULTIPLIER_TO_PLAYERS = 1
 var amount_power_sprites: int
 @onready var power_label: Label = $HUD/PowerLabel
 
-@export var angle := 0.0
+@export var angle := 0.0:
+	set(value):
+		if value > 360:
+			angle = value - 360
+			return
+		if value < 0:
+			angle = 360 + value
+			return
+		angle = value
 var win_count:= 0
 var loss_count:= 0
 var id: int
@@ -66,9 +74,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	user_input_component.player = self
 	keyboard_profile = "player_" + str(id + 1) + "_"
 	name = keyboard_profile
-	inventory = [INF, 10, 5, 1, 10]
+	inventory = [INF, 10, 0, 5, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
@@ -97,11 +106,11 @@ func _process(delta):
 	power_label.text = str(missile_power)
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
-		user_input_component.update_user_input(self, delta)
+		user_input_component.update_user_input(delta)
 	
 	set_percentage_visible_power(missile_power)
 		
-	hud.rotation = deg_to_rad(angle)
+	hud.rotation = deg_to_rad(angle + 180)
 
 func change_color_to_power(color: Color):
 	for child in hud.get_children():
