@@ -24,16 +24,16 @@ func create_players(ids = [], human_bools = []) -> void:
 	
 	image_ids = ids
 	is_human_bools = human_bools
-	
 	if human_bools.size() != 0 and human_bools.size() != number_players or ids.size() != number_players:
 		print("error, human_bools list size is different than number of players")
+	
+	var player_positions = Globals.generate_random_positions(number_players, 250.0/number_players)
 	for i in range(number_players):
 		var player = preload("res://scene/player.tscn").instantiate()
 		player.human = human_bools[i]
 		player.resource_sprite_frame = ids[i]
 		player.id = i
-		player.position.x = randi_range(0, 600)
-		player.position.y = randi_range(-200, -300)
+		player.position = player_positions[i]
 		players.add_child(player)
 	
 	
