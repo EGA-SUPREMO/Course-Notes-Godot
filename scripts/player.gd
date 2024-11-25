@@ -59,7 +59,7 @@ var amount_power_sprites: int
 
 @export var angle := 0.0:
 	set(value):
-		if value > 360:
+		if value > 357:
 			angle = value - 360
 			return
 		if value < 0:
