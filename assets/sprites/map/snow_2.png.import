@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd2ikop4xof3a"
-path="res://.godot/imported/mesa bad.png-094ddb333b367821bc948a11c0e0781c.ctex"
+uid="uid://vb2nvpnqrhtv"
+path="res://.godot/imported/snow_2.png-c612157800f8a80b971b07ffcfd0d9f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/map/mesa bad.png"
-dest_files=["res://.godot/imported/mesa bad.png-094ddb333b367821bc948a11c0e0781c.ctex"]
+source_file="res://assets/sprites/map/snow_2.png"
+dest_files=["res://.godot/imported/snow_2.png-c612157800f8a80b971b07ffcfd0d9f6.ctex"]
 
 [params]
 
