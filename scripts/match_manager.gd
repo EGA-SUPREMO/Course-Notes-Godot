@@ -28,6 +28,8 @@ func create_players(ids = [], human_bools = []) -> void:
 		print("error, human_bools list size is different than number of players")
 	
 	var player_positions = Globals.generate_random_positions(number_players, 250.0/number_players)
+	player_positions.shuffle()
+	
 	for i in range(number_players):
 		var player = preload("res://scene/player.tscn").instantiate()
 		player.human = human_bools[i]
@@ -35,6 +37,7 @@ func create_players(ids = [], human_bools = []) -> void:
 		player.id = i
 		player.position = player_positions[i]
 		players.add_child(player)
+		player.velocity = Vector2.ZERO#something random? ej they are flying couse explotion
 	
 	
 func prepare_new_match():
@@ -44,6 +47,8 @@ func prepare_new_match():
 		player.HP = player.max_hp
 		player.stamina = player.max_stamina
 		player.state_machine.current_state.next_turn()
+		
+		player.velocity = Vector2.ZERO#something random? ej they are flying couse explotion
 		
 func sort_players_node_by_id():
 	var sorted_nodes := players.get_children()
