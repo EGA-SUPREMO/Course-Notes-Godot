@@ -10,6 +10,9 @@ class_name Player
 @export var missile_power := 50:
 	set(value):
 		missile_power = clamp(value, 0, 100)
+		if tap_sfx and missile_power == value:
+			tap_sfx.play()
+
 @export var keyboard_profile: String
 signal shoot
 signal death
@@ -56,9 +59,12 @@ const FORCE_MULTIPLIER_TO_PLAYERS = 1
 @onready var angle_number: Label = $HUD/AngleNumberLabel
 var amount_power_sprites: int
 @onready var power_label: Label = $HUD/PowerLabel
+@onready var tap_sfx: AudioStreamPlayer2D = $TapSFX
 
 @export var angle := 0.0:
 	set(value):
+		if tap_sfx:
+			tap_sfx.play()
 		if value > 357:
 			angle = value - 360
 			return
@@ -77,6 +83,8 @@ func _ready():
 	user_input_component.player = self
 	keyboard_profile = "player_" + str(id + 1) + "_"
 	name = keyboard_profile
+	tap_sfx.pitch_scale += id/10.0
+	
 	inventory = [INF, 10, 0, 5, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	

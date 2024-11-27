@@ -22,10 +22,14 @@ func create_players(ids = [], human_bools = []) -> void:
 		ids = image_ids
 		human_bools = is_human_bools
 	
-	image_ids = ids
-	is_human_bools = human_bools
 	if human_bools.size() != 0 and human_bools.size() != number_players or ids.size() != number_players:
 		print("error, human_bools list size is different than number of players")
+		print(human_bools)
+		print(ids)
+		print(number_players)
+	
+	image_ids = ids
+	is_human_bools = human_bools
 	
 	var player_positions = Globals.generate_random_positions(number_players, 250.0/number_players)
 	player_positions.shuffle()
@@ -41,9 +45,12 @@ func create_players(ids = [], human_bools = []) -> void:
 	
 	
 func prepare_new_match():
-	for player in players.get_children():
-		player.position.x = randi_range(0, 600)
-		player.position.y = randi_range(-200, -300)
+	var player_positions = Globals.generate_random_positions(number_players, 250.0/number_players)
+	player_positions.shuffle()
+	
+	for i in range(players.get_child_count()):
+		var player = players.get_child(i)
+		player.position = player_positions[i]
 		player.HP = player.max_hp
 		player.stamina = player.max_stamina
 		player.state_machine.current_state.next_turn()
