@@ -6,6 +6,7 @@ class_name Player
 @onready var state_machine: Node = $StateMachine
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var label: Label = $Label
+@onready var woosh_sfx: AudioStreamPlayer2D = $WooshSFX
 
 @export var missile_power := 50:
 	set(value):
@@ -211,6 +212,7 @@ func spend_current_missile_in_inventory(forced := false) -> void:
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
 	current_missile += 1
+	woosh_sfx.play()
 	if current_missile >= Globals.PLAYABLE_MISSILES.size():
 		current_missile = 0
 	if inventory[current_missile] < 1:
@@ -218,6 +220,7 @@ func change_current_missile_to_next_missile_in_inventory() -> void:
 
 
 func change_current_missile_to_previous_missile_in_inventory() -> void:
+	woosh_sfx.play()
 	if current_missile>0:
 		current_missile -= 1;
 	else:
