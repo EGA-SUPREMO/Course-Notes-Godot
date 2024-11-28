@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://k2u3kjnuay6s"]
+[gd_scene load_steps=8 format=3 uid="uid://k2u3kjnuay6s"]
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_vsj3d"]
 [ext_resource type="PackedScene" uid="uid://diel7vtghr4bn" path="res://scene/terrain.tscn" id="2_1t2nn"]
-[ext_resource type="Texture2D" uid="uid://b6foq4ungkp2s" path="res://assets/backgrounds/background2.png" id="4_37v58"]
 [ext_resource type="PackedScene" uid="uid://5nej2cdm4ojf" path="res://scene/music.tscn" id="5_hqg6j"]
 [ext_resource type="AudioStream" uid="uid://sh3hflt0xyri" path="res://assets/music/time_for_adventure.mp3" id="6_lqwm4"]
 
@@ -45,15 +44,6 @@ shape = SubResource("WorldBoundaryShape2D_o7nlc")
 [node name="Right" type="CollisionShape2D" parent="Walls"]
 position = Vector2(960, 0)
 shape = SubResource("WorldBoundaryShape2D_hr04v")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="Background3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(0, -300)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_37v58")
 
 [node name="Music" parent="." instance=ExtResource("5_hqg6j")]
 stream = ExtResource("6_lqwm4")

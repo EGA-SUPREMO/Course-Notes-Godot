@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://diel7vtghr4bn"]
+[gd_scene load_steps=10 format=3 uid="uid://diel7vtghr4bn"]
 
 [ext_resource type="Script" path="res://scripts/terrain.gd" id="1_l2wfj"]
 [ext_resource type="Shader" path="res://scene/parent_terrain.gdshader" id="2_viorw"]
 [ext_resource type="Shader" path="res://scene/terrain_background.gdshader" id="2_xbubg"]
 [ext_resource type="Texture2D" uid="uid://bxsuft0cuyfby" path="res://assets/sprites/map/mesa_2.png" id="3_6kdo8"]
 [ext_resource type="Script" path="res://scripts/circle.gd" id="4_m27gq"]
+[ext_resource type="Texture2D" uid="uid://b6foq4ungkp2s" path="res://assets/backgrounds/background2.png" id="6_7vh80"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4pfij"]
 shader = ExtResource("2_xbubg")
@@ -51,3 +52,12 @@ z_as_relative = false
 material = SubResource("ShaderMaterial_qihk6")
 texture = ExtResource("3_6kdo8")
 centered = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(0, -300)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_7vh80")

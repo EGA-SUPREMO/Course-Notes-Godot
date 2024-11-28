@@ -3,12 +3,43 @@ extends Node2D
 @onready var island_holder = $IslandHolder
 @onready var circle: Node2D = $SubViewport/Circle
 @onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
+@onready var background: Sprite2D = $Background
+@onready var background_2: Sprite2D = $ParallaxBackground/ParallaxLayer/Background2
 
 var map_size: Vector2i
 const MIN_MASS_POLYGON := 200
 const FORCE_MULTIPLIER_TO_POLYGONS = 1000
 
+var maps = [preload("res://assets/sprites/map/desert_1.png"),
+	preload("res://assets/sprites/map/desert_2.png"),
+	preload("res://assets/sprites/map/desert_2.png"),
+	preload("res://assets/sprites/map/mesa_1.png"), 
+	preload("res://assets/sprites/map/mesa_2.png"), 
+	preload("res://assets/sprites/map/mesa_3.png"), 
+	preload("res://assets/sprites/map/snow_1.png"), 
+	preload("res://assets/sprites/map/snow_2.png"), 
+	preload("res://assets/sprites/map/snow_3.png"),
+	preload("res://assets/sprites/map/plains_1.png"), 
+	preload("res://assets/sprites/map/plains_2.png"), 
+	preload("res://assets/sprites/map/plains_3.png"),
+]
+
+var backgrounds_textures = [preload("res://assets/backgrounds/background1.png"), 
+preload("res://assets/backgrounds/background2.png"), 
+preload("res://assets/backgrounds/background3.png"), 
+preload("res://assets/backgrounds/background4.png")]
+
+var colors_biome = [Color.LIGHT_YELLOW, Color.WEB_MAROON, Color.WHITE, Color.WEB_GREEN]
+var biome_id: int
+
 func _ready() -> void:
+	var variant = randi_range(0, 2)
+	biome_id = randi_range(0, 3)
+
+	background_2.texture = backgrounds_textures[biome_id]
+	shape_sprite.texture = maps[variant + biome_id * 3]
+	background.texture = shape_sprite.texture
+	
 	add_to_group("destructibles")
 	create_collisions()
 	
@@ -46,7 +77,7 @@ func create_collisions():
 		
 		collider.polygon = newpoints
 		polygon_temp.polygon = collider.polygon
-		polygon_temp.color = Color.WEB_MAROON
+		polygon_temp.color = colors_biome[biome_id]
 		map_size = bitMap.get_size()
 		
 		body.add_child(collider)
@@ -103,7 +134,7 @@ func clip(missile_polygon: PackedVector2Array):
 				var centroid = calculate_centroid(clipped_collision)
 				collider.polygon = offset_polygon_by_center_of_mass(clipped_collision, centroid)
 				polygon_temp.polygon = collider.polygon
-				polygon_temp.color = Color.WEB_MAROON
+				polygon_temp.color = colors_biome[biome_id]
 				
 				var mass = abs(calculate_area(collider.polygon))
 				if mass < MIN_MASS_POLYGON:#too small
