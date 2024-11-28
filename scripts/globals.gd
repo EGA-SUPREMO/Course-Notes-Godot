@@ -7,7 +7,7 @@ const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
 const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
 const ENDERPEARL = preload("res://scene/enderpearl.tscn")
 const REGENERATE = preload("res://scene/regenerate.tscn")
-const MAP_WIDTH = 960
+const MAP_SIZE = Vector2i(960, 540)
 
 const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
 	SCENE_NUCLEAR_MISSILE, ENDERPEARL, REGENERATE]
@@ -93,7 +93,7 @@ func random_float_in_ranges(min_negative, max_negative, min_positive, max_positi
 func generate_random_positions(player_count: int, offset: float = 0.0) -> Array:
 	var positions = []
 	var close_to_border_offset = 50
-	var segment_width = (MAP_WIDTH - offset - close_to_border_offset) / player_count
+	var segment_width = (MAP_SIZE.x - offset - close_to_border_offset) / player_count
 	
 	for i in range(player_count):
 		var min_x = offset + i * segment_width

@@ -44,6 +44,7 @@ func _ready() -> void:
 	create_collisions()
 	
 	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
+	background.offset = Globals.MAP_SIZE-map_size
 
 func go_around_map_borrar_duplicado_en_main() -> void:
 	for polygon in island_holder.get_children():
@@ -75,10 +76,12 @@ func create_collisions():
 		for point in polygon:
 			newpoints.push_back(point)
 		
+		map_size = bitMap.get_size()
+		
 		collider.polygon = newpoints
+		collider.polygon = Transform2D(0, Globals.MAP_SIZE-map_size) * collider.polygon
 		polygon_temp.polygon = collider.polygon
 		polygon_temp.color = colors_biome[biome_id]
-		map_size = bitMap.get_size()
 		
 		body.add_child(collider)
 		body.add_child(polygon_temp)
