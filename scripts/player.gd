@@ -7,6 +7,7 @@ class_name Player
 @onready var hurt_sfx: AudioStreamPlayer2D = $HurtSFX
 @onready var label: Label = $Label
 @onready var woosh_sfx: AudioStreamPlayer2D = $WooshSFX
+@onready var run_sfx: AudioStreamPlayer2D = $RunSFX
 
 @export var missile_power := 50:
 	set(value):
@@ -86,7 +87,7 @@ func _ready():
 	name = keyboard_profile
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, 10, 0, 5, 10]
+	inventory = [INF, 10, 5, 5, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():

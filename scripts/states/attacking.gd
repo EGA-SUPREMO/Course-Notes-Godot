@@ -36,6 +36,7 @@ func calculate_movement_speed(_delta, direction):
 	
 	if abs(max_movement) > abs(acceleration):
 		player.velocity.x = acceleration
+		#player.run_sfx.play()
 		player.stamina -= abs(player.velocity.x)/1000
 	else:
 		var desacceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.DESACCELERATION_MOVEMENT)
