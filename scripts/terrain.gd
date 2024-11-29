@@ -45,6 +45,12 @@ func _ready() -> void:
 	
 	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
 	background.offset = Globals.MAP_SIZE-map_size
+	background_2.position.x += Globals.MAP_SIZE.x/2
+	#background_2.position.y += Globals.MAP_SIZE.y/2
+	
+	background_2.scale.x = Globals.MAP_SIZE.x/background_2.texture.get_size().x
+	background_2.scale.y = Globals.MAP_SIZE.y/background_2.texture.get_size().y
+	
 
 func go_around_map_borrar_duplicado_en_main() -> void:
 	for polygon in island_holder.get_children():

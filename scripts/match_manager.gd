@@ -21,13 +21,6 @@ func create_players(ids = [], human_bools = []) -> void:
 	if !human_bools.size() and !ids.size():
 		ids = image_ids
 		human_bools = is_human_bools
-	
-	if human_bools.size() != 0 and human_bools.size() != number_players or ids.size() != number_players:
-		print("error, human_bools list size is different than number of players")
-		print(human_bools)
-		print(ids)
-		print(number_players)
-	
 	image_ids = ids
 	is_human_bools = human_bools
 	

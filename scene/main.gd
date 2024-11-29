@@ -73,9 +73,14 @@ func _process(_delta):
 	#	i+=1
 	#	body.collision_layer = 3
 	#	body.collision_mask = 3
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		terrain.clip(terrain.create_circle_radious_polygon(
-			get_global_mouse_position(), 50))
+	
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+	#	camera_2d.zoom += Vector2(0.01, 0.01)
+		
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		#terrain.clip(terrain.create_circle_radious_polygon(
+		#	get_global_mouse_position(), 50))
+	#	camera_2d.zoom -= Vector2(0.01, 0.01)
 		#for missile in missiles.get_children():
 			
 		#	var direction = Vector2(cos(deg_to_rad(missile.rotation)), sin(deg_to_rad(missile.rotation)))
@@ -97,7 +102,6 @@ func adjust_camera() -> void:
 	camera_2d.position.x = terrain.map_size.x/2
 	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
 	camera_2d.zoom.y = camera_2d.zoom.x
-
 
 func next_turn():
 	players_on_wait = true
@@ -143,7 +147,7 @@ func _on_player_shoot(player) -> void:
 	missile.rotation = deg_to_rad(player.angle) + PI / 2
 	missile.position = player.hud.global_position
 	var direction = Vector2(cos(deg_to_rad(player.angle + 180)), sin(deg_to_rad(player.angle + 180)))
-	missile.apply_impulse(direction * player.missile_power * 9, Vector2.ZERO)
+	missile.apply_impulse(direction * player.missile_power * 10, Vector2.ZERO)
 	missile.who_shoot = player
 	missiles.add_child(missile)
 
