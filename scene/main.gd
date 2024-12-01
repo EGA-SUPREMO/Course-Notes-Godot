@@ -143,14 +143,9 @@ func _on_player_shoot(player) -> void:
 	if players.get_child_count() == 1:
 		return
 	var missile = Globals.PLAYABLE_MISSILES[player.current_missile].instantiate()
+	player.apply_missile_shot(missile)
 	missile.add_to_group("missile")
-	missile.rotation = deg_to_rad(player.angle) + PI / 2
-	missile.position = player.hud.global_position
-	var direction = Vector2(cos(deg_to_rad(player.angle + 180)), sin(deg_to_rad(player.angle + 180)))
-	missile.apply_impulse(direction * player.missile_power * 10, Vector2.ZERO)
-	missile.who_shoot = player
 	missiles.add_child(missile)
-
 	player.spend_current_missile_in_inventory()
 
 func _on_player_death(player: Player):

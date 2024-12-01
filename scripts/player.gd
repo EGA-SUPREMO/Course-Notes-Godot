@@ -54,6 +54,7 @@ var SPEED_MOVEMENT = 50.0
 const ACCELERATION_MOVEMENT = 5.0
 const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 const FORCE_MULTIPLIER_TO_PLAYERS = 1
+const POWER_MULTIPLIER = 10
 
 @export var resource_sprite_frame: int
 @export var human: bool
@@ -228,3 +229,12 @@ func change_current_missile_to_previous_missile_in_inventory() -> void:
 		current_missile = Globals.PLAYABLE_MISSILES.size()-1;
 	if inventory[current_missile]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
+
+func apply_missile_shot(missile: Node2D) -> Vector2:
+	missile.rotation = deg_to_rad(angle) + PI / 2
+	missile.position = hud.global_position
+	var direction = Vector2(cos(deg_to_rad(angle + 180)), sin(deg_to_rad(angle + 180)))
+	missile.apply_impulse(direction * missile_power * POWER_MULTIPLIER, Vector2.ZERO)
+	missile.who_shoot = player
+	
+	return direction

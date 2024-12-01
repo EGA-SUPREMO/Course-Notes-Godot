@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt0gasob62eti"]
+
+[ext_resource type="Script" path="res://scripts/trajectory.gd" id="1_lesfa"]
+
+[node name="Line2D" type="Line2D"]
+script = ExtResource("1_lesfa")

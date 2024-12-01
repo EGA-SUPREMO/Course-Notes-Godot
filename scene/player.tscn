@@ -153,16 +153,16 @@ player = NodePath("../..")
 script = ExtResource("8_pvw5g")
 player = NodePath("../..")
 
-[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_071vd")
-bus = &"SFX"
-
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="UserInputComponent" type="Node" parent="."]
 script = ExtResource("10_bdi5k")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_071vd")
+bus = &"SFX"
 
 [node name="TapSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_u42md")

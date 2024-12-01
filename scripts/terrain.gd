@@ -59,6 +59,7 @@ func _process(delta: float) -> void:
 		var missile_node = signal_queue.pop_front()
 		call_deferred("clip", create_circle_radious_polygon(missile_node.global_position, missile_node.damage))
 		call_deferred("apply_explotion_impulse", missile_node.global_position, missile_node.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile_node.knockback_multiplier)
+		#missile_node.queue_free()
 
 func go_around_map_borrar_duplicado_en_main() -> void:
 	for polygon in island_holder.get_children():
