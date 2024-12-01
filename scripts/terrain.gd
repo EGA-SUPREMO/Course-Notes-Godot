@@ -32,6 +32,9 @@ preload("res://assets/backgrounds/background4.png")]
 var colors_biome = [Color.LIGHT_YELLOW, Color.WEB_MAROON, Color.WHITE, Color.WEB_GREEN]
 var biome_id: int
 
+var signal_queue: Array = []
+
+
 func _ready() -> void:
 	var variant = randi_range(0, 2)
 	biome_id = randi_range(0, 3)
@@ -51,6 +54,11 @@ func _ready() -> void:
 	background_2.scale.x = Globals.MAP_SIZE.x/background_2.texture.get_size().x
 	background_2.scale.y = Globals.MAP_SIZE.y/background_2.texture.get_size().y
 	
+func _process(delta: float) -> void:
+	if signal_queue.size() > 0:
+		var missile_node = signal_queue.pop_front()
+		call_deferred("clip", create_circle_radious_polygon(missile_node.global_position, missile_node.damage))
+		call_deferred("apply_explotion_impulse", missile_node.global_position, missile_node.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile_node.knockback_multiplier)
 
 func go_around_map_borrar_duplicado_en_main() -> void:
 	for polygon in island_holder.get_children():
@@ -92,8 +100,9 @@ func create_collisions():
 		body.add_child(collider)
 		body.add_child(polygon_temp)
 		island_holder.add_child(body)
-		
+	
 func clip(missile_polygon: PackedVector2Array):
+
 	for collision_body in island_holder.get_children():
 		var collision_polygon = collision_body.get_child(0)
 		
@@ -159,6 +168,7 @@ func clip(missile_polygon: PackedVector2Array):
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
 
+	
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 16
 	var points_arc = PackedVector2Array()
@@ -217,7 +227,4 @@ func apply_explotion_impulse(missile_position: Vector2, force: float) -> void:
 			collision_body.apply_impulse(strength_knockback, Vector2())
 
 func destroy(missile) -> void:
-	call_deferred("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
-	#call_deferred_thread_group("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
-	#call_thread_safe("clip", create_circle_radious_polygon(missile.global_position, missile.damage))
-	apply_explotion_impulse(missile.global_position, missile.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile.knockback_multiplier)
+	signal_queue.append(missile)

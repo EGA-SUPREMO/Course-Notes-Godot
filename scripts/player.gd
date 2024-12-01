@@ -30,7 +30,7 @@ var text_temp : String
 @onready var monitors: Node2D = $Monitors
 
 var max_hp := 100.0
-var max_stamina := 500
+var max_stamina := 300
 var HP:= max_hp:
 	set(value):
 		if HP > value:
@@ -87,7 +87,7 @@ func _ready():
 	name = keyboard_profile
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, 10, 5, 5, 10]
+	inventory = [INF, 10, 0, 5, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
