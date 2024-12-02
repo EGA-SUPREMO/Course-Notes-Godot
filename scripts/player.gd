@@ -84,7 +84,10 @@ var mass
 
 func _ready():
 	user_input_component.player = self
-	keyboard_profile = "player_" + str(id + 1) + "_"
+	if human:
+		keyboard_profile = "player_" + str(id + 1) + "_"
+	else:
+		keyboard_profile = "ai_"
 	name = keyboard_profile
 	tap_sfx.pitch_scale += id/10.0
 	
