@@ -4,4 +4,5 @@
 
 [node name="Trajectory" type="Line2D"]
 z_index = -5
+width = 7.0
 script = ExtResource("1_lesfa")

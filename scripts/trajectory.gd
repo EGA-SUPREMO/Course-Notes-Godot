@@ -2,9 +2,8 @@ extends Line2D
 
 var player: Player
 
-func update_trajectory(angle: int, power: int) -> void:
+func update_trajectory(angle: int, power: int, max_points = 1000) -> void:
 	var timestep = 0.02
-	var max_points := 1000
 	clear_points()
 	var pos = Vector2.ZERO
 	var direction = Vector2(cos(deg_to_rad(angle + 180)), sin(deg_to_rad(angle + 180)))
