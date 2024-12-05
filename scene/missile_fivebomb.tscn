@@ -4,5 +4,7 @@
 [ext_resource type="Script" path="res://scene/missile_fivebomb.gd" id="2_r34xi"]
 
 [node name="Fivebomb" instance=ExtResource("1_7n4hw")]
+lock_rotation = false
+constant_torque = 500000.0
 script = ExtResource("2_r34xi")
 price = 8000

@@ -13,6 +13,7 @@ class_name Player
 	set(value):
 		missile_power = clamp(value, 0, 100)
 		if tap_sfx and trajectory and missile_power == value:
+			tap_sfx.pitch_scale = 0.5 + missile_power/100.0
 			tap_sfx.play()
 			trajectory.update_trajectory(angle, missile_power)
 
@@ -70,6 +71,7 @@ var amount_power_sprites: int
 	set(value):
 		if tap_sfx and trajectory:
 			trajectory.update_trajectory(value, missile_power)
+			tap_sfx.pitch_scale = 1
 			tap_sfx.play()
 		if value > 357:
 			angle = value - 360

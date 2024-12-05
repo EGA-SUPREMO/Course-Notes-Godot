@@ -4,6 +4,9 @@ class_name Fivebomb
 var number_missiles := 6
 const MINI_MISSILE = preload("res://scene/mini_missile.tscn")
 
+func _physics_process(_delta):
+	pass
+
 func explode():
 	super.explode()
 	

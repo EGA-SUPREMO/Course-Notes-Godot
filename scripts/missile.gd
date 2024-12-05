@@ -32,6 +32,7 @@ func _physics_process(_delta):
 	if should_draw:#there used to be a nasty bug, that upon instantiating the scene, velocity and susequentemente rotation is 0 and misile from 1 frame to another changes make a wide turn, donot remove
 	#but seems like it disappeared :v
 		rotation = new_rotation + PI / 2
+		
 func _on_timer_timeout():
 	should_draw = true
 
