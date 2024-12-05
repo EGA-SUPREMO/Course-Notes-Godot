@@ -2,9 +2,15 @@ extends Attacking
 class_name AI_Attacking
 
 var missile: Missile
+var has_target := false
+var player_target: Player
 
-#func update(_delta):
+func update(_delta):
+	if not has_target:
+		select_target()
+		return
 	
+	calculate_angle_and_power()
 	#player.add_child(trajectory)
 #	if missile == null:
 #		missile = Globals.PLAYABLE_MISSILES[2].instantiate()
@@ -31,3 +37,10 @@ func celebrate():
 
 func update_physics(_delta):
 	super.update_physics(_delta)
+	
+func select_target():
+	player_target = MatchManager.players.get_children().pick_random()
+
+func calculate_angle_and_power():
+	player.trajectory.update_trajectory(player.angle, player.missile_power, 40, 2.0)
+	
