@@ -3,22 +3,16 @@ class_name AI_Attacking
 
 var missile: Missile
 
-func enter() -> void:
-	super.enter()
-	print("a")
-	const TRAJECTORY = preload("res://scene/trajectory.tscn")
-	player.add_child(TRAJECTORY.instantiate())
+#func update(_delta):
 	
-
-func update(_delta):
-	
-	if missile == null:
-		missile = Globals.PLAYABLE_MISSILES[2].instantiate()
+	#player.add_child(trajectory)
+#	if missile == null:
+#		missile = Globals.PLAYABLE_MISSILES[2].instantiate()
 		#print(player.apply_missile_shot(missile)  * player.missile_power * player.POWER_MULTIPLIER)
 		#missile.collision_layer = 32
 		#missile.collision_mask = 32
 		#player.add_child(missile)
-		return
+#		return
 	#var collision = missile.move_and_collide(missile.linear_velocity, false, true, true)
 	#print(missile.linear_velocity)
 	#if collision:

@@ -12,8 +12,9 @@ class_name Player
 @export var missile_power := 50:
 	set(value):
 		missile_power = clamp(value, 0, 100)
-		if tap_sfx and missile_power == value:
+		if tap_sfx and trajectory and missile_power == value:
 			tap_sfx.play()
+			trajectory.update_trajectory(angle, missile_power)
 
 @export var keyboard_profile: String
 signal shoot
@@ -28,6 +29,7 @@ var text_temp : String
 @onready var player = $"."
 @onready var hud = $HUD
 @onready var monitors: Node2D = $Monitors
+@onready var trajectory: Line2D = $Trajectory
 
 var max_hp := 100.0
 var max_stamina := 300
@@ -66,7 +68,8 @@ var amount_power_sprites: int
 
 @export var angle := 0.0:
 	set(value):
-		if tap_sfx:
+		if tap_sfx and trajectory:
+			trajectory.update_trajectory(value, missile_power)
 			tap_sfx.play()
 		if value > 357:
 			angle = value - 360
@@ -83,6 +86,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
 
 func _ready():
+	trajectory.player = self
+	trajectory.position = player.hud.position
+	trajectory.update_trajectory(angle, missile_power)
+	
 	user_input_component.player = self
 	if human:
 		keyboard_profile = "player_" + str(id + 1) + "_"

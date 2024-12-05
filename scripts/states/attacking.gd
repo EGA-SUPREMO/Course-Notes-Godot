@@ -5,7 +5,7 @@ class_name Attacking
 
 func enter():
 	player.call_deferred("change_color_to_power", Globals.colors_by_player[player.resource_sprite_frame])
-
+	
 func exit():
 	player.change_color_to_power(Color.GRAY)
 

@@ -21,6 +21,7 @@ signal explotion
 
 func _ready():
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
+	print(missile.mass)
 	timer.start(0.015)
 	sfx_explotion.pitch_scale = randf() + 0.75
 	animated_sprite_2d.scale.x = float(damage)/30

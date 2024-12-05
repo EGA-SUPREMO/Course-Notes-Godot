@@ -54,7 +54,7 @@ func _ready() -> void:
 	background_2.scale.x = Globals.MAP_SIZE.x/background_2.texture.get_size().x
 	background_2.scale.y = Globals.MAP_SIZE.y/background_2.texture.get_size().y
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if signal_queue.size() > 0:
 		var missile_node = signal_queue.pop_front()
 		call_deferred("clip", create_circle_radious_polygon(missile_node.global_position, missile_node.damage))

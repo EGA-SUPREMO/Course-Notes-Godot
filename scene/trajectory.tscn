@@ -2,5 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/trajectory.gd" id="1_lesfa"]
 
-[node name="Line2D" type="Line2D"]
+[node name="Trajectory" type="Line2D"]
+z_index = -5
 script = ExtResource("1_lesfa")
