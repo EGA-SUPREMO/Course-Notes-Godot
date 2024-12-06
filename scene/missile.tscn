@@ -365,6 +365,7 @@ sprite_frames = SubResource("SpriteFrames_1ddql")
 
 [node name="SFX_Explotion" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_errr7")
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

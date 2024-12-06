@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=21 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="Texture2D" uid="uid://ls3efihws416" path="res://assets/sprites/player_hud/shield_0.png" id="5_up7eb"]
@@ -12,6 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://c116j6brf373l" path="res://assets/sounds/tap.wav" id="10_u42md"]
 [ext_resource type="AudioStream" uid="uid://q3hfcfl6a5ef" path="res://assets/sounds/woosh.wav" id="11_yum3t"]
 [ext_resource type="AudioStream" uid="uid://v3yh1g2a25pw" path="res://assets/sounds/running.wav" id="12_h4fhx"]
+[ext_resource type="AudioStream" uid="uid://dm5tq3tj7wobw" path="res://assets/sounds/bonk doge - Sound Button [bonk_7zPAD7C].mp3" id="12_m28qo"]
+[ext_resource type="AudioStream" uid="uid://5s4gyneri1fh" path="res://assets/sounds/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3" id="13_86nwf"]
 [ext_resource type="PackedScene" uid="uid://bt0gasob62eti" path="res://scene/trajectory.tscn" id="13_q5iil"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
@@ -173,6 +175,16 @@ bus = &"SFX"
 stream = ExtResource("11_yum3t")
 volume_db = 17.0
 pitch_scale = 1.5
+bus = &"SFX"
+
+[node name="BonkSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_m28qo")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="ThrowSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_86nwf")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="RunSFX" type="AudioStreamPlayer2D" parent="."]

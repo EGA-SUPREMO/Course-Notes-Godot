@@ -66,6 +66,7 @@ const POWER_MULTIPLIER = 10
 var amount_power_sprites: int
 @onready var power_label: Label = $HUD/PowerLabel
 @onready var tap_sfx: AudioStreamPlayer2D = $TapSFX
+@onready var throw_sfx: AudioStreamPlayer2D = $ThrowSFX
 
 @export var angle := 0.0:
 	set(value):
@@ -211,6 +212,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func apply_squish_damage(_body):
 	if _body is StaticBody2D:
 		return
+	$BonkSFX.play()
 	var angular_force = _body.angular_velocity * _body.mass
 	var linear_force = _body.linear_velocity.length() * _body.mass
 	var total_force = angular_force + linear_force# TODO este metodo le falta chicha

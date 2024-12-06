@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5s4gyneri1fh"
+path="res://.godot/imported/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3-84bf517ade970c7d42d04bc661b012f2.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3"
+dest_files=["res://.godot/imported/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3-84bf517ade970c7d42d04bc661b012f2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
