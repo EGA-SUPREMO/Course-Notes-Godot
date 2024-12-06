@@ -2,15 +2,18 @@ extends Attacking
 class_name AI_Attacking
 
 var missile: Missile
-var has_target := false
+var has_aimed := false
 var player_target: Player
 
 func update(_delta):
 	if not player_target:
 		select_target()
 		return
-	
-	calculate_angle_and_power()
+	if not has_aimed:
+		calculate_angle_and_power()
+	player.shoot.emit()
+	transition.emit(self, "ai_idle")
+	has_aimed = false
 	#player.add_child(trajectory)
 #	if missile == null:
 #		missile = Globals.PLAYABLE_MISSILES[2].instantiate()
@@ -40,10 +43,30 @@ func update_physics(_delta):
 	
 func select_target():
 	#player_target = MatchManager.players.get_children().pick_random()
-	player_target = player
+	if not get_tree().get_current_scene().get_node("/root/Main/Players"):
+		return
+	player_target = get_tree().get_current_scene().get_node("/root/Main/Players").get_children().pick_random()
+	while player_target == player and get_tree().get_current_scene().get_node("/root/Main/Players").get_children().size() != 1:
+		player_target = get_tree().get_current_scene().get_node("/root/Main/Players").get_children().pick_random()
+	
 func calculate_angle_and_power():
+	var shortest_distance = INF
+	var best_angle = 0
+	var best_power = 0
+	var best_point = 0
+	select_target()
+	
 	for angle in 130:
 		for power in 10:
 			var points = player.trajectory.calculate_trajectory(angle * 3, power*10, 40, 2.0)
-			#print(power)
-	
+			for point in points:
+				point += player.global_position
+				var distance = point.distance_to(player_target.global_position)
+				if distance < shortest_distance:
+					shortest_distance = distance
+					best_angle = angle * 3
+					best_power = power * 10
+					best_point = point
+	player.angle = best_angle
+	player.missile_power = best_power
+	has_aimed = true

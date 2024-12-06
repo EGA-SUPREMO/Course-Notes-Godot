@@ -5,7 +5,7 @@ var player: Player
 func update_trajectory(angle: int, power: int, max_points = 4000, timestep = 0.02) -> void:
 	if not visible:
 		return
-	clear_points()
+	#clear_points()
 	
 	points = calculate_trajectory(angle, power, max_points, timestep)
 

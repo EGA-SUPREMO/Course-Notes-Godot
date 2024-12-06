@@ -151,3 +151,4 @@ func _on_player_shoot(player) -> void:
 func _on_player_death(player: Player):
 	players.remove_child(player)
 	MatchManager.players.call_deferred("add_child", player)
+	#next_round()
