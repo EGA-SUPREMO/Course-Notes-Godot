@@ -22,7 +22,7 @@ signal shoot
 signal death
 
 
-var current_missile:= 1
+var current_missile:= 0
 var inventory : Array
 var stamina:= 500
 var damage_done: int
@@ -71,7 +71,7 @@ var amount_power_sprites: int
 	set(value):
 		if tap_sfx and trajectory:
 			trajectory.update_trajectory(value, missile_power)
-			tap_sfx.pitch_scale = 1
+			#tap_sfx.pitch_scale = 1
 			tap_sfx.play()
 		if value > 357:
 			angle = value - 360

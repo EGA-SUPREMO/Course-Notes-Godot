@@ -6,7 +6,7 @@ var has_target := false
 var player_target: Player
 
 func update(_delta):
-	if not has_target:
+	if not player_target:
 		select_target()
 		return
 	
@@ -39,8 +39,11 @@ func update_physics(_delta):
 	super.update_physics(_delta)
 	
 func select_target():
-	player_target = MatchManager.players.get_children().pick_random()
-
+	#player_target = MatchManager.players.get_children().pick_random()
+	player_target = player
 func calculate_angle_and_power():
-	player.trajectory.update_trajectory(player.angle, player.missile_power, 40, 2.0)
+	for angle in 130:
+		for power in 10:
+			var points = player.trajectory.calculate_trajectory(angle * 3, power*10, 40, 2.0)
+			#print(power)
 	

@@ -14,7 +14,7 @@ func explode():
 		var child_missile = MINI_MISSILE.instantiate()
 		var rand_vector_position = Vector2(randf_range(-10, 10), randf_range(-10, 10))
 		
-		child_missile.damage = 20
+		child_missile.damage = 10
 		child_missile.rotation = randf() * PI * 2
 		child_missile.position = position + rand_vector_position
 		
