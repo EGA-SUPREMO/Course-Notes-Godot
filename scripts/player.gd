@@ -212,6 +212,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func apply_squish_damage(_body):
 	if _body is StaticBody2D:
 		return
+	$BonkSFX.pitch_scale = randf() + 0.75
 	$BonkSFX.play()
 	var angular_force = _body.angular_velocity * _body.mass
 	var linear_force = _body.linear_velocity.length() * _body.mass
