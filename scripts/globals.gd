@@ -27,7 +27,7 @@ var colors_by_player = [Color.BLACK.clamp(0, Color(1, 1, 1, 0.75)),
 	Color.PURPLE.clamp(0, Color(1, 1, 1, 0.75))]
 
 var current_match_count = 0
-var max_number_match = 3
+var max_number_match = 10
 
 func _ready() -> void:
 	for missile in PLAYABLE_MISSILES:

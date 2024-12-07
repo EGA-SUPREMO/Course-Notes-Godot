@@ -7,4 +7,5 @@
 lock_rotation = false
 constant_torque = 500000.0
 script = ExtResource("2_r34xi")
+damage = 20
 price = 8000
