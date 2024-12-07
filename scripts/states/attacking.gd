@@ -14,7 +14,6 @@ func update(_delta):
 		player.shoot.emit()
 		if Globals.playable_missiles_nodes[player.current_missile].consumable:
 			return
-		player.throw_sfx.play()
 		transition.emit(self, "idle")
 
 func update_physics(_delta):

@@ -147,6 +147,7 @@ func _on_player_shoot(player) -> void:
 	missile.add_to_group("missile")
 	missiles.add_child(missile)
 	player.spend_current_missile_in_inventory()
+	player.throw_sfx.play()
 
 func _on_player_death(player: Player):
 	players.remove_child(player)

@@ -9,8 +9,11 @@ func update(_delta):
 	if not player_target:
 		select_target()
 		return
+	if randi_range(0, 40) != 40:#random wait
+		return
 	if not has_aimed:
 		calculate_angle_and_power()
+
 	player.shoot.emit()
 	transition.emit(self, "ai_idle")
 	has_aimed = false
@@ -60,7 +63,7 @@ func calculate_angle_and_power():
 		for power in 10:
 			var points = player.trajectory.calculate_trajectory(angle * 3, power*10, 40, 2.0)
 			for point in points:
-				point += player.global_position
+				point += player.hud.global_position
 				var distance = point.distance_to(player_target.global_position)
 				if distance < shortest_distance:
 					shortest_distance = distance
