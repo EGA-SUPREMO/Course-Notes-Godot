@@ -5,7 +5,9 @@
 
 [node name="Fivebomb" instance=ExtResource("1_7n4hw")]
 lock_rotation = false
-constant_torque = 500000.0
+angular_velocity = 26.1799
+angular_damp_mode = 1
+angular_damp = 0.2
 script = ExtResource("2_r34xi")
 damage = 20
 price = 8000
