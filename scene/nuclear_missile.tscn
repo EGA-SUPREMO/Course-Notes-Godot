@@ -11,7 +11,7 @@ damage = 200
 price = 30000
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_c6jsw")
 
 [node name="Sprite2D" parent="." index="1"]
