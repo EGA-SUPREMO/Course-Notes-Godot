@@ -102,7 +102,7 @@ func _ready():
 	name = keyboard_profile
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, 10, 0, 5, 10]
+	inventory = [INF, INF, 0, 5, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
