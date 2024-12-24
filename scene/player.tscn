@@ -205,6 +205,7 @@ bus = &"SFX"
 
 [node name="BonkSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_m28qo")
+volume_db = -3.0
 bus = &"SFX"
 
 [node name="ThrowSFX" type="AudioStreamPlayer2D" parent="."]

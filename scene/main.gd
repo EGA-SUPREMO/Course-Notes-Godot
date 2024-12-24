@@ -41,7 +41,8 @@ func _ready():
 	fail_to_regenarate_sfx.volume_db = 10.0
 	fail_to_regenarate_sfx.stream = preload("res://assets/sounds/buy_fail2.wav")
 	add_child(fail_to_regenarate_sfx)
-	
+	Engine.time_scale = 1.25
+		
 	successful_regenaratation_sfx = AudioStreamPlayer.new()
 	successful_regenaratation_sfx.bus = "SFX"
 	fail_to_regenarate_sfx.volume_db = 9.0

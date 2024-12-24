@@ -55,5 +55,5 @@ func spawn_mini_bombs():
 		child_missile.linear_velocity = linear_velocity + (Vector2(i,i) * step_multiplier)
 		child_missile.who_shoot = who_shoot
 		
-		get_tree().get_current_scene().missiles.call_deferred("add_child", child_missile)
+		get_tree().get_current_scene().call_deferred("add_child", child_missile)
 	

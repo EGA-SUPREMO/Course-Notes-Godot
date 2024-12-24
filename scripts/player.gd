@@ -33,7 +33,7 @@ var text_temp : String
 @onready var monitors: Node2D = $Monitors
 @onready var trajectory: Line2D = $Trajectory
 
-var max_hp := 100.0
+var max_hp := 250.0
 var max_stamina := 300
 var HP:= max_hp:
 	set(value):
@@ -54,7 +54,7 @@ var money := 10000:
 	set(value):
 		money = clamp(value, 0, INF)
 const MONEY_MULTIPLIER = 50
-var SPEED_MOVEMENT = 50.0
+var SPEED_MOVEMENT = 150.0
 const ACCELERATION_MOVEMENT = 5.0
 const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 const FORCE_MULTIPLIER_TO_PLAYERS = 1
