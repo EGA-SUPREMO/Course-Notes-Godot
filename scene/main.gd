@@ -53,6 +53,8 @@ func _ready():
 	void_limit.position.y = Globals.MAP_SIZE.y/2
 	camera_2d.limit_bottom = void_limit.position.y
 	
+	Engine.time_scale = 0.90
+	
 	for player in MatchManager.players.get_children():
 		MatchManager.players.remove_child(player)
 		players.add_child(player)
