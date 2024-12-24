@@ -12,7 +12,7 @@ func explode():
 	
 	for i in range(-number_missiles/2, number_missiles/2 + 1):
 		var child_missile = MINI_MISSILE.instantiate()
-		var rand_vector_position = Vector2(randf_range(-10, 10), randf_range(-10, 10))
+		var rand_vector_position = Vector2(randf_range(-10, 10), randf_range(-10, -5))
 		
 		child_missile.damage = 5
 		child_missile.rotation = randf() * PI * 2
@@ -22,7 +22,7 @@ func explode():
 		
 		child_missile.linear_velocity = Vector2(
 			Globals.random_float_in_ranges(-250, -100, 100, 250),
-			Globals.random_float_in_ranges(-400, -200, 100, 300)) * velocity_multiplier
+			Globals.random_float_in_ranges(-400, -200, 1, 2)) * velocity_multiplier
 		child_missile.who_shoot = who_shoot
 		
 		get_tree().get_current_scene().missiles.call_deferred("add_child", child_missile)
