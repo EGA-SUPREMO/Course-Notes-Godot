@@ -47,6 +47,8 @@ func _ready():
 	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
 	add_child(successful_regenaratation_sfx)
 	
+	Engine.time_scale = 0.90
+	
 	camera_2d.limit_bottom = void_limit.position.y
 	
 	for player in MatchManager.players.get_children():
