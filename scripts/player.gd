@@ -92,6 +92,8 @@ func _ready():
 	trajectory.player = self
 	trajectory.position = player.hud.position
 	trajectory.default_color = Globals.colors_by_player[player.resource_sprite_frame]
+	hud.material = hud.material.duplicate()
+	hud.material.set_shader_parameter("player_color", trajectory.default_color)
 	trajectory.update_trajectory(angle, missile_power)
 	
 	user_input_component.player = self
