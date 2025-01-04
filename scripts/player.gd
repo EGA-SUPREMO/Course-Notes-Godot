@@ -18,6 +18,7 @@ class_name Player
 			trajectory.update_trajectory(angle, missile_power)
 
 @export var keyboard_profile: String
+@warning_ignore("unused_signal")
 signal shoot
 signal death
 
@@ -67,6 +68,7 @@ var amount_power_sprites: int
 @onready var power_label: Label = $HUD/PowerLabel
 @onready var tap_sfx: AudioStreamPlayer2D = $TapSFX
 @onready var throw_sfx: AudioStreamPlayer2D = $ThrowSFX
+@onready var second_shot_sfx: AudioStreamPlayer2D = $SecondShotSFX
 
 @export var angle := 0.0:
 	set(value):
@@ -84,6 +86,14 @@ var amount_power_sprites: int
 var win_count:= 0
 var loss_count:= 0
 var id: int
+var wants_shoot:= false:
+	set(value):
+		if value:
+			hud.material.set_shader_parameter("player_color", Color.GRAY)
+			player.change_color_to_power(Color.GRAY)
+		else:
+			hud.material.set_shader_parameter("player_color", Globals.colors_by_player[player.resource_sprite_frame])
+		wants_shoot = value
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
@@ -172,9 +182,9 @@ func destroy(exploded_missile):
 	var damage = calculate_quadratic_damage(exploded_missile.global_position, exploded_missile.damage)
 	if damage>0:
 		HP -= damage
-		var sign = ( -1 if exploded_missile.who_shoot == self else 1 )
-		exploded_missile.who_shoot.money += damage * sign * MONEY_MULTIPLIER
-		exploded_missile.who_shoot.damage_done += damage * sign
+		var sign_damage = ( -1 if exploded_missile.who_shoot == self else 1 )
+		exploded_missile.who_shoot.money += damage * sign_damage * MONEY_MULTIPLIER
+		exploded_missile.who_shoot.damage_done += damage * sign_damage
 		
 		var direction: Vector2 = player.global_position - exploded_missile.global_position
 		direction = direction.normalized()

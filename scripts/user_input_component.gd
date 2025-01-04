@@ -14,6 +14,8 @@ func _ready() -> void:
 	add_child(timer_power)
 
 func update_user_input(_delta: float) -> void:
+	if player.wants_shoot:
+		return
 	if Input.is_action_just_pressed(player.keyboard_profile + "lower_angle"):
 		player.angle -= 3
 		timer_angle.start(0.25)

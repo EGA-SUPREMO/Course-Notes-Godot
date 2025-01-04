@@ -4,8 +4,8 @@ class_name Attacking
 @export var player: CharacterBody2D
 
 func enter():
-	player.call_deferred("change_color_to_power", Globals.colors_by_player[player.resource_sprite_frame])
 	if player.trajectory:
+		player.change_color_to_power(Globals.colors_by_player[player.resource_sprite_frame])
 		player.trajectory.default_color = Globals.colors_by_player[player.resource_sprite_frame]
 	
 func exit():
@@ -13,8 +13,9 @@ func exit():
 	player.trajectory.default_color = Color.GRAY
 
 func update(_delta):
-	if Input.is_action_just_pressed(player.keyboard_profile + "shot"):
+	if Input.is_action_just_pressed(player.keyboard_profile + "shot") or player.wants_shoot:
 		player.shoot.emit()
+		player.wants_shoot = false
 		if Globals.playable_missiles_nodes[player.current_missile].consumable:
 			return
 		transition.emit(self, "idle")

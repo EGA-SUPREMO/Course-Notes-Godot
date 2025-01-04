@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=24 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="Shader" path="res://scene/player_hud.gdshader" id="2_ihj18"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dm5tq3tj7wobw" path="res://assets/sounds/bonk doge - Sound Button [bonk_7zPAD7C].mp3" id="12_m28qo"]
 [ext_resource type="AudioStream" uid="uid://5s4gyneri1fh" path="res://assets/sounds/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3" id="13_86nwf"]
 [ext_resource type="PackedScene" uid="uid://bt0gasob62eti" path="res://scene/trajectory.tscn" id="13_q5iil"]
+[ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="15_px7as"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
 radius = 4.0
@@ -208,6 +209,10 @@ stream = ExtResource("13_86nwf")
 volume_db = -5.0
 bus = &"SFX"
 
+[node name="SecondShotSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_px7as")
+bus = &"SFX"
+
 [node name="RunSFX" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = ExtResource("12_h4fhx")
@@ -215,4 +220,3 @@ volume_db = 17.0
 bus = &"SFX"
 
 [node name="Trajectory" parent="." instance=ExtResource("13_q5iil")]
-visible = false
