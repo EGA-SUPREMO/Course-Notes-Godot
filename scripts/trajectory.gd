@@ -30,5 +30,4 @@ func calculate_trajectory(angle: int, power: int, max_points = 4000, timestep = 
 		#		return new_points
 		pos += velocity * timestep
 		
-		
 	return new_points

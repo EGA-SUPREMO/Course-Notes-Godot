@@ -220,3 +220,4 @@ volume_db = 17.0
 bus = &"SFX"
 
 [node name="Trajectory" parent="." instance=ExtResource("13_q5iil")]
+texture = null
