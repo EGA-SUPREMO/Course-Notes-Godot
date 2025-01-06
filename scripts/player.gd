@@ -69,6 +69,7 @@ var amount_power_sprites: int
 @onready var tap_sfx: AudioStreamPlayer2D = $TapSFX
 @onready var throw_sfx: AudioStreamPlayer2D = $ThrowSFX
 @onready var second_shot_sfx: AudioStreamPlayer2D = $SecondShotSFX
+@onready var missile_sprite: Sprite2D = $MissileSprite
 
 @export var angle := 0.0:
 	set(value):
@@ -136,7 +137,10 @@ func _ready():
 		child.modulate = Globals.colors_by_player[resource_sprite_frame]
 	if human:
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
-		
+	
+	missile_sprite.position = hud.position
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[current_missile]
+	
 func _process(delta):
 	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
 	angle_number.text = str(angle)
@@ -248,6 +252,7 @@ func change_current_missile_to_next_missile_in_inventory() -> void:
 	if inventory[current_missile] < 1:
 		change_current_missile_to_next_missile_in_inventory()# stack overflow xdxd
 
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[current_missile]
 
 func change_current_missile_to_previous_missile_in_inventory() -> void:
 	woosh_sfx.play()
@@ -257,6 +262,8 @@ func change_current_missile_to_previous_missile_in_inventory() -> void:
 		current_missile = Globals.PLAYABLE_MISSILES.size()-1;
 	if inventory[current_missile]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
+
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[current_missile]
 
 func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.rotation = deg_to_rad(angle) + PI / 2

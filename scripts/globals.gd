@@ -11,6 +11,12 @@ const MAP_SIZE = Vector2i(960, 540)
 
 const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
 	SCENE_NUCLEAR_MISSILE, ENDERPEARL, REGENERATE]
+const PLAYABLE_MISSILE_ICONS = [preload("res://assets/sprites/icons/fivebomb.png"), 
+	preload("res://assets/sprites/icons/hotshower.png"),
+	preload("res://assets/sprites/icons/nuclear.png"),
+	preload("res://assets/sprites/icons/teleport.png"),
+	preload("res://assets/sprites/icons/repair.png")
+	]
 var playable_missiles_nodes: Array
 
 var sprites_for_players = [preload("res://scene/player_zeta.tres"),
