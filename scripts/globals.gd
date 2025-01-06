@@ -35,6 +35,8 @@ var colors_by_player = [Color.BLACK.clamp(0, Color(1, 1, 1, 0.75)),
 var current_match_count = 0
 var max_number_match = 10
 
+const PRICE_MULTIPLIER = 0.5
+
 func _ready() -> void:
 	for missile in PLAYABLE_MISSILES:
 		playable_missiles_nodes.append(missile.instantiate())

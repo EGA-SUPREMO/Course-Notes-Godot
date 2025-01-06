@@ -37,7 +37,7 @@ var navigable_items: Array
 var current_item_selected: Array
 var player_selected_next_match: Array
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	
 	money_player = Label.new()
@@ -102,7 +102,6 @@ func create_selectors():
 		selector_player[i].visible = true
 		selectors.add_child(selector_player[i])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	for item in navigable_items:
 		item.scale = Vector2(1,1)
@@ -176,8 +175,8 @@ func begin_next_match(i):
 	
 func buy(player_id: int, price: int) -> bool:
 	var player = MatchManager.players.get_children()[player_id]
-	if player.money >= price:
-		player.money -= price
+	if player.money >= price * Globals.PRICE_MULTIPLIER:
+		player.money -= price * Globals.PRICE_MULTIPLIER
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
 		
@@ -187,8 +186,8 @@ func buy(player_id: int, price: int) -> bool:
 					
 func buy_missile(player_id: int, missile_id: int) -> void:
 	var player = MatchManager.players.get_children()[player_id]
-	if player.money >= Globals.playable_missiles_nodes[missile_id].price:
-		player.money -= Globals.playable_missiles_nodes[missile_id].price
+	if player.money >= Globals.playable_missiles_nodes[missile_id].price * Globals.PRICE_MULTIPLIER:
+		player.money -= Globals.playable_missiles_nodes[missile_id].price * Globals.PRICE_MULTIPLIER
 		player.inventory[missile_id] += 1
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)

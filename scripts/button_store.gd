@@ -13,7 +13,7 @@ func _ready() -> void:
 	if is_missile:
 		for j in range(Globals.playable_missiles_nodes.size()):
 			if Globals.playable_missiles_nodes[j].name == name:
-				price_label.text = "$" + str(Globals.playable_missiles_nodes[j].price)
+				price_label.text = "$" + str(Globals.playable_missiles_nodes[j].price * Globals.PRICE_MULTIPLIER)
 				return
-	price_label.text = "$" + str(price)
+	price_label.text = "$" + str(price * Globals.PRICE_MULTIPLIER)
 	
