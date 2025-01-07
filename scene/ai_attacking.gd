@@ -5,6 +5,9 @@ var missile: Missile
 var has_aimed := false
 var player_target: Player
 
+func _ready() -> void:
+	player.death.connect(_on_player_death.bind(player))
+
 func update(_delta):
 	if not player_target:
 		select_target()
@@ -19,6 +22,7 @@ func update(_delta):
 		player.current_missile = 3
 	else:
 		player.current_missile = 0
+	player.missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[player.current_missile]
 	player.shoot.emit()
 	transition.emit(self, "ai_idle")
 	has_aimed = false
@@ -51,11 +55,29 @@ func update_physics(_delta):
 	
 func select_target():
 	#player_target = MatchManager.players.get_children().pick_random()
-	if not get_tree().get_current_scene().get_node("/root/Main/Players"):
+	var players_node = get_tree().get_current_scene().get_node("/root/Main/Players")
+	if not players_node:
+		player_target = null
 		return
-	player_target = get_tree().get_current_scene().get_node("/root/Main/Players").get_children().pick_random()
-	while player_target == player and get_tree().get_current_scene().get_node("/root/Main/Players").get_children().size() != 1:
-		player_target = get_tree().get_current_scene().get_node("/root/Main/Players").get_children().pick_random()
+	
+	# Get the list of players
+	var players = players_node.get_children()
+	
+	# If the current target is still valid, keep it
+	if player_target and player_target in players:
+		return	
+	var closest_player = null
+	var min_distance = INF
+	
+	for p in players:
+		if p != player:
+			var distance = player.global_position.distance_to(p.global_position)
+			if distance < min_distance:
+				min_distance = distance
+				closest_player = p
+	
+	player_target = closest_player
+	
 	
 func calculate_angle_and_power():
 	var shortest_distance = INF
@@ -63,6 +85,8 @@ func calculate_angle_and_power():
 	var best_power = 0
 	var best_point = 0
 	select_target()
+	if not player_target:
+		return
 	
 	for angle in 130:
 		for power in 10:
@@ -78,3 +102,6 @@ func calculate_angle_and_power():
 	player.angle = best_angle
 	player.missile_power = best_power
 	has_aimed = true
+
+func _on_player_death(player):
+	player_target = null
