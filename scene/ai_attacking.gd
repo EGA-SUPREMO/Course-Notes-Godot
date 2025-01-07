@@ -64,7 +64,7 @@ func select_target():
 	var players = players_node.get_children()
 	
 	# If the current target is still valid, keep it
-	if player_target and player_target in players:
+	if player_target and player_target in players and not randi_range(1, 5) == 5:
 		return	
 	var closest_player = null
 	var min_distance = INF
