@@ -76,6 +76,9 @@ func _process(_delta):
 	
 	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 	#	camera_2d.zoom += Vector2(0.01, 0.01)
+	#if Input.is_key_pressed(KEY_BACKSPACE):
+		#for child in missiles.get_children():
+			#missiles.remove_child(child)
 		
 	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		#terrain.clip(terrain.create_circle_radious_polygon(
