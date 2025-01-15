@@ -119,14 +119,17 @@ var amplitude = 50  # Default amplitude size, adjustable
 var random = RandomNumberGenerator.new()
 
 # Function to generate a noise map
-func generate_map(frequencies: Array, amplitudes: Array, amplitude_size: int) -> Array:
+func generate_map(frequencies_amplitudes: Array, amplitude_size: int) -> Array:
 	amplitude = amplitude_size
 	var noises = []
+	var amplitudes:= []
+	for frequency_amplitude in frequencies_amplitudes:
+		amplitudes.append(frequency_amplitude.y)
 	
 	# Generate noise for each frequency
-	for freq in frequencies:
-		noises.append(generate_noise(freq))
-	
+	for freq in frequencies_amplitudes:
+		noises.append(generate_noise(freq.x))
+		
 	return combine_with_weights(amplitudes, noises)
 
 # Function to combine weighted noise layers

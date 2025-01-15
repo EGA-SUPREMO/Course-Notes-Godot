@@ -1,8 +1,6 @@
 extends Node2D
 
 @onready var island_holder = $IslandHolder
-@onready var circle: Node2D = $SubViewport/Circle
-@onready var shape_sprite: Sprite2D = $SubViewport/ShapeSprite
 @onready var background: Sprite2D = $Background
 @onready var background_2: Sprite2D = $ParallaxBackground/ParallaxLayer/Background2
 
@@ -32,6 +30,31 @@ preload("res://assets/backgrounds/background4.png")]
 var colors_biome = [Color.LIGHT_YELLOW, Color.WEB_MAROON, Color.WHITE, Color.WEB_GREEN]
 var biome_id: int
 
+var frequencies_amplitudes_plains := [
+	[Vector2(1, 1.0), Vector2(2, 0.6), Vector2(4, 0.4)],
+	[Vector2(1, 1.0), Vector2(2, 0.1), Vector2(4, 0.1), Vector2(8, 0.1)]
+	]
+var amplitude_size_plains := 50
+
+var frequencies_amplitudes_desert := [
+	[Vector2(1, 1.0), Vector2(4, 0.2), Vector2(8, 0.1), Vector2(16, 0.05)],
+	[Vector2(1, 1.0), Vector2(2, 0.1), Vector2(4, 0.3), Vector2(8, 0.15), Vector2(16, 0.10)]
+	]
+var amplitude_size_desert := 25
+
+var frequencies_amplitudes_snow := [
+	[Vector2(1, 1.0), Vector2(2, 0.75), Vector2(4, 0.5), Vector2(8, 0.25), Vector2(16, 0.125)],
+	[Vector2(1, 1.0), Vector2(2, 0.75), Vector2(4, 0.5), Vector2(8, 0.25), Vector2(16, 0.125), Vector2(32, 0.063)],
+	]
+var amplitude_size_snow := 75
+var frequencies_amplitudes_mesa := frequencies_amplitudes_desert
+var amplitude_size_mesa := 25
+
+var frequencies_amplitudes := [frequencies_amplitudes_desert, frequencies_amplitudes_mesa,
+	frequencies_amplitudes_snow, frequencies_amplitudes_plains]
+var general_amplitudes := [amplitude_size_desert, amplitude_size_mesa, amplitude_size_snow,
+	amplitude_size_plains]
+
 var signal_queue: Array = []
 
 
@@ -40,13 +63,11 @@ func _ready() -> void:
 	biome_id = randi_range(0, 3)
 
 	background_2.texture = backgrounds_textures[biome_id]
-	shape_sprite.texture = maps[variant + biome_id * 3]
-	background.texture = shape_sprite.texture
+	background.texture = maps[variant + biome_id * 3]
 	
 	add_to_group("destructibles")
 	create_collisions()
 	
-	shape_sprite.material.set_shader_parameter("destruction_mask", circle)
 	background.offset = Globals.MAP_SIZE-map_size
 	background_2.position.x += Globals.MAP_SIZE.x/2
 	#background_2.position.y += Globals.MAP_SIZE.y/2
@@ -97,17 +118,15 @@ func create_bitmap(noise_map):
 	return bitmap
 
 func create_collisions():	
-	var bitMap = BitMap.new()
-	bitMap.create_from_image_alpha(shape_sprite.texture.get_image())
-
-	var frequencies = [1, 2, 4]  # Example frequencies
-	var amplitudes = [0.5, 0.3, 0.2]  # Example amplitudes (weights)
-	var amplitude_size = 50  # Amplitude size
-	
-	var noise_map = Globals.generate_map(frequencies, amplitudes, amplitude_size)
+	#var bitMap = BitMap.new()
+	#bitMap.create_from_image_alpha(background.texture.get_image())
+	var current_frecuency_amplitude = frequencies_amplitudes[biome_id].pick_random()
+	var current_amplitude_size = general_amplitudes[biome_id]
+	var noise_map = Globals.generate_map(current_frecuency_amplitude, current_amplitude_size)
 	var bitmap = create_bitmap(noise_map)	
 
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
+	#var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), bitmap.get_size()))
+	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE))
 	
 	for polygon in polygons:
 		var collider = CollisionPolygon2D.new()
@@ -122,7 +141,8 @@ func create_collisions():
 		for point in polygon:
 			newpoints.push_back(point)
 		
-		map_size = bitMap.get_size()
+		#map_size = bitmap.get_size()
+		map_size = Globals.MAP_SIZE
 		
 		collider.polygon = newpoints
 		collider.polygon = Transform2D(0, Globals.MAP_SIZE-map_size) * collider.polygon
