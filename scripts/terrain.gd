@@ -72,15 +72,42 @@ func go_around_map_borrar_duplicado_en_main() -> void:
 			polygon.set_deferred("position", 
 				Vector2(new_position_x, polygon.position.y))
 
-func create_bitmap():
-	return
+func create_bitmap(noise_map):
+	var min_value = noise_map.min()
+	var max_value = noise_map.max()
+	var range = max_value - min_value
+	
+	# Normalize the noise map to fit within the BitMap height
+	var bitmap_height = int(range)
+	var normalized_map = []
+	for value in noise_map:
+		normalized_map.append((value - min_value) / range * (bitmap_height - 1))
+	
+	var bitmap = BitMap.new()
+	bitmap.create(Vector2i(Globals.MAP_SIZE.x,Globals.MAP_SIZE.y))  # Create the BitMap
+	
+	for x in range(Globals.MAP_SIZE.x):
+		for y in range(Globals.MAP_SIZE.y):
+			# Mark everything below the noise value as "true" (1)
+			if y < normalized_map[x]:
+				bitmap.set_bit(x, y, false)
+			else:
+				bitmap.set_bit(x, y, true)
+	
+	return bitmap
 
 func create_collisions():	
 	var bitMap = BitMap.new()
 	bitMap.create_from_image_alpha(shape_sprite.texture.get_image())
-	
 
-	var polygons = bitMap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
+	var frequencies = [1, 2, 4]  # Example frequencies
+	var amplitudes = [0.5, 0.3, 0.2]  # Example amplitudes (weights)
+	var amplitude_size = 50  # Amplitude size
+	
+	var noise_map = Globals.generate_map(frequencies, amplitudes, amplitude_size)
+	var bitmap = create_bitmap(noise_map)	
+
+	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
 	
 	for polygon in polygons:
 		var collider = CollisionPolygon2D.new()

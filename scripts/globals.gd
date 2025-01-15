@@ -113,7 +113,6 @@ func generate_random_positions(player_count: int, offset: float = 0.0) -> Array:
 
 
 # Constants for map size
-const MAP_SIZEx = 25  # Replace with your desired map size
 
 # Variables
 var amplitude = 50  # Default amplitude size, adjustable
@@ -135,12 +134,12 @@ func combine_with_weights(amplitudes: Array, noises: Array) -> Array:
 	var final_noise = []
 	
 	# Initialize final noise array with zeros
-	for x in range(MAP_SIZEx):
+	for x in range(MAP_SIZE.x):
 		final_noise.append(0.0)
 	
 	# Sum weighted noises
 	for k in range(noises.size()):
-		for x in range(MAP_SIZEx):
+		for x in range(MAP_SIZE.x):
 			final_noise[x] += amplitudes[k] * noises[k][x]
 	
 	return final_noise
@@ -150,8 +149,8 @@ func generate_noise(frequency: int) -> Array:
 	var output = []
 	var phase = random.randf() * 2.0 * PI  # Random phase
 	
-	for x in range(MAP_SIZEx):
-		var value = amplitude * sin(2.0 * PI * frequency * x / MAP_SIZEx + phase)
+	for x in range(MAP_SIZE.x):
+		var value = amplitude * sin(2.0 * PI * frequency * x / MAP_SIZE.x + phase)
 		output.append(value)
 	
 	return output

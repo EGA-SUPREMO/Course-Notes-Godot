@@ -52,4 +52,3 @@ bus = &"Music"
 
 [node name="Line2D" type="Line2D" parent="."]
 closed = true
-width = 50.0

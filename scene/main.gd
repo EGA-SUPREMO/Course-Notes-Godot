@@ -58,13 +58,7 @@ func _ready():
 		player.death.connect(_on_player_death.bind(player))
 	#add_child(players)
 	
-	var frequencies = [1, 2, 4]  # Example frequencies
-	var amplitudes = [0.5, 0.3, 0.2]  # Example amplitudes (weights)
-	var amplitude_size = 50  # Amplitude size
 	
-	var noise_map = Globals.generate_map(frequencies, amplitudes, amplitude_size)
-	print(noise_map)
-
 func _process(_delta):
 	adjust_camera()
 	next_turn()#sholdnt run every update, but only after explotions
