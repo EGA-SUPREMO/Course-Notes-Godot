@@ -72,10 +72,14 @@ func go_around_map_borrar_duplicado_en_main() -> void:
 			polygon.set_deferred("position", 
 				Vector2(new_position_x, polygon.position.y))
 
+func create_bitmap():
+	return
+
 func create_collisions():	
 	var bitMap = BitMap.new()
 	bitMap.create_from_image_alpha(shape_sprite.texture.get_image())
 	
+
 	var polygons = bitMap.opaque_to_polygons(Rect2(Vector2(0, 0), bitMap.get_size()))
 	
 	for polygon in polygons:
@@ -208,17 +212,6 @@ func calculate_centroid(mesh_vertices: PackedVector2Array) -> Vector2:
 func offset_polygon_by_center_of_mass(polygon: PackedVector2Array, center_of_mass: Vector2) -> PackedVector2Array:
 	var offset_polygon = Transform2D(0, -center_of_mass) * polygon
 	return offset_polygon
-
-func get_min_x_y(points: PackedVector2Array) -> Vector2:
-	var min_x = points[0].x
-	var min_y = points[0].y
-
-	for point in points:
-		if point.x < min_x:
-			min_x = point.x
-		if point.y < min_y:
-			min_y = point.y
-	return Vector2(min_x, min_y)
 
 func apply_explotion_impulse(missile_position: Vector2, force: float) -> void:
 	for collision_body in island_holder.get_children():

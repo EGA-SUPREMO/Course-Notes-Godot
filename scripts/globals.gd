@@ -110,3 +110,48 @@ func generate_random_positions(player_count: int, offset: float = 0.0) -> Array:
 		positions.append(Vector2(random_x + close_to_border_offset/2, randi_range(-200, -300)))
 
 	return positions
+
+
+# Constants for map size
+const MAP_SIZEx = 25  # Replace with your desired map size
+
+# Variables
+var amplitude = 50  # Default amplitude size, adjustable
+var random = RandomNumberGenerator.new()
+
+# Function to generate a noise map
+func generate_map(frequencies: Array, amplitudes: Array, amplitude_size: int) -> Array:
+	amplitude = amplitude_size
+	var noises = []
+	
+	# Generate noise for each frequency
+	for freq in frequencies:
+		noises.append(generate_noise(freq))
+	
+	return combine_with_weights(amplitudes, noises)
+
+# Function to combine weighted noise layers
+func combine_with_weights(amplitudes: Array, noises: Array) -> Array:
+	var final_noise = []
+	
+	# Initialize final noise array with zeros
+	for x in range(MAP_SIZEx):
+		final_noise.append(0.0)
+	
+	# Sum weighted noises
+	for k in range(noises.size()):
+		for x in range(MAP_SIZEx):
+			final_noise[x] += amplitudes[k] * noises[k][x]
+	
+	return final_noise
+
+# Function to generate a single noise layer
+func generate_noise(frequency: int) -> Array:
+	var output = []
+	var phase = random.randf() * 2.0 * PI  # Random phase
+	
+	for x in range(MAP_SIZEx):
+		var value = amplitude * sin(2.0 * PI * frequency * x / MAP_SIZEx + phase)
+		output.append(value)
+	
+	return output
