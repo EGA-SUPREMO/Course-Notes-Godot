@@ -3,6 +3,7 @@ extends Node2D
 @onready var island_holder = $IslandHolder
 @onready var background: Sprite2D = $Background
 @onready var background_2: Sprite2D = $ParallaxBackground/ParallaxLayer/Background2
+@onready var map_generator: Node = $MapGenerator
 
 const MIN_MASS_POLYGON := 200
 const FORCE_MULTIPLIER_TO_POLYGONS = 1000
@@ -14,33 +15,6 @@ preload("res://assets/backgrounds/background4.png")]
 
 var colors_biome = [Color.LIGHT_YELLOW, Color.WEB_MAROON, Color.WHITE, Color.WEB_GREEN]
 var biome_id: int
-
-var frequencies_amplitudes_plains := [
-	[Vector2(1, 1.0), Vector2(2, 0.6), Vector2(4, 0.4)],
-	[Vector2(1, 1.0), Vector2(2, 0.1), Vector2(4, 0.1), Vector2(8, 0.1)]
-	]
-var amplitude_size_plains := 50
-
-var frequencies_amplitudes_desert := [
-	[Vector2(1, 1.0), Vector2(4, 0.2), Vector2(8, 0.1), Vector2(16, 0.05)],
-	[Vector2(1, 1.0), Vector2(2, 0.1), Vector2(4, 0.3), Vector2(8, 0.15), Vector2(16, 0.10)]
-	]
-var amplitude_size_desert := 25
-
-var frequencies_amplitudes_snow := [
-	[Vector2(1, 1.0), Vector2(2, 0.75), Vector2(4, 0.5), Vector2(8, 0.25), Vector2(16, 0.125)],
-	[Vector2(1, 1.0), Vector2(2, 0.75), Vector2(4, 0.5), Vector2(8, 0.25), Vector2(16, 0.125), Vector2(32, 0.063)],
-	]
-var amplitude_size_snow := 75
-var frequencies_amplitudes_mesa := frequencies_amplitudes_desert
-var amplitude_size_mesa := 25
-
-var frequencies_amplitudes := [frequencies_amplitudes_desert, frequencies_amplitudes_mesa,
-	frequencies_amplitudes_snow, frequencies_amplitudes_plains]
-var general_amplitudes := [amplitude_size_desert, amplitude_size_mesa, amplitude_size_snow,
-	amplitude_size_plains]
-
-var y_height_offset = [0.30, 0.30, 0.5, 0.5]
 
 var signal_queue: Array = []
 
@@ -68,42 +42,12 @@ func _process(_delta: float) -> void:
 		call_deferred("apply_explotion_impulse", missile_node.global_position, missile_node.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile_node.knockback_multiplier)
 		#missile_node.queue_free()
 
-func create_bitmap(noise_map):
-	var min_value = noise_map.min()
-	var max_value = noise_map.max()
-	var range = max_value - min_value
-	
-	# Normalize the noise map to fit within the BitMap height
-	var bitmap_height = int(range)
-	var normalized_map = []
-	for value in noise_map:
-		normalized_map.append((value - min_value) / range * (bitmap_height - 1))
-	var biome_offset_height = Globals.MAP_SIZE.y/2*y_height_offset[biome_id]
-	
-	var map_height = range + biome_offset_height
-	var bitmap = BitMap.new()
-	bitmap.create(Vector2i(Globals.MAP_SIZE.x, map_height))  # Create the BitMap
-	
-	for x in range(Globals.MAP_SIZE.x):
-		for y in range(map_height):
-			# Mark everything below the noise value as "true" (1)
-			if y < normalized_map[x]:
-				bitmap.set_bit(x, y, false)
-			else:
-				bitmap.set_bit(x, y, true)
-	
-	return bitmap
-
 func create_collisions():	
-	#var bitMap = BitMap.new()
-	#bitMap.create_from_image_alpha(background.texture.get_image())
-	var current_frecuency_amplitude = frequencies_amplitudes[biome_id].pick_random()
-	var current_amplitude_size = general_amplitudes[biome_id]
-	var noise_map = Globals.generate_map(current_frecuency_amplitude, current_amplitude_size)
-	var bitmap = create_bitmap(noise_map)
+	var current_frecuency_amplitude = map_generator.frequencies_amplitudes[biome_id].pick_random()
+	var current_amplitude_size = map_generator.general_amplitudes[biome_id]
+	var noise_map = map_generator.generate_map(current_frecuency_amplitude, current_amplitude_size)
+	var bitmap = map_generator.create_bitmap(noise_map)
 	
-
-	#var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), bitmap.get_size()))
 	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 1)
 	
 	for polygon in polygons:
@@ -119,7 +63,6 @@ func create_collisions():
 		for point in polygon:
 			newpoints.push_back(point)
 		
-		
 		collider.polygon = newpoints
 		collider.polygon = Transform2D(0, Vector2(0, Globals.MAP_SIZE.y-bitmap.get_size().y)) * collider.polygon
 		polygon_temp.polygon = collider.polygon
@@ -130,7 +73,6 @@ func create_collisions():
 		island_holder.add_child(body)
 	
 func clip(missile_polygon: PackedVector2Array):
-
 	for collision_body in island_holder.get_children():
 		var collision_polygon = collision_body.get_child(0)
 		
