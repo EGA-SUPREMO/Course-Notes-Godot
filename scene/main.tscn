@@ -19,14 +19,12 @@ script = ExtResource("1_vsj3d")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Terrain" parent="." instance=ExtResource("2_1t2nn")]
-position = Vector2(0, -300)
 
 [node name="Players" type="Node" parent="."]
 
 [node name="Missiles" type="Node" parent="."]
 
 [node name="VoidLimit" type="StaticBody2D" parent="."]
-position = Vector2(0, 240)
 collision_layer = 15
 collision_mask = 15
 
@@ -42,7 +40,6 @@ collision_mask = 15
 shape = SubResource("WorldBoundaryShape2D_o7nlc")
 
 [node name="Right" type="CollisionShape2D" parent="Walls"]
-position = Vector2(960, 0)
 shape = SubResource("WorldBoundaryShape2D_hr04v")
 
 [node name="Music" parent="." instance=ExtResource("5_hqg6j")]

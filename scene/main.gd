@@ -6,6 +6,7 @@ extends Node2D
 #@onready var players: Node = MatchManager.players
 @onready var missiles: Node = $Missiles
 @onready var players: Node = $Players
+@onready var right_wall: CollisionShape2D = $Walls/Right
 
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
@@ -47,6 +48,9 @@ func _ready():
 	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
 	add_child(successful_regenaratation_sfx)
 	
+	terrain.position.y = -Globals.MAP_SIZE.y/2
+	right_wall.position.x = Globals.MAP_SIZE.x
+	void_limit.position.y = Globals.MAP_SIZE.y/2
 	camera_2d.limit_bottom = void_limit.position.y
 	
 	for player in MatchManager.players.get_children():
