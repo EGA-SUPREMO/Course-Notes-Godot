@@ -50,13 +50,11 @@ func _ready():
 	camera_2d.limit_bottom = void_limit.position.y
 	
 	for player in MatchManager.players.get_children():
-		
 		MatchManager.players.remove_child(player)
 		players.add_child(player)
 	for player in players.get_children():
 		player.shoot.connect(_on_player_shoot.bind(player))
 		player.death.connect(_on_player_death.bind(player))
-	#add_child(players)
 	
 	
 func _process(_delta):
@@ -75,14 +73,14 @@ func _process(_delta):
 	#	body.collision_mask = 3
 	
 	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-	#	camera_2d.zoom += Vector2(0.01, 0.01)
+		#camera_2d.zoom -= Vector2(0.01, 0.01)
 	#if Input.is_key_pressed(KEY_BACKSPACE):
 		#for child in missiles.get_children():
 			#missiles.remove_child(child)
 		
-	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		#terrain.clip(terrain.create_circle_radious_polygon(
-		#	get_global_mouse_position(), 50))
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		terrain.clip(terrain.create_circle_radious_polygon(
+			get_global_mouse_position(), 50))
 	#	camera_2d.zoom -= Vector2(0.01, 0.01)
 		#for missile in missiles.get_children():
 			
@@ -102,8 +100,8 @@ func go_around_map():
 				Vector2(new_global_position_x, polygon.global_position.y))
 	
 func adjust_camera() -> void:
-	camera_2d.position.x = terrain.map_size.x/2
-	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / terrain.map_size.x
+	camera_2d.position.x = Globals.MAP_SIZE.x/2
+	camera_2d.zoom.x = get_viewport().get_visible_rect().size.x / Globals.MAP_SIZE.x
 	camera_2d.zoom.y = camera_2d.zoom.x
 
 func next_turn():

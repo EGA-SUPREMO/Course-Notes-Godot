@@ -4,23 +4,8 @@ extends Node2D
 @onready var background: Sprite2D = $Background
 @onready var background_2: Sprite2D = $ParallaxBackground/ParallaxLayer/Background2
 
-var map_size: Vector2i
 const MIN_MASS_POLYGON := 200
 const FORCE_MULTIPLIER_TO_POLYGONS = 1000
-
-var maps = [preload("res://assets/sprites/map/desert_1.png"),
-	preload("res://assets/sprites/map/desert_2.png"),
-	preload("res://assets/sprites/map/desert_2.png"),
-	preload("res://assets/sprites/map/mesa_1.png"), 
-	preload("res://assets/sprites/map/mesa_2.png"), 
-	preload("res://assets/sprites/map/mesa_3.png"), 
-	preload("res://assets/sprites/map/snow_1.png"), 
-	preload("res://assets/sprites/map/snow_2.png"), 
-	preload("res://assets/sprites/map/snow_3.png"),
-	preload("res://assets/sprites/map/plains_1.png"), 
-	preload("res://assets/sprites/map/plains_2.png"), 
-	preload("res://assets/sprites/map/plains_3.png"),
-]
 
 var backgrounds_textures = [preload("res://assets/backgrounds/background1.png"), 
 preload("res://assets/backgrounds/background2.png"), 
@@ -55,20 +40,21 @@ var frequencies_amplitudes := [frequencies_amplitudes_desert, frequencies_amplit
 var general_amplitudes := [amplitude_size_desert, amplitude_size_mesa, amplitude_size_snow,
 	amplitude_size_plains]
 
+var y_height_offset = [0.30, 0.30, 0.5, 0.5]
+
 var signal_queue: Array = []
 
 
 func _ready() -> void:
-	var variant = randi_range(0, 2)
 	biome_id = randi_range(0, 3)
 
 	background_2.texture = backgrounds_textures[biome_id]
-	background.texture = maps[variant + biome_id * 3]
+	#background.texture = maps[variant + biome_id * 3]
 	
 	add_to_group("destructibles")
 	create_collisions()
 	
-	background.offset = Globals.MAP_SIZE-map_size
+	#background.offset = Globals.MAP_SIZE-map_size
 	background_2.position.x += Globals.MAP_SIZE.x/2
 	#background_2.position.y += Globals.MAP_SIZE.y/2
 	
@@ -82,17 +68,6 @@ func _process(_delta: float) -> void:
 		call_deferred("apply_explotion_impulse", missile_node.global_position, missile_node.damage*FORCE_MULTIPLIER_TO_POLYGONS*missile_node.knockback_multiplier)
 		#missile_node.queue_free()
 
-func go_around_map_borrar_duplicado_en_main() -> void:
-	for polygon in island_holder.get_children():
-		if polygon.position.x < 0:
-			var new_position_x = map_size.x - polygon.position.x
-			polygon.set_deferred("position",
-				Vector2(new_position_x, polygon.position.y))
-		elif polygon.position.x > map_size.x:
-			var new_position_x = polygon.position.x - map_size.x
-			polygon.set_deferred("position", 
-				Vector2(new_position_x, polygon.position.y))
-
 func create_bitmap(noise_map):
 	var min_value = noise_map.min()
 	var max_value = noise_map.max()
@@ -103,12 +78,14 @@ func create_bitmap(noise_map):
 	var normalized_map = []
 	for value in noise_map:
 		normalized_map.append((value - min_value) / range * (bitmap_height - 1))
+	var biome_offset_height = Globals.MAP_SIZE.y/2*y_height_offset[biome_id]
 	
+	var map_height = range + biome_offset_height
 	var bitmap = BitMap.new()
-	bitmap.create(Vector2i(Globals.MAP_SIZE.x,Globals.MAP_SIZE.y))  # Create the BitMap
+	bitmap.create(Vector2i(Globals.MAP_SIZE.x, map_height))  # Create the BitMap
 	
 	for x in range(Globals.MAP_SIZE.x):
-		for y in range(Globals.MAP_SIZE.y):
+		for y in range(map_height):
 			# Mark everything below the noise value as "true" (1)
 			if y < normalized_map[x]:
 				bitmap.set_bit(x, y, false)
@@ -123,10 +100,11 @@ func create_collisions():
 	var current_frecuency_amplitude = frequencies_amplitudes[biome_id].pick_random()
 	var current_amplitude_size = general_amplitudes[biome_id]
 	var noise_map = Globals.generate_map(current_frecuency_amplitude, current_amplitude_size)
-	var bitmap = create_bitmap(noise_map)	
+	var bitmap = create_bitmap(noise_map)
+	
 
 	#var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), bitmap.get_size()))
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE))
+	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 1)
 	
 	for polygon in polygons:
 		var collider = CollisionPolygon2D.new()
@@ -141,11 +119,9 @@ func create_collisions():
 		for point in polygon:
 			newpoints.push_back(point)
 		
-		#map_size = bitmap.get_size()
-		map_size = Globals.MAP_SIZE
 		
 		collider.polygon = newpoints
-		collider.polygon = Transform2D(0, Globals.MAP_SIZE-map_size) * collider.polygon
+		collider.polygon = Transform2D(0, Vector2(0, Globals.MAP_SIZE.y-bitmap.get_size().y)) * collider.polygon
 		polygon_temp.polygon = collider.polygon
 		polygon_temp.color = colors_biome[biome_id]
 		
