@@ -88,8 +88,8 @@ func calculate_angle_and_power():
 	if not player_target:
 		return
 	
-	for angle in 130:
-		for power in 10:
+	for angle in 131:
+		for power in 11:
 			var points = player.trajectory.calculate_trajectory(angle * 3, power*10, 40, 2.0)
 			for point in points:
 				point += player.hud.global_position
