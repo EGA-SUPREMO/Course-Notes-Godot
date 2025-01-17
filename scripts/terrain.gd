@@ -21,7 +21,6 @@ var signal_queue: Array = []
 
 func _ready() -> void:
 	biome_id = randi_range(0, 3)
-
 	background_2.texture = backgrounds_textures[biome_id]
 	#background.texture = maps[variant + biome_id * 3]
 	
@@ -48,6 +47,11 @@ func create_collisions():
 	var noise_map = map_generator.generate_map(current_frecuency_amplitude, current_amplitude_size)
 	var bitmap = map_generator.create_bitmap(noise_map)
 	
+	#for i in range(10):
+		#noise_map = map_generator.generate_map(current_frecuency_amplitude, current_amplitude_size)
+		#bitmap = map_generator.create_bitmap(noise_map)
+		#bitmap.convert_to_image().save_jpg(str(i))
+	#
 	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 1)
 	
 	for polygon in polygons:
