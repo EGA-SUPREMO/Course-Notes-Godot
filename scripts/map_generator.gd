@@ -206,7 +206,10 @@ func generate_mountains(width: int, height: int) -> Array:
 	# Generate the main mountain sections
 	for i in range(main_mountain_count):
 		# Generate a new mountain section with a random width and height
-		var mountain_width = int(width / 4 + randf() * (remaining_width - width / 4))
+		var mininum_mountain_width = Globals.MAP_SIZE.x/20
+		var mountain_width = int(width / 4 + randf() * (remaining_width - width / 4) + mininum_mountain_width)
+		if mountain_width > remaining_width:
+			mountain_width = remaining_width * 0.95
 		var mountain_height = max_height * 2
 		var mountain_section = generate_part_mount_mesa(mountain_width, mountain_height)
 
