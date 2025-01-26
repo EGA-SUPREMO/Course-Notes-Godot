@@ -35,6 +35,7 @@ var text_temp : String
 @onready var hud = $HUD
 @onready var monitors: Node2D = $Monitors
 @onready var trajectory: Line2D = $Trajectory
+#var too_early_shoot_timer := Timer.new()
 
 var max_hp := 100.0
 var max_stamina := 300
@@ -101,6 +102,7 @@ var wants_shoot:= false:
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var mass
+#var can_shoot = false
 
 func _ready():
 	trajectory.player = self
@@ -113,9 +115,21 @@ func _ready():
 	user_input_component.player = self
 	if human:
 		keyboard_profile = "player_" + str(id + 1) + "_"
+		#too_early_shoot_timer.wait_time = 0.5
+		#get_tree().create_timer(0.5)
 	else:
 		keyboard_profile = "ai_"
+		#too_early_shoot_timer.wait_time = 1
+		#get_tree().create_timer(1)
 	name = keyboard_profile
+	
+	#can_shoot = false
+	#can_shoot = true
+	#too_early_shoot_timer.autostart = true
+	#too_early_shoot_timer.one_shot = true
+	#too_early_shoot_timer.timeout.connect(on_early_shoot_timeout)
+	#player.add_child(too_early_shoot_timer)
+	
 	tap_sfx.pitch_scale += id/10.0
 	
 	inventory = [INF, INF, 0, 5, 10]
@@ -276,3 +290,8 @@ func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.who_shoot = player
 	
 	return direction
+
+#func on_early_shoot_timeout():
+	#can_shoot = true
+	#too_early_shoot_timer.stop()
+	#print(can_shoot)

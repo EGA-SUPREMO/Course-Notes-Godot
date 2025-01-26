@@ -13,6 +13,8 @@ func exit():
 	player.trajectory.default_color = Color.GRAY
 
 func update(_delta):
+	#if not player.can_shoot:
+		#return
 	if Input.is_action_just_released(player.keyboard_profile + "shot") or player.wants_shoot:
 		player.shoot.emit()
 		player.wants_shoot = false

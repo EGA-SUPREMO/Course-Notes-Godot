@@ -49,6 +49,9 @@ func prepare_new_match():
 		player.state_machine.current_state.next_turn()
 		
 		player.velocity = Vector2.ZERO#something random? ej they are flying couse explotion
+		player.wants_shoot = false
+		#player.can_shoot = false
+		#player.too_early_shoot_timer.start()
 		
 func sort_players_node_by_id():
 	var sorted_nodes := players.get_children()

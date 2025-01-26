@@ -9,6 +9,8 @@ func _ready() -> void:
 	player.death.connect(_on_player_death.bind(player))
 
 func update(_delta):
+	#if not player.can_shoot:
+		#return
 	if not player_target:
 		select_target()
 		return
