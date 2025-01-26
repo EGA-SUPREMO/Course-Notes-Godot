@@ -16,7 +16,7 @@ func exit() -> void:
 func update(_delta: float) -> void:
 	player.velocity.x = lerp(player.velocity.x, 0.0, _delta * player.DESACCELERATION_MOVEMENT)
 	
-	if Input.is_action_just_pressed(player.keyboard_profile + "shot"):
+	if Input.is_action_just_released(player.keyboard_profile + "shot"):
 		player.wants_shoot = !player.wants_shoot
 		player.second_shot_sfx.play()
 

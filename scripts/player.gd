@@ -13,9 +13,10 @@ class_name Player
 	set(value):
 		missile_power = value
 		if missile_power > 100:
-			missile_power -= 100
-			value = missile_power
-		if tap_sfx and trajectory and missile_power == value:
+			missile_power -= 110
+		elif missile_power < 0:
+			missile_power += 110
+		if tap_sfx and trajectory:
 			tap_sfx.pitch_scale = 0.5 + missile_power/100.0
 			tap_sfx.play()
 			trajectory.update_trajectory(angle, missile_power)
