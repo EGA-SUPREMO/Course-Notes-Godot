@@ -11,12 +11,14 @@ class_name Player
 
 @export var missile_power := 50:
 	set(value):
-		missile_power = clamp(value, 0, 100)
+		missile_power = value
+		if missile_power > 100:
+			missile_power -= 100
+			value = missile_power
 		if tap_sfx and trajectory and missile_power == value:
 			tap_sfx.pitch_scale = 0.5 + missile_power/100.0
 			tap_sfx.play()
 			trajectory.update_trajectory(angle, missile_power)
-var missile_power_last_shot : int
 @export var keyboard_profile: String
 @warning_ignore("unused_signal")
 signal shoot

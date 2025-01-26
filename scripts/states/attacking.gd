@@ -22,10 +22,9 @@ func exit():
 func update(_delta):
 	if Input.is_action_just_released(player.keyboard_profile + "shot") or player.wants_shoot:
 		player.shoot.emit()
-		player.missile_power_last_shot = player.missile_power
 		player.wants_shoot = false
 		timer_power.stop()
-		first_time_pressing_shoot = true
+		#first_time_pressing_shoot = true
 		if Globals.playable_missiles_nodes[player.current_missile].consumable:
 			return
 		transition.emit(self, "idle")
@@ -59,13 +58,13 @@ func calculate_movement_speed(_delta, direction):
 		var desacceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.DESACCELERATION_MOVEMENT)
 		player.velocity.x = desacceleration
 	
-var first_time_pressing_shoot = true
+#var first_time_pressing_shoot = true
 func on_power_timeout():
-	if first_time_pressing_shoot:
-		player.missile_power = 0
-		first_time_pressing_shoot = false
-		timer_power.start()
-		return
+	#if first_time_pressing_shoot:
+		#player.missile_power = 0
+		#first_time_pressing_shoot = false
+		#timer_power.start()
+		#return
 	if Input.is_action_pressed(player.keyboard_profile + "shot"):
 		player.missile_power += 10
 		timer_power.start()
