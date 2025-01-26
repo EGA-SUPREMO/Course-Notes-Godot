@@ -5,7 +5,7 @@ class_name Attacking
 var timer_power := Timer.new()
 
 func _ready() -> void:
-	timer_power.wait_time = 0.25
+	timer_power.wait_time = 0.5
 	timer_power.one_shot = true
 	timer_power.timeout.connect(on_power_timeout)
 	add_child(timer_power)
@@ -65,6 +65,9 @@ func on_power_timeout():
 		#first_time_pressing_shoot = false
 		#timer_power.start()
 		#return
+	var sign:= 1
+	if Input.is_action_pressed(player.keyboard_profile + "wildcard_key"):
+		sign = -1
 	if Input.is_action_pressed(player.keyboard_profile + "shot"):
-		player.missile_power += 10
+		player.missile_power += 10 * sign
 		timer_power.start()
