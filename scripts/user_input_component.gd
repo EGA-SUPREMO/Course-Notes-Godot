@@ -36,7 +36,7 @@ func update_user_input(_delta: float) -> void:
 		player.change_current_missile_to_next_missile_in_inventory()
 
 func on_power_timeout():
-	timer_power.wait_time = 0.05
+	timer_power.wait_time = 0.10
 	if Input.is_action_pressed(player.keyboard_profile + "decrease_power"):
 		player.missile_power -= 10
 		timer_power.start()
@@ -45,7 +45,7 @@ func on_power_timeout():
 		timer_power.start()
 	
 func on_angle_timeout():
-	timer_angle.wait_time = 0.02
+	timer_angle.wait_time = 0.03
 	if Input.is_action_pressed(player.keyboard_profile + "increase_angle"):
 		player.angle += 3
 		timer_angle.start()
