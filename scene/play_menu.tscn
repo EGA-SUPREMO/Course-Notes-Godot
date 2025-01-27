@@ -22,5 +22,35 @@ text = "Quick Match"
 layout_mode = 2
 text = "Create a new match"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Controls:
+
+Player 1:
+
+A / D ---------------------
+W / S
+Q / E ----------------------
+Space
+Hold Space ------------
+Hold Space + Shift "
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "
+
+Player 2:
+
+⬅️/➡️  ----------------------- Move player
+⬇️/⬆️                               Change angle
+Ctrl / (.) ------------------- Change weapon
+Enter                             Shoot
+Hold Enter -------------- Increase power
+Hold Enter + R Shift   Decrease power"
+
 [connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
