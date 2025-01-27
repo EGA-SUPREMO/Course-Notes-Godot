@@ -36,8 +36,7 @@ A / D ---------------------
 W / S
 Q / E ----------------------
 Space
-Hold Space ------------
-Hold Space + Shift "
+1 / 2 ----------------------"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -45,12 +44,11 @@ text = "
 
 Player 2:
 
-⬅️/➡️  ----------------------- Move player
-⬇️/⬆️                               Change angle
-Ctrl / (.) ------------------- Change weapon
-Enter                             Shoot
-Hold Enter -------------- Increase power
-Hold Enter + R Shift   Decrease power"
+⬅️/➡️  ------------------------ Move player
+⬇️/⬆️                                Change power
+(.) / (-) ---------------------- Change angle
+Enter                              Shoot
+Del / Pr Pag -------------- Change Weapon"
 
 [connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
