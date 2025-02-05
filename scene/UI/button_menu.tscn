@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://ie47v1lla2a"]
+
+[ext_resource type="StyleBox" uid="uid://crq5smk3u6a15" path="res://scene/menu_button_background_panel.tres" id="1_apwvv"]
+[ext_resource type="StyleBox" uid="uid://c8xlcx8txtoje" path="res://scene/UI/button_menu_shadow.tres" id="2_4mrcq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1y25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o14ar"]
+bg_color = Color(1, 0.85098, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.803922, 0.643137, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0.658824, 0.52549, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxg48"]
+bg_color = Color(0.207843, 0.729412, 0.952941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0980392, 0.537255, 0.721569, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Panel" type="Panel"]
+offset_left = 454.0
+offset_right = 507.0
+offset_bottom = 56.0
+
+[node name="Text" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k1y25")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o14ar")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hxg48")
+theme_override_styles/normal = ExtResource("1_apwvv")
+
+[node name="Shadow" type="Panel" parent="Button"]
+visible = false
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_4mrcq")

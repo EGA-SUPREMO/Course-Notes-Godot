@@ -1,5 +1,6 @@
 extends Control
 
+@onready var quick_match: TextureButton = $VBoxContainer/QuickMatch
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,3 +20,7 @@ func _on_quick_match_pressed() -> void:
 
 func _on_create_match_pressed() -> void:
 	get_tree().change_scene_to_file("res://scene/menus/create_match_menu.tscn")
+
+
+func _on_quick_match_focus_entered() -> void:
+	print(quick_match.get_children()[2].name)

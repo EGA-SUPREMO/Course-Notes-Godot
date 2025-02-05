@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdt2h8qaty7hw"]
+[gd_scene load_steps=9 format=3 uid="uid://cdt2h8qaty7hw"]
 
 [ext_resource type="Script" path="res://scripts/play_menu.gd" id="1_2ojsx"]
+[ext_resource type="PackedScene" uid="uid://ie47v1lla2a" path="res://scene/UI/button_menu.tscn" id="2_6wfri"]
+[ext_resource type="Texture2D" uid="uid://dhc3jauetn6xx" path="res://assets/UI Pack/blue_button00.png" id="2_qdm0x"]
+[ext_resource type="FontFile" uid="uid://bm2xp78s76y1f" path="res://assets/fonts/kenvector_future.ttf" id="3_b3fuj"]
+[ext_resource type="Texture2D" uid="uid://xapttlfkfia0" path="res://assets/UI Pack/blue_button01.png" id="3_bquev"]
+[ext_resource type="Texture2D" uid="uid://wav2q1nh5iud" path="res://assets/UI Pack/yellow_button00.png" id="4_c2qxs"]
+
+[sub_resource type="Theme" id="Theme_wfs8b"]
+default_font = ExtResource("3_b3fuj")
+
+[sub_resource type="Theme" id="Theme_eijpj"]
+default_font = ExtResource("3_b3fuj")
 
 [node name="PlayMenu" type="Control"]
 layout_mode = 3
@@ -14,12 +25,71 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="QuickMatch" type="Button" parent="VBoxContainer"]
+[node name="Panel" parent="VBoxContainer" instance=ExtResource("2_6wfri")]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+
+[node name="QuickMatch" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Normal" type="NinePatchRect" parent="VBoxContainer/QuickMatch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qdm0x")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+
+[node name="Press" type="NinePatchRect" parent="VBoxContainer/QuickMatch"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bquev")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+
+[node name="Hover" type="NinePatchRect" parent="VBoxContainer/QuickMatch"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_c2qxs")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/QuickMatch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_wfs8b")
 text = "Quick Match"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CreateMatch" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_eijpj")
 text = "Create a new match"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -52,5 +122,6 @@ Enter                             Shoot
 Hold Enter -------------- Increase power
 Hold Enter + R Shift   Decrease power"
 
+[connection signal="focus_entered" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
