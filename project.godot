@@ -29,6 +29,10 @@ movie_writer/movie_file="/home/trabajo/course notes godot/Course Notes Godot/vid
 
 destructibles=""
 
+[gui]
+
+theme/custom_font="res://assets/fonts/kenvector_future.ttf"
+
 [input]
 
 player_1_shot={

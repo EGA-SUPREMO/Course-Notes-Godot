@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b23o5cbiguy87"]
+
+[ext_resource type="Texture2D" uid="uid://dtyr0yb5x2dx6" path="res://assets/UI Pack/yellow_button01.png" id="1_16t0i"]
+
+[resource]
+texture = ExtResource("1_16t0i")
+texture_margin_left = 6.0
+texture_margin_top = 8.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 190, 49)
