@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdt2h8qaty7hw"]
+[gd_scene load_steps=2 format=3 uid="uid://cdt2h8qaty7hw"]
 
 [ext_resource type="Script" path="res://scripts/play_menu.gd" id="1_2ojsx"]
-[ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="3_djb8d"]
 
 [node name="PlayMenu" type="Control"]
 layout_mode = 3
@@ -14,17 +13,6 @@ script = ExtResource("1_2ojsx")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="QuickMatch" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-theme = ExtResource("3_djb8d")
-text = "Quick Match"
-
-[node name="CreateMatch" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("3_djb8d")
-text = "Create a new match"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -55,7 +43,3 @@ Ctrl / (.) ------------------- Change weapon
 Enter                             Shoot
 Hold Enter -------------- Increase power
 Hold Enter + R Shift   Decrease power"
-
-[connection signal="focus_entered" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_focus_entered"]
-[connection signal="pressed" from="VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
-[connection signal="pressed" from="VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]

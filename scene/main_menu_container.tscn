@@ -1,26 +1,109 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddg6dw7vc0f1o"]
+[gd_scene load_steps=6 format=3 uid="uid://ddg6dw7vc0f1o"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_container.gd" id="1_oolfy"]
+[ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="2_7cb7m"]
+[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="3_35740"]
 
-[node name="MainMenuContainer" type="VBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jv8f"]
+bg_color = Color(1, 0.8, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g37cj"]
+texture = ExtResource("3_35740")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.71088
+texture_margin_bottom = 7.00989
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="MainMenuContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_oolfy")
 
-[node name="Play" type="Button" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5jv8f")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7cb7m")
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Artillery"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7cb7m")
+theme_override_styles/panel = SubResource("StyleBoxTexture_g37cj")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("2_7cb7m")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="QuickMatch" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme = ExtResource("2_7cb7m")
+text = "Quick Match"
+
+[node name="CreateMatch" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7cb7m")
+text = "Create a match"
+
+[node name="Play" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Play"
 
-[node name="Credits" type="Button" parent="."]
+[node name="Credits" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_7cb7m")
 text = "Credits"
 
-[node name="Options" type="Button" parent="."]
+[node name="Options" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_7cb7m")
 text = "Options"
 
-[node name="Exit" type="Button" parent="."]
+[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_7cb7m")
 text = "Exit"
 
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]

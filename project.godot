@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Holo piknik"
-run/main_scene="res://scene/play_menu.tscn"
+run/main_scene="res://scene/main_menu_container.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.jpeg"
 config/windows_native_icon="res://icon.ico"

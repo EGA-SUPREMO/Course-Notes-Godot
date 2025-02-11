@@ -1,0 +1,12 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://darxddihyia0c"]
+
+[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="1_3fr4j"]
+
+[resource]
+texture = ExtResource("1_3fr4j")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.71088
+texture_margin_bottom = 7.00989
+region_rect = Rect2(0, 0, 100, 100)
+modulate_color = Color(0.207843, 0.729412, 0.952941, 1)
