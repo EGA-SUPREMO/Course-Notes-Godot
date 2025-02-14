@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6hevy366qvwh"]
+[gd_scene load_steps=8 format=3 uid="uid://c6hevy366qvwh"]
 
 [ext_resource type="Script" path="res://scene/menus/create_match_menu.gd" id="1_imi00"]
 [ext_resource type="Texture2D" uid="uid://bm342svic8wpj" path="res://assets/sprites/icons/add_player.png" id="1_tsqui"]
 [ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="2_j0qud"]
-[ext_resource type="Texture2D" uid="uid://cmtq6epl1c8cg" path="res://assets/sprites/icons/next.png" id="4_irl51"]
+[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="3_b5fk5"]
+[ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="4_718bl"]
+[ext_resource type="Texture2D" uid="uid://db5s46cs8f1lt" path="res://assets/UI Pack/grey_checkmarkWhite.png" id="5_388es"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ev8jg"]
+texture = ExtResource("3_b5fk5")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.71088
+texture_margin_bottom = 7.00989
+region_rect = Rect2(0, 0, 100, 100)
+modulate_color = Color(1, 0.85098, 0.282353, 1)
 
 [node name="CreateMatchMenu" type="Control"]
 layout_mode = 3
@@ -14,65 +25,128 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_imi00")
 
-[node name="PlayerTexture_1" type="TextureRect" parent="."]
-visible = false
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-offset_top = 291.0
-offset_right = 155.0
-offset_bottom = 313.0
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_718bl")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ev8jg")
+
+[node name="PlayerTexture_1" type="TextureRect" parent="Panel"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_j0qud")
 
-[node name="CheckButton" type="CheckButton" parent="PlayerTexture_1"]
-layout_mode = 0
-offset_right = 44.0
-offset_bottom = 24.0
+[node name="CheckButton" type="CheckButton" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_top = 10.0
+offset_right = 39.0
+offset_bottom = 35.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
 text = "AI:"
 
-[node name="RemovePlayer" type="Button" parent="PlayerTexture_1"]
+[node name="RemovePlayer" type="Button" parent="Panel"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -35.5
-offset_top = -31.0
-offset_right = 35.5
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Remove"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = -5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_718bl")
+
+[node name="SubTitle" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("4_718bl")
 text = "Create a new match"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_718bl")
 
-[node name="AddPlayerButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+[node name="MainPlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel"]
 layout_mode = 2
-texture_normal = ExtResource("1_tsqui")
+offset_left = 10.0
+offset_top = 32.0
+offset_right = 1142.0
+offset_bottom = 160.0
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/AddPlayerButton"]
-layout_mode = 0
-offset_right = 40.0
+[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer"]
+layout_mode = 2
+icon = ExtResource("1_tsqui")
+
+[node name="AddPlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer/AddPlayerButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.0
+offset_top = 5.0
+offset_right = 62.0
 offset_bottom = 23.0
+grow_horizontal = 2
 text = "Add player"
 
-[node name="PlayerContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer"]
 layout_mode = 2
 
-[node name="StartMatch" type="TextureButton" parent="VBoxContainer"]
+[node name="StartMatch" type="Button" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-texture_normal = ExtResource("4_irl51")
+size_flags_vertical = 8
+theme = ExtResource("4_718bl")
+icon = ExtResource("5_388es")
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/StartMatch" to="." method="_on_start_match_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MainPlayerContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="MarginContainer/StartMatch" to="." method="_on_start_match_pressed"]

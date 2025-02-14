@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctq61evq0irce"]
+
+[ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="1_gqx4v"]
+[ext_resource type="Script" path="res://scene/UI/credits.gd" id="1_t0rqd"]
+[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="2_7hjda"]
+[ext_resource type="Texture2D" uid="uid://c0bqg38of0e2h" path="res://assets/UI Pack/grey_crossWhite.png" id="3_xd304"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sbkpt"]
+texture = ExtResource("2_7hjda")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.71088
+texture_margin_bottom = 7.00989
+region_rect = Rect2(0, 0, 100, 100)
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t0rqd")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.355
+offset_top = -55.5049
+offset_right = 162.355
+offset_bottom = 55.5049
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gqx4v")
+theme_override_styles/panel = SubResource("StyleBoxTexture_sbkpt")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.0923971, 0.0923971, 0.0923971, 1)
+theme_override_font_sizes/font_size = 14
+text = "Credits
+UI pack by Kenney Vleugels (www.kenney.nl) License (CC0)
+Backgrounds
+No se"
+autowrap_mode = 2
+
+[node name="ExitButton" type="Button" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("1_gqx4v")
+icon = ExtResource("3_xd304")

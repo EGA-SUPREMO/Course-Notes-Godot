@@ -1,7 +1,6 @@
 extends Control
-
-@onready var player_texture_1: TextureRect = $PlayerTexture_1
-@onready var player_container: HBoxContainer = $VBoxContainer/HBoxContainer/PlayerContainer
+@onready var player_panel_1: Panel = $Panel
+@onready var player_container: HBoxContainer = $MarginContainer/VBoxContainer/Panel/MainPlayerContainer/PlayerContainer
 
 var players_textures = [preload("res://assets/sprites/players/Zecretary-1.png"),
 preload("res://assets/sprites/players/Pemaloe-1.png"),
@@ -18,7 +17,7 @@ func _ready() -> void:
 	MatchManager.number_players = 0
 	for i in range(2):
 		create_players_textures()
-		player_container.get_child(i).get_child(1).disabled = true
+		player_container.get_child(i).get_child(0).get_child(1).disabled = true
 	
 func _process(delta: float) -> void:
 	pass
@@ -33,14 +32,15 @@ func create_players_textures():
 	else:
 		image_id = next_id
 		next_id += 1
-	var player_texture = player_texture_1.duplicate(0)
+	var player_panel := player_panel_1.duplicate(0)
+	var player_texture := player_panel.get_child(0)
 	player_texture.texture = players_textures[image_id]
 	player_texture.get_child(1).connect("pressed", _on_remove_player_pressed.bind(player_texture.get_child(1)))
 	player_texture.get_child(1).disabled = false
-	player_texture.visible = true
+	player_panel.visible = true
 	player_texture.set_meta("image_id", image_id)
 	player_texture.set_meta("human", true)
-	player_container.add_child(player_texture)
+	player_container.add_child(player_panel)
 	MatchManager.number_players += 1
 
 func _on_add_player_button_pressed() -> void:
@@ -48,7 +48,7 @@ func _on_add_player_button_pressed() -> void:
 
 
 func _on_remove_player_pressed(node: Node) -> void:
-	player_container.remove_child(node.get_parent())
+	player_container.remove_child(node.get_parent().get_parent())
 	node.queue_free()
 	MatchManager.number_players -= 1
 	var image_id = node.get_parent().get_meta("image_id")
@@ -59,7 +59,7 @@ func _on_start_match_pressed() -> void:
 	var ids = []
 	var human_bools = []
 	for player_node in player_container.get_children():
-		ids.append(player_node.get_meta("image_id"))
-		human_bools.append(!player_node.get_child(0).button_pressed)
+		ids.append(player_node.get_child(0).get_meta("image_id"))
+		human_bools.append(!player_node.get_child(0).get_child(0).button_pressed)
 	MatchManager.create_players(ids, human_bools)
 	get_tree().change_scene_to_file("res://scene/main.tscn")

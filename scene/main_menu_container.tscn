@@ -1,19 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddg6dw7vc0f1o"]
+[gd_scene load_steps=5 format=3 uid="uid://ddg6dw7vc0f1o"]
 
 [ext_resource type="Script" path="res://scripts/main_menu_container.gd" id="1_oolfy"]
 [ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="2_7cb7m"]
-[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="3_35740"]
+[ext_resource type="StyleBox" uid="uid://cbwho8qeb8ibp" path="res://scene/UI/main_panel_texture_white_style.tres" id="3_1wmx3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jv8f"]
 bg_color = Color(1, 0.8, 0, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g37cj"]
-texture = ExtResource("3_35740")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.71088
-texture_margin_bottom = 7.00989
-region_rect = Rect2(0, 0, 100, 100)
 
 [node name="MainMenuContainer" type="Control"]
 layout_mode = 3
@@ -24,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oolfy")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="BackgroundColor" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,13 +46,13 @@ theme = ExtResource("2_7cb7m")
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Artillery"
+text = "BarrageFest"
 horizontal_alignment = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_7cb7m")
-theme_override_styles/panel = SubResource("StyleBoxTexture_g37cj")
+theme_override_styles/panel = ExtResource("3_1wmx3")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
@@ -107,3 +99,6 @@ text = "Exit"
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/QuickMatch" to="." method="_on_quick_match_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/CreateMatch" to="." method="_on_create_match_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
