@@ -1,11 +1,11 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cbwho8qeb8ibp"]
 
-[ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="1_wboxv"]
+[ext_resource type="Texture2D" uid="uid://b2hukq6orqlyj" path="res://assets/UI pack 2/Grey/Double/button_rectangle_depth_flat.png" id="1_0q0qj"]
 
 [resource]
-texture = ExtResource("1_wboxv")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.71088
-texture_margin_bottom = 7.00989
-region_rect = Rect2(0, 0, 100, 100)
+texture = ExtResource("1_0q0qj")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(0, 0, 384, 128)

@@ -1,6 +1,6 @@
 extends Control
 @onready var player_panel_1: Panel = $Panel
-@onready var player_container: HBoxContainer = $MarginContainer/VBoxContainer/Panel/MainPlayerContainer/PlayerContainer
+@onready var player_container: HBoxContainer = $MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer/PlayerContainer
 
 var players_textures = [preload("res://assets/sprites/players/Zecretary-1.png"),
 preload("res://assets/sprites/players/Pemaloe-1.png"),
@@ -17,7 +17,8 @@ func _ready() -> void:
 	MatchManager.number_players = 0
 	for i in range(2):
 		create_players_textures()
-		player_container.get_child(i).get_child(0).get_child(1).disabled = true
+		print(player_container.get_child(i).get_child(1))
+		player_container.get_child(i).get_child(1).disabled = true
 	
 func _process(delta: float) -> void:
 	pass
@@ -35,8 +36,8 @@ func create_players_textures():
 	var player_panel := player_panel_1.duplicate(0)
 	var player_texture := player_panel.get_child(0)
 	player_texture.texture = players_textures[image_id]
-	player_texture.get_child(1).connect("pressed", _on_remove_player_pressed.bind(player_texture.get_child(1)))
-	player_texture.get_child(1).disabled = false
+	player_panel.get_child(2).connect("pressed", _on_remove_player_pressed.bind(player_panel.get_child(0)))
+	player_panel.get_child(1).disabled = false
 	player_panel.visible = true
 	player_texture.set_meta("image_id", image_id)
 	player_texture.set_meta("human", true)
@@ -47,11 +48,11 @@ func _on_add_player_button_pressed() -> void:
 	create_players_textures()
 
 
-func _on_remove_player_pressed(node: Node) -> void:
-	player_container.remove_child(node.get_parent().get_parent())
-	node.queue_free()
+func _on_remove_player_pressed(player_texture_node: Node) -> void:
+	player_container.remove_child(player_texture_node.get_parent())
+	player_texture_node.queue_free()
 	MatchManager.number_players -= 1
-	var image_id = node.get_parent().get_meta("image_id")
+	var image_id = player_texture_node.get_parent().get_meta("image_id")
 	available_ids.append(image_id)
 
 

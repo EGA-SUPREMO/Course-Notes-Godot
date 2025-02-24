@@ -14,7 +14,6 @@ texture_margin_top = 7.0
 texture_margin_right = 7.71088
 texture_margin_bottom = 7.00989
 region_rect = Rect2(0, 0, 100, 100)
-modulate_color = Color(1, 0.85098, 0.282353, 1)
 
 [node name="CreateMatchMenu" type="Control"]
 layout_mode = 3
@@ -84,6 +83,7 @@ grow_vertical = 0
 text = "Remove"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +97,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = -5
+theme_override_constants/separation = -15
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -106,6 +106,7 @@ theme = ExtResource("4_718bl")
 [node name="SubTitle" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme = ExtResource("4_718bl")
+theme_override_font_sizes/font_size = 40
 text = "Create a new match"
 horizontal_alignment = 1
 
@@ -114,18 +115,23 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_718bl")
 
-[node name="MainPlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel"]
-layout_mode = 2
-offset_left = 10.0
-offset_top = 32.0
-offset_right = 1142.0
-offset_bottom = 160.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer"]
+[node name="MainPlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer"]
 layout_mode = 2
 icon = ExtResource("1_tsqui")
 
-[node name="AddPlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer/AddPlayerButton"]
+[node name="AddPlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer/AddPlayerButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -137,7 +143,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 text = "Add player"
 
-[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MainPlayerContainer"]
+[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer"]
 layout_mode = 2
 
 [node name="StartMatch" type="Button" parent="MarginContainer"]
@@ -147,5 +153,5 @@ size_flags_vertical = 8
 theme = ExtResource("4_718bl")
 icon = ExtResource("5_388es")
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MainPlayerContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
 [connection signal="pressed" from="MarginContainer/StartMatch" to="." method="_on_start_match_pressed"]
