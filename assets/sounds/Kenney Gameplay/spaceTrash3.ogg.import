@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8hysbcoa4jtq"
+path="res://.godot/imported/spaceTrash3.ogg-75b93d61250e09ddfcb616282c2a944e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/spaceTrash3.ogg"
+dest_files=["res://.godot/imported/spaceTrash3.ogg-75b93d61250e09ddfcb616282c2a944e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

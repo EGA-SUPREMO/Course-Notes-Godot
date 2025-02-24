@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvilut7fmyncc"
+path="res://.godot/imported/bong_001.ogg-539b208b958fa02582edddbe3a9e12fb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/bong_001.ogg"
+dest_files=["res://.godot/imported/bong_001.ogg-539b208b958fa02582edddbe3a9e12fb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

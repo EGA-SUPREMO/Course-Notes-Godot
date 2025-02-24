@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ofajr6axmicu"
+path="res://.godot/imported/impactMetal_light_003.ogg-54ad9c15bfdf36df3cd37816953d7fdb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Impact SFX/impactMetal_light_003.ogg"
+dest_files=["res://.godot/imported/impactMetal_light_003.ogg-54ad9c15bfdf36df3cd37816953d7fdb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

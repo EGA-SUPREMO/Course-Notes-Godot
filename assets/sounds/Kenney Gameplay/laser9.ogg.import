@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://1c2ymnsx8j61"
+path="res://.godot/imported/laser9.ogg-011e7a35b19bba486d9708948b261c4c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/laser9.ogg"
+dest_files=["res://.godot/imported/laser9.ogg-011e7a35b19bba486d9708948b261c4c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

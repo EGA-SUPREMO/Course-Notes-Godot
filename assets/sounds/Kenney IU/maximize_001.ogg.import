@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c6g2fvrgqwnun"
+path="res://.godot/imported/maximize_001.ogg-2e21eb92924acebe2c4c27995093114a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/maximize_001.ogg"
+dest_files=["res://.godot/imported/maximize_001.ogg-2e21eb92924acebe2c4c27995093114a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

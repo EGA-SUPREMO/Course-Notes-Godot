@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bcsmqopvk6xwj"
+path="res://.godot/imported/zap1.ogg-1c0355dbaba578ae15b4e9e25d3e3590.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/zap1.ogg"
+dest_files=["res://.godot/imported/zap1.ogg-1c0355dbaba578ae15b4e9e25d3e3590.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

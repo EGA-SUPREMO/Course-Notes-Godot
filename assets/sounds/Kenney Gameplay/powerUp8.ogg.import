@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cmfeb32jvytjp"
+path="res://.godot/imported/powerUp8.ogg-d96cc276217238ec3dd12b1e2906ffae.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/powerUp8.ogg"
+dest_files=["res://.godot/imported/powerUp8.ogg-d96cc276217238ec3dd12b1e2906ffae.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

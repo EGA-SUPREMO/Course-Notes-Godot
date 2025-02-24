@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c16q84j1woqb7"
+path="res://.godot/imported/scratch_004.ogg-3da133c9fbd21435a20f8bf4ca27eebe.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/scratch_004.ogg"
+dest_files=["res://.godot/imported/scratch_004.ogg-3da133c9fbd21435a20f8bf4ca27eebe.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

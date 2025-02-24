@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnqgim2sjmhf7"
+path="res://.godot/imported/twoTone1.ogg-e8541f9d8ec091b68217389ef7e34be0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/twoTone1.ogg"
+dest_files=["res://.godot/imported/twoTone1.ogg-e8541f9d8ec091b68217389ef7e34be0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

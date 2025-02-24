@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cllrhj1i5gcvn"
+path="res://.godot/imported/zapThreeToneDown.ogg-f1d23ab1984fbd753fb053426b1856be.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/zapThreeToneDown.ogg"
+dest_files=["res://.godot/imported/zapThreeToneDown.ogg-f1d23ab1984fbd753fb053426b1856be.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

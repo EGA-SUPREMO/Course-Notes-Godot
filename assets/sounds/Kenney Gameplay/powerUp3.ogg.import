@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://7w0wpbbho6ci"
+path="res://.godot/imported/powerUp3.ogg-d7dae78b8506006351d36e2449c5d2f6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/powerUp3.ogg"
+dest_files=["res://.godot/imported/powerUp3.ogg-d7dae78b8506006351d36e2449c5d2f6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

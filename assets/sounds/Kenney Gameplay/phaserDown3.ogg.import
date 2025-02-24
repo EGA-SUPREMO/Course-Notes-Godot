@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://di2sany2a8ivw"
+path="res://.godot/imported/phaserDown3.ogg-b197ef42e21b3eaf8223e0503f88f65f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/phaserDown3.ogg"
+dest_files=["res://.godot/imported/phaserDown3.ogg-b197ef42e21b3eaf8223e0503f88f65f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

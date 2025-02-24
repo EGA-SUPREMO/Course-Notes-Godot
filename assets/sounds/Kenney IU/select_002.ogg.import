@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://erajx5xvuml6"
+path="res://.godot/imported/select_002.ogg-6883ea417aa2353bcb8bafc2398ceb94.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/select_002.ogg"
+dest_files=["res://.godot/imported/select_002.ogg-6883ea417aa2353bcb8bafc2398ceb94.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

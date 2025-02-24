@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bxt20nmbh23gx"
+path="res://.godot/imported/error_002.ogg-df5db37a14611af49def7be1ad8c087c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/error_002.ogg"
+dest_files=["res://.godot/imported/error_002.ogg-df5db37a14611af49def7be1ad8c087c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

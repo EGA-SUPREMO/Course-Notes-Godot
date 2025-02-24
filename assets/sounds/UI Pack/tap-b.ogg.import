@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dgs1udyenym86"
+path="res://.godot/imported/tap-b.ogg-ef4b65b1e22b562112927ade01c6b1bb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/UI Pack/tap-b.ogg"
+dest_files=["res://.godot/imported/tap-b.ogg-ef4b65b1e22b562112927ade01c6b1bb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

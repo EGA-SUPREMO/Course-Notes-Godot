@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://csywx3sjn3ob7"
+path="res://.godot/imported/pepSound2.ogg-50a6ae361af1bbc16d0f65c365df0a0c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/pepSound2.ogg"
+dest_files=["res://.godot/imported/pepSound2.ogg-50a6ae361af1bbc16d0f65c365df0a0c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

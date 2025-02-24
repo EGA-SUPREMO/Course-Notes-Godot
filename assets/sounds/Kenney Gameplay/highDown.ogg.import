@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://nq053ccrk5pm"
+path="res://.godot/imported/highDown.ogg-aecea5e25c329ea9e0d3053e6bdd36d6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/highDown.ogg"
+dest_files=["res://.godot/imported/highDown.ogg-aecea5e25c329ea9e0d3053e6bdd36d6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

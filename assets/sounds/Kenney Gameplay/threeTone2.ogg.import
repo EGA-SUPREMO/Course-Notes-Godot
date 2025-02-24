@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bb84d4f7jdvbi"
+path="res://.godot/imported/threeTone2.ogg-5a7279e68edc89107a55b533c9b19b0e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/threeTone2.ogg"
+dest_files=["res://.godot/imported/threeTone2.ogg-5a7279e68edc89107a55b533c9b19b0e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

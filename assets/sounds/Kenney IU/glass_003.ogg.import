@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cweh8aw6fcb6f"
+path="res://.godot/imported/glass_003.ogg-412bdee28619dc0d263b22138cbd1df4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney IU/glass_003.ogg"
+dest_files=["res://.godot/imported/glass_003.ogg-412bdee28619dc0d263b22138cbd1df4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

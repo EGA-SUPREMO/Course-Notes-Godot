@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4xe0dace864h"
+path="res://.godot/imported/footstep_grass_001.ogg-4531302491d0ee65cb58e75ecd7bac0c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Impact SFX/footstep_grass_001.ogg"
+dest_files=["res://.godot/imported/footstep_grass_001.ogg-4531302491d0ee65cb58e75ecd7bac0c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cemequsw647jn"
+path="res://.godot/imported/phaserUp6.ogg-3df65e87eb234ddee6037df9903c783e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/Kenney Gameplay/phaserUp6.ogg"
+dest_files=["res://.godot/imported/phaserUp6.ogg-3df65e87eb234ddee6037df9903c783e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
