@@ -17,12 +17,8 @@ func _ready() -> void:
 	MatchManager.number_players = 0
 	for i in range(2):
 		create_players_textures()
-		print(player_container.get_child(i).get_child(1))
-		player_container.get_child(i).get_child(1).disabled = true
+		player_container.get_child(i).get_child(2).disabled = true
 	
-func _process(delta: float) -> void:
-	pass
-
 
 func create_players_textures():
 	if player_container.get_child_count() > 4:
@@ -35,6 +31,8 @@ func create_players_textures():
 		next_id += 1
 	var player_panel := player_panel_1.duplicate(0)
 	var player_texture := player_panel.get_child(0)
+	print(image_id)
+	print(players_textures)
 	player_texture.texture = players_textures[image_id]
 	player_panel.get_child(2).connect("pressed", _on_remove_player_pressed.bind(player_panel.get_child(0)))
 	player_panel.get_child(1).disabled = false
@@ -46,7 +44,6 @@ func create_players_textures():
 
 func _on_add_player_button_pressed() -> void:
 	create_players_textures()
-
 
 func _on_remove_player_pressed(player_texture_node: Node) -> void:
 	player_container.remove_child(player_texture_node.get_parent())

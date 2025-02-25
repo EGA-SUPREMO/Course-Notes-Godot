@@ -105,5 +105,5 @@ func calculate_angle_and_power():
 	player.missile_power = best_power
 	has_aimed = true
 
-func _on_player_death(player):
+func _on_player_death(_player):
 	player_target = null

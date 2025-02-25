@@ -4,9 +4,6 @@ var credits_activated := false
 var credits_panel = preload("res://scene/UI/credits.tscn").instantiate()
 @onready var center_container: CenterContainer = $CenterContainer
 
-func _ready() -> void:
-	credits_panel.get_child(0).get_child(1).connect("pressed", _on_credits_exit_press)
-
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scene/play_menu.tscn")
 
@@ -29,12 +26,8 @@ func _on_options_pressed() -> void:
 
 
 func _on_credits_pressed() -> void:
-	if credits_activated:
-		center_container.remove_child(credits_panel)
-	else:
-		center_container.add_child(credits_panel)
-	credits_activated = !credits_activated
-
+	center_container.add_child(credits_panel)
+	
 func _on_credits_exit_press():
 	credits_activated = false
 	center_container.remove_child(credits_panel)
