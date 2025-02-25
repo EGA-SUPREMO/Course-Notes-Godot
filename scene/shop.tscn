@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
 [ext_resource type="PackedScene" uid="uid://qv82rohdiqxa" path="res://scene/button_store.tscn" id="2_cvmki"]
+[ext_resource type="StyleBox" uid="uid://cbwho8qeb8ibp" path="res://scene/UI/main_panel_texture_white_style.tres" id="2_lv4qy"]
 [ext_resource type="Texture2D" uid="uid://dmb63txpxaw6i" path="res://assets/sprites/icons/hotshower.png" id="2_qq740"]
 [ext_resource type="Texture2D" uid="uid://cb4orucc82gky" path="res://assets/sprites/icons/nuclear.png" id="3_bhtho"]
 [ext_resource type="Texture2D" uid="uid://bhus0xqa5fqns" path="res://assets/sprites/icons/more_hp.png" id="4_7audq"]
@@ -17,21 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://urg6javrrh1d" path="res://assets/sounds/buy_sfx.wav" id="13_s83id"]
 [ext_resource type="AudioStream" uid="uid://cwcm35nd7gjvl" path="res://assets/sounds/blipSelect.wav" id="14_7ym1k"]
 [ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="17_kledt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4p16"]
-bg_color = Color(0.8, 0.8, 0.8, 1)
-border_width_left = 40
-border_width_top = 40
-border_width_right = 40
-border_width_bottom = 40
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-expand_margin_left = 40.0
-expand_margin_top = 40.0
-expand_margin_right = 40.0
-expand_margin_bottom = 40.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -49,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_e4p16")
+theme_override_styles/panel = ExtResource("2_lv4qy")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
