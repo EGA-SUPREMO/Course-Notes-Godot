@@ -61,6 +61,10 @@ func _on_start_match_pressed() -> void:
 	var human_bools = []
 	for player_node in player_container.get_children():
 		ids.append(player_node.get_child(0).get_meta("image_id"))
-		human_bools.append(!player_node.get_child(0).get_child(0).button_pressed)
+		human_bools.append(!player_node.get_child(1).button_pressed)
 	MatchManager.create_players(ids, human_bools)
 	get_tree().change_scene_to_file("res://scene/main.tscn")
+
+
+func _on_back_pressed() -> void:
+	get_parent().remove_child(self)

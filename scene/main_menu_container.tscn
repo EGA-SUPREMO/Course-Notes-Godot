@@ -36,15 +36,15 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = -10
+theme_override_constants/separation = -16
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_7cb7m")
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "BarrageFest"
 horizontal_alignment = 1

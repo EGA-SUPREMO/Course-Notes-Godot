@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6hevy366qvwh"]
+[gd_scene load_steps=12 format=3 uid="uid://c6hevy366qvwh"]
 
 [ext_resource type="Script" path="res://scene/menus/create_match_menu.gd" id="1_imi00"]
 [ext_resource type="Texture2D" uid="uid://bm342svic8wpj" path="res://assets/sprites/icons/add_player.png" id="1_tsqui"]
 [ext_resource type="Texture2D" uid="uid://cvowanx1sdmfu" path="res://assets/sprites/Risuner-1.png" id="2_j0qud"]
 [ext_resource type="Texture2D" uid="uid://bdgtyrnxaee1l" path="res://assets/UI Pack/grey_panel.png" id="3_b5fk5"]
 [ext_resource type="Theme" uid="uid://b0uj057i3g3nh" path="res://scene/the_theme.tres" id="4_718bl"]
-[ext_resource type="Texture2D" uid="uid://db5s46cs8f1lt" path="res://assets/UI Pack/grey_checkmarkWhite.png" id="5_388es"]
+[ext_resource type="Texture2D" uid="uid://0hlopuygjat6" path="res://assets/UI pack 2/Grey/Default/button_rectangle_depth_gloss.png" id="6_kwl0f"]
+[ext_resource type="Texture2D" uid="uid://dxik8erwjqasp" path="res://assets/UI pack 2/Extra/Default/icon_play_light.png" id="7_jepq5"]
+[ext_resource type="Texture2D" uid="uid://d3jexgw6thw0v" path="res://assets/UI pack 2/Red/Double/icon_outline_cross.png" id="8_v38h8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ev8jg"]
 texture = ExtResource("3_b5fk5")
@@ -14,6 +16,24 @@ texture_margin_top = 7.0
 texture_margin_right = 7.71088
 texture_margin_bottom = 7.00989
 region_rect = Rect2(0, 0, 100, 100)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbcsy"]
+texture = ExtResource("6_kwl0f")
+texture_margin_left = 8.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 192, 64)
+modulate_color = Color(0.184314, 0.843137, 0.572549, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgx18"]
+texture = ExtResource("6_kwl0f")
+texture_margin_left = 8.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 192, 64)
+modulate_color = Color(1, 0.384314, 0.482353, 1)
 
 [node name="CreateMatchMenu" type="Control"]
 layout_mode = 3
@@ -83,7 +103,6 @@ grow_vertical = 0
 text = "Remove"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,9 +135,12 @@ size_flags_vertical = 3
 theme = ExtResource("4_718bl")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -126,32 +148,40 @@ theme_override_constants/margin_bottom = 20
 
 [node name="MainPlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="AddPlayerButton" type="Button" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer"]
 layout_mode = 2
 icon = ExtResource("1_tsqui")
 
-[node name="AddPlayerLabel" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer/AddPlayerButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -62.0
-offset_top = 5.0
-offset_right = 62.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "Add player"
-
 [node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer"]
 layout_mode = 2
 
-[node name="StartMatch" type="Button" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="StartMatch" type="Button" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("4_718bl")
-icon = ExtResource("5_388es")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_rbcsy")
+text = "Continue"
+icon = ExtResource("7_jepq5")
+alignment = 0
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("4_718bl")
+theme_override_styles/normal = SubResource("StyleBoxTexture_kgx18")
+icon = ExtResource("8_v38h8")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MarginContainer/MainPlayerContainer/AddPlayerButton" to="." method="_on_add_player_button_pressed"]
-[connection signal="pressed" from="MarginContainer/StartMatch" to="." method="_on_start_match_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/StartMatch" to="." method="_on_start_match_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Panel/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]

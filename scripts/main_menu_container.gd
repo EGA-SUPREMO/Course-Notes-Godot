@@ -17,9 +17,9 @@ func _on_quick_match_pressed() -> void:
 
 
 func _on_create_match_pressed() -> void:
-	get_tree().change_scene_to_file("res://scene/menus/create_match_menu.tscn")
-
-
+	var create_menu_node = preload("res://scene/menus/create_match_menu.tscn").instantiate()
+	add_child(create_menu_node)
+	
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 

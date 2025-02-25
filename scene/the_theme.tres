@@ -1,21 +1,21 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://b0uj057i3g3nh"]
 
-[ext_resource type="Texture2D" uid="uid://wav2q1nh5iud" path="res://assets/UI Pack/yellow_button00.png" id="1_7yj2h"]
+[ext_resource type="Texture2D" uid="uid://dw1go1xf4kull" path="res://assets/UI pack 2/Yellow/Default/button_rectangle_depth_gloss.png" id="1_10llw"]
 [ext_resource type="StyleBox" uid="uid://xpjo801428v7" path="res://scene/UI/box_texture_button.tres" id="2_fs1cc"]
 [ext_resource type="StyleBox" uid="uid://b23o5cbiguy87" path="res://scene/UI/box_texture_button_pressed.tres" id="3_s5cne"]
 [ext_resource type="StyleBox" uid="uid://darxddihyia0c" path="res://scene/UI/main_panel_texture_style.tres" id="4_cjnv3"]
 [ext_resource type="StyleBox" uid="uid://cbwho8qeb8ibp" path="res://scene/UI/main_panel_texture_white_style.tres" id="4_vbkut"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_76ol0"]
-texture = ExtResource("1_7yj2h")
-texture_margin_left = 6.0
-texture_margin_top = 4.0
-texture_margin_right = 6.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(0, 0, 190, 49)
+texture = ExtResource("1_10llw")
+texture_margin_left = 8.0
+texture_margin_top = 5.0
+texture_margin_right = 8.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(0, 0, 192, 64)
 
 [resource]
-Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.588235, 0.470588, 0, 1)
 Button/styles/hover = SubResource("StyleBoxTexture_76ol0")
 Button/styles/normal = ExtResource("2_fs1cc")
