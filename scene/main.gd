@@ -7,6 +7,7 @@ extends Node2D
 @onready var missiles: Node = $Missiles
 @onready var players: Node = $Players
 @onready var right_wall: CollisionShape2D = $Walls/Right
+@onready var objects: Node = $Objects
 
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
@@ -149,8 +150,11 @@ func _on_player_shoot(player) -> void:
 		return
 	var missile = Globals.PLAYABLE_MISSILES[player.current_missile].instantiate()
 	player.apply_missile_shot(missile)
-	missile.add_to_group("missile")
-	missiles.add_child(missile)
+	if missile.is_permanent:
+		objects.add_child(missile)
+	else:
+		missile.add_to_group("missile")
+		missiles.add_child(missile)
 	player.spend_current_missile_in_inventory()
 	player.throw_sfx.pitch_scale = randf() + 0.75
 	player.throw_sfx.play()

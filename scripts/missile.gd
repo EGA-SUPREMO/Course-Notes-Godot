@@ -9,6 +9,7 @@ var who_shoot: CharacterBody2D
 @export var price: int
 @export var consumable := false#doesnt spend a turn to use
 @export var knockback_multiplier:= 1
+@export var is_permanent := false
 
 signal explotion
 
