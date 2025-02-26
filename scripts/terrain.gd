@@ -143,7 +143,7 @@ func clip(missile_polygon: PackedVector2Array):
 				body.call_deferred("add_child", polygon_temp)
 
 	
-func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
+func create_real_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 12
 	var points_arc = PackedVector2Array()
 	
@@ -153,7 +153,26 @@ func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector
 		points_arc.push_back(circle_position + Vector2(cos(angle_point), sin(angle_point)) * radius)
 
 	return points_arc
+	
+func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
+	var nb_points = 12
+	var points_arc = PackedVector2Array()
+	
+	points_arc.push_back(circle_position)
+	for i in range(nb_points + 1):
+		var angle_point = deg_to_rad(i * 360 / nb_points)
+		# Stretch the shape vertically to form an upright egg
+		var stretch_factor = 1.0 - 0.3 * sin(angle_point)
+		var adjusted_radius_x = radius
+		var adjusted_radius_y = radius * stretch_factor 
+		
+		points_arc.push_back(circle_position + Vector2(
+			cos(angle_point) * adjusted_radius_x, 
+			sin(angle_point) * adjusted_radius_y
+		))
 
+	return points_arc
+	
 func calculate_area(mesh_vertices: PackedVector2Array) -> float:
 	var result := 0.0
 	var num_vertices := mesh_vertices.size()
