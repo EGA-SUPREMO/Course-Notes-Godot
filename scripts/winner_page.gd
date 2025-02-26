@@ -1,8 +1,8 @@
 extends Control
 
-@onready var h_box_container: HBoxContainer = $VBoxContainer/HBoxContainer
-@onready var sub_viewport: SubViewport = $VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport
-@onready var first_place_label: RichTextLabel = $VBoxContainer/FirstPlaceLabel
+@onready var h_box_container: HBoxContainer = $PanelContainer/VBoxContainer/HBoxContainer
+@onready var sub_viewport: SubViewport = $PanelContainer/VBoxContainer/HBoxContainer/SubViewportContainer/SubViewport
+@onready var first_place_label: RichTextLabel = $PanelContainer/VBoxContainer/FirstPlaceLabel
 
 var players_sorted: Array
 

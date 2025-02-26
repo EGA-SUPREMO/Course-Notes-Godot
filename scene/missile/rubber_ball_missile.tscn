@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c4pw1uh0k6o3v" path="res://assets/UI pack 2/Red/Default/button_round_gloss.png" id="4_hk66m"]
 
 [sub_resource type="Curve" id="Curve_5hkqp"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238372, 0), 3.60021, 3.60021, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.125, 0), 1.05494, 1.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fneuu"]
