@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhoruecjupae1"]
+
+[ext_resource type="PackedScene" uid="uid://c0562akwst7p3" path="res://scene/missile.tscn" id="1_ad5n5"]
+[ext_resource type="PhysicsMaterial" uid="uid://chxf13g8vaio0" path="res://scene/missile/physics_material_bouncy.tres" id="2_3srgi"]
+[ext_resource type="Script" path="res://scene/missile/rubber_ball_missile.gd" id="2_evom4"]
+
+[sub_resource type="Curve" id="Curve_5hkqp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fneuu"]
+height = 20.0
+
+[node name="RubberBall" instance=ExtResource("1_ad5n5")]
+physics_material_override = ExtResource("2_3srgi")
+lock_rotation = false
+script = ExtResource("2_evom4")
+damage_per_speed = SubResource("Curve_5hkqp")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_fneuu")
+
+[node name="AnimatedSprite2D" parent="." index="4"]
+visible = false

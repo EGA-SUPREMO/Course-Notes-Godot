@@ -7,12 +7,14 @@ const SCENE_NUCLEAR_MISSILE = preload("res://scene/nuclear_missile.tscn")
 const SCENE_MISSILE_FIVEBOMB = preload("res://scene/missile_fivebomb.tscn")
 const ENDERPEARL = preload("res://scene/enderpearl.tscn")
 const REGENERATE = preload("res://scene/regenerate.tscn")
+const SCENE_RUBBER_BALL_MISSILE = preload("res://scene/missile/rubber_ball_missile.tscn")
 const MAP_SIZE = Vector2i(1280, 720)
 
 const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
-	SCENE_NUCLEAR_MISSILE, ENDERPEARL, REGENERATE]
+	SCENE_NUCLEAR_MISSILE, SCENE_RUBBER_BALL_MISSILE, ENDERPEARL, REGENERATE]
 const PLAYABLE_MISSILE_ICONS = [preload("res://assets/sprites/icons/fivebomb.png"), 
 	preload("res://assets/sprites/icons/hotshower.png"),
+	preload("res://assets/sprites/icons/nuclear.png"),
 	preload("res://assets/sprites/icons/nuclear.png"),
 	preload("res://assets/sprites/icons/teleport.png"),
 	preload("res://assets/sprites/icons/repair.png")

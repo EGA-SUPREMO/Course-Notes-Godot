@@ -135,6 +135,7 @@ layout_mode = 2
 
 [node name="NextMatch" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 icon = ExtResource("9_dbnhc")
 icon_alignment = 1
 
