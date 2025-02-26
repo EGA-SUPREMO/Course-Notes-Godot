@@ -137,6 +137,7 @@ func clip(missile_polygon: PackedVector2Array):
 				body.contact_monitor = true
 				body.max_contacts_reported = 2
 				body.mass = mass
+				body.physics_material_override = preload("res://scene/missile/physics_material_bouncy.tres")
 				
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
