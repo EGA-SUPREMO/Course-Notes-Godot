@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2rhsns4gia5e"]
+[gd_scene load_steps=3 format=3 uid="uid://dys3an27f1u0h"]
 
+[ext_resource type="PackedScene" uid="uid://yc1e8ehoygq4" path="res://scene/consumable.tscn" id="1_uthly"]
 [ext_resource type="Script" path="res://scripts/regenerate.gd" id="1_wtuyj"]
 
-[node name="Regenerate" type="Node2D"]
+[node name="Regenerate" instance=ExtResource("1_uthly")]
 script = ExtResource("1_wtuyj")
+price = 800

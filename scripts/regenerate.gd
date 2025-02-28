@@ -1,8 +1,5 @@
-extends Node2D
+extends Consumable
 
-const consumable := true
-var price := 800
-var who_shoot: Player
 
 func _ready() -> void:
 	queue_free()
