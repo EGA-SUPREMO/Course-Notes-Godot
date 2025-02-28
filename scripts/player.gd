@@ -132,7 +132,7 @@ func _ready():
 	
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, INF, 0, INF, 5, 10]
+	inventory = [INF, INF, 0, INF, 5, 10, 3]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
@@ -264,6 +264,7 @@ func spend_current_missile_in_inventory(forced := false) -> void:
 func change_current_missile_to_next_missile_in_inventory() -> void:
 	current_missile += 1
 	woosh_sfx.play()
+	print(Globals.PLAYABLE_MISSILES)
 	if current_missile >= Globals.PLAYABLE_MISSILES.size():
 		current_missile = 0
 	if inventory[current_missile] < 1:
