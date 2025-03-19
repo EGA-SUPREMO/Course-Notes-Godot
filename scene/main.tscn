@@ -26,6 +26,8 @@ script = ExtResource("1_vsj3d")
 
 [node name="Objects" type="Node" parent="."]
 
+[node name="AudioManager" type="Node" parent="."]
+
 [node name="VoidLimit" type="StaticBody2D" parent="."]
 collision_layer = 15
 collision_mask = 15
