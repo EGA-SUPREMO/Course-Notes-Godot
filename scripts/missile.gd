@@ -18,7 +18,7 @@ signal explotion
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sfx_explotion: AudioStreamPlayer2D = $SFX_Explotion
 @onready var sprite_2d: Sprite2D = $Sprite2D
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedExplotion
 
 func _ready():
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height

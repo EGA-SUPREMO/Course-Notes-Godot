@@ -146,6 +146,8 @@ func next_round():
 	get_tree().change_scene_to_file("res://scene/shop.tscn")
 
 func _on_player_shoot(player) -> void:
+	if player.HP <= 0:
+		return
 	if players.get_child_count() == 1:
 		return
 	var missile = Globals.PLAYABLE_MISSILES[player.current_missile].instantiate()
@@ -160,9 +162,11 @@ func _on_player_shoot(player) -> void:
 	player.throw_sfx.play()
 
 func _on_player_death(player: Player):
-	players.remove_child(player)
-	MatchManager.players.call_deferred("add_child", player)
-	var death = preload("res://scene/death.tscn").instantiate()
+	player.animation_player.play("Death")
+	player.death_sfx.play(0.3)
+	#players.remove_child(player)
+	#MatchManager.players.call_deferred("add_child", player)
+	#var death = preload("res://scene/death.tscn").instantiate()
 	
 	#next_round()
 	

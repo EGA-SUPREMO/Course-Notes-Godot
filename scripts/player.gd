@@ -8,6 +8,7 @@ class_name Player
 @onready var label: Label = $Label
 @onready var woosh_sfx: AudioStreamPlayer2D = $WooshSFX
 @onready var run_sfx: AudioStreamPlayer2D = $RunSFX
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var missile_power := 50:
 	set(value):
@@ -36,11 +37,14 @@ var text_temp : String
 @onready var monitors: Node2D = $Monitors
 @onready var trajectory: Line2D = $Trajectory
 #var too_early_shoot_timer := Timer.new()
+@onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
 
 var max_hp := 100.0
 var max_stamina := 300
 var HP:= max_hp:
 	set(value):
+		if HP <= 0 and value <= HP:
+			return
 		if HP > value:
 			hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
 			hurt_sfx.pitch_scale = randf() + 0.5
@@ -105,6 +109,7 @@ var mass
 #var can_shoot = false
 
 func _ready():
+	hurt_sfx.pitch_scale = randf() + 0.75
 	trajectory.player = self
 	trajectory.position = player.hud.position
 	trajectory.default_color = Globals.colors_by_player[player.resource_sprite_frame]
@@ -159,7 +164,7 @@ func _ready():
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[current_missile]
 	
 func _process(delta):
-	label.text = "$: " + str(money) + "\nHp: " + str(HP) + "\n" + str(inventory) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
+	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
 	angle_number.text = str(angle)
 	power_label.text = str(missile_power)
 	text_temp = ""
@@ -291,6 +296,11 @@ func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.who_shoot = player
 	
 	return direction
+
+func die() -> void:
+	get_parent().remove_child(player)
+	MatchManager.players.call_deferred("add_child", player)
+	player.animation_player.play("RESET")
 
 #func on_early_shoot_timeout():
 	#can_shoot = true

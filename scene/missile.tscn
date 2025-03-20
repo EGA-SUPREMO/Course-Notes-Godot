@@ -13,7 +13,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
-tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/path = NodePath("AnimatedExplotion:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -153,7 +153,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/path = NodePath("AnimatedExplotion:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -179,7 +179,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D")
+tracks/3/path = NodePath("AnimatedExplotion")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -244,7 +244,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/path = NodePath("AnimatedExplotion:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -262,39 +262,39 @@ _data = {
 "reset": SubResource("Animation_61hfh")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vtayj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k73ok"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(0, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yich7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4edi"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(192, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p7u2g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp4na"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(384, 0, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pg3xw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j858q"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(0, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p28sp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqo3s"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(192, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ar6ha"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4xpm"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(384, 192, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vd0xx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2wiu"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(0, 384, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r0qdh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys2gy"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(192, 384, 192, 192)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ya8j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ud7l2"]
 atlas = ExtResource("3_xlgyg")
 region = Rect2(384, 384, 192, 192)
 
@@ -302,31 +302,31 @@ region = Rect2(384, 384, 192, 192)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vtayj")
+"texture": SubResource("AtlasTexture_k73ok")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yich7")
+"texture": SubResource("AtlasTexture_e4edi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p7u2g")
+"texture": SubResource("AtlasTexture_tp4na")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pg3xw")
+"texture": SubResource("AtlasTexture_j858q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p28sp")
+"texture": SubResource("AtlasTexture_dqo3s")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ar6ha")
+"texture": SubResource("AtlasTexture_r4xpm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vd0xx")
+"texture": SubResource("AtlasTexture_n2wiu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r0qdh")
+"texture": SubResource("AtlasTexture_ys2gy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ya8j")
+"texture": SubResource("AtlasTexture_ud7l2")
 }],
 "loop": false,
 "name": &"default",
@@ -358,7 +358,8 @@ libraries = {
 }
 autoplay = "reset"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedExplotion" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_1ddql")
 
