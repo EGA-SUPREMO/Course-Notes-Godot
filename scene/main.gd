@@ -8,6 +8,7 @@ extends Node2D
 @onready var players: Node = $Players
 @onready var right_wall: CollisionShape2D = $Walls/Right
 @onready var objects: Node = $Objects
+@onready var effects: Node = $Effects
 
 var players_on_wait: bool
 #@onready var rigid_body_2d = $RigidBody2D
@@ -157,6 +158,8 @@ func _on_player_shoot(player) -> void:
 	else:
 		missile.add_to_group("missile")
 		missiles.add_child(missile)
+	if player.current_missile == 6:
+		missile.effect.connect(_on_add_effect.bind(missile.animated_sprite_effect_node, missile))
 	player.spend_current_missile_in_inventory()
 	player.throw_sfx.pitch_scale = randf() + 0.75
 	player.throw_sfx.play()
@@ -164,9 +167,16 @@ func _on_player_shoot(player) -> void:
 func _on_player_death(player: Player):
 	player.animation_player.play("Death")
 	player.death_sfx.play(0.3)
-	#players.remove_child(player)
-	#MatchManager.players.call_deferred("add_child", player)
-	#var death = preload("res://scene/death.tscn").instantiate()
+	var explotion = preload("res://scene/animated_explotion.tscn").instantiate()
+	_on_add_effect(explotion, player)
 	
 	#next_round()
-	
+
+func _on_add_effect(effect: AnimatedSprite2D, parent: Node2D):
+	if parent is Bat:
+		effect.global_position = parent.last_position_collision
+		effect.get_child(0).play()
+	else:
+		effect.global_position = parent.global_position
+	effect.play()
+	effects.add_child(effect)

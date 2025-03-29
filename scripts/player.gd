@@ -165,7 +165,7 @@ func _ready():
 	
 func _process(delta):
 	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
-	angle_number.text = str(angle)
+	angle_number.text = str(map_angle(angle + 90))
 	power_label.text = str(missile_power)
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
@@ -173,7 +173,7 @@ func _process(delta):
 	
 	set_percentage_visible_power(missile_power)
 		
-	hud.rotation = deg_to_rad(angle + 180)
+	hud.rotation = deg_to_rad(angle)
 
 func change_color_to_power(color: Color):
 	for child in hud.get_children():
@@ -289,9 +289,9 @@ func change_current_missile_to_previous_missile_in_inventory() -> void:
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[current_missile]
 
 func apply_missile_shot(missile: Node2D) -> Vector2:
-	missile.rotation = deg_to_rad(angle) + PI / 2
+	missile.rotation = deg_to_rad(angle)
 	missile.position = hud.global_position
-	var direction = Vector2(cos(deg_to_rad(angle + 180)), sin(deg_to_rad(angle + 180)))
+	var direction = Vector2(cos(deg_to_rad(angle)), sin(deg_to_rad(angle)))
 	missile.apply_impulse(direction * missile_power * POWER_MULTIPLIER, Vector2.ZERO)
 	missile.who_shoot = player
 	
@@ -306,3 +306,12 @@ func die() -> void:
 	#can_shoot = true
 	#too_early_shoot_timer.stop()
 	#print(can_shoot)
+	
+func map_angle(angle: float) -> float:
+	angle = fposmod(angle, 360)  # Normalize to [0, 360)
+	var mapped_angle = 90 - fposmod(angle, 180)  # Map to 90 → 0 → -90 cycle
+	
+	if angle >= 180:
+		mapped_angle *= -1  # Flip sign in the second half of the cycle
+	
+	return mapped_angle

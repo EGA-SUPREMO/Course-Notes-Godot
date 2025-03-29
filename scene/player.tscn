@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene load_steps=28 format=3 uid="uid://53q7cmdct0vu"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
 [ext_resource type="Shader" path="res://scene/player_hud.gdshader" id="2_ihj18"]
@@ -18,7 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="15_px7as"]
 [ext_resource type="AudioStream" uid="uid://cpjsy8f0utxil" path="res://assets/sounds/Kenney Impact SFX/impactMining_000.ogg" id="16_e15sd"]
 [ext_resource type="AudioStream" uid="uid://d262jsva8yap1" path="res://assets/sounds/8d82b5_pacman_dies_sound_effect.mp3" id="17_7dfgk"]
-[ext_resource type="Texture2D" uid="uid://d0080wsh48tfm" path="res://assets/sprites/explosion/spritesheet.png" id="18_3g2fh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
 radius = 4.0
@@ -49,7 +48,7 @@ resource_name = "Death"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedExplotion:visible")
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +60,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -70,25 +69,13 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -96,27 +83,13 @@ tracks/3/keys = {
 "method": &"die"
 }]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedExplotion")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"", 1.0, false],
-"method": &"play"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 0.10882),
 "update": 0,
@@ -128,46 +101,34 @@ resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedExplotion:visible")
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/enabled = false
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -175,13 +136,13 @@ tracks/3/keys = {
 "method": &"die"
 }]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -193,77 +154,6 @@ _data = {
 "Death": SubResource("Animation_37hv0"),
 "RESET": SubResource("Animation_ihm5u")
 }
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k73ok"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(0, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e4edi"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(192, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tp4na"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(384, 0, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j858q"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(0, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqo3s"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(192, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4xpm"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(384, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n2wiu"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(0, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ys2gy"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(192, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ud7l2"]
-atlas = ExtResource("18_3g2fh")
-region = Rect2(384, 384, 192, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rppr2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k73ok")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e4edi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tp4na")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j858q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqo3s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r4xpm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n2wiu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ys2gy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ud7l2")
-}],
-"loop": false,
-"name": &"default",
-"speed": 20.0
-}]
 
 [node name="player" type="CharacterBody2D" groups=["destructibles"]]
 z_index = 5
@@ -464,8 +354,3 @@ libraries = {
 [node name="Trajectory" parent="." instance=ExtResource("13_q5iil")]
 visible = false
 texture = null
-
-[node name="AnimatedExplotion" type="AnimatedSprite2D" parent="."]
-visible = false
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_rppr2")
