@@ -12,7 +12,7 @@ func update_trajectory(angle: int, power: int, max_points = 4000, timestep = 0.0
 func calculate_trajectory(angle: int, power: int, max_points = 4000, timestep = 0.02) -> PackedVector2Array:
 	var new_points:= []
 	var pos = Vector2.ZERO
-	var direction = Vector2(cos(deg_to_rad(angle + 180)), sin(deg_to_rad(angle + 180)))
+	var direction = Vector2(cos(deg_to_rad(angle)), sin(deg_to_rad(angle)))
 	var speed: float = power * player.POWER_MULTIPLIER/32.34
 	var velocity = direction * speed
 	#var terrain = get_tree().get_current_scene().get_node("/root/Main/Terrain").island_holder.get_children()

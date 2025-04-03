@@ -81,17 +81,22 @@ var amount_power_sprites: int
 
 @export var angle := 0.0:
 	set(value):
+		#if animated_sprite:
+			#var max_angle = 270 if !animated_sprite.flip_h else 90
+			#var min_angle = 90 if !animated_sprite.flip_h else 270
+			#print(min_angle)
+			#if value < min_angle:
+				#angle = min_angle
+				#return
+			#elif value > max_angle:
+				#angle = max_angle
+				#return
 		if tap_sfx and trajectory:
 			trajectory.update_trajectory(value, missile_power)
 			#tap_sfx.pitch_scale = 1
 			tap_sfx.play()
-		if value > 357:
-			angle = value - 360
-			return
-		if value < 0:
-			angle = 360 + value
-			return
-		angle = value
+			
+		angle = fposmod(value, 360)
 var win_count:= 0
 var loss_count:= 0
 var id: int
@@ -165,7 +170,8 @@ func _ready():
 	
 func _process(delta):
 	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
-	angle_number.text = str(map_angle(angle + 90))
+	#angle_number.text = str(map_angle(angle + 90))
+	angle_number.text = str(angle)
 	power_label.text = str(missile_power)
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
@@ -315,3 +321,9 @@ func map_angle(angle: float) -> float:
 		mapped_angle *= -1  # Flip sign in the second half of the cycle
 	
 	return mapped_angle
+
+func flip_angle_horizontally() -> void:
+	angle = fposmod(180 - angle, 360)
+
+func change_angle(new_value):
+	angle = new_value

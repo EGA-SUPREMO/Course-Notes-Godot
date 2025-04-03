@@ -25,12 +25,14 @@ func update(_delta):
 
 func update_physics(_delta):
 	var direction = Input.get_axis(player.keyboard_profile + "left_move", player.keyboard_profile + "right_move")
-	
-	if direction > 0:
+
+	if direction > 0 and player.animated_sprite.flip_h:
 		player.animated_sprite.flip_h = false
-	elif direction < 0:
+		player.flip_angle_horizontally()
+	elif direction < 0 and not player.animated_sprite.flip_h:
 		player.animated_sprite.flip_h = true
-	
+		player.flip_angle_horizontally()
+
 	calculate_movement_speed(_delta, direction)
 	
 func calculate_movement_speed(_delta, direction):
