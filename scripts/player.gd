@@ -91,6 +91,8 @@ var amount_power_sprites: int
 			#elif value > max_angle:
 				#angle = max_angle
 				#return
+		if value == angle:
+			return
 		if tap_sfx and trajectory:
 			trajectory.update_trajectory(value, missile_power)
 			#tap_sfx.pitch_scale = 1
@@ -326,4 +328,24 @@ func flip_angle_horizontally() -> void:
 	angle = fposmod(180 - angle, 360)
 
 func change_angle(new_value):
-	angle = new_value
+	if animated_sprite:
+		if animated_sprite.flip_h:
+			var max_angle = 270
+			var min_angle = 90
+			if new_value < min_angle:
+				angle = min_angle
+				return
+			elif new_value > max_angle:
+				angle = max_angle
+				return
+			angle = new_value
+			return
+		var in_upper_left_arc = new_value < 270 && new_value > 180
+		var in_lower_left_arc = new_value > 90 && new_value < 180
+		if in_upper_left_arc:
+			angle = 270
+			return
+		elif in_lower_left_arc:
+			angle = 90
+			return
+		angle = new_value

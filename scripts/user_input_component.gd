@@ -28,10 +28,12 @@ func update_user_input(_delta: float) -> void:
 		timer_power.start()
 	
 	if Input.is_action_just_pressed(player.keyboard_profile + "lower_angle"):
-		player.angle -= 1
+		#player.angle -= 1
+		player.change_angle(player.angle - 1)
 		timer_angle.start(0.25)
 	if Input.is_action_just_pressed(player.keyboard_profile + "increase_angle"):
-		player.angle += 1
+		#player.angle += 1
+		player.change_angle(player.angle + 1)
 		timer_angle.start(0.25)
 	
 	#if Input.is_action_just_pressed(player.keyboard_profile + "decrease_power"):
@@ -66,8 +68,10 @@ func on_power_timeout():
 func on_angle_timeout():
 	timer_angle.wait_time = 0.02
 	if Input.is_action_pressed(player.keyboard_profile + "increase_angle"):
-		player.angle += 3
+		#player.angle += 3
+		player.change_angle(player.angle + 3)
 		timer_angle.start()
 	if Input.is_action_pressed(player.keyboard_profile + "lower_angle"):
-		player.angle -= 3
+		#player.angle -= 3
+		player.change_angle(player.angle - 3)
 		timer_angle.start()
