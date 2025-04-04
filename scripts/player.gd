@@ -172,8 +172,7 @@ func _ready():
 	
 func _process(delta):
 	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
-	#angle_number.text = str(map_angle(angle + 90))
-	angle_number.text = str(angle)
+	angle_number.text = str(map_angle(angle + 90))
 	power_label.text = str(missile_power)
 	text_temp = ""
 	if human:# change something like state machine when IA is fully implemented
@@ -327,8 +326,11 @@ func map_angle(angle: float) -> float:
 func flip_angle_horizontally() -> void:
 	angle = fposmod(180 - angle, 360)
 
-func change_angle(new_value):
+func change_angle(delta_angle: int) -> void:
 	if animated_sprite:
+		if not animated_sprite.flip_h:
+			delta_angle *= -1
+		var new_value = angle + delta_angle
 		if animated_sprite.flip_h:
 			var max_angle = 270
 			var min_angle = 90
