@@ -20,24 +20,24 @@
 [ext_resource type="AudioStream" uid="uid://d262jsva8yap1" path="res://assets/sounds/8d82b5_pacman_dies_sound_effect.mp3" id="17_7dfgk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_damwu"]
-radius = 4.0
-height = 18.0
+radius = 6.0
+height = 22.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_h64yj"]
-a = Vector2(-9, 3)
-b = Vector2(9, 3)
+a = Vector2(-11, 1)
+b = Vector2(11, 1)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_whavn"]
-a = Vector2(-9, 11)
-b = Vector2(9, 11)
+a = Vector2(-11, 13)
+b = Vector2(11, 13)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_422t8"]
-a = Vector2(-18, 3)
-b = Vector2(-18, 11)
+a = Vector2(-20, 1)
+b = Vector2(-20, 13)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_c5dy1"]
-a = Vector2(18, 3)
-b = Vector2(18, 11)
+a = Vector2(20, 1)
+b = Vector2(20, 13)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4hegk"]
 shader = ExtResource("2_ihj18")
@@ -169,7 +169,6 @@ shape = SubResource("CapsuleShape2D_damwu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 7)
 scale = Vector2(0.7, 0.7)
-animation = &""
 
 [node name="Monitors" type="Node2D" parent="."]
 position = Vector2(0, 1)
