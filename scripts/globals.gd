@@ -12,20 +12,21 @@ const SCENE_RUBBER_BALL_MISSILE = preload("res://scene/missile/rubber_ball_missi
 
 const MAP_SIZE = Vector2i(1280, 720)
 
-const PLAYABLE_MISSILES = [SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
-	SCENE_NUCLEAR_MISSILE, SCENE_RUBBER_BALL_MISSILE, ENDERPEARL, REGENERATE,
-	BAT]
+const PLAYABLE_MISSILES = [[SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
+	SCENE_NUCLEAR_MISSILE, SCENE_RUBBER_BALL_MISSILE], [ENDERPEARL, REGENERATE,
+	BAT]]
 
-const PLAYABLE_MISSILE_ICONS = [preload("res://assets/sprites/icons/fivebomb.png"), 
+const PLAYABLE_MISSILE_ICONS = [[preload("res://assets/sprites/icons/fivebomb.png"), 
 	preload("res://assets/sprites/icons/hotshower.png"),
 	preload("res://assets/sprites/icons/nuclear.png"),
-	preload("res://assets/sprites/icons/nuclear.png"),
+	preload("res://assets/sprites/icons/nuclear.png")],
+	[
 	preload("res://assets/sprites/icons/teleport.png"),
 	preload("res://assets/sprites/icons/repair.png"),
-	preload("res://assets/UI pack 2/Blue/Default/arrow_basic_e.png")]
+	preload("res://assets/UI pack 2/Blue/Default/arrow_basic_e.png")]]
 var playable_missiles_nodes: Array
 
-var sprites_for_players = [preload("res://scene/player_zeta.tres"),
+var sprites_for_players = [preload("res://scene/player_zeta_temp.tres"),
 	preload("res://scene/player_pemaloe.tres"),
 	preload("res://scene/player_merakyat.tres"),
 	preload("res://scene/player_risu.tres"),
@@ -44,8 +45,9 @@ var max_number_match = 6
 const PRICE_MULTIPLIER = 0.5
 
 func _ready() -> void:
-	for missile in PLAYABLE_MISSILES:
-		playable_missiles_nodes.append(missile.instantiate())
+	for items in PLAYABLE_MISSILES:
+		for item in items:
+			playable_missiles_nodes.append(item.instantiate())
 		
 
 func counting():
