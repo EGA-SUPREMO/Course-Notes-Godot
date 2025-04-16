@@ -26,7 +26,7 @@ const PLAYABLE_MISSILE_ICONS = [[preload("res://assets/sprites/icons/fivebomb.pn
 	preload("res://assets/UI pack 2/Blue/Default/arrow_basic_e.png")]]
 var playable_missiles_nodes:= [[], []]
 
-var sprites_for_players = [preload("res://scene/player_zeta_temp.tres"),
+var sprites_for_players = [preload("res://scene/player_zeta.tres"),
 	preload("res://scene/player_pemaloe.tres"),
 	preload("res://scene/player_merakyat.tres"),
 	preload("res://scene/player_risu.tres"),
