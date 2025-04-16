@@ -151,7 +151,7 @@ func _on_player_shoot(player) -> void:
 		return
 	if players.get_child_count() == 1:
 		return
-	var missile = Globals.PLAYABLE_MISSILES[player.active_item_type][player.current_missile].instantiate()
+	var missile = Globals.PLAYABLE_MISSILES[player.active_item_type][player.selectedItem].instantiate()
 	player.apply_missile_shot(missile)
 	if missile.is_permanent:
 		objects.add_child(missile)

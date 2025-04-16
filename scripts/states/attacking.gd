@@ -19,34 +19,6 @@ func update(_delta):
 		player.shoot.emit()
 		player.wants_shoot = false
 		player.user_input_component.timer_power.stop()
-		if Globals.playable_missiles_nodes[player.current_missile].consumable:
+		if Globals.playable_missiles_nodes[player.active_item_type][player.selectedItem].consumable:
 			return
 		transition.emit(self, "idle")
-
-func update_physics(_delta):
-	var direction = Input.get_axis(player.keyboard_profile + "left_move", player.keyboard_profile + "right_move")
-
-	if direction > 0 and player.animated_sprite.flip_h:
-		player.animated_sprite.flip_h = false
-		player.flip_angle_horizontally()
-	elif direction < 0 and not player.animated_sprite.flip_h:
-		player.animated_sprite.flip_h = true
-		player.flip_angle_horizontally()
-
-	calculate_movement_speed(_delta, direction)
-	
-func calculate_movement_speed(_delta, direction):
-	if player.stamina <= 0:
-		direction = 0
-	
-	var max_movement = direction * player.SPEED_MOVEMENT
-	var acceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.ACCELERATION_MOVEMENT)
-	
-	if abs(max_movement) > abs(acceleration):
-		player.velocity.x = acceleration
-		#player.run_sfx.play()
-		player.stamina -= abs(player.velocity.x)/1000
-	else:
-		var desacceleration = lerp(player.velocity.x, direction * player.SPEED_MOVEMENT, _delta * player.DESACCELERATION_MOVEMENT)
-		player.velocity.x = desacceleration
-	

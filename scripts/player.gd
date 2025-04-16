@@ -33,8 +33,8 @@ var current_consumable:= 0
 var selectedItem := 0:
 	get():
 		if active_item_type:
-			return current_missile
-		return current_consumable
+			return current_consumable
+		return current_missile
 var inventory : Array
 var stamina:= 500
 var damage_done: int
@@ -45,6 +45,7 @@ var text_temp : String
 @onready var trajectory: Line2D = $Trajectory
 #var too_early_shoot_timer := Timer.new()
 @onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
+@onready var switch_type_item_sfx: AudioStreamPlayer2D = $SwitchTypeItemSFX
 
 var max_hp := 100.0
 var max_stamina := 300
@@ -175,10 +176,10 @@ func _ready():
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
 	
 	missile_sprite.position = hud.position
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][current_missile]
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 	
 func _process(delta):
-	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina) + "\n" + str(Globals.playable_missiles_nodes[current_missile].name)
+	label.text = "\nHp: " + str(HP) + text_temp + "\n" + str(stamina)
 	angle_number.text = str(map_angle(angle + 90))
 	power_label.text = str(missile_power)
 	text_temp = ""
@@ -272,35 +273,58 @@ func apply_squish_damage(_body):
 	
 	HP -= total_force/20000
 
+func switch_item_type():
+	if active_item_type == 1:
+		active_item_type = 0
+	else:
+		active_item_type = 1
+	switch_type_item_sfx.play()
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
+
 func spend_current_missile_in_inventory(forced := false) -> void:
-	if Globals.playable_missiles_nodes[current_missile].name == "Regenerate" and forced==false:
+	if Globals.playable_missiles_nodes[active_item_type][selectedItem].name == "Regenerate" and forced==false:
 		return
 	
-	inventory[active_item_type][current_missile] -= 1
-	if inventory[active_item_type][current_missile] < 1:
+	inventory[active_item_type][selectedItem] -= 1
+	if inventory[active_item_type][selectedItem] < 1:
 		change_current_missile_to_next_missile_in_inventory()
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
-	current_missile += 1
+	print(selectedItem)
+	if active_item_type:
+		current_consumable += 1
+	else:
+		current_missile += 1
 	woosh_sfx.play()
-	
-	if current_missile >= Globals.PLAYABLE_MISSILES[active_item_type].size():
-		current_missile = 0
-	if inventory[active_item_type][current_missile] < 1:
+	print(selectedItem)
+	if selectedItem >= Globals.PLAYABLE_MISSILES[active_item_type].size():
+		if active_item_type:
+			current_consumable = 0
+		else:
+			current_missile = 0
+	if inventory[active_item_type][selectedItem] < 1:
 		change_current_missile_to_next_missile_in_inventory()# stack overflow xdxd
 
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][current_missile]
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func change_current_missile_to_previous_missile_in_inventory() -> void:
 	woosh_sfx.play()
-	if current_missile>0:
-		current_missile -= 1;
+	if active_item_type:
+		if current_consumable>0:
+			current_consumable -= 1;
+		else:
+			current_consumable = Globals.PLAYABLE_MISSILES[active_item_type].size()-1;
 	else:
-		current_missile = Globals.PLAYABLE_MISSILES[active_item_type].size()-1;
-	if inventory[active_item_type][current_missile]<1:
+		if current_missile>0:
+			current_missile -= 1;
+		else:
+			current_missile = Globals.PLAYABLE_MISSILES[active_item_type].size()-1;
+	
+	
+	if inventory[active_item_type][selectedItem]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
 
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][current_missile]
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.rotation = deg_to_rad(angle)

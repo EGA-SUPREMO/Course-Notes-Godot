@@ -24,7 +24,7 @@ const PLAYABLE_MISSILE_ICONS = [[preload("res://assets/sprites/icons/fivebomb.pn
 	preload("res://assets/sprites/icons/teleport.png"),
 	preload("res://assets/sprites/icons/repair.png"),
 	preload("res://assets/UI pack 2/Blue/Default/arrow_basic_e.png")]]
-var playable_missiles_nodes: Array
+var playable_missiles_nodes:= [[], []]
 
 var sprites_for_players = [preload("res://scene/player_zeta_temp.tres"),
 	preload("res://scene/player_pemaloe.tres"),
@@ -45,9 +45,10 @@ var max_number_match = 6
 const PRICE_MULTIPLIER = 0.5
 
 func _ready() -> void:
-	for items in PLAYABLE_MISSILES:
-		for item in items:
-			playable_missiles_nodes.append(item.instantiate())
+	for missile in PLAYABLE_MISSILES[0]:
+		playable_missiles_nodes[0].append(missile.instantiate())
+	for consumable in PLAYABLE_MISSILES[1]:
+		playable_missiles_nodes[1].append(consumable.instantiate())
 		
 
 func counting():

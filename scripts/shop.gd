@@ -201,7 +201,7 @@ func update_inventory(player_id: int) -> void:
 	
 	match current_item_selected[player_id]:
 		0, 1, 2, 3, 4:
-			labels[player_id][1].text = str(current_player.inventory[item])
+			labels[player_id][1].text = str(current_player.inventory[0][item])
 		5:
 			labels[player_id][1].text = str(current_player.max_hp)
 		6:
