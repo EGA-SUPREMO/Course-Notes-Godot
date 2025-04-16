@@ -46,7 +46,7 @@ func _ready():
 	
 	successful_regenaratation_sfx = AudioStreamPlayer.new()
 	successful_regenaratation_sfx.bus = "SFX"
-	fail_to_regenarate_sfx.volume_db = 9.0
+	fail_to_regenarate_sfx.volume_db = -10.0
 	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
 	add_child(successful_regenaratation_sfx)
 	
@@ -158,7 +158,8 @@ func _on_player_shoot(player) -> void:
 	else:
 		missile.add_to_group("missile")
 		missiles.add_child(missile)
-	if player.current_missile == 6:
+	
+	if player.current_consumable == 2 and player.active_item_type:
 		missile.effect.connect(_on_add_effect.bind(missile.animated_sprite_effect_node, missile))
 	player.spend_current_missile_in_inventory()
 	player.throw_sfx.pitch_scale = randf() + 0.75

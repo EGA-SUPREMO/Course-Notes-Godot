@@ -62,6 +62,9 @@ func update_user_input(_delta: float) -> void:
 
 	calculate_movement_speed(_delta, direction)
 	
+	if Input.is_action_just_released(player.keyboard_profile + "shot") and Globals.playable_missiles_nodes[player.active_item_type][player.selectedItem].consumable:
+		player.shoot.emit()
+	
 func calculate_movement_speed(_delta, direction):
 	if player.stamina <= 0:
 		direction = 0

@@ -24,9 +24,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		body.linear_velocity = -body.linear_velocity*1.1
 		body.angular_velocity = -body.angular_velocity*1.1
 		last_position_collision = body.global_position
-		print(body.global_position)
-		print(global_position)
-		print(body)
 		effect.emit()
 
 func _on_life_span_timeout() -> void:

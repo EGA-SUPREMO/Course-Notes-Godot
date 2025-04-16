@@ -15,10 +15,9 @@ func exit():
 func update(_delta):
 	#if not player.can_shoot:
 		#return
-	if Input.is_action_just_released(player.keyboard_profile + "shot") or player.wants_shoot:
-		player.shoot.emit()
-		player.wants_shoot = false
-		player.user_input_component.timer_power.stop()
-		if Globals.playable_missiles_nodes[player.active_item_type][player.selectedItem].consumable:
-			return
-		transition.emit(self, "idle")
+	if not Globals.playable_missiles_nodes[player.active_item_type][player.selectedItem].consumable:
+		if Input.is_action_just_released(player.keyboard_profile + "shot") or player.wants_shoot:
+			player.shoot.emit()
+			player.wants_shoot = false
+			player.user_input_component.timer_power.stop()
+			transition.emit(self, "idle")

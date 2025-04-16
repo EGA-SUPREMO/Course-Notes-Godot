@@ -7,4 +7,3 @@ func next_turn() -> void:
 
 func update(delta: float) -> void:
 	player.velocity.x = lerp(player.velocity.x, 0.0, delta * player.DESACCELERATION_MOVEMENT)
-	print(player.name)

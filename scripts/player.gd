@@ -208,7 +208,6 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	move_and_slide()
-	
 
 func calculate_quadratic_damage(target_position: Vector2, damage: float) -> float:
 	var distance = Globals.get_closest_distance_to_shape(collision_shape, target_position)
@@ -290,13 +289,11 @@ func spend_current_missile_in_inventory(forced := false) -> void:
 		change_current_missile_to_next_missile_in_inventory()
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
-	print(selectedItem)
 	if active_item_type:
 		current_consumable += 1
 	else:
 		current_missile += 1
 	woosh_sfx.play()
-	print(selectedItem)
 	if selectedItem >= Globals.PLAYABLE_MISSILES[active_item_type].size():
 		if active_item_type:
 			current_consumable = 0
