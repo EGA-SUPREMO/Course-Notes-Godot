@@ -9,7 +9,7 @@ func _on_play_pressed() -> void:
 
 func _on_quick_match_pressed() -> void:
 	MatchManager.number_players = randi_range(2, 5)
-	MatchManager.create_players()
+	MatchManager.clean_players()
 	get_tree().change_scene_to_file("res://scene/main.tscn")
 
 

@@ -4,11 +4,14 @@ class_name AI_Attacking
 var missile: Missile
 var has_aimed := false
 var player_target: Player
+var moving:= false
 
 func _ready() -> void:
 	player.death.connect(_on_player_death.bind(player))
 
 func update(_delta):
+	if not moving:#DONT MOVE FOR NOW TODO
+		player.velocity.x = lerp(player.velocity.x, 0.0, _delta * player.DESACCELERATION_MOVEMENT)
 	#if not player.can_shoot:
 		#return
 	if not player_target:

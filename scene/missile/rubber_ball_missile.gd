@@ -7,7 +7,7 @@ func _physics_process(_delta):
 	pass
 
 func explode() -> void:
-	damage = damage_per_speed.sample(linear_velocity.abs().length()/500) * 100
+	damage = damage_per_speed.sample(linear_velocity.abs().length()/1000) * 100
 	if damage < 1:
 		return
 	sfx_explotion.play()
