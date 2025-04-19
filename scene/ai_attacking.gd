@@ -95,7 +95,7 @@ func calculate_angle_and_power():
 	
 	for angle in 131:
 		for power in 11:
-			var points = player.trajectory.calculate_trajectory(angle * 3, power*10, 40, 2.0)
+			var points = player.trajectory.calculate_trajectory(angle * 3, power, 40, 2.0)
 			for point in points:
 				point += player.hud.global_position
 				var distance = point.distance_to(player_target.global_position)

@@ -22,7 +22,7 @@ func explode():
 		
 		child_missile.linear_velocity = Vector2(
 			Globals.random_float_in_ranges(-250, -100, 100, 250),
-			Globals.random_float_in_ranges(-400, -200, 1, 2)) * velocity_multiplier
+			Globals.random_float_in_ranges(-400, -300, 1, 2)) * velocity_multiplier
 		child_missile.who_shoot = who_shoot
 		
 		get_tree().get_current_scene().missiles.call_deferred("add_child", child_missile)

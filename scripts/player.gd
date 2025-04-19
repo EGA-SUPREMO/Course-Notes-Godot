@@ -74,7 +74,7 @@ var SPEED_MOVEMENT = 50.0
 const ACCELERATION_MOVEMENT = 5.0
 const DESACCELERATION_MOVEMENT = ACCELERATION_MOVEMENT * 2.0
 const FORCE_MULTIPLIER_TO_PLAYERS = 1
-const POWER_MULTIPLIER = 10
+const POWER_MULTIPLIER = 15
 
 @export var resource_sprite_frame: int
 @export var human: bool
@@ -152,7 +152,7 @@ func _ready():
 	
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [[INF, INF, 0, INF], [5, 10, 30]]
+	inventory = [[INF, 5, 0, 10], [5, 10, 30]]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
