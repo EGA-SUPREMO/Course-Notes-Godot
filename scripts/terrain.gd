@@ -52,7 +52,7 @@ func create_collisions():
 		#bitmap = map_generator.create_bitmap(noise_map)
 		#bitmap.convert_to_image().save_jpg(str(i))
 	#
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 1)
+	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 2)
 	
 	for polygon in polygons:
 		var collider = CollisionPolygon2D.new()
@@ -145,7 +145,7 @@ func clip(missile_polygon: PackedVector2Array):
 
 	
 func create_real_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
-	var nb_points = 12
+	var nb_points = 10
 	var points_arc = PackedVector2Array()
 	
 	points_arc.push_back(circle_position)
@@ -156,7 +156,7 @@ func create_real_circle_radious_polygon(circle_position, radius: int) -> PackedV
 	return points_arc
 	
 func create_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
-	var nb_points = 12
+	var nb_points = 10
 	var points_arc = PackedVector2Array()
 	
 	points_arc.push_back(circle_position)

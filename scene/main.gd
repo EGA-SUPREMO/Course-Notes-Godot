@@ -47,9 +47,8 @@ func _ready():
 	successful_regenaratation_sfx = AudioStreamPlayer.new()
 	successful_regenaratation_sfx.bus = "SFX"
 	fail_to_regenarate_sfx.volume_db = -10.0
-	successful_regenaratation_sfx.stream = preload("res://assets/sounds/bolt sliding back from Pixabay.mp3")
+	successful_regenaratation_sfx.stream = preload("res://assets/sounds/Kenney Gameplay/phaserUp6.ogg")
 	add_child(successful_regenaratation_sfx)
-	
 	terrain.position.y = -Globals.MAP_SIZE.y/2
 	right_wall.position.x = Globals.MAP_SIZE.x
 	void_limit.position.y = Globals.MAP_SIZE.y/2
