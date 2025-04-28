@@ -52,7 +52,7 @@ func create_collisions():
 		#bitmap = map_generator.create_bitmap(noise_map)
 		#bitmap.convert_to_image().save_jpg(str(i))
 	#
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 2)
+	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0, 0), Globals.MAP_SIZE), 1.5)
 	
 	for polygon in polygons:
 		var collider = CollisionPolygon2D.new()
