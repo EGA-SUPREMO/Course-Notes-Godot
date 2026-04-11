@@ -21,3 +21,4 @@ func update(_delta):
 			player.wants_shoot = false
 			player.user_input_component.timer_power.stop()
 			transition.emit(self, "idle")
+
