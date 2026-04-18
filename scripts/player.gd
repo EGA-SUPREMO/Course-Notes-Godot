@@ -87,6 +87,9 @@ var amount_power_sprites: int
 @onready var second_shot_sfx: AudioStreamPlayer2D = $SecondShotSFX
 @onready var missile_sprite: Sprite2D = $MissileSprite
 
+# Store the currently colliding bodies
+var overlapping_bodies: Dictionary = {}
+
 @export var angle := 0.0:
 	set(value):
 		#if animated_sprite:
@@ -246,13 +249,27 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			match collision_side.name:
 				"MonitorLeft":
 					left_overlapping = true
+					var new_collision = collision_side.get_meta("colliding_nodes")
+					new_collision[body] = true
+					collision_side.set_meta("colliding_nodes", new_collision)
 				"MonitorRight":
 					right_overlapping = true
+					var new_collision = collision_side.get_meta("colliding_nodes")
+					new_collision[body] = true
+					collision_side.set_meta("colliding_nodes", new_collision)
 				"MonitorTop":
 					top_overlapping = true
+					var new_collision = collision_side.get_meta("colliding_nodes")
+					new_collision[body] = true
+					collision_side.set_meta("colliding_nodes", new_collision)
 				"MonitorBottom":
 					bottom_overlapping = true
-		
+					var new_collision = collision_side.get_meta("colliding_nodes")
+					new_collision[body] = true
+					collision_side.set_meta("colliding_nodes", new_collision)
+			print(collision_side.get_meta("colliding_nodes"))
+			print(str(player))
+
 	if (left_overlapping and right_overlapping) or (top_overlapping and bottom_overlapping):
 		#text_temp += "\n " + str(left_overlapping)
 		#text_temp += "\n " + str(right_overlapping)

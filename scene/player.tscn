@@ -1,15 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://53q7cmdct0vu"]
+[gd_scene format=3 uid="uid://53q7cmdct0vu"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_dsi0t"]
-[ext_resource type="Shader" path="res://scene/player_hud.gdshader" id="2_ihj18"]
+[ext_resource type="Script" uid="uid://bnbiye700ltrt" path="res://scripts/player.gd" id="1_dsi0t"]
+[ext_resource type="Shader" uid="uid://cs75vad7emfbv" path="res://scene/player_hud.gdshader" id="2_ihj18"]
 [ext_resource type="Texture2D" uid="uid://ls3efihws416" path="res://assets/sprites/player_hud/shield_0.png" id="5_up7eb"]
-[ext_resource type="Script" path="res://scripts/states/state_machine.gd" id="6_murpk"]
-[ext_resource type="Script" path="res://scene/ai_attacking.gd" id="7_10yhs"]
+[ext_resource type="Script" uid="uid://xiwts3311o3k" path="res://scripts/states/state_machine.gd" id="6_murpk"]
+[ext_resource type="Script" uid="uid://b6s8k8o0viji4" path="res://scene/ai_attacking.gd" id="7_10yhs"]
 [ext_resource type="AudioStream" uid="uid://dh4iecimemn8p" path="res://assets/sounds/hurt.wav" id="7_071vd"]
-[ext_resource type="Script" path="res://scripts/states/idle.gd" id="7_75v2v"]
-[ext_resource type="Script" path="res://scripts/states/attacking.gd" id="8_cm8dj"]
-[ext_resource type="Script" path="res://scripts/states/ai_idle.gd" id="8_pvw5g"]
-[ext_resource type="Script" path="res://scripts/user_input_component.gd" id="10_bdi5k"]
+[ext_resource type="Script" uid="uid://l7higog4uk5c" path="res://scripts/states/idle.gd" id="7_75v2v"]
+[ext_resource type="Script" uid="uid://10ox8nbq5p8f" path="res://scripts/states/attacking.gd" id="8_cm8dj"]
+[ext_resource type="Script" uid="uid://ddumf0e2i8bl0" path="res://scripts/states/ai_idle.gd" id="8_pvw5g"]
+[ext_resource type="Script" uid="uid://burumfta8sxf6" path="res://scripts/user_input_component.gd" id="10_bdi5k"]
 [ext_resource type="AudioStream" uid="uid://c116j6brf373l" path="res://assets/sounds/tap.wav" id="10_u42md"]
 [ext_resource type="AudioStream" uid="uid://q3hfcfl6a5ef" path="res://assets/sounds/woosh.wav" id="11_yum3t"]
 [ext_resource type="AudioStream" uid="uid://dm5tq3tj7wobw" path="res://assets/sounds/bonk doge - Sound Button [bonk_7zPAD7C].mp3" id="12_m28qo"]
@@ -42,7 +42,7 @@ b = Vector2(20, 13)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4hegk"]
 shader = ExtResource("2_ihj18")
-shader_parameter/player_color = null
+shader_parameter/player_color = Vector3(0, 0, 0)
 
 [sub_resource type="Animation" id="Animation_37hv0"]
 resource_name = "Death"
@@ -152,150 +152,154 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a0tgi"]
 _data = {
-"Death": SubResource("Animation_37hv0"),
-"RESET": SubResource("Animation_ihm5u")
+&"Death": SubResource("Animation_37hv0"),
+&"RESET": SubResource("Animation_ihm5u")
 }
 
-[node name="player" type="CharacterBody2D" groups=["destructibles"]]
+[node name="player" type="CharacterBody2D" unique_id=1862379994 groups=["destructibles"]]
 z_index = 5
 floor_max_angle = 1.309
 script = ExtResource("1_dsi0t")
 angle = 45.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1251687852]
 position = Vector2(0, 8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_damwu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1279087839]
 position = Vector2(0, 7)
 scale = Vector2(0.7, 0.7)
 
-[node name="Monitors" type="Node2D" parent="."]
+[node name="Monitors" type="Node2D" parent="." unique_id=942790376]
 position = Vector2(0, 1)
 
-[node name="MonitorTop" type="Area2D" parent="Monitors"]
+[node name="MonitorTop" type="Area2D" parent="Monitors" unique_id=417515420]
+metadata/colliding_nodes = {}
 
-[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorTop"]
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorTop" unique_id=384043535]
 shape = SubResource("SegmentShape2D_h64yj")
 
-[node name="MonitorBottom" type="Area2D" parent="Monitors"]
+[node name="MonitorBottom" type="Area2D" parent="Monitors" unique_id=1841172439]
+metadata/colliding_nodes = {}
 
-[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorBottom"]
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorBottom" unique_id=562289400]
 shape = SubResource("SegmentShape2D_whavn")
 
-[node name="MonitorLeft" type="Area2D" parent="Monitors"]
+[node name="MonitorLeft" type="Area2D" parent="Monitors" unique_id=1504371114]
+metadata/colliding_nodes = {}
 
-[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorLeft"]
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorLeft" unique_id=170981360]
 position = Vector2(9, 0)
 shape = SubResource("SegmentShape2D_422t8")
 
-[node name="MonitorRight" type="Area2D" parent="Monitors"]
+[node name="MonitorRight" type="Area2D" parent="Monitors" unique_id=1735800113]
+metadata/colliding_nodes = {}
 
-[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorRight"]
+[node name="Line" type="CollisionShape2D" parent="Monitors/MonitorRight" unique_id=61534879]
 position = Vector2(-9, 0)
 shape = SubResource("SegmentShape2D_c5dy1")
 
-[node name="MissileSprite" type="Sprite2D" parent="."]
+[node name="MissileSprite" type="Sprite2D" parent="." unique_id=1914791672]
 scale = Vector2(0.15, 0.15)
 
-[node name="HUD" type="Node2D" parent="."]
+[node name="HUD" type="Node2D" parent="." unique_id=1760681636]
 z_index = -22
 material = SubResource("ShaderMaterial_4hegk")
 position = Vector2(0, -10)
 
-[node name="power" type="Sprite2D" parent="HUD"]
+[node name="power" type="Sprite2D" parent="HUD" unique_id=1885210763]
 use_parent_material = true
 position = Vector2(8, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power2" type="Sprite2D" parent="HUD"]
+[node name="power2" type="Sprite2D" parent="HUD" unique_id=42500034]
 use_parent_material = true
 position = Vector2(16, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power3" type="Sprite2D" parent="HUD"]
+[node name="power3" type="Sprite2D" parent="HUD" unique_id=1572458476]
 use_parent_material = true
 position = Vector2(24, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power4" type="Sprite2D" parent="HUD"]
+[node name="power4" type="Sprite2D" parent="HUD" unique_id=316567895]
 use_parent_material = true
 position = Vector2(32, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power5" type="Sprite2D" parent="HUD"]
+[node name="power5" type="Sprite2D" parent="HUD" unique_id=909249372]
 use_parent_material = true
 position = Vector2(40, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power6" type="Sprite2D" parent="HUD"]
+[node name="power6" type="Sprite2D" parent="HUD" unique_id=1380568469]
 use_parent_material = true
 position = Vector2(48, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power7" type="Sprite2D" parent="HUD"]
+[node name="power7" type="Sprite2D" parent="HUD" unique_id=1556909906]
 use_parent_material = true
 position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power8" type="Sprite2D" parent="HUD"]
+[node name="power8" type="Sprite2D" parent="HUD" unique_id=1449189504]
 use_parent_material = true
 position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power9" type="Sprite2D" parent="HUD"]
+[node name="power9" type="Sprite2D" parent="HUD" unique_id=272284854]
 use_parent_material = true
 position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="power10" type="Sprite2D" parent="HUD"]
+[node name="power10" type="Sprite2D" parent="HUD" unique_id=1805588962]
 use_parent_material = true
 position = Vector2(56, 0)
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("5_up7eb")
 
-[node name="AngleNumberLabel" type="Label" parent="HUD"]
+[node name="AngleNumberLabel" type="Label" parent="HUD" unique_id=2049199534]
 offset_left = 60.0
 offset_top = 10.0
 offset_right = 100.0
 offset_bottom = 33.0
 
-[node name="PowerLabel" type="Label" parent="HUD"]
+[node name="PowerLabel" type="Label" parent="HUD" unique_id=70696663]
 offset_top = -30.0
 offset_right = 40.0
 offset_bottom = -7.0
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1494017915 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_murpk")
 initial_state = NodePath("AI_Attacking")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1051601272 node_paths=PackedStringArray("player")]
 script = ExtResource("7_75v2v")
 player = NodePath("../..")
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=888072507 node_paths=PackedStringArray("player")]
 script = ExtResource("8_cm8dj")
 player = NodePath("../..")
 
-[node name="AI_Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="AI_Attacking" type="Node" parent="StateMachine" unique_id=1083306666 node_paths=PackedStringArray("player")]
 script = ExtResource("7_10yhs")
 player = NodePath("../..")
 
-[node name="AI_Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="AI_Idle" type="Node" parent="StateMachine" unique_id=1619148818 node_paths=PackedStringArray("player")]
 script = ExtResource("8_pvw5g")
 player = NodePath("../..")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1845045679]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -306,57 +310,55 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 11
 text = "aoeuoea"
 
-[node name="UserInputComponent" type="Node" parent="."]
+[node name="UserInputComponent" type="Node" parent="." unique_id=1569249378]
 script = ExtResource("10_bdi5k")
 
-[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=942246747]
 stream = ExtResource("7_071vd")
 bus = &"SFX"
 
-[node name="TapSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="TapSFX" type="AudioStreamPlayer2D" parent="." unique_id=1181809121]
 stream = ExtResource("10_u42md")
 bus = &"SFX"
 
-[node name="WooshSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="WooshSFX" type="AudioStreamPlayer2D" parent="." unique_id=709504852]
 stream = ExtResource("11_yum3t")
 volume_db = 17.0
 pitch_scale = 1.5
 bus = &"SFX"
 
-[node name="SwitchTypeItemSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SwitchTypeItemSFX" type="AudioStreamPlayer2D" parent="." unique_id=205714726]
 stream = ExtResource("13_6c61t")
 volume_db = 17.0
 pitch_scale = 1.5
 bus = &"SFX"
 
-[node name="BonkSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="BonkSFX" type="AudioStreamPlayer2D" parent="." unique_id=1363811815]
 stream = ExtResource("12_m28qo")
 bus = &"SFX"
 
-[node name="ThrowSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="ThrowSFX" type="AudioStreamPlayer2D" parent="." unique_id=218823722]
 stream = ExtResource("13_86nwf")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="SecondShotSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SecondShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=552646247]
 stream = ExtResource("15_px7as")
 bus = &"SFX"
 
-[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=73421928]
 stream = ExtResource("17_7dfgk")
 volume_db = -7.0
 pitch_scale = 2.0
 
-[node name="RunSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="RunSFX" type="AudioStreamPlayer2D" parent="." unique_id=2077008948]
 stream = ExtResource("16_e15sd")
 volume_db = 17.0
 bus = &"SFX"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_a0tgi")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1583120256]
+libraries/ = SubResource("AnimationLibrary_a0tgi")
 
-[node name="Trajectory" parent="." instance=ExtResource("13_q5iil")]
+[node name="Trajectory" parent="." unique_id=950755628 instance=ExtResource("13_q5iil")]
 visible = false
 texture = null
