@@ -87,9 +87,6 @@ var amount_power_sprites: int
 @onready var second_shot_sfx: AudioStreamPlayer2D = $SecondShotSFX
 @onready var missile_sprite: Sprite2D = $MissileSprite
 
-# Store the currently colliding bodies
-var overlapping_bodies: Dictionary = {}
-
 @export var angle := 0.0:
 	set(value):
 		#if animated_sprite:
@@ -244,30 +241,28 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	var top_overlapping = false
 	var bottom_overlapping = false
 	
+
+	# Store the currently colliding bodies
+	var overlapping_bodies: Dictionary = {
+		"left_overlapping": {},
+		"right_overlapping": {},
+		"top_overlapping": {},
+		"bottom_overlapping": {},
+		}
+
 	for collision_side in monitors.get_children():
-		if collision_side.has_overlapping_bodies():
+		if collision_side.has_overlapping_bodies().has(body):# el has es necesario???
 			match collision_side.name:
 				"MonitorLeft":
-					left_overlapping = true
-					var new_collision = collision_side.get_meta("colliding_nodes")
-					new_collision[body] = true
-					collision_side.set_meta("colliding_nodes", new_collision)
+					overlapping_bodies['left_overlapping'][body] = true
 				"MonitorRight":
-					right_overlapping = true
-					var new_collision = collision_side.get_meta("colliding_nodes")
-					new_collision[body] = true
-					collision_side.set_meta("colliding_nodes", new_collision)
+					overlapping_bodies['right_overlapping'][body] = true
 				"MonitorTop":
-					top_overlapping = true
-					var new_collision = collision_side.get_meta("colliding_nodes")
-					new_collision[body] = true
-					collision_side.set_meta("colliding_nodes", new_collision)
+					overlapping_bodies['top_overlapping'][body] = true
 				"MonitorBottom":
-					bottom_overlapping = true
-					var new_collision = collision_side.get_meta("colliding_nodes")
-					new_collision[body] = true
-					collision_side.set_meta("colliding_nodes", new_collision)
-			print(collision_side.get_meta("colliding_nodes"))
+					overlapping_bodies['bottom_overlapping'][body] = true
+
+			print(str(overlapping_bodies))
 			print(str(player))
 
 	if (left_overlapping and right_overlapping) or (top_overlapping and bottom_overlapping):
@@ -288,6 +283,14 @@ func apply_squish_damage(_body):
 	var total_force = angular_force + linear_force# TODO este metodo le falta chicha
 	
 	HP -= total_force/20000
+
+# TODO conectar este evento con los nodos
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	# Remove this body from all lists when it leaves
+	overlapping_bodies['left_overlapping'].erase(body)
+	overlapping_bodies['right_overlapping'].erase(body)
+	overlapping_bodies['top_overlapping'].erase(body)
+	overlapping_bodies['bottom_overlapping'].erase(body)
 
 func switch_item_type():
 	if active_item_type == 1:
