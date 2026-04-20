@@ -362,11 +362,11 @@ func die() -> void:
 	#too_early_shoot_timer.stop()
 	#print(can_shoot)
 	
-func map_angle(angle: float) -> float:
-	angle = fposmod(angle, 360)  # Normalize to [0, 360)
-	var mapped_angle = 90 - fposmod(angle, 180)  # Map to 90 → 0 → -90 cycle
+func map_angle(_angle: float) -> float:
+	_angle = fposmod(_angle, 360)  # Normalize to [0, 360)
+	var mapped_angle = 90 - fposmod(_angle, 180)  # Map to 90 → 0 → -90 cycle
 	
-	if angle >= 180:
+	if _angle >= 180:
 		mapped_angle *= -1  # Flip sign in the second half of the cycle
 	
 	return mapped_angle
