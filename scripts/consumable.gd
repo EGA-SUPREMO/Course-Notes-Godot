@@ -10,3 +10,4 @@ var is_permanent := false
 
 func apply_impulse(_ignore1, _ignore2) -> void:
 	return
+

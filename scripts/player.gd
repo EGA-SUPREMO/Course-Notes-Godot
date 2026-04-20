@@ -236,41 +236,49 @@ func destroy(exploded_missile):
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D or body is Missile:
 		return
-	var left_overlapping = false
-	var right_overlapping = false
-	var top_overlapping = false
-	var bottom_overlapping = false
-	
 
 	# Store the currently colliding bodies
 	var overlapping_bodies: Dictionary = {
-		"left_overlapping": {},
-		"right_overlapping": {},
-		"top_overlapping": {},
-		"bottom_overlapping": {},
+		"MonitorLeft": {},
+		"MonitorBottom": {},
+		"MonitorTop": {},
+		"MonitorRight": {},
 		}
 
 	for collision_side in monitors.get_children():
-		if collision_side.has_overlapping_bodies().has(body):# el has es necesario???
-			match collision_side.name:
-				"MonitorLeft":
-					overlapping_bodies['left_overlapping'][body] = true
-				"MonitorRight":
-					overlapping_bodies['right_overlapping'][body] = true
-				"MonitorTop":
-					overlapping_bodies['top_overlapping'][body] = true
-				"MonitorBottom":
-					overlapping_bodies['bottom_overlapping'][body] = true
+		var bodies_found = collision_side.get_overlapping_bodies()
 
-			print(str(overlapping_bodies))
-			print(str(player))
+		# Map the results to your dictionary based on the node name
+		var key = collision_side.name
+		if overlapping_bodies.has(key):
+			overlapping_bodies[key] = bodies_found
 
-	if (left_overlapping and right_overlapping) or (top_overlapping and bottom_overlapping):
-		#text_temp += "\n " + str(left_overlapping)
-		#text_temp += "\n " + str(right_overlapping)
-		#text_temp += "\n " + str(top_overlapping)
-		#text_temp += "\n " + str(bottom_overlapping)
-		#print(str(player) + text_temp)
+
+	# Check if there is ANY object on the left that is NOT the same as an object on the right
+	var horizontal_squish = false
+	var vertical_squish = false
+
+	for l_body in overlapping_bodies["MonitorLeft"]:
+		for r_body in overlapping_bodies["MonitorRight"]:
+		# If we find two bodies that are NOT the same instance, it's a squish
+			if l_body != r_body:
+				horizontal_squish = true
+				break # Stop inner loop
+		if horizontal_squish: 
+			break # Stop outer loop
+		
+	for t_body in overlapping_bodies["MonitorTop"]:
+		for b_body in overlapping_bodies["MonitorBottom"]:
+		# If we find two bodies that are NOT the same instance, it's a squish
+			if t_body != b_body:
+				vertical_squish = true
+				break # Stop inner loop
+		if vertical_squish: 
+			break # Stop outer loop
+
+	if horizontal_squish or vertical_squish:
+		print("I'm being crushed by two different objects! - " + str(player))
+		print(str(overlapping_bodies))
 		apply_squish_damage(body)
 
 func apply_squish_damage(_body):
@@ -283,14 +291,6 @@ func apply_squish_damage(_body):
 	var total_force = angular_force + linear_force# TODO este metodo le falta chicha
 	
 	HP -= total_force/20000
-
-# TODO conectar este evento con los nodos
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	# Remove this body from all lists when it leaves
-	overlapping_bodies['left_overlapping'].erase(body)
-	overlapping_bodies['right_overlapping'].erase(body)
-	overlapping_bodies['top_overlapping'].erase(body)
-	overlapping_bodies['bottom_overlapping'].erase(body)
 
 func switch_item_type():
 	if active_item_type == 1:
