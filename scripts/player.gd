@@ -152,7 +152,7 @@ func _ready():
 	
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [[INF, 5, 0, 10], [5, 10, 30]]
+	inventory = [INF, 5, 0, 10]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
@@ -296,7 +296,7 @@ func apply_squish_damage(_body):
 	
 	HP -= total_force/20000
 
-func switch_item_type():
+func switch_item_type(): # TODO renombrar metodo y borrar todo esto, hacer activar signal shoot y luego volver a poner misol como item activo
 	if active_item_type == 1:
 		active_item_type = 0
 	else:
@@ -305,47 +305,35 @@ func switch_item_type():
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func spend_current_missile_in_inventory(forced := false) -> void:
-	if Globals.playable_missiles_nodes[active_item_type][selectedItem].name == "Regenerate" and forced==false:
+	if Globals.playable_missiles_nodes[selectedItem].name == "Regenerate" and forced==false:
 		return
 	
-	inventory[active_item_type][selectedItem] -= 1
-	if inventory[active_item_type][selectedItem] < 1:
+	inventory[selectedItem] -= 1
+	if inventory[selectedItem] < 1:
 		change_current_missile_to_next_missile_in_inventory()
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
-	if active_item_type:
-		current_consumable += 1
-	else:
-		current_missile += 1
+	current_missile += 1
 	woosh_sfx.play()
-	if selectedItem >= Globals.PLAYABLE_MISSILES[active_item_type].size():
-		if active_item_type:
-			current_consumable = 0
-		else:
-			current_missile = 0
-	if inventory[active_item_type][selectedItem] < 1:
+	if selectedItem >= Globals.PLAYABLE_MISSILES[0].size():
+		current_missile = 0
+	if inventory[selectedItem] < 1:
 		change_current_missile_to_next_missile_in_inventory()# stack overflow xdxd
 
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func change_current_missile_to_previous_missile_in_inventory() -> void:
 	woosh_sfx.play()
-	if active_item_type:
-		if current_consumable>0:
-			current_consumable -= 1;
-		else:
-			current_consumable = Globals.PLAYABLE_MISSILES[active_item_type].size()-1;
+	if current_missile>0:
+		current_missile -= 1;
 	else:
-		if current_missile>0:
-			current_missile -= 1;
-		else:
-			current_missile = Globals.PLAYABLE_MISSILES[active_item_type].size()-1;
+		current_missile = Globals.PLAYABLE_MISSILES[0].size()-1;
 	
 	
-	if inventory[active_item_type][selectedItem]<1:
+	if inventory[selectedItem]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
 
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[selectedItem]
 
 func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.rotation = deg_to_rad(angle)
