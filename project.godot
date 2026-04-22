@@ -32,6 +32,7 @@ movie_writer/movie_file="/home/trabajo/course notes godot/Course Notes Godot/vid
 [global_group]
 
 destructibles=""
+void=""
 
 [input]
 

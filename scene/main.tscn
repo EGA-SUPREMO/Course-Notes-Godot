@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://k2u3kjnuay6s"]
+[gd_scene format=3 uid="uid://k2u3kjnuay6s"]
 
-[ext_resource type="Script" path="res://scene/main.gd" id="1_vsj3d"]
+[ext_resource type="Script" uid="uid://dlcgurj126pan" path="res://scene/main.gd" id="1_vsj3d"]
 [ext_resource type="PackedScene" uid="uid://diel7vtghr4bn" path="res://scene/terrain.tscn" id="2_1t2nn"]
 [ext_resource type="PackedScene" uid="uid://5nej2cdm4ojf" path="res://scene/music.tscn" id="5_hqg6j"]
 [ext_resource type="AudioStream" uid="uid://sh3hflt0xyri" path="res://assets/music/time_for_adventure.mp3" id="6_lqwm4"]
@@ -13,45 +13,45 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hr04v"]
 normal = Vector2(-1, 0)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1127228156]
 script = ExtResource("1_vsj3d")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1645369679]
 
-[node name="Terrain" parent="." instance=ExtResource("2_1t2nn")]
+[node name="Terrain" parent="." unique_id=891023176 instance=ExtResource("2_1t2nn")]
 
-[node name="Players" type="Node" parent="."]
+[node name="Players" type="Node" parent="." unique_id=792613304]
 
-[node name="Missiles" type="Node" parent="."]
+[node name="Missiles" type="Node" parent="." unique_id=913191448]
 
-[node name="Objects" type="Node" parent="."]
+[node name="Objects" type="Node" parent="." unique_id=384917751]
 
-[node name="Effects" type="Node" parent="."]
+[node name="Effects" type="Node" parent="." unique_id=1622583827]
 
-[node name="AudioManager" type="Node" parent="."]
+[node name="AudioManager" type="Node" parent="." unique_id=1655516144]
 
-[node name="VoidLimit" type="StaticBody2D" parent="."]
+[node name="VoidLimit" type="StaticBody2D" parent="." unique_id=338060596 groups=["void"]]
 collision_layer = 15
 collision_mask = 15
 
-[node name="Bottom" type="CollisionShape2D" parent="VoidLimit"]
+[node name="Bottom" type="CollisionShape2D" parent="VoidLimit" unique_id=348394570]
 shape = SubResource("WorldBoundaryShape2D_573hu")
 
-[node name="Walls" type="StaticBody2D" parent="."]
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1530075060]
 position = Vector2(0, 222)
 collision_layer = 15
 collision_mask = 15
 
-[node name="Left" type="CollisionShape2D" parent="Walls"]
+[node name="Left" type="CollisionShape2D" parent="Walls" unique_id=1347386813]
 shape = SubResource("WorldBoundaryShape2D_o7nlc")
 
-[node name="Right" type="CollisionShape2D" parent="Walls"]
+[node name="Right" type="CollisionShape2D" parent="Walls" unique_id=2048970230]
 shape = SubResource("WorldBoundaryShape2D_hr04v")
 
-[node name="Music" parent="." instance=ExtResource("5_hqg6j")]
+[node name="Music" parent="." unique_id=1559273193 instance=ExtResource("5_hqg6j")]
 stream = ExtResource("6_lqwm4")
 autoplay = true
 bus = &"Music"
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." unique_id=2079636797]
 closed = true

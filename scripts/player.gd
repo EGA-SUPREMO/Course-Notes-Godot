@@ -237,6 +237,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D or body is Missile:
 		return
 
+	if body.is_in_group("void"):
+		HP = 0
+		return
+
 	# Store the currently colliding bodies
 	var overlapping_bodies: Dictionary = {
 		"MonitorLeft": {},

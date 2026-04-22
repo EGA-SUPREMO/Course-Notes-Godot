@@ -29,8 +29,8 @@ a = Vector2(-11, 1)
 b = Vector2(11, 1)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_whavn"]
-a = Vector2(-11, 13)
-b = Vector2(11, 13)
+a = Vector2(-11, 14)
+b = Vector2(11, 14)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_422t8"]
 a = Vector2(-20, 1)
