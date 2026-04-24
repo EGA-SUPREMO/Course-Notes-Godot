@@ -281,8 +281,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			break # Stop outer loop
 
 	if horizontal_squish or vertical_squish:
-		print("I'm being crushed by two different objects! - " + str(player))
-		print(str(overlapping_bodies))
+		# print("I'm being crushed by two different objects! - " + str(player))
+		# print(str(overlapping_bodies))
 		apply_squish_damage(body)
 
 func apply_squish_damage(_body):
@@ -296,16 +296,18 @@ func apply_squish_damage(_body):
 	
 	HP -= total_force/20000
 
-func switch_item_type(): # TODO renombrar metodo y borrar todo esto, hacer activar signal shoot y luego volver a poner misol como item activo
-	if active_item_type == 1:
-		active_item_type = 0
-	else:
-		active_item_type = 1
+func consume():
+	if HP <= 0 or stamina <= 0:
+		return
+
+	active_item_type = 1
+	shoot.emit()
 	switch_type_item_sfx.play()
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
+	active_item_type = 0
+	# missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func spend_current_missile_in_inventory(forced := false) -> void:
-	if Globals.playable_missiles_nodes[selectedItem].name == "Regenerate" and forced==false:
+	if Globals.playable_missiles_nodes[active_item_type][selectedItem].name == "Regenerate" and forced==false:
 		return
 	
 	inventory[selectedItem] -= 1
@@ -333,7 +335,7 @@ func change_current_missile_to_previous_missile_in_inventory() -> void:
 	if inventory[selectedItem]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
 
-	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[selectedItem]
+	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func apply_missile_shot(missile: Node2D) -> Vector2:
 	missile.rotation = deg_to_rad(angle)

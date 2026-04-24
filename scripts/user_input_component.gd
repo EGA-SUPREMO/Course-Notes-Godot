@@ -25,7 +25,7 @@ func update_user_input(_delta: float) -> void:
 	#	return
 	
 	if Input.is_action_just_pressed(player.keyboard_profile + "switch_missile"):
-		player.switch_item_type()
+		timer_power.start()
 	if Input.is_action_just_pressed(player.keyboard_profile + "shot"):
 		timer_power.start()
 	
@@ -64,6 +64,8 @@ func update_user_input(_delta: float) -> void:
 	
 	if Input.is_action_just_released(player.keyboard_profile + "shot") and Globals.playable_missiles_nodes[player.active_item_type][player.selectedItem].consumable:
 		player.shoot.emit()
+	if Input.is_action_just_released(player.keyboard_profile + "switch_missile"):
+		player.consume()
 	
 func calculate_movement_speed(_delta, direction):
 	if player.stamina <= 0:
@@ -94,7 +96,7 @@ func on_power_timeout():
 	var sign:= 1
 	if Input.is_action_pressed(player.keyboard_profile + "wildcard_key"):
 		sign = -1
-	if Input.is_action_pressed(player.keyboard_profile + "shot"):
+	if Input.is_action_pressed(player.keyboard_profile + "shot") or Input.is_action_pressed(player.keyboard_profile + "switch_missile"):
 		player.missile_power += 10 * sign
 		timer_power.start()
 
