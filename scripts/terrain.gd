@@ -139,11 +139,44 @@ func clip(missile_polygon: PackedVector2Array):
 				body.mass = mass
 				body.physics_material_override = preload("res://scene/missile/physics_material_bouncy.tres")
 				
+				is_polygon_touching_ground(polygon_temp)
+				# is_touching_ground(collider)
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
 
+func is_touching_ground(poly_node: CollisionPolygon2D) -> bool:
+	var points = poly_node.polygon # This is the array of Vector2s
+	print("DEBUGPRINT[8]: terrain.gd:149: points=", points)
 	
+	for point in points:
+		# Convert local vertex position to world position
+		var global_point_y = poly_node.to_global(point).y
+		print("DEBUGPRINT[7]: terrain.gd:152: global_point_y=", global_point_y)
+		
+		# Check if the vertex is at or below the ground (y=0)
+		# if global_point_y >= 0:
+		# 	return true
+			
+	return false
+
+func is_polygon_touching_ground(polygon_node: Polygon2D) -> bool:
+	var ground_y = Globals.MAP_SIZE.y / 2
+	var points = polygon_node.polygon # These are local coordinates
+
+	for local_point in points:
+		# to_global() handles the body AND the polygon_node's transforms combined
+		var global_point = polygon_node.to_global(local_point)
+		# print("Point Local: ", local_point, " | Point Global: ", polygon_node.to_global(local_point))
+		# Check if the point has reached or passed the ground level
+		# Remember: >= 0 means it is at or below the line in Godot 2D
+		if global_point.y >= ground_y:
+			print("DEBUGPRINT[10]: terrain.gd:174: true=", true)
+			return true 
+
+	print("DEBUGPRINT[11]: terrain.gd:177: false=", false)
+	return false
+
 func create_real_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
 	var nb_points = 10
 	var points_arc = PackedVector2Array()

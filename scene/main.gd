@@ -43,7 +43,7 @@ func _ready():
 	fail_to_regenarate_sfx.volume_db = 10.0
 	fail_to_regenarate_sfx.stream = preload("res://assets/sounds/buy_fail2.wav")
 	add_child(fail_to_regenarate_sfx)
-	
+
 	successful_regenaratation_sfx = AudioStreamPlayer.new()
 	successful_regenaratation_sfx.bus = "SFX"
 	fail_to_regenarate_sfx.volume_db = -10.0
@@ -82,7 +82,9 @@ func _process(_delta):
 	#if Input.is_key_pressed(KEY_BACKSPACE):
 		#for child in missiles.get_children():
 			#missiles.remove_child(child)
-		
+
+	# var mouse_pos = get_global_mouse_position()
+	# print(mouse_pos)
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
 			get_global_mouse_position(), 50))
