@@ -139,7 +139,10 @@ func clip(missile_polygon: PackedVector2Array):
 				body.mass = mass
 				body.physics_material_override = preload("res://scene/missile/physics_material_bouncy.tres")
 				
-				is_polygon_touching_ground(polygon_temp)
+				if (!is_polygon_touching_ground(polygon_temp, body)):
+					body.freeze = true
+					body.freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
+
 				# is_touching_ground(collider)
 				island_holder.call_deferred("add_child", body)
 				body.call_deferred("add_child", collider)
@@ -160,20 +163,30 @@ func is_touching_ground(poly_node: CollisionPolygon2D) -> bool:
 			
 	return false
 
-func is_polygon_touching_ground(polygon_node: Polygon2D) -> bool:
-	var ground_y = Globals.MAP_SIZE.y / 2
+func is_polygon_touching_ground(polygon_node: Polygon2D, reference_point: Node) -> bool:
+	var ground_y = ( Globals.MAP_SIZE.y / 2 ) - 10
+	print("DEBUGPRINT[12]: terrain.gd:164: ground_y=", ground_y)
 	var points = polygon_node.polygon # These are local coordinates
+	var top_point = null
+	var top_local_point = null
 
 	for local_point in points:
 		# to_global() handles the body AND the polygon_node's transforms combined
-		var global_point = polygon_node.to_global(local_point)
+		var global_point = reference_point.to_global(local_point)
 		# print("Point Local: ", local_point, " | Point Global: ", polygon_node.to_global(local_point))
 		# Check if the point has reached or passed the ground level
 		# Remember: >= 0 means it is at or below the line in Godot 2D
+		if top_local_point == null or local_point.y < top_local_point.y:
+			top_local_point = local_point
+		if top_point == null or global_point.y < top_point.y:
+			top_point = global_point
 		if global_point.y >= ground_y:
 			print("DEBUGPRINT[10]: terrain.gd:174: true=", true)
 			return true 
 
+	if top_point != null:
+		print("Highest Point (Top): ", top_point)
+		print("Highest local Point (Top): ", top_local_point)
 	print("DEBUGPRINT[11]: terrain.gd:177: false=", false)
 	return false
 

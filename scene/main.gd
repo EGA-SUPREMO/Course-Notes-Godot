@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Main
+
 @onready var terrain = $Terrain
 @onready var camera_2d = $Camera2D
 @onready var void_limit: StaticBody2D = $VoidLimit
