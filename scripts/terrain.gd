@@ -139,7 +139,7 @@ func clip(missile_polygon: PackedVector2Array):
 				body.mass = mass
 				body.physics_material_override = preload("res://scene/missile/physics_material_bouncy.tres")
 				
-				if (!is_polygon_touching_ground(polygon_temp, body)):
+				if (is_polygon_touching_ground(polygon_temp, body)):
 					body.freeze = true
 					body.freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
 
@@ -164,11 +164,11 @@ func is_touching_ground(poly_node: CollisionPolygon2D) -> bool:
 	return false
 
 func is_polygon_touching_ground(polygon_node: Polygon2D, reference_point: Node) -> bool:
-	var ground_y = ( Globals.MAP_SIZE.y / 2 ) - 10
+	var ground_y = ( Globals.MAP_SIZE.y ) - 10
 	print("DEBUGPRINT[12]: terrain.gd:164: ground_y=", ground_y)
-	var points = polygon_node.polygon # These are local coordinates
-	var top_point = null
-	var top_local_point = null
+	var points = polygon_node.polygon
+	# var bottom_point = null
+	# var bottom_local_point = null
 
 	for local_point in points:
 		# to_global() handles the body AND the polygon_node's transforms combined
@@ -176,18 +176,18 @@ func is_polygon_touching_ground(polygon_node: Polygon2D, reference_point: Node) 
 		# print("Point Local: ", local_point, " | Point Global: ", polygon_node.to_global(local_point))
 		# Check if the point has reached or passed the ground level
 		# Remember: >= 0 means it is at or below the line in Godot 2D
-		if top_local_point == null or local_point.y < top_local_point.y:
-			top_local_point = local_point
-		if top_point == null or global_point.y < top_point.y:
-			top_point = global_point
+		# if bottom_local_point == null or local_point.y < bottom_local_point.y:
+		# 	bottom_local_point = local_point
+		# if bottom_point == null or global_point.y < bottom_point.y:
+		# 	bottom_point = global_point
 		if global_point.y >= ground_y:
-			print("DEBUGPRINT[10]: terrain.gd:174: true=", true)
+			# print("DEBUGPRINT[10]: terrain.gd:174: true=", true)
 			return true 
 
-	if top_point != null:
-		print("Highest Point (Top): ", top_point)
-		print("Highest local Point (Top): ", top_local_point)
-	print("DEBUGPRINT[11]: terrain.gd:177: false=", false)
+	# if bottom_point != null:
+	# 	print("lowest Point (bottom): ", bottom_point)
+	# 	print("lowest local Point (bottom): ", bottom_local_point)
+	# print("DEBUGPRINT[11]: terrain.gd:177: false=", false)
 	return false
 
 func create_real_circle_radious_polygon(circle_position, radius: int) -> PackedVector2Array:
