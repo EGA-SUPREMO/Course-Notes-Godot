@@ -302,6 +302,7 @@ func consume():
 
 	active_item_type = 1
 	shoot.emit()
+	stamina -= 100
 	switch_type_item_sfx.play()
 	active_item_type = 0
 	# missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
