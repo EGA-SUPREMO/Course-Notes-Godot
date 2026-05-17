@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b0uj057i3g3nh"]
+[gd_resource type="Theme" format=3 uid="uid://b0uj057i3g3nh"]
 
 [ext_resource type="Texture2D" uid="uid://dw1go1xf4kull" path="res://assets/UI pack 2/Yellow/Default/button_rectangle_depth_gloss.png" id="1_10llw"]
 [ext_resource type="StyleBox" uid="uid://xpjo801428v7" path="res://scene/UI/box_texture_button.tres" id="2_fs1cc"]

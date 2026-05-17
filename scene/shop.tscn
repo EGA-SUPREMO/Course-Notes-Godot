@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://brxo0auobyvwh"]
+[gd_scene format=3 uid="uid://brxo0auobyvwh"]
 
-[ext_resource type="Script" path="res://scripts/shop.gd" id="1_njatk"]
+[ext_resource type="Script" uid="uid://dmnyp5vyr0b0e" path="res://scripts/shop.gd" id="1_njatk"]
 [ext_resource type="Texture2D" uid="uid://c2ntyvp08wywk" path="res://assets/sprites/icons/fivebomb.png" id="1_qggbj"]
 [ext_resource type="PackedScene" uid="uid://qv82rohdiqxa" path="res://scene/button_store.tscn" id="2_cvmki"]
 [ext_resource type="StyleBox" uid="uid://cbwho8qeb8ibp" path="res://scene/UI/main_panel_texture_white_style.tres" id="2_lv4qy"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://bhus0xqa5fqns" path="res://assets/sprites/icons/more_hp.png" id="4_7audq"]
 [ext_resource type="Texture2D" uid="uid://3rmbpwy5ca8j" path="res://assets/sprites/icons/more_speed.png" id="5_fyeax"]
 [ext_resource type="Texture2D" uid="uid://be3nefdvpib53" path="res://assets/sprites/icons/stamina.png" id="6_533r8"]
+[ext_resource type="Texture2D" uid="uid://b0hxevud4x14y" path="res://assets/sprites/icons/ball.png" id="6_ud2ya"]
 [ext_resource type="Texture2D" uid="uid://ce6fxcplbpco5" path="res://assets/sprites/icons/teleport.png" id="7_4y46l"]
 [ext_resource type="Texture2D" uid="uid://bfd6wsayi02mn" path="res://assets/sprites/icons/half_hexagon.png" id="7_ikopq"]
 [ext_resource type="Texture2D" uid="uid://dnpcmf6qr6eu5" path="res://assets/sprites/icons/repair.png" id="8_pnuyr"]
+[ext_resource type="Texture2D" uid="uid://iis06ig1rg2b" path="res://assets/sprites/icons/bat.png" id="8_uscfg"]
 [ext_resource type="Texture2D" uid="uid://cmtq6epl1c8cg" path="res://assets/sprites/icons/next.png" id="9_dbnhc"]
 [ext_resource type="PackedScene" uid="uid://di5uwrrvmcv2p" path="res://scene/selector.tscn" id="13_2lw2x"]
 [ext_resource type="AudioStream" uid="uid://d2jib15psq40h" path="res://assets/sounds/buy_fail.wav" id="13_irxat"]
@@ -19,7 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://cwcm35nd7gjvl" path="res://assets/sounds/blipSelect.wav" id="14_7ym1k"]
 [ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="17_kledt"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=807139295]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_njatk")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1866174881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,11 +40,11 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_lv4qy")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=758823786]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer" unique_id=631023901]
 clip_contents = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -50,7 +52,7 @@ step = 1.0
 rounded = true
 show_percentage = false
 
-[node name="StoreLabel" type="Label" parent="PanelContainer/VBoxContainer/ProgressBar"]
+[node name="StoreLabel" type="Label" parent="PanelContainer/VBoxContainer/ProgressBar" unique_id=1738912549]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,110 +64,120 @@ text = "🏪Store"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Missiles" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Missiles" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1079417832]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Fivebomb" parent="PanelContainer/VBoxContainer/Missiles" instance=ExtResource("2_cvmki")]
+[node name="Fivebomb" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1823791889 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("1_qggbj")
 is_missile = true
 
-[node name="Hotshower" parent="PanelContainer/VBoxContainer/Missiles" instance=ExtResource("2_cvmki")]
+[node name="Hotshower" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1020421230 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("2_qq740")
 is_missile = true
 
-[node name="Nuclear" parent="PanelContainer/VBoxContainer/Missiles" instance=ExtResource("2_cvmki")]
+[node name="RubberBall" parent="PanelContainer/VBoxContainer/Missiles" unique_id=2045101670 instance=ExtResource("2_cvmki")]
+layout_mode = 2
+texture_normal = ExtResource("6_ud2ya")
+is_missile = true
+
+[node name="Nuclear2" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1830466766 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("3_bhtho")
 is_missile = true
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/Missiles"]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1515304374]
 layout_mode = 2
 
-[node name="Consumables" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Missiles"]
+[node name="Consumables" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1279103462]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Enderpearl" parent="PanelContainer/VBoxContainer/Missiles/Consumables" instance=ExtResource("2_cvmki")]
+[node name="Enderpearl" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1534628475 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("7_4y46l")
 is_missile = true
 
-[node name="Regenerate" parent="PanelContainer/VBoxContainer/Missiles/Consumables" instance=ExtResource("2_cvmki")]
+[node name="Bat" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1300596779 instance=ExtResource("2_cvmki")]
+layout_mode = 2
+texture_normal = ExtResource("8_uscfg")
+is_missile = true
+
+[node name="Regenerate" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=2084892036 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("8_pnuyr")
 is_missile = true
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1679676775]
 layout_mode = 2
 
-[node name="Traits" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Traits" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=90403059]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Ignore" type="TextureRect" parent="PanelContainer/VBoxContainer/Traits"]
+[node name="Ignore" type="TextureRect" parent="PanelContainer/VBoxContainer/Traits" unique_id=750802382]
 visible = false
 layout_mode = 2
 texture = ExtResource("7_ikopq")
 
-[node name="HP" parent="PanelContainer/VBoxContainer/Traits" instance=ExtResource("2_cvmki")]
+[node name="HP" parent="PanelContainer/VBoxContainer/Traits" unique_id=47911998 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("4_7audq")
 price = 10000
 
-[node name="MovementSpeed" parent="PanelContainer/VBoxContainer/Traits" instance=ExtResource("2_cvmki")]
+[node name="MovementSpeed" parent="PanelContainer/VBoxContainer/Traits" unique_id=1894730964 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("5_fyeax")
 is_missile = true
 price = 7000
 
-[node name="Stamina" parent="PanelContainer/VBoxContainer/Traits" instance=ExtResource("2_cvmki")]
+[node name="Stamina" parent="PanelContainer/VBoxContainer/Traits" unique_id=185421445 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("6_533r8")
 is_missile = true
 price = 3000
 
-[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=934649892]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=522514441]
 layout_mode = 2
 
-[node name="NextMatch" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="NextMatch" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=594125513]
 layout_mode = 2
 size_flags_horizontal = 4
 icon = ExtResource("9_dbnhc")
 icon_alignment = 1
 
-[node name="UserInputComponent" type="Node" parent="PanelContainer"]
+[node name="UserInputComponent" type="Node" parent="PanelContainer" unique_id=1912613981]
 
-[node name="Selectors" type="Control" parent="."]
-layout_mode = 2
+[node name="Selectors" type="Control" parent="." unique_id=444203831]
 anchors_preset = 0
 offset_left = 40.0
 offset_top = -21.0
 offset_right = 1112.0
 offset_bottom = 669.0
 
-[node name="Selector" parent="." instance=ExtResource("13_2lw2x")]
+[node name="Selector" parent="." unique_id=1234406878 instance=ExtResource("13_2lw2x")]
+layout_mode = 0
 
-[node name="FailBuySFX" type="AudioStreamPlayer" parent="."]
+[node name="FailBuySFX" type="AudioStreamPlayer" parent="." unique_id=197287030]
 stream = ExtResource("13_irxat")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="BuySFX" type="AudioStreamPlayer" parent="."]
+[node name="BuySFX" type="AudioStreamPlayer" parent="." unique_id=1354968164]
 stream = ExtResource("13_s83id")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="MovethisToGlobal" type="AudioStreamPlayer" parent="."]
+[node name="MovethisToGlobal" type="AudioStreamPlayer" parent="." unique_id=405255023]
 stream = ExtResource("14_7ym1k")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="MovethisToGlobal2" type="AudioStreamPlayer" parent="."]
+[node name="MovethisToGlobal2" type="AudioStreamPlayer" parent="." unique_id=1243515946]
 stream = ExtResource("17_kledt")
 bus = &"SFX"

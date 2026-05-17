@@ -305,7 +305,6 @@ func consume():
 	stamina -= 100
 	switch_type_item_sfx.play()
 	active_item_type = 0
-	# missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 
 func spend_current_missile_in_inventory(forced := false) -> void:
 	if Globals.playable_missiles_nodes[active_item_type][selectedItem].name == "Regenerate" and forced==false:

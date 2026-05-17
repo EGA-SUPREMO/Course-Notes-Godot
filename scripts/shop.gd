@@ -200,13 +200,13 @@ func update_inventory(player_id: int) -> void:
 	var item = current_item_selected[player_id]
 	
 	match current_item_selected[player_id]:
-		0, 1, 2, 3, 4:
-			labels[player_id][1].text = str(current_player.inventory[0][item])
-		5:
-			labels[player_id][1].text = str(current_player.max_hp)
+		0, 1, 2, 3:
+			labels[player_id][1].text = str(current_player.inventory[item])
 		6:
-			labels[player_id][1].text = str(current_player.SPEED_MOVEMENT)
+			labels[player_id][1].text = str(current_player.max_hp)
 		7:
+			labels[player_id][1].text = str(current_player.SPEED_MOVEMENT)
+		8:
 			labels[player_id][1].text = str(current_player.max_stamina)
 		_:
 			labels[player_id][1].text = ""
