@@ -148,24 +148,9 @@ func clip(missile_polygon: PackedVector2Array):
 				body.call_deferred("add_child", collider)
 				body.call_deferred("add_child", polygon_temp)
 
-func is_touching_ground(poly_node: CollisionPolygon2D) -> bool:
-	var points = poly_node.polygon # This is the array of Vector2s
-	print("DEBUGPRINT[8]: terrain.gd:149: points=", points)
-	
-	for point in points:
-		# Convert local vertex position to world position
-		var global_point_y = poly_node.to_global(point).y
-		print("DEBUGPRINT[7]: terrain.gd:152: global_point_y=", global_point_y)
-		
-		# Check if the vertex is at or below the ground (y=0)
-		# if global_point_y >= 0:
-		# 	return true
-			
-	return false
-
 func is_polygon_touching_ground(polygon_node: Polygon2D, reference_point: Node) -> bool:
-	var ground_y = ( Globals.MAP_SIZE.y ) - 10
-	print("DEBUGPRINT[12]: terrain.gd:164: ground_y=", ground_y)
+	var ground_y = ( Globals.MAP_SIZE.y ) - 10 # TODO ojala que no genere problemas inventarse este numero
+	# print("DEBUGPRINT[12]: terrain.gd:164: ground_y=", ground_y)
 	var points = polygon_node.polygon
 	# var bottom_point = null
 	# var bottom_local_point = null
