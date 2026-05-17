@@ -83,7 +83,7 @@ layout_mode = 2
 texture_normal = ExtResource("6_ud2ya")
 is_missile = true
 
-[node name="Nuclear2" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1830466766 instance=ExtResource("2_cvmki")]
+[node name="Nuclear" parent="PanelContainer/VBoxContainer/Missiles" unique_id=1830466766 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("3_bhtho")
 is_missile = true
@@ -100,14 +100,14 @@ layout_mode = 2
 texture_normal = ExtResource("7_4y46l")
 is_missile = true
 
-[node name="Bat" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1300596779 instance=ExtResource("2_cvmki")]
-layout_mode = 2
-texture_normal = ExtResource("8_uscfg")
-is_missile = true
-
 [node name="Regenerate" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=2084892036 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("8_pnuyr")
+is_missile = true
+
+[node name="Bat" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1300596779 instance=ExtResource("2_cvmki")]
+layout_mode = 2
+texture_normal = ExtResource("8_uscfg")
 is_missile = true
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1679676775]
@@ -162,6 +162,10 @@ offset_bottom = 669.0
 
 [node name="Selector" parent="." unique_id=1234406878 instance=ExtResource("13_2lw2x")]
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1072.0
+offset_bottom = 690.0
 
 [node name="FailBuySFX" type="AudioStreamPlayer" parent="." unique_id=197287030]
 stream = ExtResource("13_irxat")

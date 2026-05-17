@@ -108,7 +108,7 @@ func _process(_delta: float) -> void:
 	for i in range(MatchManager.number_players):
 		if not MatchManager.players.get_children()[i].human:
 			player_selected_next_match[i] = true# cambiar a algo mas natural, ej que mueva el selector a donde es
-			current_item_selected[i] = 8
+			current_item_selected[i] = 10
 			navigable_items[current_item_selected[i]].scale.x = 1.35
 			navigable_items[current_item_selected[i]].scale.y = 1.35
 			
@@ -158,9 +158,15 @@ func _process(_delta: float) -> void:
 						MatchManager.players.get_children()[i].max_stamina += 100
 						update_inventory(i)
 				_:
-					for j in range(Globals.playable_missiles_nodes.size()):
-						if Globals.playable_missiles_nodes[j].name == navigable_items[current_item_selected[i]].name:
+					print(current_item_selected[i])
+					print(Globals.playable_missiles_nodes[0].size())
+					for j in range(Globals.playable_missiles_nodes[0].size()):
+						if Globals.playable_missiles_nodes[0][j].name == navigable_items[current_item_selected[i]].name:
 							buy_missile(i, j)
+							return
+					for j in range(Globals.playable_missiles_nodes[1].size()):
+						if Globals.playable_missiles_nodes[1][j].name == navigable_items[current_item_selected[i]].name:
+							MatchManager.players.get_children()[i].current_consumable = current_item_selected[i] - Globals.playable_missiles_nodes[0].size()
 
 func begin_next_match(i):
 	if not player_selected_next_match[i]:
@@ -186,8 +192,8 @@ func buy(player_id: int, price: int) -> bool:
 					
 func buy_missile(player_id: int, missile_id: int) -> void:
 	var player = MatchManager.players.get_children()[player_id]
-	if player.money >= Globals.playable_missiles_nodes[missile_id].price * Globals.PRICE_MULTIPLIER:
-		player.money -= Globals.playable_missiles_nodes[missile_id].price * Globals.PRICE_MULTIPLIER
+	if player.money >= Globals.playable_missiles_nodes[0][missile_id].price * Globals.PRICE_MULTIPLIER:
+		player.money -= Globals.playable_missiles_nodes[0][missile_id].price * Globals.PRICE_MULTIPLIER
 		player.inventory[missile_id] += 1
 		buy_sfx.play()
 		labels[player_id][0].text = "$" + str(player.money)
@@ -202,11 +208,11 @@ func update_inventory(player_id: int) -> void:
 	match current_item_selected[player_id]:
 		0, 1, 2, 3:
 			labels[player_id][1].text = str(current_player.inventory[item])
-		6:
-			labels[player_id][1].text = str(current_player.max_hp)
 		7:
-			labels[player_id][1].text = str(current_player.SPEED_MOVEMENT)
+			labels[player_id][1].text = str(current_player.max_hp)
 		8:
+			labels[player_id][1].text = str(current_player.SPEED_MOVEMENT)
+		9:
 			labels[player_id][1].text = str(current_player.max_stamina)
 		_:
 			labels[player_id][1].text = ""
