@@ -152,7 +152,7 @@ func _ready():
 	
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, 5, 0, 10]
+	inventory = [INF, 5, 10, 0]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():

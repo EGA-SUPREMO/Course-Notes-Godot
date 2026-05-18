@@ -18,7 +18,7 @@ const PLAYABLE_MISSILES = [[SCENE_MISSILE_FIVEBOMB, SCENE_MISSILE_HOTSHOWER,
 
 const PLAYABLE_MISSILE_ICONS = [[preload("res://assets/sprites/icons/fivebomb.png"), 
 	preload("res://assets/sprites/icons/hotshower.png"),
-	preload("res://assets/sprites/icons/nuclear.png"),
+	preload("res://assets/sprites/icons/ball.png"),
 	preload("res://assets/sprites/icons/nuclear.png")],
 	[
 	preload("res://assets/sprites/icons/teleport.png"),
