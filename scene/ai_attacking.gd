@@ -17,14 +17,16 @@ func update(_delta):
 	if not player_target:
 		select_target()
 		return
+	if randi_range(0, 180) == 180:
+		calculate_angle_and_power()
+		player.current_consumable = randi_range(0, 1)
+		player.consume()
+		has_aimed = false
+		return
 	if randi_range(0, 40) != 40:#random wait
 		return
 	if not has_aimed:
 		calculate_angle_and_power()
-	# if randi_range(0, 40) != 40:
-		# player.current_consumable = randi_range(0, 1)
-		# player.consume()
-		# return
 	if randi_range(1, 5) == 5:
 		player.current_missile = 1
 	elif randi_range(1, 6) == 5:

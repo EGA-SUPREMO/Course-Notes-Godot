@@ -15,7 +15,7 @@ func calculate_trajectory(angle: int, power: int, max_points = 4000, timestep = 
 	var direction = Vector2(cos(deg_to_rad(angle)), sin(deg_to_rad(angle)))
 	#var speed: float = power * player.POWER_MULTIPLIER/32.34#gravity normal
 	#var speed: float = power * player.POWER_MULTIPLIER/38#gravity 1.5
-	var speed: float = power * player.POWER_MULTIPLIER/35.95#gravity 1.25
+	var speed: float = power * player.POWER_MULTIPLIER/3.95#gravity 1.25
 	var velocity = direction * speed
 	#var terrain = get_tree().get_current_scene().get_node("/root/Main/Terrain").island_holder.get_children()
 	

@@ -27,7 +27,7 @@ var frequencies_amplitudes := [frequencies_amplitudes_desert, frequencies_amplit
 var general_amplitudes := [amplitude_size_desert, amplitude_size_mesa, amplitude_size_snow,
 	amplitude_size_plains]
 
-var y_height_offset = [0.30, 0.30, 0.5, 0.5]
+var y_height_offset = [0.05, 0.30, 0.5, 0.5]
 var amplitude = 50
 var random = RandomNumberGenerator.new()
 
