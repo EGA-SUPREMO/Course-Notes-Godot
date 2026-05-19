@@ -35,6 +35,7 @@ var list_labels_selector: Array
 
 var navigable_items: Array
 var current_item_selected: Array
+var current_consumable_selected: Array # TODO aca comienza lo bueno
 var player_selected_next_match: Array
 
 

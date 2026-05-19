@@ -21,10 +21,14 @@ func update(_delta):
 		return
 	if not has_aimed:
 		calculate_angle_and_power()
+	# if randi_range(0, 40) != 40:
+		# player.current_consumable = randi_range(0, 1)
+		# player.consume()
+		# return
 	if randi_range(1, 5) == 5:
 		player.current_missile = 1
 	elif randi_range(1, 6) == 5:
-		player.current_missile = 3
+		player.current_missile = 2
 	else:
 		player.current_missile = 0
 	player.missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[player.active_item_type][player.current_missile]
