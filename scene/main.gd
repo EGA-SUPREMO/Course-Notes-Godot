@@ -162,8 +162,8 @@ func _on_player_shoot(player) -> void:
 		missile.add_to_group("missile")
 		missiles.add_child(missile)
 	
-	if player.current_consumable == 2 and player.active_item_type:
-		missile.effect.connect(_on_add_effect.bind(missile.animated_sprite_effect_node, missile))
+	# if player.current_consumable == 2 and player.active_item_type:
+	# 	missile.effect.connect(_on_add_effect.bind(missile.animated_sprite_effect_node, missile))
 	player.spend_current_missile_in_inventory()
 	player.throw_sfx.pitch_scale = randf() + 0.75
 	player.throw_sfx.play()
@@ -177,7 +177,7 @@ func _on_player_death(player: Player):
 	#next_round()
 
 func _on_add_effect(effect: AnimatedSprite2D, parent: Node2D):
-	if parent is Bat:
+	if parent is Bat: # comentado esta parte en on player shoot porque da error por algun motivo
 		effect.global_position = parent.last_position_collision
 		effect.get_child(0).play()
 	else:

@@ -299,7 +299,9 @@ func apply_squish_damage(_body):
 func consume():
 	if HP <= 0 or stamina <= 0:
 		return
-
+	if hud.has_node("Bat"):
+		# print("ya tiene bate")
+		return
 	active_item_type = 1
 	shoot.emit()
 	stamina -= 100
