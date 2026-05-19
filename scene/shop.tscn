@@ -98,17 +98,14 @@ theme_override_constants/separation = 40
 [node name="Enderpearl" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1534628475 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("7_4y46l")
-is_missile = true
 
 [node name="Regenerate" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=2084892036 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("8_pnuyr")
-is_missile = true
 
 [node name="Bat" parent="PanelContainer/VBoxContainer/Missiles/Consumables" unique_id=1300596779 instance=ExtResource("2_cvmki")]
 layout_mode = 2
 texture_normal = ExtResource("8_uscfg")
-is_missile = true
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1679676775]
 layout_mode = 2

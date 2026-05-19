@@ -15,5 +15,9 @@ func _ready() -> void:
 			if Globals.playable_missiles_nodes[0][j].name == name:
 				price_label.text = "$" + str(Globals.playable_missiles_nodes[0][j].price * Globals.PRICE_MULTIPLIER)
 				return
+
+	if price <= 0:
+		price_label.text = ""
+		return
 	price_label.text = "$" + str(price * Globals.PRICE_MULTIPLIER)
 	
