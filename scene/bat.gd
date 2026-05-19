@@ -1,7 +1,7 @@
 extends Consumable
 class_name Bat
 
-@onready var collision_shape: CollisionPolygon2D = $Area2D/CollisionPolygon2D
+@onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 var linear_velocity:= 0
 var last_position_collision: Vector2
 @onready var polygon: Polygon2D = $Polygon
@@ -14,11 +14,10 @@ func _ready() -> void:
 	position = Vector2.ZERO
 	rotation = deg_to_rad(-90)
 	
-	polygon.position = collision_shape.position
-	polygon.polygon = collision_shape.polygon
-	polygon.rotation = collision_shape.rotation
-	polygon.scale = collision_shape.scale
-	
+func _draw():
+	# Draws a circle (position, Radius, Thickness)
+	draw_circle(Vector2.ZERO, 60.0, Color.DEEP_SKY_BLUE)
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is RigidBody2D:
 		body.linear_velocity = -body.linear_velocity*1.1

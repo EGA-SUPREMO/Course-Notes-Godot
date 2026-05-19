@@ -1,36 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5wacemo6ljbk"]
+[gd_scene format=3 uid="uid://b5wacemo6ljbk"]
 
-[ext_resource type="Script" path="res://scene/bat.gd" id="2_i0ecm"]
+[ext_resource type="Script" uid="uid://b1pvuur27y3u1" path="res://scene/bat.gd" id="2_i0ecm"]
 [ext_resource type="AudioStream" uid="uid://5s4gyneri1fh" path="res://assets/sounds/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3" id="2_n1w30"]
 [ext_resource type="AudioStream" uid="uid://c28wyo076g3cf" path="res://assets/sounds/Kenney Impact SFX/impactBell_heavy_000.ogg" id="2_sjqbo"]
 
-[node name="Bat" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0pxt"]
+radius = 60.0
+
+[node name="Bat" type="Node2D" unique_id=132689519]
 script = ExtResource("2_i0ecm")
 price = 400
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1630214145]
 collision_layer = 6
 collision_mask = 6
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2(-8.18545e-12, 54)
-rotation = 3.14159
-scale = Vector2(4, 6)
-polygon = PackedVector2Array(-5.99995, -9.75001, -2.33332, -3.25, -1.00003, 9, 1, 9, 4.49999, 2.00001, 5.00003, -7.59999)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=745563080]
+shape = SubResource("CircleShape2D_i0pxt")
 
-[node name="Polygon" type="Polygon2D" parent="."]
-position = Vector2(6.36646e-12, 0)
-
-[node name="LifeSpan" type="Timer" parent="."]
+[node name="LifeSpan" type="Timer" parent="." unique_id=865715526]
 wait_time = 1.5
 one_shot = true
 autostart = true
 
-[node name="LaunchSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="LaunchSFX" type="AudioStreamPlayer2D" parent="." unique_id=254495806]
 stream = ExtResource("2_n1w30")
 bus = &"SFX"
 
-[node name="BounceSFXSEPAREATE" type="AudioStreamPlayer2D" parent="."]
+[node name="BounceSFXSEPAREATE" type="AudioStreamPlayer2D" parent="." unique_id=854047292]
 stream = ExtResource("2_sjqbo")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
