@@ -13,6 +13,7 @@ class_name Main
 @onready var effects: Node = $Effects
 
 var players_on_wait: bool
+var debug_mode: bool
 #@onready var rigid_body_2d = $RigidBody2D
 #@onready var rigid_body_2d2 = $RigidBody2D2
 #@onready var collision_polygon_2d = $RigidBody2D/CollisionPolygon2D
@@ -87,16 +88,26 @@ func _process(_delta):
 
 	# var mouse_pos = get_global_mouse_position()
 	# print(mouse_pos)
+	
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_F2:
+			debug_mode = !debug_mode
+		if event.keycode == KEY_F1 && debug_mode:
+			for player_node in players.get_children():
+				print(player_node)
+				player_node.HP = 0
+	if !debug_mode:
+		return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		terrain.clip(terrain.create_circle_radious_polygon(
 			get_global_mouse_position(), 50))
-	#	camera_2d.zoom -= Vector2(0.01, 0.01)
 		#for missile in missiles.get_children():
 			
 		#	var direction = Vector2(cos(deg_to_rad(missile.rotation)), sin(deg_to_rad(missile.rotation)))
 		#	missile.apply_impulse(direction * 5000 * 15, Vector2.ZERO)
-	
-	
+
 func go_around_map():	
 	for polygon in missiles.get_children():
 		if polygon.global_position.x < 0:
