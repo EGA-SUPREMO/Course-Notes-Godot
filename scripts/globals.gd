@@ -43,6 +43,7 @@ var current_match_count = 0
 var max_number_match = 6
 
 const PRICE_MULTIPLIER = 0.5
+var debug_mode: bool
 
 func _ready() -> void:
 	for missile in PLAYABLE_MISSILES[0]:
