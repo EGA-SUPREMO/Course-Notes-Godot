@@ -36,6 +36,8 @@ func update(_delta):
 		player.current_missile = 1
 	elif randi_range(1, 6) == 5:
 		player.current_missile = 2
+	elif randi_range(1, 20) == 5:
+		player.current_missile = 3
 	else:
 		player.current_missile = 0
 	player.missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[player.active_item_type][player.current_missile]
