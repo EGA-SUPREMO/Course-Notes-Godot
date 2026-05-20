@@ -5,6 +5,7 @@ var missile: Missile
 var has_aimed := false
 var player_target: Player
 var moving:= false
+var initial_wait:= false
 
 func _ready() -> void:
 	player.death.connect(_on_player_death.bind(player))
@@ -17,13 +18,17 @@ func update(_delta):
 	if not player_target:
 		select_target()
 		return
-	if randi_range(0, 180) == 180:
+	if randi_range(0, 180) == 180 && initial_wait:
 		calculate_angle_and_power()
 		player.current_consumable = randi_range(0, 1)
 		player.consume()
 		has_aimed = false
 		return
 	if randi_range(0, 40) != 40:#random wait
+		return
+	if !initial_wait:
+		if randi_range(0, 7) == 7:#random wait
+			initial_wait = true
 		return
 	if not has_aimed:
 		calculate_angle_and_power()
