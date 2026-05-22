@@ -33,6 +33,7 @@ func create_players(ids = [], human_bools = []) -> void:
 		player.resource_sprite_frame = ids[i]
 		player.id = i
 		player.position = player_positions[i]
+		player.current_consumable = randi_range(0, 2)
 		players.add_child(player)
 		player.velocity = Vector2.ZERO#something random? ej they are flying couse explotion
 	
