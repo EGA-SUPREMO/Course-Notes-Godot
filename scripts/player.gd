@@ -36,7 +36,6 @@ var selectedItem := 0:
 			return current_consumable
 		return current_missile
 var inventory : Array
-var stamina:= 500
 var damage_done: int
 var text_temp : String
 @onready var player = $"."
@@ -48,10 +47,11 @@ var text_temp : String
 @onready var switch_type_item_sfx: AudioStreamPlayer2D = $SwitchTypeItemSFX
 
 var max_hp := 100.0
-var max_stamina := 300
+var max_stamina := 500
+var stamina:= max_stamina
 var HP:= max_hp:
 	set(value):
-		if HP <= 0 and value <= HP:
+		if HP <= 0 and value != max_hp:
 			return
 		if HP > value:
 			hurt_sfx.stream = load("res://assets/sounds/hurt_"+ str(randi_range(1, 3)) +".wav")# TODO is this loaded everytime theres a explotion?, is so change that with an array or smth smh
