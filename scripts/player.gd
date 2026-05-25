@@ -152,7 +152,7 @@ func _ready():
 	
 	tap_sfx.pitch_scale += id/10.0
 	
-	inventory = [INF, 5, 10, 0]
+	inventory = [INF, 0, 0, 0]
 	animated_sprite.sprite_frames = Globals.sprites_for_players[resource_sprite_frame]
 	
 	for collision_side in monitors.get_children():
@@ -174,7 +174,9 @@ func _ready():
 		child.modulate = Globals.colors_by_player[resource_sprite_frame]
 	if human:
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
-	
+
+	change_current_missile_to_previous_missile_in_inventory()
+
 	missile_sprite.position = hud.position
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
 	

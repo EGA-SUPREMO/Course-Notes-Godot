@@ -48,6 +48,8 @@ func prepare_new_match():
 		player.HP = player.max_hp
 		player.stamina = player.max_stamina
 		player.state_machine.current_state.next_turn()
+		player.current_missile = 0
+		player.change_current_missile_to_previous_missile_in_inventory()
 		
 		player.velocity = Vector2.ZERO#something random? ej they are flying couse explotion
 		player.wants_shoot = false
