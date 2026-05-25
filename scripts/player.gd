@@ -175,6 +175,7 @@ func _ready():
 	if human:
 		state_machine.current_state.transition.emit(state_machine.current_state, "attacking")
 
+	current_missile = 0
 	change_current_missile_to_previous_missile_in_inventory()
 
 	missile_sprite.position = hud.position
@@ -302,7 +303,6 @@ func consume():
 	if HP <= 0 or stamina <= 0:
 		return
 	if hud.has_node("Bat"):
-		# print("ya tiene bate")
 		return
 	active_item_type = 1
 	shoot.emit()
@@ -314,16 +314,16 @@ func spend_current_missile_in_inventory(forced := false) -> void:
 	if Globals.playable_missiles_nodes[active_item_type][selectedItem].name == "Regenerate" and forced==false:
 		return
 	
-	inventory[selectedItem] -= 1
-	if inventory[selectedItem] < 1:
+	inventory[current_missile] -= 1
+	if inventory[current_missile] < 1:
 		change_current_missile_to_next_missile_in_inventory()
 		
 func change_current_missile_to_next_missile_in_inventory() -> void:
 	current_missile += 1
 	woosh_sfx.play()
-	if selectedItem >= Globals.PLAYABLE_MISSILES[0].size():
+	if current_missile >= Globals.PLAYABLE_MISSILES[0].size():
 		current_missile = 0
-	if inventory[selectedItem] < 1:
+	if inventory[current_missile] < 1:
 		change_current_missile_to_next_missile_in_inventory()# stack overflow xdxd
 
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
@@ -336,7 +336,7 @@ func change_current_missile_to_previous_missile_in_inventory() -> void:
 		current_missile = Globals.PLAYABLE_MISSILES[0].size()-1;
 	
 	
-	if inventory[selectedItem]<1:
+	if inventory[current_missile]<1:
 		change_current_missile_to_previous_missile_in_inventory()#stack overflow xdxd
 
 	missile_sprite.texture = Globals.PLAYABLE_MISSILE_ICONS[active_item_type][selectedItem]
