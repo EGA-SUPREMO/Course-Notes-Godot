@@ -160,7 +160,7 @@ _data = {
 z_index = 5
 floor_max_angle = 1.309
 script = ExtResource("1_dsi0t")
-angle = 45.0
+angle = -45.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1251687852]
 position = Vector2(0, 8)
