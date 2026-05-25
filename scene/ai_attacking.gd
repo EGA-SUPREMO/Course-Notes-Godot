@@ -27,7 +27,7 @@ func update(_delta):
 	if randi_range(0, 40) != 40:#random wait
 		return
 	if !initial_wait:
-		if randi_range(0, 7) == 7:#random wait
+		if randi_range(0, 5) == 5:#random wait
 			initial_wait = true
 		return
 	if not has_aimed:

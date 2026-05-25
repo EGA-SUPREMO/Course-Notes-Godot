@@ -20,6 +20,8 @@ signal explotion
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedExplotion
 
+var age: float = 0.0
+
 func _ready():
 	missile.mass = (collision_shape_2d.shape.radius * 2) * collision_shape_2d.shape.height
 	timer.start(0.015)
@@ -32,6 +34,9 @@ func _physics_process(_delta):
 	if should_draw:#there used to be a nasty bug, that upon instantiating the scene, velocity and susequentemente rotation is 0 and misile from 1 frame to another changes make a wide turn, donot remove
 	#but seems like it disappeared :v
 		rotation = new_rotation + PI / 2
+
+func _process(delta: float) -> void:
+	age += delta
 	
 	
 func _on_timer_timeout():

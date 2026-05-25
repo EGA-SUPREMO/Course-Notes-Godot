@@ -13,6 +13,7 @@ func _ready() -> void:
 	sfx_explotion.pitch_scale = randf() + 0.75
 	
 func _process(_delta: float) -> void:
+	super(_delta)
 	if linear_velocity.y > 0 and not has_fallen:
 		disappear()
 

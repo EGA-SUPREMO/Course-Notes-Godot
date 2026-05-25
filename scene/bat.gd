@@ -19,11 +19,15 @@ func _draw():
 	draw_circle(Vector2.ZERO, 60.0, Color.DEEP_SKY_BLUE)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is RigidBody2D:
-		body.linear_velocity = -body.linear_velocity*1.1
-		body.angular_velocity = -body.angular_velocity*1.1
-		last_position_collision = body.global_position
-		effect.emit()
+	if body is not RigidBody2D:
+		return
+	if body is Missile and body.who_shoot == who_shoot and body.age <= 0.16:
+		return
+
+	body.linear_velocity = -body.linear_velocity*1.1
+	body.angular_velocity = -body.angular_velocity*1.1
+	last_position_collision = body.global_position
+	effect.emit()
 
 func _on_life_span_timeout() -> void:
 	queue_free()
