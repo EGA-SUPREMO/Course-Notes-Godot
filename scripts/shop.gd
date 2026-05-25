@@ -23,6 +23,7 @@ extends Control
 
 @onready var fail_buy_sfx: AudioStreamPlayer = $FailBuySFX
 @onready var buy_sfx: AudioStreamPlayer = $BuySFX
+@onready var change_consumible_sfx: AudioStreamPlayer = $ChangeConsumibleSFX
 @onready var movethis_to_global: AudioStreamPlayer = $MovethisToGlobal
 @onready var movethis_to_global_2: AudioStreamPlayer = $MovethisToGlobal2
 
@@ -167,7 +168,7 @@ func _process(_delta: float) -> void:
 							return
 					for j in range(Globals.playable_missiles_nodes[1].size()):
 						if Globals.playable_missiles_nodes[1][j].name == navigable_items[current_item_selected[i]].name:
-							MatchManager.players.get_children()[i].current_consumable = current_item_selected[i] - Globals.playable_missiles_nodes[0].size()
+							change_consumible(i)
 
 func begin_next_match(i):
 	if not player_selected_next_match[i]:
@@ -201,6 +202,10 @@ func buy_missile(player_id: int, missile_id: int) -> void:
 		update_inventory(player_id)
 		return
 	fail_buy_sfx.play()
+
+func change_consumible(i: int) -> void:
+	MatchManager.players.get_children()[i].current_consumable = current_item_selected[i] - Globals.playable_missiles_nodes[0].size()
+	change_consumible_sfx.play()
 
 func update_inventory(player_id: int) -> void:
 	var current_player = MatchManager.players.get_children()[player_id]

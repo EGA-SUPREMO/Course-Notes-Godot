@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://urg6javrrh1d" path="res://assets/sounds/buy_sfx.wav" id="13_s83id"]
 [ext_resource type="AudioStream" uid="uid://cwcm35nd7gjvl" path="res://assets/sounds/blipSelect.wav" id="14_7ym1k"]
 [ext_resource type="AudioStream" uid="uid://evtacvrc43j1" path="res://assets/sounds/next_match_sfx.wav" id="17_kledt"]
+[ext_resource type="AudioStream" uid="uid://5s4gyneri1fh" path="res://assets/sounds/Swoosh Sound Effects - Sound Button [swoosh-sound-effects].mp3" id="19_2qx0q"]
 
 [node name="Control" type="Control" unique_id=807139295]
 layout_mode = 3
@@ -171,6 +172,11 @@ bus = &"SFX"
 
 [node name="BuySFX" type="AudioStreamPlayer" parent="." unique_id=1354968164]
 stream = ExtResource("13_s83id")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="ChangeConsumibleSFX" type="AudioStreamPlayer" parent="." unique_id=1820835404]
+stream = ExtResource("19_2qx0q")
 volume_db = -5.0
 bus = &"SFX"
 
